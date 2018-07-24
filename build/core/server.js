@@ -1,5 +1,4 @@
 "use strict";
-// /* app/server.ts */
 Object.defineProperty(exports, "__esModule", { value: true });
 // import { SwaggerUI } from './SwaggerUI';
 //import { Database } from './database';

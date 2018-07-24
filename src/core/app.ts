@@ -1,6 +1,8 @@
 import express from 'express';
+import "reflect-metadata";
 import { Bootstrap } from './bootstrap';
 import { AppConfig } from '../config/app-config';
+import "reflect-metadata";
 // import * as dotenv from 'dotenv';
 import { Server } from './server';
 
@@ -21,8 +23,9 @@ export class App {
         const appConfig = new AppConfig();
         appConfig.configure(this.express);
 
+        this.bootstrapApp.setupDatabase(this.express);
         this.bootstrapApp.setupRoutes(this.express);
-        
+
         const activeServer = this.bootstrapApp.startServer(this.express);
         const server = new Server(activeServer);
         server.use(this.express);

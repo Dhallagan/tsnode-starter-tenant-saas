@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -44,49 +34,60 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_controller_1 = require("./base-controller");
-var WelcomeController = /** @class */ (function (_super) {
-    __extends(WelcomeController, _super);
-    function WelcomeController() {
-        return _super.call(this) || this;
+var mysql = __importStar(require("mysql"));
+var Database = /** @class */ (function () {
+    function Database() {
     }
-    WelcomeController.prototype.welcome = function (req, res) {
+    Database.createConnection = function () {
+        this.db = mysql.createConnection({
+            //MAKE ENV VARIABLES SOMETIME
+            host: "localhost",
+            user: "root",
+            password: "root",
+            database: "rems"
+        });
+    };
+    Database.openConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                res.send('Hello, World!');
-                return [2 /*return*/];
+                return [2 /*return*/, this.db.connect(function (err) {
+                        if (err) {
+                            console.error('error connecting: ' + err.stack);
+                            return;
+                        }
+                        console.log("Ayye. Mysql connected!");
+                    })];
             });
         });
     };
-    WelcomeController.prototype.welcomePerson = function (req, res) {
+    Database.closeConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var name;
             return __generator(this, function (_a) {
-                name = req.params.name;
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
+                return [2 /*return*/, this.db.end()];
             });
         });
     };
-    WelcomeController.prototype.welcomeResidents = function (req, res) {
+    Database.query = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var residents;
             return __generator(this, function (_a) {
-                try {
-                    //residents = await this.Database.getAllResidents();
-                }
-                catch (error) {
-                    // ...
-                }
-                //getAllResidents()
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
+                return [2 /*return*/, this.db.query('SELECT * FROM property', function (err, rows) {
+                        if (err) {
+                            console.error('error connecting: ' + err.stack);
+                            return;
+                        }
+                        //console.log('Data received from Db:\n');
+                    })];
             });
         });
     };
-    return WelcomeController;
-}(base_controller_1.BaseController));
-exports.WelcomeController = WelcomeController;
+    return Database;
+}());
+exports.Database = Database;

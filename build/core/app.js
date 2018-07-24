@@ -39,8 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+require("reflect-metadata");
 var bootstrap_1 = require("./bootstrap");
 var app_config_1 = require("../config/app-config");
+require("reflect-metadata");
 // import * as dotenv from 'dotenv';
 var server_1 = require("./server");
 var App = /** @class */ (function () {
@@ -58,6 +60,7 @@ var App = /** @class */ (function () {
             return __generator(this, function (_a) {
                 appConfig = new app_config_1.AppConfig();
                 appConfig.configure(this.express);
+                this.bootstrapApp.setupDatabase(this.express);
                 this.bootstrapApp.setupRoutes(this.express);
                 activeServer = this.bootstrapApp.startServer(this.express);
                 server = new server_1.Server(activeServer);

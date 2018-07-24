@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -45,48 +35,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_controller_1 = require("./base-controller");
-var WelcomeController = /** @class */ (function (_super) {
-    __extends(WelcomeController, _super);
-    function WelcomeController() {
-        return _super.call(this) || this;
+var typeorm_1 = require("typeorm");
+var User_1 = require("../entity/User");
+var Database = /** @class */ (function () {
+    function Database() {
     }
-    WelcomeController.prototype.welcome = function (req, res) {
+    //public static db: mysql.Connection
+    Database.createConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var connection;
             return __generator(this, function (_a) {
-                res.send('Hello, World!');
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomePerson = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var name;
-            return __generator(this, function (_a) {
-                name = req.params.name;
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomeResidents = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var residents;
-            return __generator(this, function (_a) {
-                try {
-                    //residents = await this.Database.getAllResidents();
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.createConnection({
+                            type: "mysql",
+                            host: "localhost",
+                            port: 3306,
+                            username: "test",
+                            password: "test",
+                            database: "test",
+                            entities: [User_1.User]
+                        })];
+                    case 1:
+                        connection = _a.sent();
+                        return [2 /*return*/];
                 }
-                catch (error) {
-                    // ...
-                }
-                //getAllResidents()
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
             });
         });
     };
-    return WelcomeController;
-}(base_controller_1.BaseController));
-exports.WelcomeController = WelcomeController;
+    return Database;
+}());
+exports.Database = Database;

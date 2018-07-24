@@ -1,17 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//import * as path from 'path';
-//import { UsersRoutes } from '../app/users/users.routes';
-//import {WelcomeController} from '../controllers';
 var welcome_routes_1 = require("../routes/welcome.routes");
 //import { environment } from '../config/environment';
-//import { Database } from './database';
-//import { ApiError } from './middleware/api-error';
-// import typeDefs from '../schemas/schema';
-// import resolvers from '../resolvers/resolver';
-//import { Authentication } from './middleware/authentication';
-//import { Neo4j } from './middleware/neo4j';
-//import { WebSocketServer } from './middleware/web-socket-server';
+var database_1 = require("../core/database");
 var server_1 = require("./server");
 // import { exceptionHandler } from './api/exceptionHandler';
 // import { extendExpressResponse } from './api/extendExpressResponse';
@@ -25,15 +16,12 @@ var Bootstrap = /** @class */ (function () {
     Bootstrap.prototype.startServer = function (app) {
         return app.listen(app.get('port'));
     };
-    // public setupDatabase(app: express.Application): void {
-    //     // Retrieve all queries
-    //     // TODO: not sure if .then is wrong because queries is empty until then (should be await)
-    //     Database.retrieveQueries().then(queries => {
-    //         app.locals.dbQueries = queries;
-    //     });
-    //     app.use(Neo4j.setNeo4jSession);
-    //     app.use(Neo4j.sessionCleanup);
-    // }
+    Bootstrap.prototype.setupDatabase = function (app) {
+        // Retrieve all queries
+        // TODO: not sure if .then is wrong because queries is empty until then (should be await)
+        database_1.Database.createConnection();
+        //Database.openConnection()
+    };
     // public setupCors(app: express.Application): void {
     //     app.use((req: Request | any, res: Response, next: NextFunction) => {
     //         // TODO: don't think this is working
