@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var welcome_routes_1 = require("../routes/welcome.routes");
+var user_routes_1 = require("../routes/user.routes");
 //import { environment } from '../config/environment';
 var database_1 = require("../core/database");
 var server_1 = require("./server");
-// import { exceptionHandler } from './api/exceptionHandler';
-// import { extendExpressResponse } from './api/extendExpressResponse';
+var seeds_1 = require("./seeds");
 var root = './';
 var Bootstrap = /** @class */ (function () {
     function Bootstrap() {
@@ -19,8 +18,10 @@ var Bootstrap = /** @class */ (function () {
     Bootstrap.prototype.setupDatabase = function (app) {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
+        console.log('Setting up database connection...');
         database_1.Database.createConnection();
-        //Database.openConnection()
+        console.log('Seeding database...');
+        seeds_1.Seeds.seedUsers();
     };
     // public setupCors(app: express.Application): void {
     //     app.use((req: Request | any, res: Response, next: NextFunction) => {
@@ -43,8 +44,8 @@ var Bootstrap = /** @class */ (function () {
         // const generalRouter = new GeneralRoutes().router;
         //const usersRouter = new UsersRoutes().router;
         console.log("Setting up routes...");
-        var welcomeRouter = new welcome_routes_1.WelcomeRoutes().router;
-        app.use('/api', welcomeRouter);
+        var userRouter = new user_routes_1.UserRoutes().router;
+        app.use('/api', userRouter);
         //app.use('/api', usersRouter);
     };
     return Bootstrap;

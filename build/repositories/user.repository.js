@@ -9,6 +9,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -45,51 +51,54 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_controller_1 = require("./base-controller");
-var WelcomeController = /** @class */ (function (_super) {
-    __extends(WelcomeController, _super);
-    function WelcomeController() {
-        return _super.call(this) || this;
+var typeorm_1 = require("typeorm");
+var typeorm_2 = require("typeorm");
+var User_1 = require("../entity/User");
+var UserRepository = /** @class */ (function (_super) {
+    __extends(UserRepository, _super);
+    function UserRepository() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    WelcomeController.prototype.welcome = function (req, res) {
+    // public async getUserById(res: Response): Promise<UserModel> {
+    //     return await this.usersRepository.getUserById(res, this.getUserId(res));
+    // }
+    UserRepository.prototype.getUserById = function (res, uId) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
             return __generator(this, function (_a) {
-                user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false };
-                //var user = await getConnection().manager.save(User, user);
-                res.send(user);
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomePerson = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var name;
-            return __generator(this, function (_a) {
-                name = req.params.name;
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomeResidents = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var residents;
-            return __generator(this, function (_a) {
-                try {
-                    //residents = await this.Database.getAllResidents();
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.find(User_1.User, { Id: uId })];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                catch (error) {
-                    // ...
-                }
-                //getAllResidents()
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
             });
         });
     };
-    return WelcomeController;
-}(base_controller_1.BaseController));
-exports.WelcomeController = WelcomeController;
+    // find(){
+    //     return this.find();
+    // }
+    UserRepository.prototype.createUser = function (res, username, email, password, passwordSalt) {
+        return __awaiter(this, void 0, void 0, function () {
+            var newUser;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        newUser = { Username: username,
+                            Email: email,
+                            EmailConfirmed: false,
+                            Password: password,
+                            PasswordSalt: "",
+                            //PhoneNumber: "", 
+                            PhoneNumberConfirmed: false,
+                            TwoFactorEnabled: false,
+                        };
+                        return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, newUser)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository = __decorate([
+        typeorm_1.EntityRepository(User_1.User)
+    ], UserRepository);
+    return UserRepository;
+}(typeorm_1.Repository));
+exports.UserRepository = UserRepository;

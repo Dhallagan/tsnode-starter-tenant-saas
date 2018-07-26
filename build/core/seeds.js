@@ -37,26 +37,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var User_1 = require("../entity/User");
-var Property_1 = require("../entity/Property");
-var Database = /** @class */ (function () {
-    function Database() {
+var Seeds = /** @class */ (function () {
+    function Seeds() {
     }
-    //public static db: mysql.Connection
-    Database.createConnection = function () {
+    Seeds.seedUsers = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var userRepository, user;
             return __generator(this, function (_a) {
-                return [2 /*return*/, typeorm_1.createConnection({
-                        type: "mysql",
-                        host: "localhost",
-                        port: 3306,
-                        username: "root",
-                        password: "root",
-                        database: "rems",
-                        entities: [User_1.User, Property_1.Property]
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        userRepository = typeorm_1.getRepository(User_1.User);
+                        user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false };
+                        return [4 /*yield*/, userRepository.save(user)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
-    return Database;
+    return Seeds;
 }());
-exports.Database = Database;
+exports.Seeds = Seeds;

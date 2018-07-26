@@ -1,11 +1,12 @@
 import * as express from 'express';
 import * as http from 'http';
-import {WelcomeRoutes} from '../routes/welcome.routes';
+import {UserRoutes} from '../routes/user.routes';
 //import { environment } from '../config/environment';
 import {Database} from '../core/database'
 import { Server } from './server';
-// import { exceptionHandler } from './api/exceptionHandler';
-// import { extendExpressResponse } from './api/extendExpressResponse';
+import { Seeds } from './seeds';
+import { Connection } from 'typeorm';
+
 
 const root = './';
 
@@ -23,10 +24,12 @@ export class Bootstrap {
     public setupDatabase(app: express.Application): void {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
-        Database.createConnection()
-
-        //Database.openConnection()
+        console.log('Setting up database connection...')
+        Database.createConnection();
+        console.log('Seeding database...')
+        Seeds.seedUsers();
     }
+
 
     // public setupCors(app: express.Application): void {
     //     app.use((req: Request | any, res: Response, next: NextFunction) => {
@@ -51,8 +54,8 @@ export class Bootstrap {
         // const generalRouter = new GeneralRoutes().router;
         //const usersRouter = new UsersRoutes().router;
         console.log("Setting up routes...")
-        const welcomeRouter = new WelcomeRoutes().router;
-        app.use('/api', welcomeRouter);
+        const userRouter = new UserRoutes().router;
+        app.use('/api', userRouter);
         //app.use('/api', usersRouter);
     }
 

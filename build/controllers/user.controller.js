@@ -46,50 +46,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_controller_1 = require("./base-controller");
-var WelcomeController = /** @class */ (function (_super) {
-    __extends(WelcomeController, _super);
-    function WelcomeController() {
-        return _super.call(this) || this;
+var user_service_1 = require("../services/user.service");
+var UserController = /** @class */ (function (_super) {
+    __extends(UserController, _super);
+    function UserController() {
+        var _this = _super.call(this) || this;
+        _this.userService = new user_service_1.UserService();
+        return _this;
     }
-    WelcomeController.prototype.welcome = function (req, res) {
+    UserController.prototype.createUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
-            return __generator(this, function (_a) {
-                user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false };
-                //var user = await getConnection().manager.save(User, user);
-                res.send(user);
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomePerson = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var name;
-            return __generator(this, function (_a) {
-                name = req.params.name;
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
-            });
-        });
-    };
-    WelcomeController.prototype.welcomeResidents = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var residents;
-            return __generator(this, function (_a) {
-                try {
-                    //residents = await this.Database.getAllResidents();
+            var viewModel, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        viewModel = { username: "test2wfd223", email: "test223@test.com", password: "asfdsf" };
+                        //viewModel.Username = trimString(viewModel.Username);
+                        //viewModel.Email = trimString(viewModel.Username);
+                        _b = (_a = res.status(201)).json;
+                        return [4 /*yield*/, this.userService.createUser(res, viewModel.email, viewModel.username, viewModel.password)];
+                    case 1:
+                        //viewModel.Username = trimString(viewModel.Username);
+                        //viewModel.Email = trimString(viewModel.Username);
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
                 }
-                catch (error) {
-                    // ...
-                }
-                //getAllResidents()
-                // Greet the given name
-                res.send('Hello, ' + name);
-                return [2 /*return*/];
             });
         });
     };
-    return WelcomeController;
+    UserController.prototype.getUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        id = req.params.id;
+                        _b = (_a = res.status(200)).json;
+                        return [4 /*yield*/, this.userService.getUserById(res, id)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return UserController;
 }(base_controller_1.BaseController));
-exports.WelcomeController = WelcomeController;
+exports.UserController = UserController;

@@ -35,28 +35,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var User_1 = require("../entity/User");
-var Property_1 = require("../entity/Property");
-var Database = /** @class */ (function () {
-    function Database() {
+var user_repository_1 = require("../repositories/user.repository");
+var UserService = /** @class */ (function () {
+    function UserService() {
+        //super();
+        this.userRepository = new user_repository_1.UserRepository();
     }
-    //public static db: mysql.Connection
-    Database.createConnection = function () {
+    UserService.prototype.createUser = function (res, email, username, password) {
         return __awaiter(this, void 0, void 0, function () {
+            var user;
             return __generator(this, function (_a) {
-                return [2 /*return*/, typeorm_1.createConnection({
-                        type: "mysql",
-                        host: "localhost",
-                        port: 3306,
-                        username: "root",
-                        password: "root",
-                        database: "rems",
-                        entities: [User_1.User, Property_1.Property]
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        username = username.toLowerCase();
+                        email = email.toLowerCase();
+                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, password, "")];
+                    case 1:
+                        user = _a.sent();
+                        // Send Email
+                        //Notify
+                        return [2 /*return*/, user];
+                }
             });
         });
     };
-    return Database;
+    UserService.prototype.getUserById = function (res, uId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserById(res, uId)];
+                    case 1:
+                        user = _a.sent();
+                        // Send Email
+                        //Notify
+                        return [2 /*return*/, user];
+                }
+            });
+        });
+    };
+    return UserService;
 }());
-exports.Database = Database;
+exports.UserService = UserService;

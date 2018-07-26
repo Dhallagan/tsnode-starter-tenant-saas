@@ -1,18 +1,38 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from "typeorm"
 
 @Entity()
 export class User {
 
     @PrimaryGeneratedColumn()
-    id!: number;
+    Id: number;
 
     @Column()
-    firstName!: string;
+    Username: string;
 
     @Column()
-    lastName!: string;
+    Email: string;
 
     @Column()
-    isActive!: boolean;
+    EmailConfirmed: boolean;
 
+    @Column()
+    PasswordHash: string;
+
+    @Column()
+    PasswordSalt: string;
+
+    @Column()
+    PhoneNumber: string;
+
+    @Column()
+    PhoneNumberConfirmed: boolean;
+
+    @Column()
+    TwoFactorEnabled: boolean;
+
+    @Column()
+    ForgotPasswordCode: string;
+
+    @CreateDateColumn()
+    DateCreated: Date;
 }

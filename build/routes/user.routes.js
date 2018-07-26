@@ -12,19 +12,19 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_route_1 = require("./base-route");
 var user_controller_1 = require("../controllers/user.controller");
-var WelcomeRoutes = /** @class */ (function (_super) {
-    __extends(WelcomeRoutes, _super);
-    function WelcomeRoutes() {
+var UserRoutes = /** @class */ (function (_super) {
+    __extends(UserRoutes, _super);
+    function UserRoutes() {
         var _this = _super.call(this) || this;
         _this.userController = new user_controller_1.UserController();
         _this.initRoutes();
         return _this;
     }
-    WelcomeRoutes.prototype.initRoutes = function () {
+    UserRoutes.prototype.initRoutes = function () {
         var _this = this;
-        this.router.get('/user', function (req, res, next) { return _this.userController.getAllUsers(req, res).catch(next); });
-        this.router.get('/user/:name', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
+        this.router.get('/register', function (req, res, next) { return _this.userController.createUser(req, res).catch(next); });
+        this.router.get('/user/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
     };
-    return WelcomeRoutes;
+    return UserRoutes;
 }(base_route_1.BaseRoute));
-exports.WelcomeRoutes = WelcomeRoutes;
+exports.UserRoutes = UserRoutes;
