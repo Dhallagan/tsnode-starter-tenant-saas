@@ -7,9 +7,7 @@ export const Validation = {
       .isEmail().withMessage('Email is not valid'),
       //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
     check('password')
-      .isEmpty().withMessage('Password cannot be blank'),
-    check('password')
-      .isLength({ min: 8 }).withMessage('Password must be at least 6 characters'),
+      .isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
     check('confirmPassword')
       .custom((confirmPassword, { req }) => req.body.password === confirmPassword).withMessage('Passwords do not match')
   ],
