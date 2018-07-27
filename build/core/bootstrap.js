@@ -4,7 +4,7 @@ var user_routes_1 = require("../routes/user.routes");
 //import { environment } from '../config/environment';
 var database_1 = require("../core/database");
 var server_1 = require("./server");
-var seeds_1 = require("./seeds");
+//import { Seeds } from './seeds';
 var root = './';
 var Bootstrap = /** @class */ (function () {
     function Bootstrap() {
@@ -20,8 +20,8 @@ var Bootstrap = /** @class */ (function () {
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
         console.log('Setting up database connection...');
         database_1.Database.createConnection();
-        console.log('Seeding database...');
-        seeds_1.Seeds.seedUsers();
+        //console.log('Seeding database...')
+        //Seeds.seedUsers();
     };
     // public setupCors(app: express.Application): void {
     //     app.use((req: Request | any, res: Response, next: NextFunction) => {

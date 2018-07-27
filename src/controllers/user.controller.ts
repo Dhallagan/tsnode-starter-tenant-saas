@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { UserService } from '../services/user.service'
+import { check, validationResult } from 'express-validator/check';
 
 export class UserController extends BaseController {
 
@@ -12,23 +13,27 @@ export class UserController extends BaseController {
     }
 
     public async createUser(req: Request, res: Response) {
-        //var user = await getConnection().query('SELECT * FROM property')
-        //var user = await getConnection().manager.find(Property)
+        const viewModel = req.body;
 
-        const viewModel = { username: "test2wfd223", email: "test223@test.com", password: "asfdsf"}
-        //viewModel.Username = trimString(viewModel.Username);
-        //viewModel.Email = trimString(viewModel.Username);
-        
+        //check(viewModel.email, 'Email is not valid').isEmail();
+       // check(viewModel.password, 'Password cannot be blank').isLength({ min: 5 });
+
+        const errors = validationResult(req);
+        console.log(errors.array())
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        console.log(req.body)
         res.status(201).json(
-            await this.userService.createUser(res, viewModel.email, viewModel.username, viewModel.password)
+            await this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)
         );
     }
 
    public async getUser(req: Request, res: Response) {
 
         let { id } = req.params;
-       res.status(200).json(
-         await this.userService.getUserById(res, id)
+        res.status(200).json(
+            await this.userService.getUserById(res, id)
        );
    }
 }

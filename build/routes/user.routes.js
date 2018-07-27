@@ -12,6 +12,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_route_1 = require("./base-route");
 var user_controller_1 = require("../controllers/user.controller");
+var validation_1 = require("../util/validation");
 var UserRoutes = /** @class */ (function (_super) {
     __extends(UserRoutes, _super);
     function UserRoutes() {
@@ -22,7 +23,7 @@ var UserRoutes = /** @class */ (function (_super) {
     }
     UserRoutes.prototype.initRoutes = function () {
         var _this = this;
-        this.router.get('/register', function (req, res, next) { return _this.userController.createUser(req, res).catch(next); });
+        this.router.post('/register', validation_1.Validation.forRegister, function (req, res, next) { return _this.userController.createUser(req, res).catch(next); });
         this.router.get('/user/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
     };
     return UserRoutes;

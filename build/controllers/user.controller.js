@@ -47,6 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_controller_1 = require("./base-controller");
 var user_service_1 = require("../services/user.service");
+var check_1 = require("express-validator/check");
 var UserController = /** @class */ (function (_super) {
     __extends(UserController, _super);
     function UserController() {
@@ -56,18 +57,20 @@ var UserController = /** @class */ (function (_super) {
     }
     UserController.prototype.createUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, _a, _b;
+            var viewModel, errors, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        viewModel = { username: "test2wfd223", email: "test223@test.com", password: "asfdsf" };
-                        //viewModel.Username = trimString(viewModel.Username);
-                        //viewModel.Email = trimString(viewModel.Username);
+                        viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        console.log(errors.array());
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        console.log(req.body);
                         _b = (_a = res.status(201)).json;
-                        return [4 /*yield*/, this.userService.createUser(res, viewModel.email, viewModel.username, viewModel.password)];
+                        return [4 /*yield*/, this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)];
                     case 1:
-                        //viewModel.Username = trimString(viewModel.Username);
-                        //viewModel.Email = trimString(viewModel.Username);
                         _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];
                 }

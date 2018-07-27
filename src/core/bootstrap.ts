@@ -1,11 +1,12 @@
 import * as express from 'express';
+
 import * as http from 'http';
 import {UserRoutes} from '../routes/user.routes';
 //import { environment } from '../config/environment';
 import {Database} from '../core/database'
 import { Server } from './server';
-import { Seeds } from './seeds';
-import { Connection } from 'typeorm';
+//import { Seeds } from './seeds';
+
 
 
 const root = './';
@@ -26,8 +27,8 @@ export class Bootstrap {
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
         console.log('Setting up database connection...')
         Database.createConnection();
-        console.log('Seeding database...')
-        Seeds.seedUsers();
+        //console.log('Seeding database...')
+        //Seeds.seedUsers();
     }
 
 
