@@ -34,42 +34,68 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var emailer_1 = require("../email/emailer");
 var user_repository_1 = require("../repositories/user.repository");
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
         this.userRepository = new user_repository_1.UserRepository();
     }
-    UserService.prototype.createUser = function (res, email, username, password) {
+    UserService.prototype.createUser = function (res, username, email, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
+            var userExists, passwordHash, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         username = username.toLowerCase();
                         email = email.toLowerCase();
-                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, password, "")];
+                        return [4 /*yield*/, this.userRepository.findUserByEmail(email)];
                     case 1:
+                        userExists = _a.sent();
+                        if (userExists) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Account with that email address already exists.' }] }];
+                        }
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 2:
+                        passwordHash = _a.sent();
+                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, passwordHash)];
+                    case 3:
                         user = _a.sent();
-                        // Send Email
-                        //Notify
+                        // Send email
+                        // Emailer.welcomeEmail(user.email, user.username, user.emailCode);
+                        emailer_1.Emailer.welcomeEmail("test@test.com", "", "");
                         return [2 /*return*/, user];
                 }
             });
         });
     };
-    UserService.prototype.getUserById = function (res, uId) {
+    UserService.prototype.login = function (res, email, password) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserById(res, uId)];
+                    case 0: return [4 /*yield*/, this.userRepository.findUserByEmail(email)];
                     case 1:
                         user = _a.sent();
-                        // Send Email
-                        //Notify
-                        return [2 /*return*/, user];
+                        if (!user) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Email not found.' }] }];
+                        }
+                        console.log(user);
+                        if (bcrypt_1.default.compare(password, user.PasswordHash)) {
+                            return [2 /*return*/, user];
+                        }
+                        return [2 /*return*/, { 'errors': [{ 'msg': 'Invalid password.' }] }
+                            // const passwordHash = await bcrypt.hash(password, 10)
+                            // const user = await this.userRepository.createUser(res, username, email, passwordHash);
+                            // // Send email
+                            // // Emailer.welcomeEmail(user.email, user.username, user.emailCode);
+                            // Emailer.welcomeEmail("test@test.com", "", "");
+                        ];
                 }
             });
         });

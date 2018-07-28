@@ -59,39 +59,44 @@ var UserRepository = /** @class */ (function (_super) {
     function UserRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // public async getUserById(res: Response): Promise<UserModel> {
-    //     return await this.usersRepository.getUserById(res, this.getUserId(res));
-    // }
-    UserRepository.prototype.getUserById = function (res, uId) {
+    UserRepository.prototype.createUser = function (res, username, email, passwordHash) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.find(User_1.User, { Id: uId })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { Username: username, Email: email, PasswordHash: passwordHash })];
+                    case 1: 
+                    // var newUser = { Username: username, 
+                    //     Email: email, 
+                    //     EmailConfirmed: false, 
+                    //     Password: password, 
+                    //     PasswordSalt: "", 
+                    //     //PhoneNumber: "", 
+                    //     PhoneNumberConfirmed: false, 
+                    //     TwoFactorEnabled: false,
+                    //     //ForgotPasswordCode: ""
+                    //  }
+                    return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    // find(){
-    //     return this.find();
-    // }
-    UserRepository.prototype.createUser = function (res, username, email, password, passwordSalt) {
+    UserRepository.prototype.findUserByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
-            var newUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        newUser = { Username: username,
-                            Email: email,
-                            EmailConfirmed: false,
-                            Password: password,
-                            PasswordSalt: "",
-                            //PhoneNumber: "", 
-                            PhoneNumberConfirmed: false,
-                            TwoFactorEnabled: false,
-                        };
-                        return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, newUser)];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { Email: email })];
+                    case 1: 
+                    // var newUser = { Username: username, 
+                    //     Email: email, 
+                    //     EmailConfirmed: false, 
+                    //     Password: password, 
+                    //     PasswordSalt: "", 
+                    //     //PhoneNumber: "", 
+                    //     PhoneNumberConfirmed: false, 
+                    //     TwoFactorEnabled: false,
+                    //     //ForgotPasswordCode: ""
+                    //  }
+                    return [2 /*return*/, _a.sent()];
                 }
             });
         });

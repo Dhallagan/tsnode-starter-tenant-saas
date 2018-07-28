@@ -13,6 +13,7 @@ export class Database {
         username: "root",
         password: "root",
         database: "rems",
+        synchronize: true,
         entities: [User, Property]
     });
   }

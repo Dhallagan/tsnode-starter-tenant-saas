@@ -1,0 +1,181 @@
+CREATE TABLE `lease` (
+  `LeaseId` int(11) NOT NULL AUTO_INCREMENT,
+  `ResidentId` int(11) NOT NULL,
+  `PropertyId` int(11) NOT NULL,
+  `UnitId` int(11) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EndDate` date DEFAULT NULL,
+  `SignDate` date DEFAULT NULL,
+  `Terms` int(11) NOT NULL,
+  `MonthlyRent` decimal(10,0) NOT NULL,
+  `SecurityDeposit` decimal(10,0) DEFAULT NULL,
+  `PetDeposit` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`LeaseId`),
+  KEY `ResidentId_idx` (`ResidentId`),
+  KEY `PropertyId_idx` (`PropertyId`),
+  KEY `UnitId_idx` (`UnitId`),
+  CONSTRAINT `PropertyId` FOREIGN KEY (`PropertyId`) REFERENCES `property` (`PropertyId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `ResidentId` FOREIGN KEY (`ResidentId`) REFERENCES `resident` (`ResidentId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `leaseledger` (
+  `LeasePaymentId` int(11) NOT NULL AUTO_INCREMENT,
+  `LeaseId` int(11) DEFAULT NULL,
+  `PaymentType` int(11) DEFAULT NULL,
+  `PaymentCategory` int(11) DEFAULT NULL,
+  `DueDate` date DEFAULT NULL,
+  `PeriodFromDate` date DEFAULT NULL,
+  `PeriodToDate` date DEFAULT NULL,
+  `AmountDue` decimal(10,0) DEFAULT NULL,
+  `AmountPaid` decimal(10,0) DEFAULT NULL,
+  `PaidDate` date DEFAULT NULL,
+  `InvoiceDate` date DEFAULT NULL,
+  `GraceDays` int(11) DEFAULT NULL,
+  `Arrears` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`LeasePaymentId`),
+  KEY `LeaseId_idx` (`LeaseId`),
+  KEY `PaymentType_idx` (`PaymentType`),
+  KEY `PaymentCategory_idx` (`PaymentCategory`),
+  CONSTRAINT `LeaseId` FOREIGN KEY (`LeaseId`) REFERENCES `lease` (`LeaseId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `PaymentCategory` FOREIGN KEY (`PaymentCategory`) REFERENCES `paymentcategory` (`PaymentCategoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `PaymentType` FOREIGN KEY (`PaymentType`) REFERENCES `paymenttype` (`PaymentTypeId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `listing` (
+  `ListingId` int(11) NOT NULL AUTO_INCREMENT,
+  `PropertyId` int(11) DEFAULT NULL,
+  `UnitId` int(11) DEFAULT NULL,
+  `MonthlyRent` decimal(10,0) DEFAULT NULL,
+  `Deposit` decimal(10,0) DEFAULT NULL,
+  `AvailableDate` date DEFAULT NULL,
+  `ListedDate` date DEFAULT NULL,
+  `Terms` int(11) DEFAULT NULL,
+  `Section8` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`ListingId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `occupant` (
+  `OccupantId` int(11) NOT NULL AUTO_INCREMENT,
+  `ResidentId` int(11) DEFAULT NULL,
+  `OccupantType` int(11) DEFAULT NULL,
+  `First` varchar(45) DEFAULT NULL,
+  `Last` varchar(45) DEFAULT NULL,
+  `Age` int(11) DEFAULT NULL,
+  `Sex` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`OccupantId`),
+  KEY `ResidentId_idx` (`ResidentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `occupanttype` (
+  `OccupantTypeId` int(11) NOT NULL,
+  `OccupantType` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`OccupantTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `paymentcategory` (
+  `PaymentCategoryId` int(11) NOT NULL,
+  `PaymentCategory` varchar(45) NOT NULL,
+  PRIMARY KEY (`PaymentCategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `paymenttype` (
+  `PaymentTypeId` int(11) NOT NULL,
+  `PaymentType` varchar(45) NOT NULL,
+  PRIMARY KEY (`PaymentTypeId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `property` (
+  `PropertyId` int(11) NOT NULL AUTO_INCREMENT,
+  `Street` varchar(45) DEFAULT NULL,
+  `City` varchar(45) DEFAULT NULL,
+  `State` varchar(45) DEFAULT NULL,
+  `Zipcode` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`PropertyId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `resident` (
+  `ResidentId` int(11) NOT NULL AUTO_INCREMENT,
+  `RFirst` varchar(45) DEFAULT NULL,
+  `RLast` varchar(45) DEFAULT NULL,
+  `REmail` varchar(45) DEFAULT NULL,
+  `RMobile` varchar(45) DEFAULT NULL,
+  `RPhone` varchar(45) DEFAULT NULL,
+  `RNotes` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ResidentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `termtypes` (
+  `TermTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `TermType` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`TermTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `unit` (
+  `UnitId` int(11) NOT NULL AUTO_INCREMENT,
+  `PropertyId` int(11) DEFAULT NULL,
+  `UnitNumber` varchar(3) DEFAULT NULL,
+  `Bedrooms` int(11) DEFAULT NULL,
+  `Baths` decimal(10,0) DEFAULT NULL,
+  `SqFt` int(11) DEFAULT NULL,
+  `Garage` tinyint(4) DEFAULT NULL,
+  `Smoking` tinyint(4) DEFAULT NULL,
+  `Description` text,
+  PRIMARY KEY (`UnitId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `user` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(45) DEFAULT NULL,
+  `Email` varchar(100) DEFAULT NULL,
+  `EmailConfirmed` tinyint(4) DEFAULT NULL,
+  `PasswordHash` varchar(45) DEFAULT NULL,
+  `PasswordSalt` varchar(45) DEFAULT NULL,
+  `PhoneNumber` varchar(45) DEFAULT NULL,
+  `PhoneNumberConfirmed` varchar(45) DEFAULT NULL,
+  `TwoFactorEnabled` varchar(45) DEFAULT NULL,
+  `ForgotPasswordCode` varchar(45) DEFAULT NULL,
+  `DateCreated` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `workorder` (
+  `WorkOrderId` int(11) NOT NULL AUTO_INCREMENT,
+  `UnitId` int(11) NOT NULL,
+  `WorkOrderType` int(11) DEFAULT NULL,
+  `CreatedDate` date NOT NULL,
+  `Priority` int(11) DEFAULT NULL,
+  `ProblemDesc` text,
+  `CompletionDate` date DEFAULT NULL,
+  `StartDate` date DEFAULT NULL,
+  `CanEnter` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`WorkOrderId`),
+  KEY `UnitId_idx` (`UnitId`),
+  CONSTRAINT `UnitId` FOREIGN KEY (`UnitId`) REFERENCES `unit` (`UnitId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `workorderpart` (
+  `WorkOrderPartId` int(11) NOT NULL,
+  `WorkOrderId` int(11) NOT NULL,
+  PRIMARY KEY (`WorkOrderPartId`,`WorkOrderId`),
+  KEY `WorkOrderId_idx` (`WorkOrderId`),
+  CONSTRAINT `WorkOrderId` FOREIGN KEY (`WorkOrderId`) REFERENCES `workorder` (`WorkOrderId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `workordertype` (
+  `WorkOrderTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `WorkOrderType` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`WorkOrderTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+
+
+

@@ -26,9 +26,9 @@ var User = /** @class */ (function () {
         __metadata("design:type", String)
     ], User.prototype, "Email", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: false }),
         __metadata("design:type", Boolean)
-    ], User.prototype, "EmailConfirmed", void 0);
+    ], User.prototype, "EmailVerified", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
@@ -36,23 +36,19 @@ var User = /** @class */ (function () {
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], User.prototype, "PasswordSalt", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
     ], User.prototype, "PhoneNumber", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: false }),
         __metadata("design:type", Boolean)
-    ], User.prototype, "PhoneNumberConfirmed", void 0);
+    ], User.prototype, "PhoneNumberVerified", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: false }),
         __metadata("design:type", Boolean)
     ], User.prototype, "TwoFactorEnabled", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ default: null }),
         __metadata("design:type", String)
-    ], User.prototype, "ForgotPasswordCode", void 0);
+    ], User.prototype, "VerifyCode", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

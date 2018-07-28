@@ -23,8 +23,8 @@ var UserRoutes = /** @class */ (function (_super) {
     }
     UserRoutes.prototype.initRoutes = function () {
         var _this = this;
-        this.router.post('/register', validation_1.Validation.forRegister, function (req, res, next) { return _this.userController.createUser(req, res).catch(next); });
-        this.router.get('/user/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
+        this.router.post('/register', validation_1.Validation.forRegister, function (req, res, next) { return _this.userController.register(req, res).catch(next); });
+        this.router.post('/login', function (req, res, next) { return _this.userController.login(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));

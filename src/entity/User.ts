@@ -12,26 +12,23 @@ export class User {
     @Column()
     Email: string;
 
-    @Column()
-    EmailConfirmed: boolean;
+    @Column({default: false})
+    EmailVerified: boolean;
 
     @Column()
     PasswordHash: string;
 
     @Column()
-    PasswordSalt: string;
-
-    @Column()
     PhoneNumber: string;
 
-    @Column()
-    PhoneNumberConfirmed: boolean;
+    @Column({default: false})
+    PhoneNumberVerified: boolean;
 
-    @Column()
+    @Column({default: false})
     TwoFactorEnabled: boolean;
 
-    @Column()
-    ForgotPasswordCode: string;
+    @Column({default: null})
+    VerifyCode: string;
 
     @CreateDateColumn()
     DateCreated: Date;

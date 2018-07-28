@@ -55,7 +55,7 @@ var UserController = /** @class */ (function (_super) {
         _this.userService = new user_service_1.UserService();
         return _this;
     }
-    UserController.prototype.createUser = function (req, res) {
+    UserController.prototype.register = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var viewModel, errors, _a, _b;
             return __generator(this, function (_c) {
@@ -63,11 +63,9 @@ var UserController = /** @class */ (function (_super) {
                     case 0:
                         viewModel = req.body;
                         errors = check_1.validationResult(req);
-                        console.log(errors.array());
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        console.log(req.body);
                         _b = (_a = res.status(201)).json;
                         return [4 /*yield*/, this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)];
                     case 1:
@@ -77,17 +75,18 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
-    UserController.prototype.getUser = function (req, res) {
+    UserController.prototype.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, _a, _b;
+            var viewModel, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        id = req.params.id;
-                        _b = (_a = res.status(200)).json;
-                        return [4 /*yield*/, this.userService.getUserById(res, id)];
+                        viewModel = req.body;
+                        _b = (_a = res.status(201)).json;
+                        return [4 /*yield*/, this.userService.login(res, viewModel.email, viewModel.password)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
+                        ;
                         return [2 /*return*/];
                 }
             });

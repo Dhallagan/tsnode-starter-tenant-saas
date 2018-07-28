@@ -13,8 +13,8 @@ export class UserRoutes extends BaseRoute {
     }
 
     initRoutes() {
-        this.router.post('/register', Validation.forRegister, (req, res, next) => this.userController.createUser(req, res).catch(next));
+        this.router.post('/register', Validation.forRegister, (req, res, next) => this.userController.register(req, res).catch(next));
         
-          this.router.get('/user/:id', (req, res, next) => this.userController.getUser(req, res).catch(next));
+        this.router.post('/login', (req, res, next) => this.userController.login(req, res).catch(next));
     }
 }

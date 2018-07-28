@@ -52,6 +52,7 @@ var Database = /** @class */ (function () {
                         username: "root",
                         password: "root",
                         database: "rems",
+                        synchronize: true,
                         entities: [User_1.User, Property_1.Property]
                     })];
             });
