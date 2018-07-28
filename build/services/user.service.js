@@ -37,15 +37,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var emailer_1 = require("../email/emailer");
 var user_repository_1 = require("../repositories/user.repository");
 var bcrypt_1 = __importDefault(require("bcrypt"));
+var moment_1 = __importDefault(require("moment"));
+var jwt = __importStar(require("jsonwebtoken"));
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
         this.userRepository = new user_repository_1.UserRepository();
     }
+    UserService.prototype.generateToken = function (user) {
+        var payload = {
+            iss: "localhost",
+            sub: user._id,
+            iat: moment_1.default().unix(),
+            exp: moment_1.default().add(14, 'days').unix()
+        };
+        return jwt.sign(payload, 'secretsecretsecret');
+    };
     UserService.prototype.createUser = function (res, username, email, password) {
         return __awaiter(this, void 0, void 0, function () {
             var userExists, passwordHash, user;
@@ -54,7 +72,7 @@ var UserService = /** @class */ (function () {
                     case 0:
                         username = username.toLowerCase();
                         email = email.toLowerCase();
-                        return [4 /*yield*/, this.userRepository.findUserByEmail(email)];
+                        return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
                         userExists = _a.sent();
                         if (userExists) {
@@ -79,24 +97,28 @@ var UserService = /** @class */ (function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.findUserByEmail(email)];
+                    case 0: return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
                         user = _a.sent();
                         if (!user) {
                             return [2 /*return*/, { 'errors': [{ 'msg': 'Email not found.' }] }];
                         }
-                        console.log(user);
-                        if (bcrypt_1.default.compare(password, user.PasswordHash)) {
-                            return [2 /*return*/, user];
+                        if (!bcrypt_1.default.compare(password, user.PasswordHash)) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Invalid password.' }] }];
                         }
-                        return [2 /*return*/, { 'errors': [{ 'msg': 'Invalid password.' }] }
-                            // const passwordHash = await bcrypt.hash(password, 10)
-                            // const user = await this.userRepository.createUser(res, username, email, passwordHash);
-                            // // Send email
-                            // // Emailer.welcomeEmail(user.email, user.username, user.emailCode);
-                            // Emailer.welcomeEmail("test@test.com", "", "");
-                        ];
+                        else {
+                            return [2 /*return*/, { token: this.generateToken(user), user: user }];
+                        }
+                        return [2 /*return*/];
                 }
+            });
+        });
+    };
+    UserService.prototype.authCheck = function (res, email, password) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log("Authorized");
+                return [2 /*return*/];
             });
         });
     };

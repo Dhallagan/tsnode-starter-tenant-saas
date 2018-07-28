@@ -92,6 +92,22 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
+    UserController.prototype.auth = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var viewModel, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        viewModel = req.body;
+                        _b = (_a = res.status(201)).json;
+                        return [4 /*yield*/, this.userService.authCheck(res, viewModel.email, viewModel.password)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     return UserController;
 }(base_controller_1.BaseController));
 exports.UserController = UserController;

@@ -24,7 +24,7 @@ export class UserRepository extends Repository<User> {
     }
 
     
-    public async findUserByEmail(email: string){
+    public async getUserByEmail(email: string){
         // var newUser = { Username: username, 
         //     Email: email, 
         //     EmailConfirmed: false, 

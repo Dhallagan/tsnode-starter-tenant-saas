@@ -5,6 +5,7 @@ var user_routes_1 = require("../routes/user.routes");
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 //import { Seeds } from './seeds';
+var Authentication_1 = require("./middleware/Authentication");
 var root = './';
 var Bootstrap = /** @class */ (function () {
     function Bootstrap() {
@@ -39,6 +40,10 @@ var Bootstrap = /** @class */ (function () {
     //         next();
     //     });
     // }
+    Bootstrap.prototype.setupAuthentication = function (app) {
+        console.log("Setting up authentication...");
+        app.use(Authentication_1.Authentication.isAuthenticated);
+    };
     Bootstrap.prototype.setupRoutes = function (app) {
         // serving api routes
         // const generalRouter = new GeneralRoutes().router;

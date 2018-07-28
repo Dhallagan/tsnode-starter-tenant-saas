@@ -34,5 +34,13 @@ export class UserController extends BaseController {
             await this.userService.login(res, viewModel.email, viewModel.password)
         );;
    }
+
+   public async auth(req: Request, res: Response) {
+        const viewModel = req.body;
+
+        res.status(201).json(
+            await this.userService.authCheck(res, viewModel.email, viewModel.password)
+        );
+    }
 }
 

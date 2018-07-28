@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var check_1 = require("express-validator/check");
 exports.Validation = {
     forRegister: [
-        check_1.check('email', 'Email is not valid')
+        check_1.check('email', 'Email is not valid.')
             .isEmail(),
         //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
         check_1.check('password', 'Password must be at least 6 characters')
@@ -16,8 +16,8 @@ exports.Validation = {
         }).withMessage('Passwords do not match')
     ],
     forLogin: [
-    //  check('email')
-    //    .isEmail().withMessage('Invalid email format')
+    //  check('email', 'Email is not valid.')
+    //    .isEmail()
     //    .custom(email => User.findOne({ where: { email } }).then(u => !!u)).withMessage('Invalid email or password'),
     //  check('password')
     //    .custom((password, { req }) => {

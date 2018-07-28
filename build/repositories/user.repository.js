@@ -80,7 +80,7 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
-    UserRepository.prototype.findUserByEmail = function (email) {
+    UserRepository.prototype.getUserByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {

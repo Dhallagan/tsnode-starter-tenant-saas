@@ -6,6 +6,7 @@ import {UserRoutes} from '../routes/user.routes';
 import {Database} from '../core/database'
 import { Server } from './server';
 //import { Seeds } from './seeds';
+import { Authentication } from './middleware/Authentication'
 
 
 
@@ -49,6 +50,12 @@ export class Bootstrap {
     //         next();
     //     });
     // }
+
+    public setupAuthentication(app: express.Application): void {
+        console.log("Setting up authentication...")
+        app.use(Authentication.isAuthenticated);
+    }
+
     public setupRoutes(app: express.Application): void {
      
         // serving api routes
