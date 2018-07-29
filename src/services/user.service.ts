@@ -4,7 +4,7 @@ import { UserRepository } from "../repositories/user.repository";
 import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
-import { Authentication } from '../core/middleware/Authentication'
+import { v4 as UUId } from 'uuid';
 
 export class UserService {
 
@@ -61,9 +61,36 @@ export class UserService {
 
     }
 
-    public async authCheck(res: Response, email: string, password: string) {
-        console.log("Authorized")
+    public async forgotPassword(res: Response, email: string) {
+        email = email.toLowerCase();
 
+        const userExists = await this.userRepository.getUserByEmail(email)
+
+        if(!userExists){
+            return  {'errors': [{'msg': 'Account with the email address '+ email + ' email address does not exist.'}]}
+        }
+
+        const user = await this.userRepository.forgotPassword(email, UUId(), moment().add(1, 'days').toString())
+
+        console.log("Emailer.send()")
+        return {'msg': 'An email has been sent to '+ email + ' with further instruction.'};
+    }
+
+    public async resetPassword(res: Response, token: string, password: string) {
+        var user = await this.userRepository.getUserByToken(token)
+        if(!user) {
+            return  {'errors': [{'msg': 'Password reset token is invalid or expired.'}]}
+        }
+
+        // NEED TO CLEAR PasswordRestExpirs date as well 
+        user.PasswordHash = await bcrypt.hash(password, 10);
+        user.PasswordResetToken = "";
+
+        await this.userRepository.saveUser(res, user);
+        
+        //Emailer.send()
+
+        return {'msg': 'Your password has been saved successfully.'}
     }
 }
 

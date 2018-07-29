@@ -64,18 +64,7 @@ var UserRepository = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { Username: username, Email: email, PasswordHash: passwordHash })];
-                    case 1: 
-                    // var newUser = { Username: username, 
-                    //     Email: email, 
-                    //     EmailConfirmed: false, 
-                    //     Password: password, 
-                    //     PasswordSalt: "", 
-                    //     //PhoneNumber: "", 
-                    //     PhoneNumberConfirmed: false, 
-                    //     TwoFactorEnabled: false,
-                    //     //ForgotPasswordCode: ""
-                    //  }
-                    return [2 /*return*/, _a.sent()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -85,18 +74,43 @@ var UserRepository = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { Email: email })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.getUserByToken = function (token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { where: { PasswordResetToken: token, PasswordResetExpires: typeorm_1.MoreThan(Date.now()) } })];
                     case 1: 
-                    // var newUser = { Username: username, 
-                    //     Email: email, 
-                    //     EmailConfirmed: false, 
-                    //     Password: password, 
-                    //     PasswordSalt: "", 
-                    //     //PhoneNumber: "", 
-                    //     PhoneNumberConfirmed: false, 
-                    //     TwoFactorEnabled: false,
-                    //     //ForgotPasswordCode: ""
-                    //  }
+                    // NEED TO ADD EXPIRATION
                     return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.forgotPassword = function (email, token, expiration) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userRepository;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        userRepository = typeorm_1.getRepository(User_1.User);
+                        return [4 /*yield*/, userRepository.update({ Email: email }, { PasswordResetToken: token, PasswordResetExpires: expiration })];
+                    case 1: // you can also get it via getConnection().getRepository() or getManager().getRepository()
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.saveUser = function (res, user) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, user)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

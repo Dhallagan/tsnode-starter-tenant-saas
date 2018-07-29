@@ -13,7 +13,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var base_route_1 = require("./base-route");
 var user_controller_1 = require("../controllers/user.controller");
 var validation_1 = require("../util/validation");
-var Authentication_1 = require("../core/middleware/Authentication");
 var UserRoutes = /** @class */ (function (_super) {
     __extends(UserRoutes, _super);
     function UserRoutes() {
@@ -26,7 +25,8 @@ var UserRoutes = /** @class */ (function (_super) {
         var _this = this;
         this.router.post('/register', validation_1.Validation.forRegister, function (req, res, next) { return _this.userController.register(req, res).catch(next); });
         this.router.post('/login', validation_1.Validation.forLogin, function (req, res, next) { return _this.userController.login(req, res).catch(next); });
-        this.router.post('/auth', Authentication_1.Authentication.isAuthenticated, validation_1.Validation.forLogin, function (req, res, next) { return _this.userController.auth(req, res).catch(next); });
+        this.router.post('/recover', function (req, res, next) { return _this.userController.forgotPassword(req, res).catch(next); });
+        this.router.post('/reset/:token', function (req, res, next) { return _this.userController.resetPassword(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));

@@ -26,6 +26,7 @@
     "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.2.7",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "uuid": "^3.3.2"
   }
 }

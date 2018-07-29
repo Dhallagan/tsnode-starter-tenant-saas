@@ -82,25 +82,40 @@ var UserController = /** @class */ (function (_super) {
                 switch (_c.label) {
                     case 0:
                         viewModel = req.body;
-                        _b = (_a = res.status(201)).json;
+                        _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.login(res, viewModel.email, viewModel.password)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
-                        ;
                         return [2 /*return*/];
                 }
             });
         });
     };
-    UserController.prototype.auth = function (req, res) {
+    UserController.prototype.forgotPassword = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var viewModel, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         viewModel = req.body;
-                        _b = (_a = res.status(201)).json;
-                        return [4 /*yield*/, this.userService.authCheck(res, viewModel.email, viewModel.password)];
+                        _b = (_a = res.status(200)).json;
+                        return [4 /*yield*/, this.userService.forgotPassword(res, viewModel.email)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UserController.prototype.resetPassword = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var viewModel, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        viewModel = req.body;
+                        _b = (_a = res.status(200)).json;
+                        return [4 /*yield*/, this.userService.resetPassword(res, req.params.token, viewModel.password)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];

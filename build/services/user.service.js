@@ -50,6 +50,7 @@ var user_repository_1 = require("../repositories/user.repository");
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var moment_1 = __importDefault(require("moment"));
 var jwt = __importStar(require("jsonwebtoken"));
+var uuid_1 = require("uuid");
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
@@ -114,11 +115,52 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.authCheck = function (res, email, password) {
+    UserService.prototype.forgotPassword = function (res, email) {
         return __awaiter(this, void 0, void 0, function () {
+            var userExists, user;
             return __generator(this, function (_a) {
-                console.log("Authorized");
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        email = email.toLowerCase();
+                        return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
+                    case 1:
+                        userExists = _a.sent();
+                        if (!userExists) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Account with the email address ' + email + ' email address does not exist.' }] }];
+                        }
+                        return [4 /*yield*/, this.userRepository.forgotPassword(email, uuid_1.v4(), moment_1.default().add(1, 'days').toString())];
+                    case 2:
+                        user = _a.sent();
+                        console.log("Emailer.send()");
+                        return [2 /*return*/, { 'msg': 'An email has been sent to ' + email + ' with further instruction.' }];
+                }
+            });
+        });
+    };
+    UserService.prototype.resetPassword = function (res, token, password) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserByToken(token)];
+                    case 1:
+                        user = _b.sent();
+                        if (!user) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Password reset token is invalid or expired.' }] }];
+                        }
+                        // NEED TO CLEAR PasswordRestExpirs date as well 
+                        _a = user;
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 2:
+                        // NEED TO CLEAR PasswordRestExpirs date as well 
+                        _a.PasswordHash = _b.sent();
+                        user.PasswordResetToken = "";
+                        return [4 /*yield*/, this.userRepository.saveUser(res, user)];
+                    case 3:
+                        _b.sent();
+                        //Emailer.send()
+                        return [2 /*return*/, { 'msg': 'Your password has been saved successfully.' }];
+                }
             });
         });
     };

@@ -46,9 +46,13 @@ var User = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], User.prototype, "TwoFactorEnabled", void 0);
     __decorate([
-        typeorm_1.Column({ default: null }),
+        typeorm_1.Column({ default: null, nullable: true }),
         __metadata("design:type", String)
-    ], User.prototype, "VerifyCode", void 0);
+    ], User.prototype, "PasswordResetToken", void 0);
+    __decorate([
+        typeorm_1.Column({ default: null, nullable: true }),
+        __metadata("design:type", Date)
+    ], User.prototype, "PasswordResetExpires", void 0);
     __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)

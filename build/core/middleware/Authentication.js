@@ -16,23 +16,6 @@ var moment_1 = __importDefault(require("moment"));
 var Authentication = /** @class */ (function () {
     function Authentication() {
     }
-    // static isAuthenticated(req: Request): string {
-    //     let token = null;
-    //     const authorization = req.headers.authorization as string;
-    //     // Retrieve the token form the Authorization header
-    //     if (authorization && authorization.length > 8 && authorization.split(' ')[0] === 'Bearer') {
-    //         token = authorization.split(' ')[1];
-    //     }
-    //     return token;
-    // }
-    // static isAuthenticated(req: Request, res: Response, next: NextFunction): void {
-    //     var token = (req.headers.authorization as string).split(' ')[1]
-    //     try {
-    //         return jwt.verify(token, 'secretsecretsecret')
-    //     } catch (error) {
-    //         return false
-    //     }
-    // }
     Authentication.isAuthenticated = function (req, res, next) {
         if (!req.header('Authorization')) {
             return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
@@ -49,7 +32,6 @@ var Authentication = /** @class */ (function () {
             return res.status(401).send({ message: 'Token has expired' });
         }
         //req.user = payload.sub;
-        console.log(payload);
         next();
     };
     Authentication.issuerName = 'localhost';

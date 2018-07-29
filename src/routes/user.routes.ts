@@ -15,9 +15,9 @@ export class UserRoutes extends BaseRoute {
 
     initRoutes() {
         this.router.post('/register', Validation.forRegister, (req, res, next) => this.userController.register(req, res).catch(next));
-        
         this.router.post('/login', Validation.forLogin, (req, res, next) => this.userController.login(req, res).catch(next));
-
-        this.router.post('/auth', Authentication.isAuthenticated, Validation.forLogin, (req, res, next) => this.userController.auth(req, res).catch(next));
+        this.router.post('/recover', (req, res, next) => this.userController.forgotPassword(req, res).catch(next));
+        this.router.post('/reset/:token', (req, res, next) => this.userController.resetPassword(req, res).catch(next));
+        
     }
 }

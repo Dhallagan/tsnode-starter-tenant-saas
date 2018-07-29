@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Timestamp} from "typeorm"
 
 @Entity()
 export class User {
@@ -27,8 +27,11 @@ export class User {
     @Column({default: false})
     TwoFactorEnabled: boolean;
 
-    @Column({default: null})
-    VerifyCode: string;
+    @Column({default: null, nullable: true})
+    PasswordResetToken: string;
+
+    @Column({default: null, nullable: true})
+    PasswordResetExpires: Date;
 
     @CreateDateColumn()
     DateCreated: Date;

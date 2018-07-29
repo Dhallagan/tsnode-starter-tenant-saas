@@ -7,28 +7,6 @@ import moment from 'moment';
 export class Authentication {
     static issuerName = 'localhost';
 
-    // static isAuthenticated(req: Request): string {
-    //     let token = null;
-    //     const authorization = req.headers.authorization as string;
-
-    //     // Retrieve the token form the Authorization header
-    //     if (authorization && authorization.length > 8 && authorization.split(' ')[0] === 'Bearer') {
-    //         token = authorization.split(' ')[1];
-    //     }
-
-    //     return token;
-    // }
-
-    // static isAuthenticated(req: Request, res: Response, next: NextFunction): void {
-    //     var token = (req.headers.authorization as string).split(' ')[1]
-    //     try {
-    //         return jwt.verify(token, 'secretsecretsecret')
-    //     } catch (error) {
-    //         return false
-    //     }
-
-    // }
-
     static isAuthenticated(req: Request, res: Response, next: NextFunction) {
         if (!req.header('Authorization')) {
             return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
@@ -47,7 +25,6 @@ export class Authentication {
             return res.status(401).send({ message: 'Token has expired' });
           }
           //req.user = payload.sub;
-          console.log(payload)
           next();
     }
 }

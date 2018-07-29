@@ -8,8 +8,8 @@ export const Validation = {
       //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
     check('password', 'Password must be at least 6 characters')
       .isLength({ min: 6 }),
-    check('confirmPassword')
-      .custom((confirmPassword, { req }) => req.body.password === confirmPassword).withMessage('Passwords do not match')
+    check('confirmPassword', 'Passwords do not match')
+      .custom((confirmPassword, { req }) => req.body.password === confirmPassword)
   ],
   forLogin: [
   //  check('email', 'Email is not valid.')
@@ -20,5 +20,10 @@ export const Validation = {
   //      return User.findOne({ where: { email: req.body.email } })
   //        .then(u => bcrypt.compare(password, u!.password))
   //    }).withMessage('Invalid email or password')
-  ]
+  ],
+
+  forReset: [
+    check('confirmPassword', 'Passwords do not match')
+      .custom((confirmPassword, { req }) => req.body.password === confirmPassword)
+    ]
 }

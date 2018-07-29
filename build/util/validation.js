@@ -9,11 +9,11 @@ exports.Validation = {
         //.custom(email => User.find({ where: { email } }).then(u => !!!u)).withMessage('Email exists'),
         check_1.check('password', 'Password must be at least 6 characters')
             .isLength({ min: 6 }),
-        check_1.check('confirmPassword')
+        check_1.check('confirmPassword', 'Passwords do not match')
             .custom(function (confirmPassword, _a) {
             var req = _a.req;
             return req.body.password === confirmPassword;
-        }).withMessage('Passwords do not match')
+        })
     ],
     forLogin: [
     //  check('email', 'Email is not valid.')
@@ -24,5 +24,12 @@ exports.Validation = {
     //      return User.findOne({ where: { email: req.body.email } })
     //        .then(u => bcrypt.compare(password, u!.password))
     //    }).withMessage('Invalid email or password')
+    ],
+    forReset: [
+        check_1.check('confirmPassword', 'Passwords do not match')
+            .custom(function (confirmPassword, _a) {
+            var req = _a.req;
+            return req.body.password === confirmPassword;
+        })
     ]
 };
