@@ -59,11 +59,11 @@ var UserRepository = /** @class */ (function (_super) {
     function UserRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    UserRepository.prototype.createUser = function (res, username, email, passwordHash) {
+    UserRepository.prototype.createUser = function (res, username, email, passwordHash, emailVerifyToken) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { Username: username, Email: email, PasswordHash: passwordHash })];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { Username: username, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -83,6 +83,16 @@ var UserRepository = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ EmailVerifyToken: token })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.getUserByTokenAndExpiration = function (token) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { where: { PasswordResetToken: token, PasswordResetExpires: typeorm_1.MoreThan(Date.now()) } })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
@@ -93,7 +103,7 @@ var UserRepository = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).update({ Email: email }, { PasswordResetToken: token, PasswordResetExpires: expiration })];
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save({ Email: email, PasswordResetToken: token, PasswordResetExpires: expiration })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

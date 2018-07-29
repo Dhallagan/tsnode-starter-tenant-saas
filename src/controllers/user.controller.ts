@@ -32,6 +32,16 @@ export class UserController extends BaseController {
 
 
 
+    
+    public async verifyRegistration(req: Request, res: Response) {
+
+        res.status(201).json(
+            await this.userService.verifyEmail(res, req.params.token)
+        );
+    }
+
+
+
 
    public async login(req: Request, res: Response) {
         const viewModel = req.body;

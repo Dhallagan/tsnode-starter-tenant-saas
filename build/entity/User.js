@@ -54,6 +54,10 @@ var User = /** @class */ (function () {
         __metadata("design:type", Date)
     ], User.prototype, "PasswordResetExpires", void 0);
     __decorate([
+        typeorm_1.Column({ default: null, nullable: true }),
+        __metadata("design:type", String)
+    ], User.prototype, "EmailVerifyToken", void 0);
+    __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], User.prototype, "DateCreated", void 0);

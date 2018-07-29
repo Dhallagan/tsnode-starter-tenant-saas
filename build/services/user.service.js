@@ -82,13 +82,34 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
                     case 2:
                         passwordHash = _a.sent();
-                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, passwordHash)];
+                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, passwordHash, uuid_1.v4())];
                     case 3:
                         user = _a.sent();
                         // Send email
-                        // Emailer.welcomeEmail(user.email, user.username, user.emailCode);
-                        emailer_1.Emailer.welcomeEmail("test@test.com", "", "");
+                        emailer_1.Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
                         return [2 /*return*/, user];
+                }
+            });
+        });
+    };
+    UserService.prototype.verifyEmail = function (res, verifyEmailToken) {
+        return __awaiter(this, void 0, void 0, function () {
+            var verifiedUser;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserByToken(verifyEmailToken)];
+                    case 1:
+                        verifiedUser = _a.sent();
+                        if (!verifiedUser) {
+                            return [2 /*return*/, { 'errors': [{ 'msg': 'Email verification token is invalid or expired.' }] }];
+                        }
+                        verifiedUser.EmailVerified = true;
+                        verifiedUser.EmailVerifyToken = "";
+                        return [4 /*yield*/, this.userRepository.saveUser(res, verifiedUser)];
+                    case 2:
+                        _a.sent();
+                        // Send Registration complete email?
+                        return [2 /*return*/, { 'msg': 'Your email has been successfully verified.' }];
                 }
             });
         });
@@ -131,7 +152,7 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.forgotPassword(email, uuid_1.v4(), moment_1.default().add(1, 'days').toString())];
                     case 2:
                         user = _a.sent();
-                        console.log("Emailer.send()");
+                        emailer_1.Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken);
                         return [2 /*return*/, { 'msg': 'An email has been sent to ' + email + ' with further instruction.' }];
                 }
             });
@@ -142,7 +163,7 @@ var UserService = /** @class */ (function () {
             var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByToken(token)];
+                    case 0: return [4 /*yield*/, this.userRepository.getUserByTokenAndExpiration(token)];
                     case 1:
                         user = _b.sent();
                         if (!user) {
@@ -158,7 +179,7 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.saveUser(res, user)];
                     case 3:
                         _b.sent();
-                        //Emailer.send()
+                        emailer_1.Emailer.passwordResetSuccessEmail(user.Email);
                         return [2 /*return*/, { 'msg': 'Your password has been saved successfully.' }];
                 }
             });

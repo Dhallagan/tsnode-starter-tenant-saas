@@ -75,6 +75,21 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
+    UserController.prototype.verifyRegistration = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _b = (_a = res.status(201)).json;
+                        return [4 /*yield*/, this.userService.verifyEmail(res, req.params.token)];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     UserController.prototype.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var viewModel, errors, _a, _b;

@@ -33,6 +33,9 @@ export class User {
     @Column({default: null, nullable: true})
     PasswordResetExpires: Date;
 
+    @Column({default: null, nullable: true})
+    EmailVerifyToken: string;
+
     @CreateDateColumn()
     DateCreated: Date;
 }

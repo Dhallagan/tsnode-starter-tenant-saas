@@ -9,8 +9,8 @@ import { User } from "../entity/User";
 export class UserRepository extends Repository<User> {
 
 
-    public async createUser(res: Response, username: string, email: string, passwordHash: string){
-        return await getConnection().manager.save(User, {Username: username, Email: email, PasswordHash: passwordHash});
+    public async createUser(res: Response, username: string, email: string, passwordHash: string, emailVerifyToken: string){
+        return await getConnection().manager.save(User, {Username: username, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken});
     }
 
 
@@ -24,6 +24,13 @@ export class UserRepository extends Repository<User> {
 
 
     public async getUserByToken(token: string){
+        return await getRepository(User).findOne({EmailVerifyToken: token});
+    }
+
+
+
+
+    public async getUserByTokenAndExpiration(token: string){
         return await getConnection().manager.findOne(User, { where: {PasswordResetToken: token , PasswordResetExpires: MoreThan(Date.now())} });
     }
 
@@ -31,7 +38,7 @@ export class UserRepository extends Repository<User> {
 
 
     public async forgotPassword(email: string, token: string, expiration: string){
-        return await getRepository(User).update({Email: email}, {PasswordResetToken: token, PasswordResetExpires: expiration});
+        return await getRepository(User).save({Email: email, PasswordResetToken: token, PasswordResetExpires: expiration});
     }
 
 

@@ -25,7 +25,8 @@ export class UserService {
         return jwt.sign(payload, 'secretsecretsecret');
     }
 
-    
+
+
 
     public async createUser(res: Response, username: string, email: string, password: string) {
         username = username.toLowerCase();
@@ -38,17 +39,38 @@ export class UserService {
         }
 
         const passwordHash = await bcrypt.hash(password, 10)
-        const user = await this.userRepository.createUser(res, username, email, passwordHash);
+        const user = await this.userRepository.createUser(res, username, email, passwordHash, UUId());
 
         // Send email
-        // Emailer.welcomeEmail(user.email, user.username, user.emailCode);
-        Emailer.welcomeEmail("test@test.com", "", "");
+        Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
+    
 
         return user;
     }
 
 
 
+
+    public async verifyEmail(res: Response, verifyEmailToken: string) {
+      
+        var verifiedUser = await this.userRepository.getUserByToken(verifyEmailToken)
+        
+        if(!verifiedUser){
+            return  {'errors': [{'msg': 'Email verification token is invalid or expired.'}]}
+        }
+
+        verifiedUser.EmailVerified = true
+        verifiedUser.EmailVerifyToken = ""
+
+        await this.userRepository.saveUser(res, verifiedUser);
+
+        // Send Registration complete email?
+    
+        return {'msg': 'Your email has been successfully verified.'};
+    }
+
+
+    
 
     public async login(res: Response, email: string, password: string) {
         const user = await this.userRepository.getUserByEmail(email)
@@ -78,7 +100,8 @@ export class UserService {
 
         const user = await this.userRepository.forgotPassword(email, UUId(), moment().add(1, 'days').toString())
 
-        console.log("Emailer.send()")
+        Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken)
+
         return {'msg': 'An email has been sent to '+ email + ' with further instruction.'};
     }
 
@@ -86,7 +109,7 @@ export class UserService {
 
 
     public async resetPassword(res: Response, token: string, password: string) {
-        var user = await this.userRepository.getUserByToken(token)
+        var user = await this.userRepository.getUserByTokenAndExpiration(token)
         if(!user) {
             return  {'errors': [{'msg': 'Password reset token is invalid or expired.'}]}
         }
@@ -97,7 +120,7 @@ export class UserService {
 
         await this.userRepository.saveUser(res, user);
 
-        //Emailer.send()
+        Emailer.passwordResetSuccessEmail(user.Email)
 
         return {'msg': 'Your password has been saved successfully.'}
     }
