@@ -23,6 +23,8 @@ export const Validation = {
   ],
 
   forReset: [
+    check('password', 'Password must be at least 6 characters')
+      .isLength({ min: 6 }),
     check('confirmPassword', 'Passwords do not match')
       .custom((confirmPassword, { req }) => req.body.password === confirmPassword)
     ]

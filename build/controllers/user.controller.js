@@ -77,11 +77,15 @@ var UserController = /** @class */ (function (_super) {
     };
     UserController.prototype.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, _a, _b;
+            var viewModel, errors, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
                         _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.login(res, viewModel.email, viewModel.password)];
                     case 1:
@@ -109,11 +113,15 @@ var UserController = /** @class */ (function (_super) {
     };
     UserController.prototype.resetPassword = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, _a, _b;
+            var viewModel, errors, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
                         _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.resetPassword(res, req.params.token, viewModel.password)];
                     case 1:

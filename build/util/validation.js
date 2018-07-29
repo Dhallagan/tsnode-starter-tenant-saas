@@ -26,6 +26,8 @@ exports.Validation = {
     //    }).withMessage('Invalid email or password')
     ],
     forReset: [
+        check_1.check('password', 'Password must be at least 6 characters')
+            .isLength({ min: 6 }),
         check_1.check('confirmPassword', 'Passwords do not match')
             .custom(function (confirmPassword, _a) {
             var req = _a.req;

@@ -13,6 +13,9 @@ export class UserController extends BaseController {
         this.userService = new UserService();
     }
 
+
+
+
     public async register(req: Request, res: Response) {
         const viewModel = req.body;
 
@@ -27,13 +30,25 @@ export class UserController extends BaseController {
         );
     }
 
+
+
+
    public async login(req: Request, res: Response) {
         const viewModel = req.body;
+
+        const errors = validationResult(req);
+     
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
 
         res.status(200).json(
             await this.userService.login(res, viewModel.email, viewModel.password)
         );
    }
+
+
+
 
    public async forgotPassword(req: Request, res: Response) {
         const viewModel = req.body;
@@ -43,8 +58,18 @@ export class UserController extends BaseController {
         );
     }
 
+
+
+
     public async resetPassword(req: Request, res: Response) {
         const viewModel = req.body;
+
+        const errors = validationResult(req);
+     
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
         res.status(200).json(
             await this.userService.resetPassword(res, req.params.token, viewModel.password)
         )

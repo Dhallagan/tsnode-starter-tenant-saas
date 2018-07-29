@@ -25,6 +25,8 @@ export class UserService {
         return jwt.sign(payload, 'secretsecretsecret');
     }
 
+    
+
     public async createUser(res: Response, username: string, email: string, password: string) {
         username = username.toLowerCase();
         email = email.toLowerCase();
@@ -45,6 +47,9 @@ export class UserService {
         return user;
     }
 
+
+
+
     public async login(res: Response, email: string, password: string) {
         const user = await this.userRepository.getUserByEmail(email)
         
@@ -57,9 +62,10 @@ export class UserService {
         } else {
             return {token: this.generateToken(user), user: user}
         }
-        
-
     }
+
+
+
 
     public async forgotPassword(res: Response, email: string) {
         email = email.toLowerCase();
@@ -76,6 +82,9 @@ export class UserService {
         return {'msg': 'An email has been sent to '+ email + ' with further instruction.'};
     }
 
+
+
+
     public async resetPassword(res: Response, token: string, password: string) {
         var user = await this.userRepository.getUserByToken(token)
         if(!user) {
@@ -87,7 +96,7 @@ export class UserService {
         user.PasswordResetToken = "";
 
         await this.userRepository.saveUser(res, user);
-        
+
         //Emailer.send()
 
         return {'msg': 'Your password has been saved successfully.'}
