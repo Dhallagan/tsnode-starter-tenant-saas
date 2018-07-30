@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Register from '../pages/Register'
 import Login from '../pages/Login'
+import Recover from '../pages/Recover'
+import Reset from '../pages/Reset'
 
 import Home from '../pages/Home'
 import Reports from '../pages/Reports'
@@ -23,10 +26,28 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/Login',
+      path: '/register',
+      name: 'Register',
+      meta: { layout: 'authentication' },
+      component: Register
+    },
+    {
+      path: '/login',
       name: 'Login',
       meta: { layout: 'authentication' },
       component: Login
+    },
+    {
+      path: '/recover',
+      name: 'Login',
+      meta: { layout: 'authentication' },
+      component: Recover
+    },
+    {
+      path: '/reset/:token',
+      name: 'Reset',
+      meta: { layout: 'authentication' },
+      component: Reset
     },
     {
       path: '/',

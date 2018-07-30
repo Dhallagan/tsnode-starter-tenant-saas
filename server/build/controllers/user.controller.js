@@ -134,7 +134,7 @@ var UserController = /** @class */ (function (_super) {
                         viewModel = req.body;
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
-                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                            return [2 /*return*/, res.status(200).json({ errors: errors.array() })];
                         }
                         _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.resetPassword(res, req.params.token, viewModel.password)];

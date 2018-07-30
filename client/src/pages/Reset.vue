@@ -1,0 +1,68 @@
+<template>
+<page>
+<div class="text-center">
+            <div class="form-signin">
+                <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+                <img class="mb-4" src="../assets/logo.png" alt="" width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">Reset Password</h1>
+
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required v-model="resetForm.password">
+
+                <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+                <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Confirm Password" required v-model="resetForm.confirmPassword">
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="reset()">Reset Password</button>
+                <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+                </div>
+        </div>
+</page>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  mounted () {
+    this.fetch()
+  },
+
+  data () {
+    return {
+      resetForm: {
+        token: 'asdd',
+        password: '',
+        confirmPassword: ''
+      }
+    }
+  },
+
+  methods: {
+    fetch () {
+      this.resetForm.token = this.$route.params.token
+    },
+
+    reset () {
+      console.log(this.resetForm.password, this.resetForm.confirmPassword)
+      axios.post('http://localhost:3000/api/reset/' + this.resetForm.token, {
+        password: this.resetForm.password,
+        confirmPassword: this.resetForm.confirmPassword
+      })
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+  }
+}
+</script>
+
+<style>
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+</style>
