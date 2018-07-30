@@ -51,9 +51,7 @@ export class UserController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        res.status(200).json(
-            await this.userService.login(res, viewModel.email, viewModel.password)
-        );
+        await this.userService.login(res, viewModel.email, viewModel.password)
    }
 
 
