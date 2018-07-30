@@ -79,8 +79,9 @@ export class UserService {
         if(!user){
             return  {'errors': [{'msg': 'Email not found.'}]}
         }
+        var passwordMatch = await bcrypt.compare(password, user.PasswordHash)
 
-        if(!bcrypt.compare(password, user.PasswordHash)){
+        if(!passwordMatch){
             return {'errors': [{'msg': 'Invalid password.'}]}
         } else {
             return {token: this.generateToken(user), user: user}

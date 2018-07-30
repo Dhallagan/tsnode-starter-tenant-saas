@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Login from '../pages/Login'
+
 import Home from '../pages/Home'
-import Utilization from '../pages/utilization/Utilization'
 import Reports from '../pages/Reports'
 import Accounts from '../pages/Accounts'
 import Applicants from '../pages/Applicants'
@@ -22,14 +23,15 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/Login',
+      name: 'Login',
+      meta: { layout: 'authentication' },
+      component: Login
+    },
+    {
       path: '/',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/Utilization',
-      name: 'Utilization',
-      component: Utilization
     },
     {
       path: '/Reports',

@@ -24,7 +24,6 @@ export class Bootstrap {
     public setupEnviroment(app: express.Application): void {
         console.log('Setting up enviroment variables...')
         dotenv.load({path: '../enviroment/dev.env'})
-        console.log(process.env)
     }
 
 
@@ -38,23 +37,16 @@ export class Bootstrap {
     }
 
 
-    // public setupCors(app: express.Application): void {
-    //     app.use((req: Request | any, res: Response, next: NextFunction) => {
-    //         // TODO: don't think this is working
-    //         const allowedOrigins = app.get('env') === 'development'
-    //             ? ['http://localhost:4200' /*Dev web client*/, 'http://localhost:3000' /*Web client*/, 'http://localhost:8000' /*IOS client*/, 'http://10.0.0.10:3000' /*Phone client*/]
-    //             : ['https://nean.io'];
-    //         const origin = req.headers.origin;
-    //         if (allowedOrigins.indexOf(origin) > -1) {
-    //             res.setHeader('Access-Control-Allow-Origin', origin);
-    //         }
-
-    //         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    //         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-    //         res.header('Access-Control-Allow-Credentials', 'true');
-    //         next();
-    //     });
-    // }
+    public setupCors(app: express.Application): void {
+        console.log("Setting up CORS...")
+        app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', 'http://localhost:8080' );
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+            res.header('Access-Control-Allow-Credentials', 'true');
+            next();
+        });
+    }
 
     public setupAuthentication(app: express.Application): void {
         console.log("Setting up authentication...")

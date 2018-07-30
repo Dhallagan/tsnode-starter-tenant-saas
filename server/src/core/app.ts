@@ -22,8 +22,9 @@ export class App {
         // Configure the app config for all the middlewares
         const appConfig = new AppConfig();
         appConfig.configure(this.express);
-        this.bootstrapApp.setupEnviroment(this.express);
+        // this.bootstrapApp.setupEnviroment(this.express);
         this.bootstrapApp.setupDatabase(this.express);
+        this.bootstrapApp.setupCors(this.express);
         this.bootstrapApp.setupRoutes(this.express);
 
         const activeServer = this.bootstrapApp.startServer(this.express);

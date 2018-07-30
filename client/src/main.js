@@ -10,7 +10,9 @@ import BootstrapVue from 'bootstrap-vue'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import PortalVue from 'portal-vue'
+
 // Proprietary Components Import
+import WillowAuthenticationLayout from './components/WillowAuthenticationLayout'
 import WillowApplicationLayout from './components/WillowApplicationLayout'
 import WillowAnnotatedSection from './components/WillowAnnotatedSection'
 import WillowButton from './components/WillowButton'
@@ -47,6 +49,7 @@ import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
 import { Applications, Buildings } from '../static/dummydata.js'
 
 // Proprietary components
+Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
 Vue.component('willow-annotated-section', WillowAnnotatedSection)
 Vue.component('willow-breadcrumbs', WillowBreadcrumbs)

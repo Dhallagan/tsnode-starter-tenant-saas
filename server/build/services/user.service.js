@@ -116,7 +116,7 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.login = function (res, email, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
+            var user, passwordMatch;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
@@ -125,7 +125,10 @@ var UserService = /** @class */ (function () {
                         if (!user) {
                             return [2 /*return*/, { 'errors': [{ 'msg': 'Email not found.' }] }];
                         }
-                        if (!bcrypt_1.default.compare(password, user.PasswordHash)) {
+                        return [4 /*yield*/, bcrypt_1.default.compare(password, user.PasswordHash)];
+                    case 2:
+                        passwordMatch = _a.sent();
+                        if (!passwordMatch) {
                             return [2 /*return*/, { 'errors': [{ 'msg': 'Invalid password.' }] }];
                         }
                         else {

@@ -60,8 +60,9 @@ var App = /** @class */ (function () {
             return __generator(this, function (_a) {
                 appConfig = new app_config_1.AppConfig();
                 appConfig.configure(this.express);
-                this.bootstrapApp.setupEnviroment(this.express);
+                // this.bootstrapApp.setupEnviroment(this.express);
                 this.bootstrapApp.setupDatabase(this.express);
+                this.bootstrapApp.setupCors(this.express);
                 this.bootstrapApp.setupRoutes(this.express);
                 activeServer = this.bootstrapApp.startServer(this.express);
                 server = new server_1.Server(activeServer);
