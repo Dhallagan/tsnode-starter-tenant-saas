@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/api/api'
 export default {
   data () {
     return {
@@ -45,17 +45,17 @@ export default {
 
   methods: {
     register () {
-      console.log(this.registerForm)
-      axios.post('http://localhost:3000/api/register', {
+      const params = {
         username: this.registerForm.username,
         email: this.registerForm.email,
         password: this.registerForm.password,
         confirmPassword: this.registerForm.password
-      })
-        .then(function (response) {
-          console.log(response)
+      }
+      api.register(params)
+        .then(res => {
+          console.log(res)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
         })
     }

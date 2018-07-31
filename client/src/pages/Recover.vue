@@ -29,13 +29,14 @@ export default {
 
   methods: {
     recover () {
-      axios.post('http://localhost:3000/api/recover', {
+     const params = {
         email: this.recoverForm.email
-      })
-        .then(function (response) {
-          console.log(response)
+      }
+      api.recover(params)
+         .then(res => {
+          console.log(res)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
         })
     }

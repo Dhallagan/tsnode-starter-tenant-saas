@@ -19,7 +19,7 @@
                     <a>Forgot Password?</a>
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit" @click="login()">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" @click="login()">Sign in</button>
                 <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
                 </div>
         </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/api/api'
 export default {
   data () {
     return {
@@ -40,15 +40,15 @@ export default {
 
   methods: {
     login () {
-      console.log(this.loginForm.email, this.loginForm.password)
-      axios.post('http://localhost:3000/api/login', {
+      const params = {
         email: this.loginForm.email,
         password: this.loginForm.password
-      })
-        .then(function (response) {
-          console.log(response)
+      }
+      api.login(params)
+        .then(res => {
+          console.log(res)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
         })
     }

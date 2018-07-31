@@ -302,3 +302,55 @@ h5,
 h6 {
   font-weight: 300;
 }
+
+/* TABLEAU-IE */
+
+sidebar-sticky {
+  background: #fafafa;
+  border-right: 1px solid #d1d1d1;
+  box-shadow: 0 1px 1px rgba(3,3,3,.175);
+  background-color: #fff;
+}
+body {
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 1.66666667;
+  color: #363636;
+  /* background-color: #fff; */
+}
+ 
+.h1, .h2, h1, h2 {
+  font-weight: 200;
+}
+ 
+.table th, .table td {
+    padding: 0.5rem 0.5rem;
+}
+ 
+.card {
+      border: none; 
+      box-shadow: 0 1px 1px rgba(3,3,3,.175);
+      border-radius: 0.0rem;
+}
+ 
+.btn {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.0rem;
+    box-shadow: 0 1px 1px rgba(3,3,3,.175);
+}
+ 
+.custom-select {
+    line-height: 1.0;
+    border: 1px solid #ced4da;
+    border-radius: 0.0rem;
+ 
+}
+ 
+.bg-primary {
+    background-color: #144161 !important; ;
+        /* background-color: #01084a !important; */
+}
+ 
+.navbar-brand {
+    background-color: rgba(0, 0, 0, 0);
+}

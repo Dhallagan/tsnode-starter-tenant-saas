@@ -97,6 +97,7 @@ var UserController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         viewModel = req.body;
+                        console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];

@@ -39,7 +39,7 @@ export default new Router({
     },
     {
       path: '/recover',
-      name: 'Login',
+      name: 'Recover',
       meta: { layout: 'authentication' },
       component: Recover
     },
@@ -52,11 +52,13 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
+      meta: { layout: 'application' },
       component: Home
     },
     {
       path: '/Reports',
       name: 'Reports',
+      meta: { layout: 'application' },
       component: Reports
     },
     {
@@ -64,7 +66,8 @@ export default new Router({
       name: 'Applicants',
       component: Applicants,
       meta: {
-        breadcrumb: 'Applicants'
+        breadcrumb: 'Applicants',
+        layout: 'application'
       }
     },
     {
@@ -72,64 +75,76 @@ export default new Router({
       name: 'Applicant',
       component: Applicant,
       meta: {
-        breadcrumb: ':applicant_id'
+        breadcrumb: ':applicant_id',
+        layout: 'application'
       }
     },
     {
       path: '/Buildings',
       name: 'Buildings',
+      meta: { layout: 'application' },
       component: Buildings
     },
     {
       path: '/Buildings/:building_id',
       name: 'Building',
+      meta: { layout: 'application' },
       component: Building
     },
     {
       path: '/Tenants',
       name: 'Tenants',
+      meta: { layout: 'application' },
       component: Tenants
     },
     // add tenants/tenant_id
     {
       path: '/Listings',
       name: 'Listings',
+      meta: { layout: 'application' },
       component: Listings
     },
     {
       path: '/Listings/:listing_id',
       name: 'Listing',
+      meta: { layout: 'application' },
       component: Listing
     },
     {
       path: '/Lease',
       name: 'Lease',
+      meta: { layout: 'application' },
       component: AddLease
     },
     {
       path: '/Components',
       name: 'Components',
+      meta: { layout: 'application' },
       component: Components
     },
     {
       path: '/Settings',
       name: 'Settings',
+      meta: { layout: 'application' },
       component: Settings
     },
 
     {
       path: '/Settings/Accounts',
       name: 'Accounts',
+      meta: { layout: 'application' },
       component: Accounts
     },
     {
       path: '/Settings/Accounts/New',
       name: 'InviteStaff',
+      meta: { layout: 'application' },
       component: InviteStaff
     },
     {
       path: '/Settings/Accounts/Profile',
       name: 'Profile',
+      meta: { layout: 'application' },
       component: Profile
     }
   ]

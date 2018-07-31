@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       resetForm: {
-        token: 'asdd',
+        token: '',
         password: '',
         confirmPassword: ''
       }
@@ -42,15 +42,16 @@ export default {
     },
 
     reset () {
-      console.log(this.resetForm.password, this.resetForm.confirmPassword)
-      axios.post('http://localhost:3000/api/reset/' + this.resetForm.token, {
+            
+      const params = {
         password: this.resetForm.password,
         confirmPassword: this.resetForm.confirmPassword
-      })
-        .then(function (response) {
-          console.log(response)
+      }
+      api.recover(this.resetForm.token, params)
+         .then(res => {
+          console.log(res)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
         })
     }

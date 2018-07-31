@@ -119,17 +119,19 @@ var UserService = /** @class */ (function () {
             var user, passwordMatch;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
+                    case 0:
+                        console.log(email);
+                        return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
                         user = _a.sent();
                         if (!user) {
-                            return [2 /*return*/, res.status(400).json({ 'errors': [{ 'msg': 'Email not found.' }] })];
+                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'Email not found.' }] })];
                         }
                         return [4 /*yield*/, bcrypt_1.default.compare(password, user.PasswordHash)];
                     case 2:
                         passwordMatch = _a.sent();
                         if (!passwordMatch) {
-                            return [2 /*return*/, res.status(400).json({ 'errors': [{ 'msg': 'Invalid password.' }] })];
+                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'Invalid password.' }] })];
                         }
                         else {
                             return [2 /*return*/, res.status(200).json({ token: this.generateToken(user), user: user })];
