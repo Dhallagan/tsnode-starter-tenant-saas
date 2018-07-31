@@ -99,11 +99,11 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
-    UserRepository.prototype.forgotPassword = function (email, token, expiration) {
+    UserRepository.prototype.forgotPassword = function (user) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save({ Email: email, PasswordResetToken: token, PasswordResetExpires: expiration })];
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save(user)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

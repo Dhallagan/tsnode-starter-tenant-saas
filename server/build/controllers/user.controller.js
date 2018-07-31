@@ -77,12 +77,13 @@ var UserController = /** @class */ (function (_super) {
     };
     UserController.prototype.verifyRegistration = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, _b;
+            var viewModel, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
+                        viewModel = req.body;
                         _b = (_a = res.status(201)).json;
-                        return [4 /*yield*/, this.userService.verifyEmail(res, req.params.token)];
+                        return [4 /*yield*/, this.userService.verifyEmail(res, viewModel.token)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];
@@ -110,7 +111,7 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
-    UserController.prototype.forgotPassword = function (req, res) {
+    UserController.prototype.recoverPassword = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var viewModel, _a, _b;
             return __generator(this, function (_c) {
@@ -118,7 +119,7 @@ var UserController = /** @class */ (function (_super) {
                     case 0:
                         viewModel = req.body;
                         _b = (_a = res.status(200)).json;
-                        return [4 /*yield*/, this.userService.forgotPassword(res, viewModel.email)];
+                        return [4 /*yield*/, this.userService.recoverPassword(res, viewModel.email)];
                     case 1:
                         _b.apply(_a, [_c.sent()]);
                         return [2 /*return*/];
@@ -133,6 +134,7 @@ var UserController = /** @class */ (function (_super) {
                 switch (_c.label) {
                     case 0:
                         viewModel = req.body;
+                        console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(200).json({ errors: errors.array() })];

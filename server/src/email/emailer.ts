@@ -14,7 +14,7 @@ export class Emailer {
             from: Emailer.fromEmail,
             subject: 'Welcome to TS-Node-Starter',
             html: "<p>Welcome to TS-Node-Starter.  To finish registration please click or paste this link into your browser to complete the process. </p>" +
-                  "<p><a href='http://localhost:3000/api/verify/" + emailVerifyToken + "'>http://localhost:3000/api/verify/" + emailVerifyToken + "</a> </p>"
+                  "<p><a href='http://localhost:8080/verify/" + emailVerifyToken + "'>http://localhost:8080/verify/" + emailVerifyToken + "</a> </p>"
         };
 
         Emailer.send(mailData)
@@ -32,7 +32,7 @@ export class Emailer {
             from: Emailer.fromEmail,
             subject: 'Reset your TS-Node-Starter password',
             html: "<p>We have received your request to reset your password. Please click the link below to complete the reset:</p>" +
-                  "<p><a href='http://localhost:3000/api/reset/" + passwordResetToken + "'>http://localhost:3000/api/reset/" + passwordResetToken + "</a> </p>"
+                  "<p><a href='http://localhost:8080/reset/" + passwordResetToken + "'>http://localhost:8080/reset/" + passwordResetToken + "</a> </p>"
         };
 
         Emailer.send(mailData)
@@ -65,8 +65,8 @@ export class Emailer {
             service: 'gmail',
             secure: false,
             auth: {
-                user: 'XXXXXX@XXXXX.XXX',
-                pass: 'XXXXXX'
+                user: 'dylanhallagan@gmail.com',
+                pass: 'Jogger234!'
             }
         };
 

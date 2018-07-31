@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/api/api'
 export default {
   mounted () {
     this.fetch()
@@ -42,13 +42,13 @@ export default {
     },
 
     reset () {
-            
       const params = {
         password: this.resetForm.password,
         confirmPassword: this.resetForm.confirmPassword
       }
-      api.recover(this.resetForm.token, params)
-         .then(res => {
+      console.log(params)
+      api.resetPassword(this.resetForm.token, params)
+        .then(res => {
           console.log(res)
         })
         .catch(error => {

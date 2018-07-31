@@ -37,8 +37,8 @@ export class UserRepository extends Repository<User> {
 
 
 
-    public async forgotPassword(email: string, token: string, expiration: string){
-        return await getRepository(User).save({Email: email, PasswordResetToken: token, PasswordResetExpires: expiration});
+    public async forgotPassword(user: User){
+        return await getRepository(User).save(user);
     }
 
 

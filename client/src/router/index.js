@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '../pages/Register'
+import Verify from '../pages/Verify'
 import Login from '../pages/Login'
 import Recover from '../pages/Recover'
 import Reset from '../pages/Reset'
@@ -30,6 +31,12 @@ export default new Router({
       name: 'Register',
       meta: { layout: 'authentication' },
       component: Register
+    },
+    {
+      path: '/verify/:token',
+      name: 'verify',
+      meta: { layout: 'authentication' },
+      component: Verify
     },
     {
       path: '/login',

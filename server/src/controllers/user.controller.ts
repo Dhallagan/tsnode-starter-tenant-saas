@@ -33,9 +33,10 @@ export class UserController extends BaseController {
 
     
     public async verifyRegistration(req: Request, res: Response) {
+        const viewModel = req.body;
 
         res.status(201).json(
-            await this.userService.verifyEmail(res, req.params.token)
+            await this.userService.verifyEmail(res, viewModel.token)
         );
     }
 
@@ -58,11 +59,11 @@ export class UserController extends BaseController {
 
 
 
-   public async forgotPassword(req: Request, res: Response) {
+   public async recoverPassword(req: Request, res: Response) {
         const viewModel = req.body;
 
         res.status(200).json(
-            await this.userService.forgotPassword(res, viewModel.email)
+            await this.userService.recoverPassword(res, viewModel.email)
         );
     }
 
@@ -71,6 +72,7 @@ export class UserController extends BaseController {
 
     public async resetPassword(req: Request, res: Response) {
         const viewModel = req.body;
+        console.log(viewModel)
 
         const errors = validationResult(req);
      

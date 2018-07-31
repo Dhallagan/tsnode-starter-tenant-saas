@@ -12,6 +12,18 @@ export default {
       })
   },
 
+  verify (params) {
+    console.log(params)
+    axios.post('/verify', params)
+      .then(function (response) {
+        console.log(response)
+        return response.body
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  },
+
   login (params) {
     console.log(params)
     axios.post('/login', params)
@@ -31,7 +43,7 @@ export default {
   },
 
   resetPassword (token, params) {
-    axios.post('/reset/' + token, { params })
+    axios.post('/reset/' + token, params)
       .then(function (response) {
         console.log(response)
         return response.body

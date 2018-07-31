@@ -92,16 +92,19 @@ export class UserService {
 
 
 
-    public async forgotPassword(res: Response, email: string) {
+    public async recoverPassword(res: Response, email: string) {
         email = email.toLowerCase();
 
-        const userExists = await this.userRepository.getUserByEmail(email)
-
+        var userExists = await this.userRepository.getUserByEmail(email)
+        console.log(userExists)
         if(!userExists){
             return  {'errors': [{'msg': 'Account with the email address '+ email + ' email address does not exist.'}]}
         }
 
-        const user = await this.userRepository.forgotPassword(email, UUId(), moment().add(1, 'days').toString())
+        userExists.PasswordResetToken = UUId()
+        userExists.PasswordResetExpires = moment().add(1, 'days').toDate()
+
+        const user = await this.userRepository.forgotPassword(userExists)
 
         Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken)
 
@@ -112,6 +115,7 @@ export class UserService {
 
 
     public async resetPassword(res: Response, token: string, password: string) {
+        console.log(token, password)
         var user = await this.userRepository.getUserByTokenAndExpiration(token)
         if(!user) {
             return  {'errors': [{'msg': 'Password reset token is invalid or expired.'}]}

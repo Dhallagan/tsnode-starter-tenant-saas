@@ -141,7 +141,7 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.forgotPassword = function (res, email) {
+    UserService.prototype.recoverPassword = function (res, email) {
         return __awaiter(this, void 0, void 0, function () {
             var userExists, user;
             return __generator(this, function (_a) {
@@ -151,10 +151,13 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
                         userExists = _a.sent();
+                        console.log(userExists);
                         if (!userExists) {
                             return [2 /*return*/, { 'errors': [{ 'msg': 'Account with the email address ' + email + ' email address does not exist.' }] }];
                         }
-                        return [4 /*yield*/, this.userRepository.forgotPassword(email, uuid_1.v4(), moment_1.default().add(1, 'days').toString())];
+                        userExists.PasswordResetToken = uuid_1.v4();
+                        userExists.PasswordResetExpires = moment_1.default().add(1, 'days').toDate();
+                        return [4 /*yield*/, this.userRepository.forgotPassword(userExists)];
                     case 2:
                         user = _a.sent();
                         emailer_1.Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken);
@@ -168,7 +171,9 @@ var UserService = /** @class */ (function () {
             var user, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByTokenAndExpiration(token)];
+                    case 0:
+                        console.log(token, password);
+                        return [4 /*yield*/, this.userRepository.getUserByTokenAndExpiration(token)];
                     case 1:
                         user = _b.sent();
                         if (!user) {

@@ -8,7 +8,7 @@
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="recoverForm.email">
 
-          <button class="btn btn-lg btn-primary btn-block" type="submit" @click="recover()">Recover Account</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" >Recover Account</button>
           <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
       </div>
     </div>
@@ -18,21 +18,15 @@
 <script>
 import api from '@/api/api'
 export default {
-  data () {
-    return {
-      recoverForm: {
-        email: '',
-        password: ''
-      }
-    }
+  mounted () {
+    this.verify()
   },
 
   methods: {
-    recover () {
-      const params = {
-        email: this.recoverForm.email
-      }
-      api.recover(params)
+    verify () {
+      const params = { token: this.$route.params.token }
+      console.log(params)
+      api.verify(params)
         .then(res => {
           console.log(res)
         })
