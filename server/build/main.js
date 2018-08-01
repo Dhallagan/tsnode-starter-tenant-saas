@@ -11,5 +11,4 @@ var dotenv = __importStar(require("dotenv"));
 var app_1 = require("./core/app");
 exports.app = new app_1.App();
 dotenv.load();
-console.log(process.env);
 exports.app.bootstrap();

@@ -78,12 +78,12 @@ export class UserService {
         const user = await this.userRepository.getUserByEmail(email)
         
         if(!user){
-            return  res.status(200).json({'errors': [{'msg': 'Email not found.'}]})
+            return  res.status(200).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
         }
         var passwordMatch = await bcrypt.compare(password, user.PasswordHash)
 
         if(!passwordMatch){
-            return  res.status(200).json({'errors': [{'msg': 'Invalid password.'}]})
+            return  res.status(200).json({'errors': [{'msg': 'The password you’ve entered is incorrect.'}]})
         } else {
             return  res.status(200).json({token: this.generateToken(user), user: user})
         }

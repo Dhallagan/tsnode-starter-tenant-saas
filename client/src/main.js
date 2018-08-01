@@ -31,6 +31,7 @@ import WillowDrawer from './components/WillowDrawer'
 import WillowThemeConfig from './components/WillowThemeConfig'
 import WillowThemeConfigItem from './components/WillowThemeConfigItem'
 import WillowThemeConfigSection from './components/WillowThemeConfigSectionTitle'
+import WillowMessages from './components/WillowMessages'
 import WillowNotifications from './components/WillowNotifications'
 import WillowNotification from './components/WillowNotification'
 import WillowResourceList from './components/WillowResourceList.vue'
@@ -60,6 +61,7 @@ Vue.component('willow-layout-section', WillowLayoutSection)
 Vue.component('willow-layout', WillowLayout)
 Vue.component('willow-menu-item', WillowMenuItem)
 Vue.component('willow-modal', WillowModal)
+Vue.component('willow-messages', WillowMessages)
 Vue.component('page', WillowPage)
 Vue.component('page-header', WillowPageHeader)
 Vue.component('page-actions', WillowPageActions)

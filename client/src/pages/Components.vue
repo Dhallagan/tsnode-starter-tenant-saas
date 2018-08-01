@@ -9,6 +9,13 @@
 
   <willow-layout>
     <willow-layout-section>
+        <willow-messages
+          type="danger"
+          icon="exclamation"
+          dismissable
+        >
+          Invalid password
+        </willow-messages>
       <b-card title="Filters">
         <willow-filters
           :filters="filters"

@@ -125,13 +125,13 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         if (!user) {
-                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'Email not found.' }] })];
+                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'The email you’ve entered doesn’t match any account.' }] })];
                         }
                         return [4 /*yield*/, bcrypt_1.default.compare(password, user.PasswordHash)];
                     case 2:
                         passwordMatch = _a.sent();
                         if (!passwordMatch) {
-                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'Invalid password.' }] })];
+                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'The password you’ve entered is incorrect.' }] })];
                         }
                         else {
                             return [2 /*return*/, res.status(200).json({ token: this.generateToken(user), user: user })];

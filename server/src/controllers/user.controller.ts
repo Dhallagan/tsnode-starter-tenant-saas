@@ -77,7 +77,7 @@ export class UserController extends BaseController {
         const errors = validationResult(req);
      
         if (!errors.isEmpty()) {
-            return res.status(200).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
 
         res.status(200).json(

@@ -126,7 +126,7 @@ export default new Router({
     {
       path: '/Components',
       name: 'Components',
-      meta: { layout: 'application' },
+      meta: { layout: 'authentication' },
       component: Components
     },
     {

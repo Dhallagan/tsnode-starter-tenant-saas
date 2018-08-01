@@ -65,8 +65,8 @@ export class Emailer {
             service: 'gmail',
             secure: false,
             auth: {
-                user: 'dylanhallagan@gmail.com',
-                pass: 'Jogger234!'
+                user: '',
+                pass: ''
             }
         };
 
