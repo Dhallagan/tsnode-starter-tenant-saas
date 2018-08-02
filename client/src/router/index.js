@@ -65,7 +65,7 @@ export default new Router({
     {
       path: '/Reports',
       name: 'Reports',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Reports
     },
     {
@@ -74,7 +74,8 @@ export default new Router({
       component: Applicants,
       meta: {
         breadcrumb: 'Applicants',
-        layout: 'application'
+        layout: 'application',
+        requiresAuth: true
       }
     },
     {
@@ -83,44 +84,45 @@ export default new Router({
       component: Applicant,
       meta: {
         breadcrumb: ':applicant_id',
-        layout: 'application'
+        layout: 'application',
+        requiresAuth: true
       }
     },
     {
       path: '/Buildings',
       name: 'Buildings',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Buildings
     },
     {
       path: '/Buildings/:building_id',
       name: 'Building',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Building
     },
     {
       path: '/Tenants',
       name: 'Tenants',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Tenants
     },
     // add tenants/tenant_id
     {
       path: '/Listings',
       name: 'Listings',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Listings
     },
     {
       path: '/Listings/:listing_id',
       name: 'Listing',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Listing
     },
     {
       path: '/Lease',
       name: 'Lease',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: AddLease
     },
     {
@@ -132,26 +134,26 @@ export default new Router({
     {
       path: '/Settings',
       name: 'Settings',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Settings
     },
 
     {
       path: '/Settings/Accounts',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Accounts
     },
     {
       path: '/Settings/Accounts/New',
       name: 'InviteStaff',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: InviteStaff
     },
     {
       path: '/Settings/Accounts/Profile',
       name: 'Profile',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Profile
     }
   ]
