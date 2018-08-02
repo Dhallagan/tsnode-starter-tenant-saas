@@ -51,8 +51,9 @@ export default {
       api.login(params)
         .then(res => {
           if (res.data.token) {
-            console.log('LOGIN_SUCCESS')
             // LOGIN USER ->
+            this.$store.dispatch('LOGIN_SUCCESS', res.data)
+            this.$router.push({ path: '/' })
           } else {
             console.log('LOGIN_FAILURE')
             this.messages = res.data.errors

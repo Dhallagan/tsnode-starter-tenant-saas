@@ -59,7 +59,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Home
     },
     {

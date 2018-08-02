@@ -1,6 +1,6 @@
 const User = {
   state: {
-    token: null,
+    token: 'hi',
     user: null,
     claims: null
   },

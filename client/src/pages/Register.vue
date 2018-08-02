@@ -57,7 +57,6 @@ export default {
       }
       api.register(params)
         .then(res => {
-          console.log(res)
           var messages = [res.data]
 
           messages.forEach(message => {
