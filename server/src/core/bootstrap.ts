@@ -1,11 +1,11 @@
 import * as express from 'express';
 import * as http from 'http';
-import * as dotenv from 'dotenv';
 import {Database} from '../core/database'
 import { Server } from './server';
 //import { Seeds } from './seeds';
 import { Authentication } from './middleware/Authentication'
 import {UserRoutes} from '../routes/user.routes';
+import * as dotenv from 'dotenv';
 
 
 
@@ -23,7 +23,7 @@ export class Bootstrap {
 
     public setupEnviroment(app: express.Application): void {
         console.log('Setting up enviroment variables...')
-        dotenv.load({path: '../enviroment/dev.env'})
+        dotenv.config({ path: "./src/config/.env.development" });
     }
 
 

@@ -41,9 +41,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 require("reflect-metadata");
 var bootstrap_1 = require("./bootstrap");
-var app_config_1 = require("../config/app-config");
-require("reflect-metadata");
-// import * as dotenv from 'dotenv';
+var app_config_1 = require("./app-config");
 var server_1 = require("./server");
 var App = /** @class */ (function () {
     function App() {
@@ -60,7 +58,7 @@ var App = /** @class */ (function () {
             return __generator(this, function (_a) {
                 appConfig = new app_config_1.AppConfig();
                 appConfig.configure(this.express);
-                // this.bootstrapApp.setupEnviroment(this.express);
+                this.bootstrapApp.setupEnviroment(this.express);
                 this.bootstrapApp.setupDatabase(this.express);
                 this.bootstrapApp.setupCors(this.express);
                 this.bootstrapApp.setupRoutes(this.express);

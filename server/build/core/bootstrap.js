@@ -7,12 +7,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dotenv = __importStar(require("dotenv"));
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 //import { Seeds } from './seeds';
 var Authentication_1 = require("./middleware/Authentication");
 var user_routes_1 = require("../routes/user.routes");
+var dotenv = __importStar(require("dotenv"));
 var root = './';
 var Bootstrap = /** @class */ (function () {
     function Bootstrap() {
@@ -25,7 +25,7 @@ var Bootstrap = /** @class */ (function () {
     };
     Bootstrap.prototype.setupEnviroment = function (app) {
         console.log('Setting up enviroment variables...');
-        dotenv.load({ path: '../enviroment/dev.env' });
+        dotenv.config({ path: "./src/config/.env.development" });
     };
     Bootstrap.prototype.setupDatabase = function (app) {
         // Retrieve all queries

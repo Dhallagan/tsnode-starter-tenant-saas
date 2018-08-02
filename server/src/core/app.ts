@@ -1,9 +1,7 @@
 import express from 'express';
 import "reflect-metadata";
 import { Bootstrap } from './bootstrap';
-import { AppConfig } from '../config/app-config';
-import "reflect-metadata";
-// import * as dotenv from 'dotenv';
+import { AppConfig } from './app-config';
 import { Server } from './server';
 
 export class App {
@@ -22,7 +20,7 @@ export class App {
         // Configure the app config for all the middlewares
         const appConfig = new AppConfig();
         appConfig.configure(this.express);
-        // this.bootstrapApp.setupEnviroment(this.express);
+        this.bootstrapApp.setupEnviroment(this.express);
         this.bootstrapApp.setupDatabase(this.express);
         this.bootstrapApp.setupCors(this.express);
         this.bootstrapApp.setupRoutes(this.express);
