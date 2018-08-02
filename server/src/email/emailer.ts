@@ -68,7 +68,7 @@ export class Emailer {
                 user: '',
                 pass: ''
             }
-        };
+        }
 
         let transporter = nodemailer.createTransport(smtpConfig)
 

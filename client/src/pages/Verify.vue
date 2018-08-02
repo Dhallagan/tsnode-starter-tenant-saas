@@ -2,14 +2,7 @@
 <page>
     <div class="text-center">
       <div class="form-signin">
-          <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
-          <img class="mb-4" src="../assets/logo.png" alt="" width="72" height="72">
-          <h1 class="h3 mb-3 font-weight-normal">Recover Password</h1>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="recoverForm.email">
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit" >Recover Account</button>
-          <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+          <willow-messages v-for="(message, i) in messages" :key="i" :type="message.type">{{message.msg}}</willow-messages>
       </div>
     </div>
 </page>
@@ -22,16 +15,37 @@ export default {
     this.verify()
   },
 
+  data () {
+    return {
+      messages: {}
+    }
+  },
+
   methods: {
     verify () {
       const params = { token: this.$route.params.token }
       console.log(params)
       api.verify(params)
         .then(res => {
-          console.log(res)
+          var messages = [res.data]
+          messages.forEach(message => {
+            message.type = 'success'
+          })
+
+          this.messages = messages
+
+          setTimeout(() => this.$router.push({ path: '/login' }), 5000)
         })
         .catch(error => {
           console.log(error)
+          var messages = error.response.data.errors
+
+          messages.forEach(message => {
+            message.type = 'danger'
+          })
+
+          this.messages = messages
+          setTimeout(() => this.$router.push({ path: '/login' }), 5000)
         })
     }
   }

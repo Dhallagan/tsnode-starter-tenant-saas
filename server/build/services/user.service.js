@@ -77,7 +77,7 @@ var UserService = /** @class */ (function () {
                     case 1:
                         userExists = _a.sent();
                         if (userExists) {
-                            return [2 /*return*/, { 'errors': [{ 'msg': 'Account with that email address already exists.' }] }];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Account with that email address already exists.' }] })];
                         }
                         return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
                     case 2:
@@ -87,7 +87,7 @@ var UserService = /** @class */ (function () {
                         user = _a.sent();
                         // Send email
                         emailer_1.Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
-                        return [2 /*return*/, user];
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Registration success! An email has been sent to ' + email + '.  Check your email to complete the registration process.' })];
                 }
             });
         });
@@ -101,7 +101,7 @@ var UserService = /** @class */ (function () {
                     case 1:
                         verifiedUser = _a.sent();
                         if (!verifiedUser) {
-                            return [2 /*return*/, { 'errors': [{ 'msg': 'Email verification token is invalid or expired.' }] }];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Email verification token is invalid or expired.' }] })];
                         }
                         verifiedUser.EmailVerified = true;
                         verifiedUser.EmailVerifyToken = "";
@@ -109,7 +109,7 @@ var UserService = /** @class */ (function () {
                     case 2:
                         _a.sent();
                         // Send Registration complete email?
-                        return [2 /*return*/, { 'msg': 'Your email has been successfully verified.' }];
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Your email has been successfully verified.' })];
                 }
             });
         });
@@ -125,13 +125,13 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         if (!user) {
-                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'The email you’ve entered doesn’t match any account.' }] })];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'The email you’ve entered doesn’t match any account.' }] })];
                         }
                         return [4 /*yield*/, bcrypt_1.default.compare(password, user.PasswordHash)];
                     case 2:
                         passwordMatch = _a.sent();
                         if (!passwordMatch) {
-                            return [2 /*return*/, res.status(200).json({ 'errors': [{ 'msg': 'The password you’ve entered is incorrect.' }] })];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'The password you’ve entered is incorrect.' }] })];
                         }
                         else {
                             return [2 /*return*/, res.status(200).json({ token: this.generateToken(user), user: user })];
@@ -151,9 +151,8 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
                         userExists = _a.sent();
-                        console.log(userExists);
                         if (!userExists) {
-                            return [2 /*return*/, { 'errors': [{ 'msg': 'Account with the email address ' + email + ' email address does not exist.' }] }];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Account with the email address ' + email + ' email address does not exist.' }] })];
                         }
                         userExists.PasswordResetToken = uuid_1.v4();
                         userExists.PasswordResetExpires = moment_1.default().add(1, 'days').toDate();
@@ -161,7 +160,7 @@ var UserService = /** @class */ (function () {
                     case 2:
                         user = _a.sent();
                         emailer_1.Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken);
-                        return [2 /*return*/, { 'msg': 'An email has been sent to ' + email + ' with further instruction.' }];
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'An email has been sent to ' + email + ' with further instruction.' })];
                 }
             });
         });
@@ -177,7 +176,7 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _b.sent();
                         if (!user) {
-                            return [2 /*return*/, { 'errors': [{ 'msg': 'Password reset token is invalid or expired.' }] }];
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Password reset token is invalid or expired.' }] })];
                         }
                         // NEED TO CLEAR PasswordRestExpirs date as well 
                         _a = user;
@@ -190,7 +189,7 @@ var UserService = /** @class */ (function () {
                     case 3:
                         _b.sent();
                         emailer_1.Emailer.passwordResetSuccessEmail(user.Email);
-                        return [2 /*return*/, { 'msg': 'Your password has been saved successfully.' }];
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Your password has been saved successfully.' })];
                 }
             });
         });

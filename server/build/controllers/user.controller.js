@@ -57,20 +57,18 @@ var UserController = /** @class */ (function (_super) {
     }
     UserController.prototype.register = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, errors, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var viewModel, errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         viewModel = req.body;
+                        console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        _b = (_a = res.status(201)).json;
                         return [4 /*yield*/, this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)];
-                    case 1:
-                        _b.apply(_a, [_c.sent()]);
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -113,37 +111,31 @@ var UserController = /** @class */ (function (_super) {
     };
     UserController.prototype.recoverPassword = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var viewModel;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         viewModel = req.body;
-                        _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.recoverPassword(res, viewModel.email)];
-                    case 1:
-                        _b.apply(_a, [_c.sent()]);
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
     UserController.prototype.resetPassword = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var viewModel, errors, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var viewModel, errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         viewModel = req.body;
                         console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
-                            return [2 /*return*/, res.status(400).json({ errors: errors.array() })];
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        _b = (_a = res.status(200)).json;
                         return [4 /*yield*/, this.userService.resetPassword(res, req.params.token, viewModel.password)];
-                    case 1:
-                        _b.apply(_a, [_c.sent()]);
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

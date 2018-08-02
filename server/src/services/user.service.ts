@@ -36,7 +36,7 @@ export class UserService {
         const userExists = await this.userRepository.getUserByEmail(email)
         
         if(userExists){
-            return  {'errors': [{'msg': 'Account with that email address already exists.'}]}
+            return  res.status(422).json({'errors': [{'msg': 'Account with that email address already exists.'}]})
         }
 
         const passwordHash = await bcrypt.hash(password, 10)
@@ -45,8 +45,7 @@ export class UserService {
         // Send email
         Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
     
-
-        return user;
+        return res.status(200).json({'msg': 'Registration success! An email has been sent to '+ email + '.  Check your email to complete the registration process.'});
     }
 
 
@@ -57,7 +56,7 @@ export class UserService {
         var verifiedUser = await this.userRepository.getUserByToken(verifyEmailToken)
         
         if(!verifiedUser){
-            return  {'errors': [{'msg': 'Email verification token is invalid or expired.'}]}
+            return res.status(422).json({'errors': [{'msg': 'Email verification token is invalid or expired.'}]})
         }
 
         verifiedUser.EmailVerified = true
@@ -67,7 +66,7 @@ export class UserService {
 
         // Send Registration complete email?
     
-        return {'msg': 'Your email has been successfully verified.'};
+        return res.status(200).json({'msg': 'Your email has been successfully verified.'});
     }
 
 
@@ -78,12 +77,12 @@ export class UserService {
         const user = await this.userRepository.getUserByEmail(email)
         
         if(!user){
-            return  res.status(200).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
+            return  res.status(422).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
         }
         var passwordMatch = await bcrypt.compare(password, user.PasswordHash)
 
         if(!passwordMatch){
-            return  res.status(200).json({'errors': [{'msg': 'The password you’ve entered is incorrect.'}]})
+            return  res.status(422).json({'errors': [{'msg': 'The password you’ve entered is incorrect.'}]})
         } else {
             return  res.status(200).json({token: this.generateToken(user), user: user})
         }
@@ -96,9 +95,9 @@ export class UserService {
         email = email.toLowerCase();
 
         var userExists = await this.userRepository.getUserByEmail(email)
-        console.log(userExists)
+
         if(!userExists){
-            return  {'errors': [{'msg': 'Account with the email address '+ email + ' email address does not exist.'}]}
+            return  res.status(422).json({'errors': [{'msg': 'Account with the email address '+ email + ' email address does not exist.'}]})
         }
 
         userExists.PasswordResetToken = UUId()
@@ -108,7 +107,7 @@ export class UserService {
 
         Emailer.forgotPasswordRequestEmail(user.Email, user.PasswordResetToken)
 
-        return {'msg': 'An email has been sent to '+ email + ' with further instruction.'};
+        return res.status(200).json({'msg': 'An email has been sent to '+ email + ' with further instruction.'});
     }
 
 
@@ -118,7 +117,7 @@ export class UserService {
         console.log(token, password)
         var user = await this.userRepository.getUserByTokenAndExpiration(token)
         if(!user) {
-            return  {'errors': [{'msg': 'Password reset token is invalid or expired.'}]}
+            return  res.status(422).json({'errors': [{'msg': 'Password reset token is invalid or expired.'}]})
         }
 
         // NEED TO CLEAR PasswordRestExpirs date as well 
@@ -129,7 +128,7 @@ export class UserService {
 
         Emailer.passwordResetSuccessEmail(user.Email)
 
-        return {'msg': 'Your password has been saved successfully.'}
+        return res.status(200).json({'msg': 'Your password has been saved successfully.'})
     }
 }
 
