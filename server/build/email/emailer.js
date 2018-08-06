@@ -50,8 +50,8 @@ var Emailer = /** @class */ (function () {
             service: 'gmail',
             secure: false,
             auth: {
-                user: '',
-                pass: ''
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASS
             }
         };
         var transporter = nodemailer.createTransport(smtpConfig);
