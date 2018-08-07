@@ -6,6 +6,7 @@
     :breadcrumbs="pageheader.breadcrumbs"
   >
   </page-header>
+  <willow-messages v-for="(message, i) in messages" :key="i" :type="message.type" >{{message.msg}}</willow-messages>
 
   <willow-layout>
   <!-- CARD -->
@@ -16,6 +17,7 @@
           <b-col>
             <label for="inputLive">First Name</label>
             <b-form-input
+                  :value="user.FirstName"
                   type="text"
                   placeholder="First">
             </b-form-input>
@@ -23,6 +25,7 @@
           <b-col class="mb-4">
             <label for="inputLive">Last</label>
             <b-form-input
+                  :value="user.LastName"
                   type="text"
                   placeholder="Last">
             </b-form-input>
@@ -32,6 +35,7 @@
           <b-col>
             <label for="inputLive">Email</label>
             <b-form-input
+                  :value="user.Email"
                   type="text"
                   placeholder="example@me.com">
             </b-form-input>
@@ -41,19 +45,39 @@
           <b-col>
             <label for="inputLive">Phone</label>
             <b-form-input
-                  type="text"
-                  placeholder="Phone">
+                  :value="user.PhoneNumber"
+                  type="tel"
+                  placeholder="Phone"
+                  >
             </b-form-input>
           </b-col>
         </b-row>
+
+        <h6>Password Reset</h6>
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">Email</label>
+            <label for="inputLive">New Password</label>
             <b-form-input
-                  type="text"
-                  placeholder="First">
+                  :value="passwordForm.newPassword"
+                  type="password"
+                  v-model="passwordForm.newPassword"
+                  >
             </b-form-input>
           </b-col>
+          <b-col>
+            <label for="inputLive">Confirm Password</label>
+            <b-form-input
+                  :value="passwordForm.confirmPassword"
+                  type="text"
+                  v-model="passwordForm.confirmPassword"
+                  >
+            </b-form-input>
+          </b-col>
+        </b-row>
+        <b-row>
+           <b-col>
+            <willow-button class="float-right mt-0" @click.native="updatePassword()">Reset Password</willow-button>
+           </b-col>
         </b-row>
        </b-card>
     </willow-annotated-section>
@@ -69,7 +93,12 @@
 </template>
 
 <script>
+import api from '@/api/api'
 export default {
+  mounted () {
+    this.user = JSON.parse(this.$store.getters.getUser)
+  },
+
   data () {
     return {
       pageheader: {
@@ -79,12 +108,37 @@ export default {
             href: '/Settings/Accounts'
           }
         ]
+      },
+      user: {},
+      passwordForm: {
+        newPassword: null,
+        confirmPassword: null
+      },
+      messages: null
+    }
+  },
+
+  methods: {
+    updatePassword () {
+      var params = {
+        id: this.user.Id,
+        password: this.passwordForm.newPassword,
+        confirmPassword: this.passwordForm.confirmPassword
       }
+      api.updatePassword(params)
+        .then(res => {
+          this.$router.go()
+        })
+        .catch(error => {
+          var messages = error.response.data.errors
+
+          messages.forEach(message => {
+            message.type = 'danger'
+          })
+
+          this.messages = messages
+        })
     }
   }
 }
 </script>
-
-<style>
-
-</style>

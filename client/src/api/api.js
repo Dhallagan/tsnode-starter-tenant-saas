@@ -21,6 +21,10 @@ export default {
 
   resetPassword (token, params) {
     return axios.post('/reset/' + token, params)
+  },
+
+  updatePassword (params) {
+    return axios.put('/password/update', params)
   }
 
 }

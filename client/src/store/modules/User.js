@@ -1,15 +1,15 @@
 const User = {
   state: {
-    token: 'hi',
-    user: null,
+    token: localStorage.getItem('token'),
+    user: localStorage.getItem('user'),
     claims: null
   },
   mutations: {
     setToken: function (state, token) {
-      state.token = token
+      localStorage.setItem('token', JSON.stringify(token))
     },
     setUser: function (state, user) {
-      state.user = user
+      localStorage.setItem('user', JSON.stringify(user))
     },
     setClaims: function (state, claims) {
       state.claims = claims
@@ -43,14 +43,10 @@ const User = {
   actions: {
     LOGIN_SUCCESS: function (context, data) {
       console.log('LOGIN_SUCCESS')
+      console.log(data.token)
       context.commit('setToken', data.token)
+      console.log(data.user)
       context.commit('setUser', data.user)
-    },
-    IDENTITY_LOGIN_SUCCESS: function (context, data) {
-      console.log('LOGIN_SUCCESS')
-      context.commit('setToken', data.token)
-      context.commit('setUser', data.user)
-      context.commit('setClaims', data.claims)
     },
     LOGOUT_SUCCESS: function (context, resetState) {
       console.log('LOGOUT_SUCCESS')

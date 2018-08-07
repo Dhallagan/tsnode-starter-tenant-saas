@@ -48,7 +48,7 @@
         ></willow-menu-item>
 
         <!-- MENU ITEMS-->
-        <willow-vertical-submenu
+        <!-- <willow-vertical-submenu
           icon='newspaper'
           title='Leasing'
         >
@@ -83,7 +83,7 @@
           <willow-menu-item
             title='All Units'
           ></willow-menu-item>
-        </willow-vertical-submenu>
+        </willow-vertical-submenu> -->
 
         <willow-menu-item
           title='Settings'
@@ -102,7 +102,7 @@
 
         <willow-menu-item
           title='Profile'
-          href='/Profile'
+          href='/Settings/Accounts/Profile'
         ></willow-menu-item>
 
         <willow-menu-item
