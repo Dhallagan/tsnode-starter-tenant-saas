@@ -194,6 +194,32 @@ var UserService = /** @class */ (function () {
             });
         });
     };
+    UserService.prototype.updatePassword = function (res, userId, password, confirmPassword) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserById(userId)];
+                    case 1:
+                        user = _b.sent();
+                        if (!user) {
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'User Id is invalid.' }] })];
+                        }
+                        // NEED TO CLEAR PasswordRestExpirs date as well 
+                        _a = user;
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 2:
+                        // NEED TO CLEAR PasswordRestExpirs date as well 
+                        _a.PasswordHash = _b.sent();
+                        return [4 /*yield*/, this.userRepository.saveUser(res, user)];
+                    case 3:
+                        _b.sent();
+                        // Emailer.passwordResetSuccessEmail(user.Email)
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Your password has been saved successfully.' })];
+                }
+            });
+        });
+    };
     return UserService;
 }());
 exports.UserService = UserService;

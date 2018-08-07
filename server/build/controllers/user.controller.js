@@ -89,6 +89,25 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
+    UserController.prototype.updatePassword = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var viewModel, errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        return [4 /*yield*/, this.userService.updatePassword(res, viewModel.id, viewModel.password, viewModel.confirmPassword)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     UserController.prototype.login = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var viewModel, errors;

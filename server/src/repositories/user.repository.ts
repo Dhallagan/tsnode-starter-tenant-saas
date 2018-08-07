@@ -47,4 +47,11 @@ export class UserRepository extends Repository<User> {
     public async saveUser(res: Response, user: User){
         return await getConnection().manager.save(User, user);
     }
+
+
+
+
+    public async getUserById(id: number){
+        return await getConnection().manager.findOne(User, {Id: id});
+    }
 }

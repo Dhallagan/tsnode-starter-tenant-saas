@@ -130,5 +130,21 @@ export class UserService {
 
         return res.status(200).json({'msg': 'Your password has been saved successfully.'})
     }
+
+    public async updatePassword(res: Response, userId: number, password: string, confirmPassword: string) {
+        var user = await this.userRepository.getUserById(userId)
+        if(!user) {
+            return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
+        }
+
+        // NEED TO CLEAR PasswordRestExpirs date as well 
+        user.PasswordHash = await bcrypt.hash(password, 10);
+
+        await this.userRepository.saveUser(res, user);
+
+        // Emailer.passwordResetSuccessEmail(user.Email)
+
+        return res.status(200).json({'msg': 'Your password has been saved successfully.'})
+    }
 }
 

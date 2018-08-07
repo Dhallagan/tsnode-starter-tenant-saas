@@ -28,6 +28,8 @@ var UserRoutes = /** @class */ (function (_super) {
         this.router.post('/login', validation_1.Validation.forLogin, function (req, res, next) { return _this.userController.login(req, res).catch(next); });
         this.router.post('/recover', function (req, res, next) { return _this.userController.recoverPassword(req, res).catch(next); });
         this.router.post('/reset/:token', validation_1.Validation.forReset, function (req, res, next) { return _this.userController.resetPassword(req, res).catch(next); });
+        // this.router.put('/account/', Validation.forReset, (req, res, next) => this.userController.resetPassword(req, res).catch(next));
+        this.router.put('/password/update', validation_1.Validation.forReset, function (req, res, next) { return _this.userController.updatePassword(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));
