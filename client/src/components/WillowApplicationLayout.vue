@@ -92,7 +92,7 @@
     <!-- Utility Menu -->
       <slot name="utility"/>
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link" @click="logout()">Sign out</a>
       </li>
     </ul>
 
@@ -111,7 +111,7 @@
     <ul class="navbar-nav">
         <slot name="utility"/>
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link" @click="logout()">Sign out</a>
       </li>
     </ul>
   </nav>
@@ -127,7 +127,7 @@
             <slot name="vertical-menu-primary"/>
           </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+          <h6 v-if="this.$slots.vertical-menu-saved-reports" class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
             <span>Saved reports</span>
             <a class="d-flex align-items-center text-muted" v-b-modal.modallg>
               <icon name="plus-circle"></icon>
@@ -185,12 +185,18 @@ export default {
         document.body.classList.remove('body-bg_white')
       }
     }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+      this.$router.push({path: '/login'})
+    }
   }
 }
 </script>
 
 <style>
-#logout_sidebar_button {
+#Logout_sidebar_button {
   position: absolute;
   display: inline-block;
   bottom: 0;

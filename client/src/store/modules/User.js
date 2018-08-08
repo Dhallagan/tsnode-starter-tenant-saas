@@ -17,10 +17,10 @@ const User = {
   },
   getters: {
     getAuthToken: function (state) {
-      return state.token
+      return JSON.parse(state.token)
     },
     getUser: function (state) {
-      return state.user
+      return JSON.parse(state.user)
     },
     getUsername: function (state) {
       if (state.user) {
@@ -48,8 +48,9 @@ const User = {
       console.log(data.user)
       context.commit('setUser', data.user)
     },
-    LOGOUT_SUCCESS: function (context, resetState) {
+    LOGOUT: function (context) {
       console.log('LOGOUT_SUCCESS')
+      var resetState = {token: null, user: null}
       context.commit('setToken', resetState.token)
       context.commit('setUser', resetState.user)
     }

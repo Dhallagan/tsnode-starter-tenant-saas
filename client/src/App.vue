@@ -114,7 +114,7 @@
       </template>
 
       <!-- SAVED REPORTS MENU  -->
-      <template slot='vertical-menu-saved-reports'>
+      <!-- <template slot='vertical-menu-saved-reports'>
 
         <willow-menu-item
           icon='file-excel'
@@ -140,7 +140,7 @@
           href=''
         ></willow-menu-item>
 
-      </template>
+      </template> -->
 
       <willow-drawer slot='drawer'
         :hidden='drawer.hidden'

@@ -18,7 +18,7 @@
           <b-col>
             <h6>Member Since</h6>
             <p class="card-text">
-              April 24, 2018
+              {{registrationDate}}
             </p>
           </b-col>
           <b-col>
@@ -36,8 +36,9 @@
     >
        <b-card class="mb-2">
        <h6>Account Owner</h6>
-        <willow-button plain>Dylan Hall</willow-button>
-        <willow-button plain>Open Modal</willow-button>
+       <router-link to="/Settings/Accounts/Profile">
+        <willow-button plain>{{this.$store.getters.getUser.FirstName}} {{this.$store.getters.getUser.LastName}}</willow-button>
+       </router-link>
        </b-card>
     </willow-annotated-section>
 
@@ -84,7 +85,13 @@
 </template>
 
 <script>
+import {format} from 'date-fns'
 export default {
+  computed: {
+    registrationDate () {
+      return format(this.$store.getters.getUser.DateCreated, 'MMMM D, YYYY')
+    }
+  },
   data () {
     return {
       pageheader: {
