@@ -20,5 +20,6 @@ export class UserRoutes extends BaseRoute {
         this.router.post('/reset/:token', Validation.forReset, (req, res, next) => this.userController.resetPassword(req, res).catch(next));
         // this.router.put('/account/', Validation.forReset, (req, res, next) => this.userController.resetPassword(req, res).catch(next));
         this.router.put('/password/update', Validation.forReset, (req, res, next) => this.userController.updatePassword(req, res).catch(next));
+        this.router.get('/users', (req, res, next) => this.userController.getUsers(req, res).catch(next));
     }
 }

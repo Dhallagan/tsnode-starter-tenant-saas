@@ -1,16 +1,17 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, Timestamp} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, JoinColumn} from "typeorm"
+import { RoleAliasArn, RoleAliasDescription } from "../../node_modules/aws-sdk/clients/iot";
 
-@Entity()
+@Entity("user")
 export class User {
 
     @PrimaryGeneratedColumn()
     Id: number;
 
-    @Column()
-    FirstName: string;
+    @Column({nullable: true})
+    FirstName!: string;
 
-    @Column()
-    LastName: string;
+    @Column({nullable: true})
+    LastName!: string;
 
     @Column()
     Email: string;
@@ -21,10 +22,10 @@ export class User {
     @Column()
     PasswordHash: string;
 
-    @Column()
+    @Column({nullable: true})
     PhoneNumber: string;
 
-    @Column({default: false})
+    @Column({default: false, nullable: true})
     PhoneNumberVerified: boolean;
 
     @Column({default: false})
@@ -39,6 +40,10 @@ export class User {
     @Column({default: null, nullable: true})
     EmailVerifyToken: string;
 
+    @Column({default: 'User', nullable: false})
+    Role: string;
+
     @CreateDateColumn()
     DateCreated: Date;
+
 }

@@ -24,7 +24,7 @@ export class UserController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)
+        return await this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password)
     }
 
 
@@ -92,6 +92,23 @@ export class UserController extends BaseController {
         }
 
         return await this.userService.resetPassword(res, req.params.token, viewModel.password)
+        
+    }
+
+
+
+
+    public async getUsers(req: Request, res: Response) {
+        const viewModel = req.body;
+        console.log(viewModel)
+
+        const errors = validationResult(req);
+     
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.userService.getUsers(res)
         
     }
 }

@@ -4,7 +4,7 @@ import {Database} from '../core/database'
 import { Server } from './server';
 //import { Seeds } from './seeds';
 import { Authentication } from './middleware/Authentication'
-import {UserRoutes} from '../routes/user.routes';
+import { UserRoutes } from '../routes/user.routes';
 import * as dotenv from 'dotenv';
 
 

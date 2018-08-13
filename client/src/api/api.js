@@ -25,6 +25,9 @@ export default {
 
   updatePassword (params) {
     return axios.put('/password/update', params)
-  }
+  },
 
+  getUsers (params) {
+    return axios.get('/users', params)
+  }
 }

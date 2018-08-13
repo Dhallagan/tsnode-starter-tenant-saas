@@ -21,6 +21,9 @@
       <div class="checkbox mb-3">
           <router-link to="/recover">Forgot Password?</router-link>
       </div>
+      <div class="checkbox mb-3">
+          Or <router-link to="/register">Register</router-link>
+      </div>
 
       <button class="btn btn-lg btn-primary btn-block" @click="login()">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>

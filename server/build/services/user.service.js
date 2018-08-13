@@ -65,13 +65,14 @@ var UserService = /** @class */ (function () {
         };
         return jwt.sign(payload, 'secretsecretsecret');
     };
-    UserService.prototype.createUser = function (res, username, email, password) {
+    UserService.prototype.createUser = function (res, firstname, lastname, email, password) {
         return __awaiter(this, void 0, void 0, function () {
             var userExists, passwordHash, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        username = username.toLowerCase();
+                        firstname = firstname.toLowerCase();
+                        lastname = lastname.toLowerCase();
                         email = email.toLowerCase();
                         return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
                     case 1:
@@ -82,11 +83,12 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
                     case 2:
                         passwordHash = _a.sent();
-                        return [4 /*yield*/, this.userRepository.createUser(res, username, email, passwordHash, uuid_1.v4())];
+                        return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4())];
                     case 3:
                         user = _a.sent();
+                        console.log(user);
                         // Send email
-                        emailer_1.Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
+                        emailer_1.Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
                         return [2 /*return*/, res.status(200).json({ 'msg': 'Registration success! An email has been sent to ' + email + '.  Check your email to complete the registration process.' })];
                 }
             });
@@ -216,6 +218,19 @@ var UserService = /** @class */ (function () {
                         _b.sent();
                         // Emailer.passwordResetSuccessEmail(user.Email)
                         return [2 /*return*/, res.status(200).json({ 'msg': 'Your password has been saved successfully.' })];
+                }
+            });
+        });
+    };
+    UserService.prototype.getUsers = function (res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var users;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUsers()];
+                    case 1:
+                        users = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ users: users })];
                 }
             });
         });

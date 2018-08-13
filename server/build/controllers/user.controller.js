@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -67,7 +70,7 @@ var UserController = /** @class */ (function (_super) {
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        return [4 /*yield*/, this.userService.createUser(res, viewModel.username, viewModel.email, viewModel.password)];
+                        return [4 /*yield*/, this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -154,6 +157,24 @@ var UserController = /** @class */ (function (_super) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
                         return [4 /*yield*/, this.userService.resetPassword(res, req.params.token, viewModel.password)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserController.prototype.getUsers = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var viewModel, errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        viewModel = req.body;
+                        console.log(viewModel);
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        return [4 /*yield*/, this.userService.getUsers(res)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

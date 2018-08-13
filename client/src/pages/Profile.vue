@@ -96,7 +96,7 @@
 import api from '@/api/api'
 export default {
   mounted () {
-    this.user = JSON.parse(this.$store.getters.getUser)
+    this.user = this.$store.getters.getUser
   },
 
   data () {
@@ -125,6 +125,7 @@ export default {
         password: this.passwordForm.newPassword,
         confirmPassword: this.passwordForm.confirmPassword
       }
+      console.log(params)
       api.updatePassword(params)
         .then(res => {
           this.$router.go()

@@ -9,8 +9,8 @@ import { User } from "../entity/User";
 export class UserRepository extends Repository<User> {
 
 
-    public async createUser(res: Response, username: string, email: string, passwordHash: string, emailVerifyToken: string){
-        return await getConnection().manager.save(User, {Username: username, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken});
+    public async createUser(res: Response, firstname: string, lastname: string, email: string, passwordHash: string, emailVerifyToken: string){
+        return await getConnection().manager.save(User, {FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken});
     }
 
 
@@ -53,5 +53,12 @@ export class UserRepository extends Repository<User> {
 
     public async getUserById(id: number){
         return await getConnection().manager.findOne(User, {Id: id});
+    }
+
+
+
+
+    public async getUsers(){
+        return await getConnection().manager.find(User);
     }
 }

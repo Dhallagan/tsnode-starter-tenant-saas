@@ -18,11 +18,11 @@ var User = /** @class */ (function () {
         __metadata("design:type", Number)
     ], User.prototype, "Id", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ nullable: true }),
         __metadata("design:type", String)
     ], User.prototype, "FirstName", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ nullable: true }),
         __metadata("design:type", String)
     ], User.prototype, "LastName", void 0);
     __decorate([
@@ -38,11 +38,11 @@ var User = /** @class */ (function () {
         __metadata("design:type", String)
     ], User.prototype, "PasswordHash", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ nullable: true }),
         __metadata("design:type", String)
     ], User.prototype, "PhoneNumber", void 0);
     __decorate([
-        typeorm_1.Column({ default: false }),
+        typeorm_1.Column({ default: false, nullable: true }),
         __metadata("design:type", Boolean)
     ], User.prototype, "PhoneNumberVerified", void 0);
     __decorate([
@@ -62,11 +62,15 @@ var User = /** @class */ (function () {
         __metadata("design:type", String)
     ], User.prototype, "EmailVerifyToken", void 0);
     __decorate([
+        typeorm_1.Column({ default: 'User', nullable: false }),
+        __metadata("design:type", String)
+    ], User.prototype, "Role", void 0);
+    __decorate([
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], User.prototype, "DateCreated", void 0);
     User = __decorate([
-        typeorm_1.Entity()
+        typeorm_1.Entity("user")
     ], User);
     return User;
 }());

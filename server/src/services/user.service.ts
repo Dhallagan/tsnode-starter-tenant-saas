@@ -29,8 +29,9 @@ export class UserService {
 
 
 
-    public async createUser(res: Response, username: string, email: string, password: string) {
-        username = username.toLowerCase();
+    public async createUser(res: Response, firstname: string, lastname: string, email: string, password: string) {
+        firstname = firstname.toLowerCase();
+        lastname = lastname.toLowerCase();
         email = email.toLowerCase();
       
         const userExists = await this.userRepository.getUserByEmail(email)
@@ -40,10 +41,10 @@ export class UserService {
         }
 
         const passwordHash = await bcrypt.hash(password, 10)
-        const user = await this.userRepository.createUser(res, username, email, passwordHash, UUId());
-
+        const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId());
+        console.log(user)
         // Send email
-        Emailer.welcomeEmail(user.Email, user.Username, user.EmailVerifyToken);
+        Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
     
         return res.status(200).json({'msg': 'Registration success! An email has been sent to '+ email + '.  Check your email to complete the registration process.'});
     }
@@ -131,6 +132,9 @@ export class UserService {
         return res.status(200).json({'msg': 'Your password has been saved successfully.'})
     }
 
+
+
+
     public async updatePassword(res: Response, userId: number, password: string, confirmPassword: string) {
         var user = await this.userRepository.getUserById(userId)
         if(!user) {
@@ -145,6 +149,14 @@ export class UserService {
         // Emailer.passwordResetSuccessEmail(user.Email)
 
         return res.status(200).json({'msg': 'Your password has been saved successfully.'})
+    }
+
+
+
+
+    public async getUsers(res: Response) {
+        var users = await this.userRepository.getUsers()
+        return res.status(200).json({users})
     }
 }
 

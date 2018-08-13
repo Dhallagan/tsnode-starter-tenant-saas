@@ -56,95 +56,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var typeorm_2 = require("typeorm");
-var User_1 = require("../entity/User");
-var UserRepository = /** @class */ (function (_super) {
-    __extends(UserRepository, _super);
-    function UserRepository() {
+var Role_1 = require("../entity/Role");
+var RoleRepository = /** @class */ (function (_super) {
+    __extends(RoleRepository, _super);
+    function RoleRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken) {
+    RoleRepository.prototype.getRoleById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken })];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(Role_1.Role, { Id: id })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    UserRepository.prototype.getUserByEmail = function (email) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { Email: email })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.getUserByToken = function (token) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ EmailVerifyToken: token })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.getUserByTokenAndExpiration = function (token) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { where: { PasswordResetToken: token, PasswordResetExpires: typeorm_1.MoreThan(Date.now()) } })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.forgotPassword = function (user) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save(user)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.saveUser = function (res, user) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, user)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.getUserById = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { Id: id })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository.prototype.getUsers = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.find(User_1.User)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserRepository = __decorate([
-        typeorm_1.EntityRepository(User_1.User)
-    ], UserRepository);
-    return UserRepository;
+    RoleRepository = __decorate([
+        typeorm_1.EntityRepository(Role_1.Role)
+    ], RoleRepository);
+    return RoleRepository;
 }(typeorm_1.Repository));
-exports.UserRepository = UserRepository;
+exports.RoleRepository = RoleRepository;
