@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
+import { User } from "../entity/User";
 
 export class UserService {
 
@@ -63,7 +64,7 @@ export class UserService {
         verifiedUser.EmailVerified = true
         verifiedUser.EmailVerifyToken = ""
 
-        await this.userRepository.saveUser(res, verifiedUser);
+        await this.userRepository.saveUser(verifiedUser);
 
         // Send Registration complete email?
     
@@ -129,7 +130,7 @@ export class UserService {
         user.PasswordHash = await bcrypt.hash(password, 10);
         user.PasswordResetToken = "";
 
-        await this.userRepository.saveUser(res, user);
+        await this.userRepository.saveUser(user);
 
         Emailer.passwordResetSuccessEmail(user.Email)
 
@@ -148,7 +149,7 @@ export class UserService {
         // NEED TO CLEAR PasswordRestExpirs date as well 
         user.PasswordHash = await bcrypt.hash(password, 10);
 
-        await this.userRepository.saveUser(res, user);
+        await this.userRepository.saveUser(user);
 
         // Emailer.passwordResetSuccessEmail(user.Email)
 
@@ -160,7 +161,25 @@ export class UserService {
 
     public async getUsers(res: Response) {
         var users = await this.userRepository.getUsers()
-        return res.status(200).json({users})
+        return res.status(200).json(users)
+    }
+
+
+
+
+
+    public async getUser(res: Response, userId: number) {
+        var user = await this.userRepository.getUserById(userId)
+        return res.status(200).json(user)
+    }
+
+
+
+
+
+    public async updateUser(res: Response, id: number, user: User) {
+        var updatedUser = await this.userRepository.updateUser(id, user)
+        return res.status(200).json(updatedUser)
     }
 }
 

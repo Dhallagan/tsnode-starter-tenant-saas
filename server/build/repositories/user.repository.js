@@ -109,7 +109,7 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
-    UserRepository.prototype.saveUser = function (res, user) {
+    UserRepository.prototype.saveUser = function (user) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -134,6 +134,16 @@ var UserRepository = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.find(User_1.User)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.updateUser = function (id, user) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).update(id, user)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

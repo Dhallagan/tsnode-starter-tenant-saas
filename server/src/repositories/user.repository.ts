@@ -44,7 +44,7 @@ export class UserRepository extends Repository<User> {
 
 
 
-    public async saveUser(res: Response, user: User){
+    public async saveUser(user: User){
         return await getConnection().manager.save(User, user);
     }
 
@@ -60,5 +60,10 @@ export class UserRepository extends Repository<User> {
 
     public async getUsers(){
         return await getConnection().manager.find(User);
+    }
+
+
+    public async updateUser(id: number, user: User){
+        return await getRepository(User).update(id, user);
     }
 }

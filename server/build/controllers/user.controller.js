@@ -176,6 +176,39 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
+    UserController.prototype.getUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        return [4 /*yield*/, this.userService.getUser(res, req.params.id)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserController.prototype.updateUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var viewModel, errors;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        return [4 /*yield*/, this.userService.updateUser(res, viewModel.Id, viewModel)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     return UserController;
 }(base_controller_1.BaseController));
 exports.UserController = UserController;

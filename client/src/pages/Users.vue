@@ -64,6 +64,10 @@
        {{data.item.Role}}
     </template>
 
+        <template slot="Action" slot-scope="data">
+       <willow-button primary>Edit</willow-button>
+    </template>
+
   </b-table>
 
   </b-card>
@@ -82,7 +86,7 @@ export default {
 
   data () {
     return {
-      fields: ['Email', 'Verified', 'Created', 'Role'],
+      fields: ['Email', 'Verified', 'Created', 'Role', 'Action'],
       users: {}
     }
   },
@@ -92,7 +96,7 @@ export default {
       api.getUsers()
         .then(res => {
           console.log(res.data)
-          this.users = res.data.users
+          this.users = res.data
         })
     }
   }

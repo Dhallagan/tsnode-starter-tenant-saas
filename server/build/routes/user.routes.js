@@ -31,6 +31,8 @@ var UserRoutes = /** @class */ (function (_super) {
         // this.router.put('/account/', Validation.forReset, (req, res, next) => this.userController.resetPassword(req, res).catch(next));
         this.router.put('/password/update', validation_1.Validation.forReset, function (req, res, next) { return _this.userController.updatePassword(req, res).catch(next); });
         this.router.get('/users', function (req, res, next) { return _this.userController.getUsers(req, res).catch(next); });
+        this.router.get('/users/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
+        this.router.post('/users/:id', function (req, res, next) { return _this.userController.updateUser(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));

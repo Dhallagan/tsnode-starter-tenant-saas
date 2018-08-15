@@ -110,5 +110,32 @@ export class UserController extends BaseController {
         return await this.userService.getUsers(res)
         
     }
+
+
+
+
+    public async getUser(req: Request, res: Response) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.userService.getUser(res, req.params.id)
+    }
+
+
+
+
+
+    public async updateUser(req: Request, res: Response) {
+        const viewModel = req.body;
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.userService.updateUser(res, viewModel.Id, viewModel)
+    }
 }
 

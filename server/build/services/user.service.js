@@ -107,7 +107,7 @@ var UserService = /** @class */ (function () {
                         }
                         verifiedUser.EmailVerified = true;
                         verifiedUser.EmailVerifyToken = "";
-                        return [4 /*yield*/, this.userRepository.saveUser(res, verifiedUser)];
+                        return [4 /*yield*/, this.userRepository.saveUser(verifiedUser)];
                     case 2:
                         _a.sent();
                         // Send Registration complete email?
@@ -189,7 +189,7 @@ var UserService = /** @class */ (function () {
                         // NEED TO CLEAR PasswordRestExpirs date as well 
                         _a.PasswordHash = _b.sent();
                         user.PasswordResetToken = "";
-                        return [4 /*yield*/, this.userRepository.saveUser(res, user)];
+                        return [4 /*yield*/, this.userRepository.saveUser(user)];
                     case 3:
                         _b.sent();
                         emailer_1.Emailer.passwordResetSuccessEmail(user.Email);
@@ -215,7 +215,7 @@ var UserService = /** @class */ (function () {
                     case 2:
                         // NEED TO CLEAR PasswordRestExpirs date as well 
                         _a.PasswordHash = _b.sent();
-                        return [4 /*yield*/, this.userRepository.saveUser(res, user)];
+                        return [4 /*yield*/, this.userRepository.saveUser(user)];
                     case 3:
                         _b.sent();
                         // Emailer.passwordResetSuccessEmail(user.Email)
@@ -232,7 +232,33 @@ var UserService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.userRepository.getUsers()];
                     case 1:
                         users = _a.sent();
-                        return [2 /*return*/, res.status(200).json({ users: users })];
+                        return [2 /*return*/, res.status(200).json(users)];
+                }
+            });
+        });
+    };
+    UserService.prototype.getUser = function (res, userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserById(userId)];
+                    case 1:
+                        user = _a.sent();
+                        return [2 /*return*/, res.status(200).json(user)];
+                }
+            });
+        });
+    };
+    UserService.prototype.updateUser = function (res, id, user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var updatedUser;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.updateUser(id, user)];
+                    case 1:
+                        updatedUser = _a.sent();
+                        return [2 /*return*/, res.status(200).json(updatedUser)];
                 }
             });
         });
