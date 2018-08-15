@@ -11,7 +11,7 @@
 
       <!-- BRAND NAME TEXT  -->
       <template slot='brand'>
-        <strong><i>WILLOW</i></strong>
+        <strong><i>TS Node Starter</i></strong>
       </template>
 
       <!-- RIGHT SIDE NAV ITEMS -->
@@ -19,9 +19,9 @@
           <willow-menu-item class='text-light' @click.native='drawer.hidden = !drawer.hidden'
             icon='bell'
           ></willow-menu-item>
-          <willow-menu-item class='text-light' @click.native='drawer.hidden = !drawer.hidden'
+          <!-- <willow-menu-item class='text-light' @click.native='drawer.hidden = !drawer.hidden'
             icon='database'
-          ></willow-menu-item>
+          ></willow-menu-item> -->
       </template>
 
       <template slot='horizontal-menu-primary'>
