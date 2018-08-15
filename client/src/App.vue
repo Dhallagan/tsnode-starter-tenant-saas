@@ -85,30 +85,16 @@
           ></willow-menu-item>
         </willow-vertical-submenu> -->
 
+        <willow-menu-item v-if="hasRole('Admin')"
+          icon='users'
+          title='Tenants'
+          href='/admin/tenants'
+        ></willow-menu-item>
+
         <willow-menu-item
+          icon='cog'
           title='Settings'
           href='/Settings'
-        ></willow-menu-item>
-
-        <willow-menu-item
-          title='Account Settings'
-          href='/Settings/Accounts'
-        ></willow-menu-item>
-
-        <willow-menu-item
-          title='Invite'
-          href='/Settings/Accounts/New'
-        ></willow-menu-item>
-
-        <willow-menu-item
-          title='Profile'
-          href='/Settings/Accounts/Profile'
-        ></willow-menu-item>
-
-        <willow-menu-item
-          icon=''
-          title='List'
-          href='/list'
         ></willow-menu-item>
 
       </template>

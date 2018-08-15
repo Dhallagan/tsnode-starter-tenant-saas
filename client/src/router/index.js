@@ -11,7 +11,7 @@ import Home from '../pages/Home'
 import Profile from '../pages/Profile'
 
 // import Reports from '../pages/Reports'
-import Accounts from '../pages/Accounts'
+import Account from '../pages/Account'
 import Users from '../pages/Users'
 // import Applicants from '../pages/Applicants'
 // import Applicant from '../pages/Applicant'
@@ -64,7 +64,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/admin/users',
+      path: '/admin/tenants',
       name: 'Accounts',
       meta: { layout: 'application' },
       component: Users
@@ -148,7 +148,7 @@ export default new Router({
       path: '/Settings/Accounts',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
-      component: Accounts
+      component: Account
     },
     // {
     //   path: '/Settings/Accounts/New',

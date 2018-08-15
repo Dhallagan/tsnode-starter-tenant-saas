@@ -47,8 +47,6 @@ import WillowFiltersFieldSelect from './components/WillowFiltersFieldSelect'
 import WillowFiltersFieldTextfield from './components/WillowFiltersFieldTextfield'
 import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
 
-import { Applications, Buildings } from '../static/dummydata.js'
-
 // Proprietary components
 Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
@@ -122,15 +120,25 @@ Router.beforeEach((to, from, next) => {
   }
 })
 
+Vue.mixin({
+  methods: {
+    hasRole (role) {
+      console.log(role)
+      console.log(Store.getters.getUser.Role)
+      if (Store.getters.getUser.Role === role) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router: Router,
   store: Store,
   components: { App },
-  template: '<App/>',
-  created () {
-    this.$store.dispatch('LOAD_APPS', Applications)
-    this.$store.dispatch('LOAD_BUILDINGS', Buildings)
-  }
+  template: '<App/>'
 })

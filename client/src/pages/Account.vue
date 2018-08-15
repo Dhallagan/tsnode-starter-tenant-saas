@@ -2,7 +2,7 @@
 <page>
 
   <page-header
-    title="Accounts"
+    title="Account"
     :breadcrumbs="pageheader.breadcrumbs"
   >
 
