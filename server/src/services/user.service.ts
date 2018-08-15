@@ -74,12 +74,16 @@ export class UserService {
     
 
     public async login(res: Response, email: string, password: string) {
-        console.log(email)
         const user = await this.userRepository.getUserByEmail(email)
         
         if(!user){
             return  res.status(422).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
         }
+        console.log('hi', user)
+        if(user.Active === false) {
+            return  res.status(422).json({'errors': [{'msg': 'The account is not active. Contact your administrator.'}]})
+        }
+
         var passwordMatch = await bcrypt.compare(password, user.PasswordHash)
 
         if(!passwordMatch){

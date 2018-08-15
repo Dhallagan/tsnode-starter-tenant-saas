@@ -57,7 +57,6 @@ export class UserController extends BaseController {
 
    public async login(req: Request, res: Response) {
         const viewModel = req.body;
-        console.log(viewModel)
 
         const errors = validationResult(req);
      
