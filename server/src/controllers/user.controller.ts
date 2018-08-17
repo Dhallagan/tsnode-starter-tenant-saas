@@ -129,13 +129,13 @@ export class UserController extends BaseController {
 
     public async updateUser(req: Request, res: Response) {
         const viewModel = req.body;
-        
+        console.log(viewModel)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.userService.updateUser(res, viewModel.Id, viewModel)
+        return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
     }
 }
 

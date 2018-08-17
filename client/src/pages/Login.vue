@@ -56,7 +56,6 @@ export default {
           if (res.data.token) {
             // LOGIN USER ->
             this.$store.dispatch('LOGIN_SUCCESS', res.data)
-            console.log(this.$store.getters.getUser)
             this.$router.push({ path: '/' })
           }
         })

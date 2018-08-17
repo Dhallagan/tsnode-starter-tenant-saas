@@ -65,7 +65,7 @@
     </template>
 
         <template slot="Action" slot-scope="data">
-       <willow-button primary>Edit</willow-button>
+       <willow-button primary :url="'/admin/tenants/' + '1'" >Edit</willow-button>
     </template>
 
   </b-table>

@@ -250,13 +250,24 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.updateUser = function (res, id, user) {
+    UserService.prototype.updateUser = function (res, id, firstName, lastName, role, active) {
         return __awaiter(this, void 0, void 0, function () {
-            var updatedUser;
+            var user, updatedUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.updateUser(id, user)];
+                    case 0: return [4 /*yield*/, this.userRepository.getUserById(id)];
                     case 1:
+                        user = _a.sent();
+                        if (!user) {
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'User Id is invalid.' }] })];
+                        }
+                        user.FirstName = firstName;
+                        user.LastName = lastName;
+                        user.PhoneNumber = "";
+                        user.Role = role;
+                        user.Active = active;
+                        return [4 /*yield*/, this.userRepository.updateUser(id, user)];
+                    case 2:
                         updatedUser = _a.sent();
                         return [2 /*return*/, res.status(200).json(updatedUser)];
                 }

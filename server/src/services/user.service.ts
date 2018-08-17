@@ -177,7 +177,18 @@ export class UserService {
 
 
 
-    public async updateUser(res: Response, id: number, user: User) {
+    public async updateUser(res: Response, id: number, firstName: string, lastName: string, role: string, active: boolean) {
+        
+        var user = await this.userRepository.getUserById(id)
+        if(!user) {
+            return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
+        }
+        user.FirstName = firstName
+        user.LastName = lastName
+        user.PhoneNumber = ""
+        user.Role = role
+        user.Active = active
+        
         var updatedUser = await this.userRepository.updateUser(id, user)
         return res.status(200).json(updatedUser)
     }

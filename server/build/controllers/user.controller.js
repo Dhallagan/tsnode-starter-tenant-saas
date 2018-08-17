@@ -199,11 +199,12 @@ var UserController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         viewModel = req.body;
+                        console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        return [4 /*yield*/, this.userService.updateUser(res, viewModel.Id, viewModel)];
+                        return [4 /*yield*/, this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

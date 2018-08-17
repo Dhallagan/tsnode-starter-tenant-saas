@@ -13,6 +13,7 @@ import Profile from '../pages/Profile'
 // import Reports from '../pages/Reports'
 import Account from '../pages/Account'
 import Users from '../pages/Users'
+import UsersEdit from '../pages/Users.Edit'
 // import Applicants from '../pages/Applicants'
 // import Applicant from '../pages/Applicant'
 // import Buildings from '../pages/Buildings'
@@ -68,6 +69,12 @@ export default new Router({
       name: 'Accounts',
       meta: { layout: 'application' },
       component: Users
+    },
+    {
+      path: '/admin/tenants/:id',
+      name: 'Accounts',
+      meta: { layout: 'application' },
+      component: UsersEdit
     },
     // {
     //   path: '/Reports',

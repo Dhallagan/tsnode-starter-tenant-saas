@@ -109,8 +109,7 @@ Router.beforeEach((to, from, next) => {
     // if not, redirect to login page.
     if (!Store.getters.getAuthToken) {
       next({
-        path: '/login',
-        query: { redirect: to.fullPath }
+        path: '/login'
       })
     } else {
       next()

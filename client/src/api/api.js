@@ -29,5 +29,13 @@ export default {
 
   getUsers (params) {
     return axios.get('/users', params)
+  },
+
+  getUserById (id) {
+    return axios.get('/users/' + id)
+  },
+
+  updateUserById (id, params) {
+    return axios.post('/users/' + id, params)
   }
 }

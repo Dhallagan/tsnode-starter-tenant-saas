@@ -31,7 +31,7 @@ export default {
     icon: String,
     size: {
       type: String,
-      default: 'md'
+      default: 'sm'
     },
     disabled: Boolean,
     disclosure: Boolean,

@@ -64,6 +64,7 @@ export class UserRepository extends Repository<User> {
 
 
     public async updateUser(id: number, user: User){
+        
         return await getRepository(User).update(id, user);
     }
 }
