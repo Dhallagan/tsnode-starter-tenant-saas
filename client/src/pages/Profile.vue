@@ -15,6 +15,12 @@
         <h6>Profile</h6>
         <b-row class="mb-4">
           <b-col>
+            <label for="inputLive">Avatar</label>
+            <willow-file-input></willow-file-input>
+          </b-col>
+        </b-row>
+        <b-row class="mb-4">
+          <b-col>
             <label for="inputLive">First Name</label>
             <b-form-input
                   :value="user.FirstName"

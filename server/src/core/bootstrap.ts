@@ -48,6 +48,11 @@ export class Bootstrap {
         });
     }
 
+    public setupStorage(app: express.Application): void {
+        console.log("Setting up storage...")
+        // Maybe I do something here?
+    }
+
     public setupAuthentication(app: express.Application): void {
         console.log("Setting up authentication...")
         app.use(Authentication.isAuthenticated);

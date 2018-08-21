@@ -2,16 +2,19 @@ import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { UserService } from '../services/user.service'
 import { check, validationResult } from 'express-validator/check';
+import multer from 'multer';
+import { Uploader } from '../core/uploader';
 
+//app.post('/upload', uploader.startUpload);
 
 export class UserController extends BaseController {
 
     private userService: UserService;
 
-
     constructor() {
         super();
         this.userService = new UserService();
+       
     }
 
 
@@ -137,5 +140,20 @@ export class UserController extends BaseController {
 
         return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
     }
+
+
+
+
+
+    public async updateAvatar(req: Request, res: Response) {
+        const uploader = new Uploader();
+        uploader.startUpload(req, res)
+        //const errors = validationResult(req);
+        //if (!errors.isEmpty()) {
+        //   return res.status(422).json({ errors: errors.array() });
+        //}
+
+       // return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
+        }
 }
 

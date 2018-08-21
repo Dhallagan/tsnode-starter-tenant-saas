@@ -45,6 +45,10 @@ var Bootstrap = /** @class */ (function () {
             next();
         });
     };
+    Bootstrap.prototype.setupStorage = function (app) {
+        console.log("Setting up storage...");
+        // Maybe I do something here?
+    };
     Bootstrap.prototype.setupAuthentication = function (app) {
         console.log("Setting up authentication...");
         app.use(Authentication_1.Authentication.isAuthenticated);

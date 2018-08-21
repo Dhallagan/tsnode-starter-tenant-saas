@@ -9,10 +9,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var base_route_1 = require("./base-route");
 var user_controller_1 = require("../controllers/user.controller");
 var validation_1 = require("../util/validation");
+var multer_1 = __importDefault(require("multer"));
+var upload = multer_1.default({ dest: './src/uploads/' });
 var UserRoutes = /** @class */ (function (_super) {
     __extends(UserRoutes, _super);
     function UserRoutes() {
@@ -33,6 +38,7 @@ var UserRoutes = /** @class */ (function (_super) {
         this.router.get('/users', function (req, res, next) { return _this.userController.getUsers(req, res).catch(next); });
         this.router.get('/users/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
         this.router.post('/users/:id', function (req, res, next) { return _this.userController.updateUser(req, res).catch(next); });
+        this.router.post('/users/:id/avatar', function (req, res, next) { return _this.userController.updateAvatar(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));

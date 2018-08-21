@@ -7,6 +7,7 @@ import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
 import { User } from "../entity/User";
 
+
 export class UserService {
 
     private userRepository: UserRepository;
@@ -191,6 +192,25 @@ export class UserService {
         
         var updatedUser = await this.userRepository.updateUser(id, user)
         return res.status(200).json(updatedUser)
+    }
+
+
+
+
+    public async updateAvatar(req: Request, res: Response) {
+
+        //var user = await this.userRepository.getUserById(id)
+        //if(!user) {
+        //    return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
+        //}
+        //user.FirstName = firstName
+        //user.LastName = lastName
+        //user.PhoneNumber = ""
+        //user.Role = role
+        //user.Active = active
+        
+        //var updatedUser = await this.userRepository.updateUser(id, user)
+        //return res.status(200).json(updatedUser)
     }
 }
 

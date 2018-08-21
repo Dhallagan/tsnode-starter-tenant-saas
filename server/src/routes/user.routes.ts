@@ -1,13 +1,18 @@
 import { BaseRoute } from './base-route';
 import { UserController } from '../controllers/user.controller';
 import { Validation } from '../util/validation'
+import multer from 'multer'
+
+const upload =  multer({ dest: './src/uploads/' })
 
 export class UserRoutes extends BaseRoute {
     userController: UserController;
 
+
     constructor() {
         super();
         this.userController = new UserController();
+
         this.initRoutes();
     }
 
@@ -23,5 +28,6 @@ export class UserRoutes extends BaseRoute {
         this.router.get('/users', (req, res, next) => this.userController.getUsers(req, res).catch(next));
         this.router.get('/users/:id', (req, res, next) => this.userController.getUser(req, res).catch(next));
         this.router.post('/users/:id', (req, res, next) => this.userController.updateUser(req, res).catch(next));
+        this.router.post('/users/:id/avatar', (req, res, next) => this.userController.updateAvatar(req, res).catch(next));
     }
 }

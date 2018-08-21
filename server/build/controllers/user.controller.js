@@ -48,6 +48,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var base_controller_1 = require("./base-controller");
 var user_service_1 = require("../services/user.service");
 var check_1 = require("express-validator/check");
+var uploader_1 = require("../core/uploader");
+//app.post('/upload', uploader.startUpload);
 var UserController = /** @class */ (function (_super) {
     __extends(UserController, _super);
     function UserController() {
@@ -207,6 +209,16 @@ var UserController = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
+            });
+        });
+    };
+    UserController.prototype.updateAvatar = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var uploader;
+            return __generator(this, function (_a) {
+                uploader = new uploader_1.Uploader();
+                uploader.startUpload(req, res);
+                return [2 /*return*/];
             });
         });
     };

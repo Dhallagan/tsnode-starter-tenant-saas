@@ -18,6 +18,7 @@ import WillowAnnotatedSection from './components/WillowAnnotatedSection'
 import WillowButton from './components/WillowButton'
 import WillowBreadcrumbs from './components/WillowBreadcrumbs'
 import WillowCalloutCard from './components/WillowCalloutCard.vue'
+import WillowFileInput from './components/WillowFileInput.vue'
 import WillowLayout from './components/WillowLayout'
 import WillowLayoutSection from './components/WillowLayoutSection'
 import WillowModal from './components/WillowModal'
@@ -54,6 +55,7 @@ Vue.component('willow-annotated-section', WillowAnnotatedSection)
 Vue.component('willow-breadcrumbs', WillowBreadcrumbs)
 Vue.component('willow-button', WillowButton)
 Vue.component('willow-callout-card', WillowCalloutCard)
+Vue.component('willow-file-input', WillowFileInput)
 Vue.component('willow-drawer', WillowDrawer)
 Vue.component('willow-layout-section', WillowLayoutSection)
 Vue.component('willow-layout', WillowLayout)
