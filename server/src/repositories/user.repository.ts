@@ -3,14 +3,15 @@ import moment from 'moment';
 import { EntityRepository, Repository, getRepository, MoreThan, TreeLevelColumn } from "typeorm";
 import { getConnection } from "typeorm";
 import { User } from "../entity/User";
+import { Tenant } from "../entity/Tenant";
 
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
 
-    public async createUser(res: Response, firstname: string, lastname: string, email: string, passwordHash: string, emailVerifyToken: string){
-        return await getConnection().manager.save(User, {FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken});
+    public async createUser(res: Response, firstname: string, lastname: string, email: string, passwordHash: string, emailVerifyToken: string, tenant){
+        return await getConnection().manager.save(User, {FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken, Tenant: tenant});
     }
 
 

@@ -3,7 +3,7 @@ import * as http from 'http';
 import {Database} from '../core/database'
 import { Server } from './server';
 //import { Seeds } from './seeds';
-import { Authentication } from './middleware/Authentication'
+import { Authentication } from './middleware/authentication'
 import { UserRoutes } from '../routes/user.routes';
 import * as dotenv from 'dotenv';
 
@@ -40,7 +40,7 @@ export class Bootstrap {
     public setupCors(app: express.Application): void {
         console.log("Setting up CORS...")
         app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', 'http://localhost:8081' );
+            res.header('Access-Control-Allow-Origin', 'http://localhost:8080' );
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
             res.header('Access-Control-Allow-Credentials', 'true');

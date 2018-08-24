@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, JoinColumn, ManyToOne} from "typeorm"
 import { RoleAliasArn, RoleAliasDescription } from "../../node_modules/aws-sdk/clients/iot";
+import { Tenant } from './Tenant';
 
 @Entity("user")
 export class User {
@@ -48,5 +49,10 @@ export class User {
 
     @CreateDateColumn()
     DateCreated: Date;
+
+    @ManyToOne( type => Tenant, tenant => tenant.Users, {
+        cascade: true
+    })
+    Tenant: Tenant;
 
 }
