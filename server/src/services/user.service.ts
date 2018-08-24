@@ -6,16 +6,18 @@ import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
 import { User } from "../entity/User";
+import { TenantService } from './tenant.service';
 
 
 export class UserService {
 
     private userRepository: UserRepository;
-
+    private tenantService: TenantService;
     
     constructor() {
         //super();
         this.userRepository = new UserRepository();
+        this.tenantService = new TenantService();
     }
 
     public generateToken(user) {
@@ -31,7 +33,7 @@ export class UserService {
 
 
 
-    public async createUser(res: Response, firstname: string, lastname: string, email: string, password: string) {
+    public async createUser(res: Response, firstname: string, lastname: string, email: string, password: string, domain: string) {
         firstname = firstname.toLowerCase();
         lastname = lastname.toLowerCase();
         email = email.toLowerCase();
@@ -42,8 +44,10 @@ export class UserService {
             return  res.status(422).json({'errors': [{'msg': 'Account with that email address already exists.'}]})
         }
 
+        const tenant = await this.tenantService.createTenant(domain);
+
         const passwordHash = await bcrypt.hash(password, 10)
-        const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId());
+        const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId(), tenant);
         console.log(user)
         // Send email
         Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);

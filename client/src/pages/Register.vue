@@ -18,6 +18,9 @@
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus v-model="registerForm.email">
 
+    <label for="inputEmail" class="sr-only">Domain</label>
+    <input type="text" id="inputText" class="form-control" placeholder="Domain" required autofocus v-model="registerForm.domain">
+
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required v-model="registerForm.password">
 
@@ -43,6 +46,7 @@ export default {
       registerForm: {
         username: '',
         email: '',
+        domain: '',
         password: '',
         confirmPassword: ''
       },
@@ -56,6 +60,7 @@ export default {
         firstName: this.registerForm.firstName,
         lastName: this.registerForm.lastName,
         email: this.registerForm.email,
+        domain: this.registerForm.domain,
         password: this.registerForm.password,
         confirmPassword: this.registerForm.confirmPassword
       }

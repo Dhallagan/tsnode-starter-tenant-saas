@@ -27,7 +27,7 @@ export class UserController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password)
+        return await this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password, viewModel.domain)
     }
 
 
