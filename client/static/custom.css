@@ -354,3 +354,7 @@ body {
 .navbar-brand {
     background-color: rgba(0, 0, 0, 0);
 }
+
+.heading {
+  font-weight: 600;
+}

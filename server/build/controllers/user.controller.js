@@ -69,7 +69,7 @@ var UserController = /** @class */ (function (_super) {
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
-                        return [4 /*yield*/, this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password)];
+                        return [4 /*yield*/, this.userService.createUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password, viewModel.domain)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

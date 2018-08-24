@@ -44,6 +44,9 @@ export class User {
     @Column({default: true, nullable: false})
     Active: Boolean;
 
+    @Column({default: null, nullable: true})
+    Avatar: String;
+
     @Column({default: 'User', nullable: false})
     Role: string;
 

@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 //import { Seeds } from './seeds';
-var Authentication_1 = require("./middleware/Authentication");
+var authentication_1 = require("./middleware/authentication");
 var user_routes_1 = require("../routes/user.routes");
 var dotenv = __importStar(require("dotenv"));
 var root = './';
@@ -38,7 +38,7 @@ var Bootstrap = /** @class */ (function () {
     Bootstrap.prototype.setupCors = function (app) {
         console.log("Setting up CORS...");
         app.use(function (req, res, next) {
-            res.header('Access-Control-Allow-Origin', 'http://localhost:8081');
+            res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
             res.header('Access-Control-Allow-Credentials', 'true');
@@ -51,7 +51,7 @@ var Bootstrap = /** @class */ (function () {
     };
     Bootstrap.prototype.setupAuthentication = function (app) {
         console.log("Setting up authentication...");
-        app.use(Authentication_1.Authentication.isAuthenticated);
+        app.use(authentication_1.Authentication.isAuthenticated);
     };
     Bootstrap.prototype.setupRoutes = function (app) {
         // serving api routes

@@ -59,11 +59,11 @@ var UserRepository = /** @class */ (function (_super) {
     function UserRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken) {
+    UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken, tenant) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken })];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken, Tenant: tenant })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

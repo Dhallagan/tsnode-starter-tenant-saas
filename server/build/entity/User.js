@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
+var Tenant_1 = require("./Tenant");
 var User = /** @class */ (function () {
     function User() {
     }
@@ -66,6 +67,10 @@ var User = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], User.prototype, "Active", void 0);
     __decorate([
+        typeorm_1.Column({ default: null, nullable: true }),
+        __metadata("design:type", String)
+    ], User.prototype, "Avatar", void 0);
+    __decorate([
         typeorm_1.Column({ default: 'User', nullable: false }),
         __metadata("design:type", String)
     ], User.prototype, "Role", void 0);
@@ -73,6 +78,12 @@ var User = /** @class */ (function () {
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
     ], User.prototype, "DateCreated", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return Tenant_1.Tenant; }, function (tenant) { return tenant.Users; }, {
+            cascade: true
+        }),
+        __metadata("design:type", Tenant_1.Tenant)
+    ], User.prototype, "Tenant", void 0);
     User = __decorate([
         typeorm_1.Entity("user")
     ], User);

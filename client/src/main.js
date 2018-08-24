@@ -12,6 +12,7 @@ import Icon from 'vue-awesome/components/Icon'
 import PortalVue from 'portal-vue'
 
 // Proprietary Components Import
+import Avatar from 'vue-avatar'
 import WillowAuthenticationLayout from './components/WillowAuthenticationLayout'
 import WillowApplicationLayout from './components/WillowApplicationLayout'
 import WillowAnnotatedSection from './components/WillowAnnotatedSection'
@@ -52,6 +53,7 @@ import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
 Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
 Vue.component('willow-annotated-section', WillowAnnotatedSection)
+Vue.component('willow-avatar', Avatar)
 Vue.component('willow-breadcrumbs', WillowBreadcrumbs)
 Vue.component('willow-button', WillowButton)
 Vue.component('willow-callout-card', WillowCalloutCard)
@@ -92,19 +94,6 @@ Vue.use(PortalVue)
 
 Vue.config.productionTip = false
 
-// Router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     // this route requires auth, check if logged in
-//     // if not, redirect to login page.
-//     if (!this.$store.getters.getAuthToken()) {
-//       this.router.push({ path: '/login' })
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next() // make sure to always call next()!
-//   }
-// })
 Router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in

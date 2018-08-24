@@ -51,10 +51,12 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var moment_1 = __importDefault(require("moment"));
 var jwt = __importStar(require("jsonwebtoken"));
 var uuid_1 = require("uuid");
+var tenant_service_1 = require("./tenant.service");
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
         this.userRepository = new user_repository_1.UserRepository();
+        this.tenantService = new tenant_service_1.TenantService();
     }
     UserService.prototype.generateToken = function (user) {
         var payload = {
@@ -65,9 +67,9 @@ var UserService = /** @class */ (function () {
         };
         return jwt.sign(payload, 'secretsecretsecret');
     };
-    UserService.prototype.createUser = function (res, firstname, lastname, email, password) {
+    UserService.prototype.createUser = function (res, firstname, lastname, email, password, domain) {
         return __awaiter(this, void 0, void 0, function () {
-            var userExists, passwordHash, user;
+            var userExists, tenant, passwordHash, user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -80,11 +82,14 @@ var UserService = /** @class */ (function () {
                         if (userExists) {
                             return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Account with that email address already exists.' }] })];
                         }
-                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                        return [4 /*yield*/, this.tenantService.createTenant(domain)];
                     case 2:
-                        passwordHash = _a.sent();
-                        return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4())];
+                        tenant = _a.sent();
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
                     case 3:
+                        passwordHash = _a.sent();
+                        return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4(), tenant)];
+                    case 4:
                         user = _a.sent();
                         console.log(user);
                         // Send email

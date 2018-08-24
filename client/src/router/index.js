@@ -12,6 +12,7 @@ import Profile from '../pages/Profile'
 
 // import Reports from '../pages/Reports'
 import Account from '../pages/Account'
+import General from '../pages/General'
 import Users from '../pages/Users'
 import UsersEdit from '../pages/Users.Edit'
 // import Applicants from '../pages/Applicants'
@@ -156,6 +157,12 @@ export default new Router({
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
       component: Account
+    },
+    {
+      path: '/Settings/General',
+      name: 'General',
+      meta: { layout: 'application', requiresAuth: true },
+      component: General
     },
     // {
     //   path: '/Settings/Accounts/New',

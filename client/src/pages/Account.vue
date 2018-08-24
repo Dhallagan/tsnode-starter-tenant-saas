@@ -12,17 +12,18 @@
   <!-- CARD -->
     <willow-annotated-section
       title="Account Overview"
+      description="Subscription settings and management."
     >
        <b-card class="mb-2">
         <b-row>
           <b-col>
-            <h6>Member Since</h6>
+            <h6 class="heading">Member Since</h6>
             <p class="card-text">
               {{registrationDate}}
             </p>
           </b-col>
           <b-col>
-            <h6>Current Subscription</h6>
+            <h6 class="heading">Current Subscription</h6>
             <p class="card-text">
               Basic
             </p>
@@ -35,7 +36,7 @@
       title="Accounts And Permissions"
     >
        <b-card class="mb-2">
-       <h6>Account Owner</h6>
+       <h6 class="heading">Account Owner</h6>
        <router-link to="/Settings/Accounts/Profile">
         <willow-button plain>{{this.$store.getters.getUser.FirstName}} {{this.$store.getters.getUser.LastName}}</willow-button>
        </router-link>
@@ -47,7 +48,7 @@
       description=" "
     >
        <b-card class="mb-2">
-       <h6>Staff Accounts</h6>
+       <h6 class="heading">Staff Accounts</h6>
        <p class="card-text">
         Invite a staff member to join you.
        </p>
@@ -62,14 +63,14 @@
        <b-card class="mb-2">
        <b-row>
         <b-col>
-          <h6>Take a break</h6>
+          <h6 class="heading">Take a break</h6>
           <p class="card-text">
             Take a break from Kastlewise. Your settings will be saved until you’re ready to manage again.
           </p>
           <willow-button variant="default">Pause Subscription</willow-button>
         </b-col>
         <b-col>
-          <h6>Close your account</h6>
+          <h6 class="heading">Close your account</h6>
           <p class="card-text">
             Turn off your online listing app and management software. They’ll be saved for 30 days if you change your mind.
           </p>
@@ -81,6 +82,12 @@
 
   </willow-layout>
 
+  <page-actions>
+    <template slot="action-right">
+      <willow-button primary>Save</willow-button>
+    </template>
+  </page-actions>
+<br/><br/>
 </page>
 </template>
 
