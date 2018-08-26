@@ -34,13 +34,12 @@ export default {
     onUpload () {
       const formData = new FormData()
       formData.append(this.identifier, this.selectedFile, this.selectedFile.name)
-      console.log(formData)
+
       axios.post(this.url, formData, {onUploadProgress: uploadEvent => {
-        console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total) * 100 + '%')
+        // console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total) * 100 + '%')
       }})
         .then(res => {
-          console.log(res)
-          this.$emit('update' + this.identifier, res.file)
+          this.$emit('uploadComplete', res.data)
         })
     },
 

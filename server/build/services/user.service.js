@@ -51,6 +51,7 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var moment_1 = __importDefault(require("moment"));
 var jwt = __importStar(require("jsonwebtoken"));
 var uuid_1 = require("uuid");
+var uploader_1 = require("../core/uploader");
 var tenant_service_1 = require("./tenant.service");
 var UserService = /** @class */ (function () {
     function UserService() {
@@ -279,10 +280,38 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.updateAvatar = function (req, res) {
+    UserService.prototype.upload = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
+            var uploader, fileName;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        uploader = new uploader_1.Uploader();
+                        return [4 /*yield*/, uploader.startUpload(req, res)];
+                    case 1:
+                        fileName = _a.sent();
+                        return [2 /*return*/, res.status(200).json({ 'filename': fileName })];
+                }
+            });
+        });
+    };
+    UserService.prototype.updateAvatar = function (res, id, avatar) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, updatedUser;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userRepository.getUserById(id)];
+                    case 1:
+                        user = _a.sent();
+                        if (!user) {
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'User Id is invalid.' }] })];
+                        }
+                        user.Avatar = avatar;
+                        return [4 /*yield*/, this.userRepository.updateUser(id, user)];
+                    case 2:
+                        updatedUser = _a.sent();
+                        return [2 /*return*/, res.status(200).json(updatedUser)];
+                }
             });
         });
     };

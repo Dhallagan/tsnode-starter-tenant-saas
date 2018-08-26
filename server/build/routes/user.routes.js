@@ -39,6 +39,7 @@ var UserRoutes = /** @class */ (function (_super) {
         this.router.get('/users/:id', function (req, res, next) { return _this.userController.getUser(req, res).catch(next); });
         this.router.post('/users/:id', function (req, res, next) { return _this.userController.updateUser(req, res).catch(next); });
         this.router.post('/users/:id/avatar', function (req, res, next) { return _this.userController.updateAvatar(req, res).catch(next); });
+        this.router.post('/upload', function (req, res, next) { return _this.userController.upload(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));

@@ -37,5 +37,9 @@ export default {
 
   updateUserById (id, params) {
     return axios.post('/users/' + id, params)
+  },
+
+  updateAvatar (id, params) {
+    return axios.post('/users/' + id + '/avatar', params)
   }
 }

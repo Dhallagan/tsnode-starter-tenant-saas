@@ -51,6 +51,7 @@ export class Bootstrap {
     public setupStorage(app: express.Application): void {
         console.log("Setting up storage...")
         // Maybe I do something here?
+        app.use(express.static('./public'))
     }
 
     public setupAuthentication(app: express.Application): void {

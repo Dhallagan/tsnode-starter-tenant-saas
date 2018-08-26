@@ -48,7 +48,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var base_controller_1 = require("./base-controller");
 var user_service_1 = require("../services/user.service");
 var check_1 = require("express-validator/check");
-var uploader_1 = require("../core/uploader");
 //app.post('/upload', uploader.startUpload);
 var UserController = /** @class */ (function (_super) {
     __extends(UserController, _super);
@@ -201,7 +200,6 @@ var UserController = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         viewModel = req.body;
-                        console.log(viewModel);
                         errors = check_1.validationResult(req);
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
@@ -214,11 +212,28 @@ var UserController = /** @class */ (function (_super) {
     };
     UserController.prototype.updateAvatar = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var uploader;
+            var viewModel, errors;
             return __generator(this, function (_a) {
-                uploader = new uploader_1.Uploader();
-                uploader.startUpload(req, res);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        viewModel = req.body;
+                        errors = check_1.validationResult(req);
+                        if (!errors.isEmpty()) {
+                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
+                        }
+                        return [4 /*yield*/, this.userService.updateAvatar(res, req.params.id, viewModel.avatar)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserController.prototype.upload = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.userService.upload(req, res)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         });
     };

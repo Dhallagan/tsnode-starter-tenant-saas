@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { UserService } from '../services/user.service'
 import { check, validationResult } from 'express-validator/check';
-import multer from 'multer';
-import { Uploader } from '../core/uploader';
+
 
 //app.post('/upload', uploader.startUpload);
 
@@ -132,7 +131,6 @@ export class UserController extends BaseController {
 
     public async updateUser(req: Request, res: Response) {
         const viewModel = req.body;
-        console.log(viewModel)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
@@ -145,15 +143,21 @@ export class UserController extends BaseController {
 
 
 
-    public async updateAvatar(req: Request, res: Response) {
-        const uploader = new Uploader();
-        uploader.startUpload(req, res)
-        //const errors = validationResult(req);
-        //if (!errors.isEmpty()) {
-        //   return res.status(422).json({ errors: errors.array() });
-        //}
-
-       // return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
+    public async updateAvatar(req, res: Response) {
+        const viewModel = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
         }
+
+        return await this.userService.updateAvatar(res, req.params.id, viewModel.avatar)
+    }
+
+
+
+
+    public async upload(req: Request, res: Response) {
+        return await this.userService.upload(req, res)
+    }
 }
 
