@@ -53,5 +53,9 @@ export default {
 
   saveCompany (params) {
     return HTTP.post('/company', params)
+  },
+
+  updateAvatar (id, params) {
+    return axios.post('/users/' + id + '/avatar', params)
   }
 }

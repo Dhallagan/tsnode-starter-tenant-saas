@@ -62,6 +62,7 @@ var App = /** @class */ (function () {
                 this.bootstrapApp.setupDatabase(this.express);
                 this.bootstrapApp.setupCors(this.express);
                 this.bootstrapApp.setupRoutes(this.express);
+                this.bootstrapApp.setupStorage(this.express);
                 activeServer = this.bootstrapApp.startServer(this.express);
                 server = new server_1.Server(activeServer);
                 server.use(this.express);

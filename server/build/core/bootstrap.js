@@ -7,6 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var express = __importStar(require("express"));
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 //import { Seeds } from './seeds';
@@ -48,6 +49,7 @@ var Bootstrap = /** @class */ (function () {
     Bootstrap.prototype.setupStorage = function (app) {
         console.log("Setting up storage...");
         // Maybe I do something here?
+        app.use(express.static('./public'));
     };
     Bootstrap.prototype.setupAuthentication = function (app) {
         console.log("Setting up authentication...");

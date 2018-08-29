@@ -47,7 +47,7 @@ var Uploader = /** @class */ (function () {
     function Uploader() {
         var storageOptions = multer_1.default.diskStorage({
             destination: function (req, file, cb) {
-                cb(null, './src/uploads/');
+                cb(null, './public/');
             },
             filename: function (req, file, cb) {
                 crypto_1.default.pseudoRandomBytes(16, function (err, raw) {
@@ -75,7 +75,7 @@ var Uploader = /** @class */ (function () {
                         //Handle your exception here
                         console.log(e_1);
                         return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/, res.json({ fileUploaded: filename })];
+                    case 3: return [2 /*return*/, filename];
                 }
             });
         });

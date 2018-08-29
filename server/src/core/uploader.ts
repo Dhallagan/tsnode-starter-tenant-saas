@@ -11,7 +11,7 @@ export class Uploader {
     constructor() {
         const storageOptions = multer.diskStorage({
             destination: function(req, file, cb) {
-                cb(null, './src/uploads/')
+                cb(null, './public/')
             },
             filename: function(req, file, cb) {
                 crypto.pseudoRandomBytes(16, function(err, raw) {
@@ -37,6 +37,6 @@ export class Uploader {
             console.log(e)
         }
 
-        return res.json({fileUploaded: filename});
+        return filename
     }
 }

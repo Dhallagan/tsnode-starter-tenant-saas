@@ -15,10 +15,10 @@
         <h6>Profile Overview</h6>
         <b-row class="mb-4">
           <b-col :cols="3">
-            <willow-avatar :username="user.firstName + ' ' + user.lastName" :src="user.avatar"></willow-avatar>
+            <willow-avatar :username="user.firstName + ' ' + user.lastName" :src="'http://localhost:3000/' + user.avatar"></willow-avatar>
           </b-col>
           <b-col :cols="4">
-            <willow-file-input :url="'http://localhost:3000/api/users/'+ user.id + '/avatar'" :identifier="'avatar'">Update Avatar</willow-file-input>
+            <willow-file-input :url="'http://localhost:3000/api/upload'" @uploadComplete="updateAvatar">Update Avatar</willow-file-input>
           </b-col>
           <b-col :cols="4">
             <willow-button :disabled="user.avatar !== null">Delete Avatar</willow-button>
@@ -149,14 +149,38 @@ export default {
 
     updatePassword () {
       var params = {
-        id: this.user.Id,
+        id: this.user.id,
         password: this.passwordForm.newPassword,
         confirmPassword: this.passwordForm.confirmPassword
       }
-      console.log(params)
+
       api.updatePassword(params)
         .then(res => {
           this.$router.go()
+        })
+        .catch(error => {
+          var messages = error.response.data.errors
+
+          messages.forEach(message => {
+            message.type = 'danger'
+          })
+
+          this.messages = messages
+        })
+    },
+
+    updateAvatar (payload) {
+      var params = {
+        id: this.user.id,
+        avatar: payload.filename
+      }
+
+      this.user.avatar = payload.filename
+      this.$store.dispatch('SET_AVATAR', payload.filename)
+
+      api.updateAvatar(this.user.id, params)
+        .then(res => {
+          // this.user.avatar = res.data.avatar
         })
         .catch(error => {
           var messages = error.response.data.errors

@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
+import multer from 'multer';
+import { Uploader } from '../core/uploader';
 import { User } from "../entity/User";
 import { TenantService } from './tenant.service';
 
@@ -201,19 +203,24 @@ export class UserService {
 
 
 
-    public async updateAvatar(req: Request, res: Response) {
+    public async upload(req, res: Response) {
+        const uploader = new Uploader();
+        var fileName = await uploader.startUpload(req, res)
 
-        //var user = await this.userRepository.getUserById(id)
-        //if(!user) {
-        //    return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
-        //}
-        //user.FirstName = firstName
-        //user.LastName = lastName
-        //user.PhoneNumber = ""
-        //user.Role = role
-        //user.Active = active
+        return res.status(200).json({'filename' : fileName})
+    }
+
+
+
+
+    public async updateAvatar(res: Response, id: number, avatar: string) {
+        var user = await this.userRepository.getUserById(id)
+        if(!user) {
+            return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
+        }
+        user.Avatar = avatar
         
-        //var updatedUser = await this.userRepository.updateUser(id, user)
-        //return res.status(200).json(updatedUser)
+        var updatedUser = await this.userRepository.updateUser(id, user)
+        return res.status(200).json(updatedUser)
     }
 }

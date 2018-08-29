@@ -24,6 +24,7 @@ export class App {
         this.bootstrapApp.setupDatabase(this.express);
         this.bootstrapApp.setupCors(this.express);
         this.bootstrapApp.setupRoutes(this.express);
+        this.bootstrapApp.setupStorage(this.express);
 
         const activeServer = this.bootstrapApp.startServer(this.express);
         const server = new Server(activeServer);

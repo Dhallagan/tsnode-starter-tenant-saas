@@ -11,6 +11,11 @@ const User = {
     setUser: function (state, user) {
       localStorage.setItem('user', JSON.stringify(user))
     },
+    setAvatar: function (state, avatar) {
+      var user = JSON.parse(localStorage.getItem('user'))
+      user.Avatar = avatar
+      localStorage.setItem('user', JSON.stringify(user))
+    },
     setClaims: function (state, claims) {
       state.claims = claims
     }
@@ -55,6 +60,9 @@ const User = {
       localStorage.removeItem('user')
       context.commit('setToken', resetState.token)
       context.commit('setUser', resetState.user)
+    },
+    SET_AVATAR: function (context, avatar) {
+      context.commit('setAvatar', avatar)
     }
   }
 }
