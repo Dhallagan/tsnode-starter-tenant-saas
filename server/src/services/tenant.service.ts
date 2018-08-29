@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { TenantRepository } from "../repositories/tenant.repository";
+
 import { v4 as UUId } from 'uuid';
 import { User } from "../entity/User";
 import { UserRepository } from '../repositories/user.repository';
@@ -27,4 +28,5 @@ export class TenantService {
 
         return tenant;
     }
+
 }

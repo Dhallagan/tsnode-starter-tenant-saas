@@ -1,6 +1,14 @@
 import axios from 'axios'
+import Store from '../store'
 
 axios.defaults.baseURL = 'http://localhost:3000/api'
+
+const HTTP = axios.create({
+  baseURL: axios.defaults.baseURL,
+  headers: {
+    Authorization: `Bearer ${Store.getters.getAuthToken}`
+  }
+})
 
 export default {
   register (params) {
@@ -37,6 +45,14 @@ export default {
 
   updateUserById (id, params) {
     return axios.post('/users/' + id, params)
+  },
+
+  getCompany () {
+    return HTTP.get('/company')
+  },
+
+  saveCompany (params) {
+    return HTTP.post('/company', params)
   },
 
   updateAvatar (id, params) {

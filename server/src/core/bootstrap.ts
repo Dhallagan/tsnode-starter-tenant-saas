@@ -5,6 +5,7 @@ import { Server } from './server';
 //import { Seeds } from './seeds';
 import { Authentication } from './middleware/authentication'
 import { UserRoutes } from '../routes/user.routes';
+import { CompanyRoutes } from '../routes/company.routes';
 import * as dotenv from 'dotenv';
 
 
@@ -67,6 +68,9 @@ export class Bootstrap {
         console.log("Setting up routes...")
         const userRouter = new UserRoutes().router;
         app.use('/api', userRouter);
+
+        const companyRouter = new CompanyRoutes().router;
+        app.use('/api', companyRouter);
         //app.use('/api', usersRouter);
     }
 }

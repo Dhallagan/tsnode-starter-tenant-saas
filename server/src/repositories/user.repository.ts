@@ -53,7 +53,7 @@ export class UserRepository extends Repository<User> {
 
 
     public async getUserById(id: number){
-        return await getConnection().manager.findOne(User, {Id: id});
+        return await getRepository(User).findOne(id)
     }
 
 

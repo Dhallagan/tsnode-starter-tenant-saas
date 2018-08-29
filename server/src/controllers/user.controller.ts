@@ -3,7 +3,6 @@ import { BaseController } from './base-controller';
 import { UserService } from '../services/user.service'
 import { check, validationResult } from 'express-validator/check';
 
-
 //app.post('/upload', uploader.startUpload);
 
 export class UserController extends BaseController {
@@ -66,7 +65,8 @@ export class UserController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        await this.userService.login(res, viewModel.email, viewModel.password)
+        return await this.userService.login(res, viewModel.email, viewModel.password)
+
    }
 
 
@@ -160,4 +160,3 @@ export class UserController extends BaseController {
         return await this.userService.upload(req, res)
     }
 }
-
