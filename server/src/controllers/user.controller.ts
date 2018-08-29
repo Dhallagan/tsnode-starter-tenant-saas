@@ -67,7 +67,8 @@ export class UserController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        await this.userService.login(res, viewModel.email, viewModel.password)
+        return await this.userService.login(res, viewModel.email, viewModel.password)
+
    }
 
 
@@ -154,6 +155,5 @@ export class UserController extends BaseController {
         //}
 
        // return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
-        }
+    }
 }
-

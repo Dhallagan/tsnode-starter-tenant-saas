@@ -23,7 +23,7 @@ export class UserService {
     public generateToken(user) {
         var payload = {
             iss: "localhost",
-            sub: user._id,
+            sub: user.Id,
             iat: moment().unix(),
             exp: moment().add(14, 'days').unix()
         };
@@ -217,4 +217,3 @@ export class UserService {
         //return res.status(200).json(updatedUser)
     }
 }
-

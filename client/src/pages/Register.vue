@@ -28,7 +28,7 @@
     <input type="password" id="inputConfirmPassword" class="form-control mb-3" placeholder="Confirm Password" required v-model="registerForm.confirmPassword">
 
     <div class="checkbox mb-3">
-        Already have accoumt?<router-link to="/login"> Sign In.</router-link>
+        Already have account?<router-link to="/login"> Sign In.</router-link>
     </div>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" @click="register()">Register</button>

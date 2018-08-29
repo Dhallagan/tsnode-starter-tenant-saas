@@ -35,7 +35,6 @@ export class TenantRepository extends Repository<Tenant> {
 
 
     public async updateTenant(id: number, tenant: Tenant){
-        
         return await getRepository(Tenant).update(id, tenant);
     }
 }

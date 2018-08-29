@@ -54,7 +54,8 @@ export class User {
     DateCreated: Date;
 
     @ManyToOne( type => Tenant, tenant => tenant.Users, {
-        cascade: true
+        cascade: true,
+        eager: true
     })
     Tenant: Tenant;
 
