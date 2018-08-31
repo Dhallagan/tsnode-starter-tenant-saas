@@ -128,6 +128,18 @@ export class UserController extends BaseController {
 
 
 
+    public async getUserByToken(req: Request, res: Response) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        
+        return await this.userService.getUser(res, req['user'])
+    }
+
+
+
+
 
     public async updateUser(req: Request, res: Response) {
         const viewModel = req.body;

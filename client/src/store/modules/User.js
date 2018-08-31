@@ -1,20 +1,22 @@
+import api from '@/api/api'
+
 const User = {
   state: {
-    token: localStorage.getItem('token'),
-    user: localStorage.getItem('user'),
+    token: localStorage.getItem('token') || '',
+    user: null,
     claims: null
   },
   mutations: {
     setToken: function (state, token) {
       localStorage.setItem('token', JSON.stringify(token))
+      state.token = JSON.stringify(token)
     },
     setUser: function (state, user) {
-      localStorage.setItem('user', JSON.stringify(user))
+      state.user = user
     },
     setAvatar: function (state, avatar) {
-      var user = JSON.parse(localStorage.getItem('user'))
+      var user = state.user
       user.Avatar = avatar
-      localStorage.setItem('user', JSON.stringify(user))
     },
     setClaims: function (state, claims) {
       state.claims = claims
@@ -22,10 +24,10 @@ const User = {
   },
   getters: {
     getAuthToken: function (state) {
-      return JSON.parse(state.token)
+      return state.token ? JSON.parse(state.token) : null
     },
     getUser: function (state) {
-      return JSON.parse(state.user)
+      return state.user
     },
     getUsername: function (state) {
       if (state.user) {
@@ -53,6 +55,11 @@ const User = {
       console.log(data.user)
       context.commit('setUser', data.user)
     },
+    LOGIN_FAILED: function (context) {
+      console.log('LOGIN_FAILED')
+      localStorage.removeItem('token')
+      context.commit('setToken', null)
+    },
     LOGOUT: function (context) {
       console.log('LOGOUT_SUCCESS')
       var resetState = {token: null, user: null}
@@ -63,6 +70,19 @@ const User = {
     },
     SET_AVATAR: function (context, avatar) {
       context.commit('setAvatar', avatar)
+    },
+    SET_USER: function (context) {
+      return new Promise((resolve, reject) => {
+        api.getUserByToken()
+          .then(res => {
+            context.commit('setUser', res.data)
+            resolve(res)
+          })
+          .catch(err => {
+            localStorage.removeItem('token')
+            reject(err)
+          })
+      })
     }
   }
 }

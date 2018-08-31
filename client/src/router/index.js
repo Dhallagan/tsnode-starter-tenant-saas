@@ -70,19 +70,19 @@ export default new Router({
     {
       path: '/admin/tenants',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Tenants
     },
     {
       path: '/admin/tenants/:tenantId/users',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Users
     },
     {
       path: '/admin/tenants/:tenantId/users/:userId',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: UsersEdit
     },
     // {

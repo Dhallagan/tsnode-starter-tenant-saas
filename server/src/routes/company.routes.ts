@@ -1,9 +1,6 @@
 import { BaseRoute } from './base-route';
 import { CompanyController } from '../controllers/company.controller';
 import { Authentication } from '../core/middleware/authentication';
-import multer from 'multer'
-
-const upload =  multer({ dest: './src/uploads/' })
 
 export class CompanyRoutes extends BaseRoute {
     companyController: CompanyController;
@@ -11,7 +8,6 @@ export class CompanyRoutes extends BaseRoute {
     constructor() {
         super();
         this.companyController = new CompanyController();
-
         this.initRoutes();
     }
 
