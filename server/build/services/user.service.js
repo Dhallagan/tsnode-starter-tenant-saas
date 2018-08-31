@@ -62,7 +62,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.generateToken = function (user) {
         var payload = {
             iss: "localhost",
-            sub: user._id,
+            sub: user.Id,
             iat: moment_1.default().unix(),
             exp: moment_1.default().add(14, 'days').unix()
         };

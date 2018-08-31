@@ -20,6 +20,9 @@ export class Tenant {
 	@CreateDateColumn()
 	CreatedAt: Date;
 
+	@Column({default: true, nullable: false})
+	Active: Boolean;
+
 	@UpdateDateColumn()
 	UpdatedAt: Date;
 
