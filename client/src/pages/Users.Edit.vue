@@ -167,7 +167,7 @@ export default {
 
   methods: {
     fetch () {
-      api.getUserById(this.$route.params.id)
+      api.getUserById(this.$route.params.userId)
         .then(res => {
           var user = res.data
 

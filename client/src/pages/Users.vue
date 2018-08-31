@@ -66,7 +66,7 @@
     </template>
 
         <template slot="Action" slot-scope="data">
-       <willow-button primary :url="'/admin/tenants/' + '1'" >Edit</willow-button>
+       <willow-button primary :url="'/admin/tenants/' + $route.params.tenantId + '/users/' + data.item.Id" >Edit</willow-button>
     </template>
 
   </b-table>
@@ -82,7 +82,6 @@ import api from '@/api/api'
 export default {
   mounted () {
     this.fetch()
-    // this.applications = this.$store.getters.getApplications
   },
 
   data () {

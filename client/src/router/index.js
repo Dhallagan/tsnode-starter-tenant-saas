@@ -74,12 +74,6 @@ export default new Router({
       component: Tenants
     },
     {
-      path: '/admin/tenants/:id',
-      name: 'Accounts',
-      meta: { layout: 'application' },
-      component: UsersEdit
-    },
-    {
       path: '/admin/tenants/:tenantId/users',
       name: 'Accounts',
       meta: { layout: 'application' },
