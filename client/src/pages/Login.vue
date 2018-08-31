@@ -56,11 +56,14 @@ export default {
           if (res.data.token) {
             // LOGIN USER ->
             this.$store.dispatch('LOGIN_SUCCESS', res.data)
+            console.log(res.data)
             this.$router.push({ path: '/' })
           }
         })
         .catch(error => {
           console.log(error)
+
+          this.$store.dispatch('LOGIN_FAILED')
           var messages = error.response.data.errors
 
           messages.forEach(message => {

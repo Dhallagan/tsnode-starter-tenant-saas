@@ -43,6 +43,10 @@ export default {
     return axios.get('/users/' + id)
   },
 
+  getUserByToken () {
+    return HTTP.get('/users/token')
+  },
+
   updateUserById (id, params) {
     return axios.post('/users/' + id, params)
   },

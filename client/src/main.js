@@ -98,12 +98,18 @@ Router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
+    console.log(Store.getters.getAuthToken)
     if (!Store.getters.getAuthToken) {
       next({
         path: '/login'
       })
     } else {
-      next()
+      if (!Store.getters.getUser) {
+        Store.dispatch('SET_USER')
+        next()
+      } else {
+        next()
+      }
     }
   } else {
     next()

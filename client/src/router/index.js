@@ -68,13 +68,13 @@ export default new Router({
     {
       path: '/admin/tenants',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: Users
     },
     {
       path: '/admin/tenants/:id',
       name: 'Accounts',
-      meta: { layout: 'application' },
+      meta: { layout: 'application', requiresAuth: true },
       component: UsersEdit
     },
     // {
