@@ -121,9 +121,7 @@ var UserController = /** @class */ (function (_super) {
                             return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
                         }
                         return [4 /*yield*/, this.userService.login(res, viewModel.email, viewModel.password)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

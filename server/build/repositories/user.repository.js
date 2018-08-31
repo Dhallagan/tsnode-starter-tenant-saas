@@ -123,7 +123,7 @@ var UserRepository = /** @class */ (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, { Id: id })];
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne(id)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

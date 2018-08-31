@@ -148,13 +148,13 @@ const items = [
   }
 ]
 export default {
-  mounted () {
-    var building = this.$store.getters.getBuildingById(
-      this.$route.params.building_id
-    )
-    console.log('Building:' + building)
-    this.building = building
-  },
+  // mounted () {
+  //   var building = this.$store.getters.getBuildingById(
+  //     this.$route.params.building_id
+  //   )
+  //   console.log('Building:' + building)
+  //   this.building = building
+  // },
   data () {
     return {
       pageheader: {
@@ -166,7 +166,19 @@ export default {
         ]
       },
       items: items,
-      building: null
+      building: {
+        id: 1,
+        property: '74 Grove Street',
+        location: 'Boston, MA',
+        owner: 'Larsen',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: 'Studio' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '3' }
+        ]
+      }
     }
   }
 }

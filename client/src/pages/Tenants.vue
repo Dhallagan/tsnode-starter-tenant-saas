@@ -46,19 +46,19 @@
 
   <br>
 
-  <b-table hover :items="users" :fields="fields"
+  <b-table hover :items="tenants" :fields="fields"
   >
-      <template slot="Email" slot-scope="data">
-       {{data.item.Email}}
+      <template slot="Company" slot-scope="data">
+       {{data.item.Company.Name}}
     </template>
 
-    <template slot="Verified" slot-scope="data">
-       <b-badge v-if="data.item.EmailVerified === 1" variant="success" pill>Verified</b-badge>
-       <b-badge v-if="data.item.EmailVerified === 0" variant="danger" pill>Unverified</b-badge>
+    <template slot="Active" slot-scope="data">
+       <b-badge v-if="data.item.Active === true" variant="success" pill>Active</b-badge>
+       <b-badge v-if="data.item.Active === false" variant="danger" pill>Disabled</b-badge>
     </template>
 
-    <template slot="Created" slot-scope="data">
-       {{data.item.DateCreated}}
+    <template slot="DateCreated" slot-scope="data">
+       {{data.item.CreatedAt}}
     </template>
 
     <template slot="Role" slot-scope="data">
@@ -66,7 +66,7 @@
     </template>
 
         <template slot="Action" slot-scope="data">
-       <willow-button primary :url="'/admin/tenants/' + $route.params.tenantId + '/users/' + data.item.Id" >Edit</willow-button>
+       <willow-button :url="'/admin/tenants/' + data.item.Id + '/users'" >View</willow-button>
     </template>
 
   </b-table>
@@ -82,30 +82,31 @@ import api from '@/api/api'
 export default {
   mounted () {
     this.fetch()
+    // this.applications = this.$store.getters.getApplications
   },
 
   data () {
     return {
       pageheader: {
-        title: 'Tenant Users',
+        title: 'Tenants',
         breadcrumbs: [
           {
-            text: 'Tenants',
-            href: '/admin/tenants'
+            text: 'Home',
+            href: '/'
           }
         ]
       },
-      fields: ['Email', 'Verified', 'Created', 'Role', 'Action'],
-      users: {}
+      fields: ['Id', 'Company.Name', 'Active', 'DateCreated', 'Action'],
+      tenants: {}
     }
   },
 
   methods: {
     fetch () {
-      api.getTenantUsers(this.$route.params.tenantId)
+      api.getTenants()
         .then(res => {
           console.log(res.data)
-          this.users = res.data.Users
+          this.tenants = res.data.Tenants
         })
     }
   }

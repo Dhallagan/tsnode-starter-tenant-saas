@@ -31,7 +31,7 @@ var Authentication = /** @class */ (function () {
         if (payload.exp <= moment_1.default().unix()) {
             return res.status(401).send({ message: 'Token has expired' });
         }
-        //req.user = payload.sub;
+        req['user'] = payload.sub;
         next();
     };
     Authentication.issuerName = 'localhost';

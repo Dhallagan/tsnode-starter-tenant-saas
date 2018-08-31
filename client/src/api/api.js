@@ -39,6 +39,14 @@ export default {
     return axios.get('/users', params)
   },
 
+  getTenants (params) {
+    return axios.get('/tenants', params)
+  },
+
+  getTenantUsers (id) {
+    return axios.get('/tenants/' + id + '/users')
+  },
+
   getUserById (id) {
     return axios.get('/users/' + id)
   },

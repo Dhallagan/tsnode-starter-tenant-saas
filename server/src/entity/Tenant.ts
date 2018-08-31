@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne, ManyToOne, JoinColumn} from "typeorm"
 import { User } from './User';
 import { Company } from './Company';
+import { Plan } from './Plan';
 
 @Entity("tenant")
 export class Tenant {
@@ -17,6 +18,9 @@ export class Tenant {
 	@Column({nullable: true})
 	Description: string;
 
+	@Column({default: true, nullable: false})
+	Active: Boolean;
+
 	@CreateDateColumn()
 	CreatedAt: Date;
 
@@ -30,7 +34,16 @@ export class Tenant {
 		eager: true,
 		cascade: true
 	})
+
 	@JoinColumn()
 	Company: Company;
+
+	@ManyToOne( type => Plan, Plan => Plan.Tenants, {
+		cascade: true,
+		eager: true
+	})
+
+	@JoinColumn()
+	Plan: Plan;
 
 }

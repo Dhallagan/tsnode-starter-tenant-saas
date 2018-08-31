@@ -13,12 +13,14 @@ import Profile from '../pages/Profile'
 // import Reports from '../pages/Reports'
 import Account from '../pages/Account'
 import General from '../pages/General'
+import Tenants from '../pages/Tenants'
+// import UsersEdit from '../pages/Users.Edit'
 import Users from '../pages/Users'
 import UsersEdit from '../pages/Users.Edit'
 // import Applicants from '../pages/Applicants'
 // import Applicant from '../pages/Applicant'
-// import Buildings from '../pages/Buildings'
-// import Building from '../pages/Building'
+import Buildings from '../pages/Buildings'
+import Building from '../pages/Building'
 // import Components from '../pages/Components'
 // import Listings from '../pages/Listings'
 // import Listing from '../pages/Listing'
@@ -69,10 +71,16 @@ export default new Router({
       path: '/admin/tenants',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
+      component: Tenants
+    },
+    {
+      path: '/admin/tenants/:tenantId/users',
+      name: 'Accounts',
+      meta: { layout: 'application', requiresAuth: true },
       component: Users
     },
     {
-      path: '/admin/tenants/:id',
+      path: '/admin/tenants/:tenantId/users/:userId',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
       component: UsersEdit
@@ -103,18 +111,18 @@ export default new Router({
     //     requiresAuth: true
     //   }
     // },
-    // {
-    //   path: '/Buildings',
-    //   name: 'Buildings',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: Buildings
-    // },
-    // {
-    //   path: '/Buildings/:building_id',
-    //   name: 'Building',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: Building
-    // },
+    {
+      path: '/Buildings',
+      name: 'Buildings',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Buildings
+    },
+    {
+      path: '/Buildings/:building_id',
+      name: 'Building',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Building
+    },
     // {
     //   path: '/Tenants',
     //   name: 'Tenants',
