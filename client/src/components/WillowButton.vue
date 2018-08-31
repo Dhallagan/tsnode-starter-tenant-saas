@@ -1,5 +1,5 @@
 <template>
- <b-button :variant="variant" :size="size" :disabled="disabled" :href="url" :block="fullWidth">
+ <b-button :variant="variant" :size="size" :disabled="disabled" :to="url" :block="fullWidth">
   <icon v-if="icon" :name="icon" style="margin-right: 6px;"></icon>
   <slot/>
   <icon v-if="disclosure" name="caret-down" style="margin-left: 6px;"></icon>

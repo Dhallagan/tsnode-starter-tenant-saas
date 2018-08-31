@@ -28,6 +28,12 @@
               Basic
             </p>
           </b-col>
+          <b-col>
+            <h6 class="heading">Account Status</h6>
+            <p class="card-text">
+              Active
+            </p>
+          </b-col>
         </b-row>
        </b-card>
     </willow-annotated-section>
