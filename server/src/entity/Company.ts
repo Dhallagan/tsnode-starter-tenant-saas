@@ -41,6 +41,6 @@ export class Company {
     Country: string;
 
     @OneToOne(type => Tenant, Tenant => Tenant.Company)
-    Tenant: string;
+    Tenant: Tenant;
 
 }

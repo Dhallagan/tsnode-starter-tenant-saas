@@ -66,7 +66,7 @@
     </template>
 
         <template slot="Action" slot-scope="data">
-       <willow-button :url="'/admin/tenants/' + data.item.Id + '/users'" >View</willow-button>
+       <willow-button :url="'/admin/tenants/' + data.item.Id" >View</willow-button>
     </template>
 
   </b-table>
