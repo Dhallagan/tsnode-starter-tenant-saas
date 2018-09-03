@@ -39,12 +39,20 @@ export default {
     return axios.get('/users', params)
   },
 
+  getTenantById (id) {
+    return HTTP.get('/tenants/' + id)
+  },
+
+  updateTenant (id, params) {
+    return HTTP.post('/tenants/' + id, params)
+  },
+
   getTenants (params) {
-    return axios.get('/tenants', params)
+    return HTTP.get('/tenants', params)
   },
 
   getTenantUsers (id) {
-    return axios.get('/tenants/' + id + '/users')
+    return HTTP.get('/tenants/' + id + '/users')
   },
 
   getUserById (id) {
@@ -69,5 +77,10 @@ export default {
 
   updateAvatar (id, params) {
     return axios.post('/users/' + id + '/avatar', params)
+  },
+
+  getPlans () {
+    return HTTP.get('/plans')
   }
+
 }
