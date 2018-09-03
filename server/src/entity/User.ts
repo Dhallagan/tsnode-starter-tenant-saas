@@ -53,10 +53,7 @@ export class User {
     @CreateDateColumn()
     DateCreated: Date;
 
-    @ManyToOne( type => Tenant, tenant => tenant.Users, {
-        cascade: true,
-        eager: true
-    })
+    @ManyToOne( type => Tenant, tenant => tenant.Users)
     Tenant: Tenant;
 
 }

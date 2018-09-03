@@ -27,7 +27,10 @@ export class Tenant {
 	@UpdateDateColumn()
 	UpdatedAt: Date;
 
-	@OneToMany(type => User, user => user.Tenant)
+	@OneToMany(type => User, user => user.Tenant, {
+		eager: true,
+		cascade: true
+	})
 	Users: User[];
 
 	@OneToOne(type => Company, Company => Company.Tenant, {

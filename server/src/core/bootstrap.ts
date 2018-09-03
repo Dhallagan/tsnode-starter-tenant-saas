@@ -2,13 +2,10 @@ import * as express from 'express';
 import * as http from 'http';
 import { Database } from '../core/database'
 import { Server } from './server';
-//import { Seeds } from './seeds';
+import { Seeds } from './seeds';
 import { Authentication } from './middleware/authentication'
-import { UserRoutes } from '../routes/user.routes';
-import { CompanyRoutes } from '../routes/company.routes';
-import { TenantRoutes } from '../routes/tenant.routes';
+import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes } from '../routes';
 import * as dotenv from 'dotenv';
-
 
 
 const root = './';
@@ -33,16 +30,19 @@ export class Bootstrap {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
         console.log('Setting up database connection...')
-        Database.createConnection();
-        //console.log('Seeding database...')
-        //Seeds.seedUsers();
+        Database.createConnection().then(async connection => {
+            console.log('Connected to DB');
+            console.log('Seeding database...');
+            // seeds.seedUsers();
+            Seeds.seedPlans();
+        });
     }
 
 
     public setupCors(app: express.Application): void {
         console.log("Setting up CORS...")
         app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', 'http://localhost:8081' );
+            res.header('Access-Control-Allow-Origin', 'http://localhost:8080' );
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
             res.header('Access-Control-Allow-Credentials', 'true');
@@ -75,6 +75,8 @@ export class Bootstrap {
 
         const tenantRouter = new TenantRoutes().router;
         app.use('/api', tenantRouter);
-        //app.use('/api', usersRouter);
+
+        const planRouter = new PlanRoutes().router;
+        app.use('/api', planRouter);
     }
 }
