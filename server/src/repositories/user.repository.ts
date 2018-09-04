@@ -53,7 +53,13 @@ export class UserRepository extends Repository<User> {
 
 
     public async getUserById(id: number){
-        return await getRepository(User).findOne(id)
+        return await getRepository(User).findOne(id);
+    }
+
+
+
+    public async getUserByIdWithRelations(id: number) {
+        return await getRepository(User).findOne({ where: {Id: id}, relations: ["Tenant"] });
     }
 
 
