@@ -54,7 +54,7 @@
 
     <template slot="Active" slot-scope="data">
        <b-badge v-if="data.item.Active === true" variant="success" pill>Active</b-badge>
-       <b-badge v-if="data.item.Active === false" variant="danger" pill>Disabled</b-badge>
+       <b-badge v-if="data.item.Active === false" variant="danger" pill>Deactivated</b-badge>
     </template>
 
     <template slot="DateCreated" slot-scope="data">

@@ -33,7 +33,7 @@ export class Bootstrap {
         Database.createConnection().then(async connection => {
             console.log('Connected to DB');
             console.log('Seeding database...');
-            // seeds.seedUsers();
+            // Seeds.seedUsers();
             Seeds.seedPlans();
         });
     }

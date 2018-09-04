@@ -32,7 +32,7 @@ export class Seeds {
     ]
 
     for (const plan of plans) {
-      const existPlan = planRepository.findOne({Name: plan.Name});
+      const existPlan = await planRepository.findOne({Name: plan.Name});
       if (existPlan)
         continue;
       await planRepository.save(plan);

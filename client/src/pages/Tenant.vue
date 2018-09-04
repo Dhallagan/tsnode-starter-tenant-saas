@@ -77,10 +77,10 @@
 
         <b-card  card-title="Secondary- Subdued" class="mb-2" style="background-color: #f8f9fa ;">
           <b-form-group id="fieldsetHorizontal"
-                    description="Turn on listing."
+                    description=""
                     label="Account Status"
                     label-for="inputHorizontal">
-          <b-select v-model="tenant.Active" @change="saveTenantStatus($event, 'active')" :options="[{ value: true, text: 'Active' },{ value: false, text: 'Frozen' }]"></b-select>
+          <b-select v-model="tenant.Active" @change="saveTenantStatus($event, 'active')" :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"></b-select>
         </b-form-group>
         <br>
         <b-form-group id="fieldsetHorizontal"
@@ -138,7 +138,7 @@ export default {
           })
           this.users = tenantUsers.data.Users
           this.tenant = tenant.data.Tenant
-          this.pageheader.title = tenant.Name
+          this.pageheader.title = this.tenant.Domain
 
           console.log(plans, tenantUsers, tenant)
         }))

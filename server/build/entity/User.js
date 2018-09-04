@@ -79,10 +79,7 @@ var User = /** @class */ (function () {
         __metadata("design:type", Date)
     ], User.prototype, "DateCreated", void 0);
     __decorate([
-        typeorm_1.ManyToOne(function (type) { return Tenant_1.Tenant; }, function (tenant) { return tenant.Users; }, {
-            cascade: true,
-            eager: true
-        }),
+        typeorm_1.ManyToOne(function (type) { return Tenant_1.Tenant; }, function (tenant) { return tenant.Users; }),
         __metadata("design:type", Tenant_1.Tenant)
     ], User.prototype, "Tenant", void 0);
     User = __decorate([

@@ -15,7 +15,7 @@ import Account from '../pages/Account'
 import General from '../pages/General'
 import Tenants from '../pages/Tenants'
 // import UsersEdit from '../pages/Users.Edit'
-import Users from '../pages/Users'
+import Tenant from '../pages/Tenant'
 import UsersEdit from '../pages/Users.Edit'
 // import Applicants from '../pages/Applicants'
 // import Applicant from '../pages/Applicant'
@@ -74,10 +74,10 @@ export default new Router({
       component: Tenants
     },
     {
-      path: '/admin/tenants/:tenantId/users',
+      path: '/admin/tenants/:tenantId',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
-      component: Users
+      component: Tenant
     },
     {
       path: '/admin/tenants/:tenantId/users/:userId',

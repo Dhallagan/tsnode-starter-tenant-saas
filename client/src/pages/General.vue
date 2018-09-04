@@ -12,7 +12,7 @@
   <!-- CARD -->
     <willow-annotated-section
       title="Company Details"
-      description="Northwind and your customers will use this information to contact you."
+      description="TS Node Starter and your customers will use this information to contact you."
     >
        <b-card class="mb-2">
         <b-row class="mb-4">

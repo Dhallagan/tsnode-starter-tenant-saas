@@ -51,6 +51,7 @@ export class UserService {
         const passwordHash = await bcrypt.hash(password, 10)
         const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId(), tenant);
         console.log(user)
+        
         // Send email
         Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
     
