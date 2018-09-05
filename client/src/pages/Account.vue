@@ -25,13 +25,13 @@
           <b-col>
             <h6 class="heading">Current Subscription</h6>
             <p class="card-text">
-              Basic
+              {{tenantStatus.subscription}}
             </p>
           </b-col>
           <b-col>
             <h6 class="heading">Account Status</h6>
             <p class="card-text">
-              Active
+              {{tenantStatus.status}}
             </p>
           </b-col>
         </b-row>
@@ -62,7 +62,7 @@
        </b-card>
     </willow-annotated-section>
 
-        <willow-annotated-section
+    <!-- <willow-annotated-section
       title="Subscription Status"
       description="Manage your subscription."
     >
@@ -84,7 +84,7 @@
         </b-col>
        </b-row>
        </b-card>
-    </willow-annotated-section>
+    </willow-annotated-section> -->
 
   </willow-layout>
 
@@ -99,7 +99,11 @@
 
 <script>
 import {format} from 'date-fns'
+import api from '@/api/api'
 export default {
+  mounted () {
+    return this.fetch()
+  },
   computed: {
     registrationDate () {
       return format(this.$store.getters.getUser.DateCreated, 'MMMM D, YYYY')
@@ -114,7 +118,25 @@ export default {
             href: '/Settings'
           }
         ]
+      },
+      tenantStatus: {
+        status: '',
+        subscription: ''
       }
+    }
+  },
+  methods: {
+    fetch () {
+      api.getTenant()
+        .then(res => {
+          const tenant = res.data.Tenant
+          this.tenantStatus.status = tenant.Active ? 'Active' : 'Disabled'
+          this.tenantStatus.subscription = tenant.Plan.Name
+          console.log(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
