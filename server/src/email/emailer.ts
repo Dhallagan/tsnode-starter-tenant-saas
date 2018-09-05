@@ -70,7 +70,7 @@ export class Emailer {
             subject: fromUsername + ' invited you to TS-Node-Starter',
             html: "<p>Welcome to TS-Node-Starter.  To finish registration please click or paste this link into your browser to complete the process. </p>" +
                   "<p><a href='http://localhost:8080/verify/" + emailVerifyToken + "'>http://localhost:8080/verify/" + emailVerifyToken + "</a> </p>" +
-                  "<p>This is you temporary password: " + password + "</p>"
+                  "<p>This is your temporary password: " + password + "</p>"
         };
 
         Emailer.send(mailData)
@@ -83,7 +83,6 @@ export class Emailer {
         let smtpConfig = {
             service: 'gmail',
             secure: false,
-            port: 587,
             auth: {
                 user: process.env.GMAIL_USER,
                 pass: process.env.GMAIL_PASS
