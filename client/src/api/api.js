@@ -81,6 +81,10 @@ export default {
 
   getPlans () {
     return HTTP.get('/plans')
+  },
+
+  sendInvite (params) {
+    return HTTP.post('/invite', params)
   }
 
 }

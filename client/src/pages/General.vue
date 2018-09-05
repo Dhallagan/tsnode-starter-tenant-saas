@@ -137,7 +137,6 @@
   <page-actions>
     <template slot="action-right">
       <willow-button primary @click.native="save()">Save</willow-button>
-      <!-- <button @click="save()">Save</button> -->
     </template>
   </page-actions>
 

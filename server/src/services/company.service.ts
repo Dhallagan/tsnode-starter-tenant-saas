@@ -17,7 +17,7 @@ export class CompanyService {
 
 
     public async createCompany( res: Response, model: any, tenant: Tenant ) {
-        await this.companyRepository.createCompany( res, model.companyName, model.accountEmail, model.companyEmail, model.legalName, model.phoneNumber,
+        await this.companyRepository.createCompany( model.companyName, model.accountEmail, model.companyEmail, model.legalName, model.phoneNumber,
                                                         model.address1, model.address2, model.city, model.zipcode, model.state, model.country, tenant );
 
         return res.status(200).json({'msg': 'Your company was saved.'});
