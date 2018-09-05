@@ -12,7 +12,22 @@ export class TenantController extends BaseController {
     constructor() {
         super();
         this.tenantService = new TenantService();
-        //this.tenantRepository = new TenantRepository();
+        this.userRepository = new UserRepository();
+    }
+
+
+
+    public async getTenant(req: Request, res: Response) {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const user = await this.userRepository.getUserByIdWithRelations(req['user']);
+        if (user) {
+            return res.status(200).json({Tenant: user.Tenant});
+        }
     }
 
 
