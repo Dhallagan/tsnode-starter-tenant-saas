@@ -1,6 +1,7 @@
 import { Response } from 'express';
+import { generate } from 'generate-password';
 import { Emailer } from '../email/emailer';
-import { UserRepository } from "../repositories/user.repository";
+import { UserRepository, CompanyRepository } from "../repositories";
 import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
@@ -14,11 +15,13 @@ import { TenantService } from './tenant.service';
 export class UserService {
 
     private userRepository: UserRepository;
+    private companyRepository: CompanyRepository;
     private tenantService: TenantService;
     
     constructor() {
         //super();
         this.userRepository = new UserRepository();
+        this.companyRepository = new CompanyRepository();
         this.tenantService = new TenantService();
     }
 
@@ -47,6 +50,7 @@ export class UserService {
         }
 
         const tenant = await this.tenantService.createTenant(domain);
+        await this.companyRepository.createCompany('', '', '', '', '', '', '', '', '', '', '', tenant);
 
         const passwordHash = await bcrypt.hash(password, 10)
         const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId(), tenant);
@@ -57,6 +61,34 @@ export class UserService {
     
         return res.status(200).json({'msg': 'Registration success! An email has been sent to '+ email + '.  Check your email to complete the registration process.'});
     }
+
+
+
+    public async createInviteUser(res: Response, firstname: string, lastname: string, email: string, role: string, invitedFrom: number) {
+        firstname = firstname.toLowerCase();
+        lastname = lastname.toLowerCase();
+        email = email.toLowerCase();
+
+        const userExists = await this.userRepository.getUserByEmail(email)
+
+        if(userExists){
+            return  res.status(422).json({'errors': [{'msg': 'Account with that email address already exists.'}]})
+        }
+
+        const userInviteSent = await this.userRepository.getUserByIdWithRelations(invitedFrom);
+        if (userInviteSent) {
+            const tenant = userInviteSent.Tenant;
+            const password = generate({length: 10, numbers: true});
+            const passwordHash = await bcrypt.hash(password, 10);
+            const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId(), tenant, role);
+            console.log(user)
+
+            Emailer.inviteEmail(email, user.FirstName + " " + user.LastName, userInviteSent.FirstName + " " + userInviteSent.LastName, user.EmailVerifyToken, password);
+
+            return res.status(200).json({'msg': 'Invite sent!'});
+        }
+
+    } 
 
 
 

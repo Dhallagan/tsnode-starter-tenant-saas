@@ -20,7 +20,8 @@
             <label for="inputLive">First Name</label>
             <b-form-input
                   type="text"
-                  placeholder="First">
+                  placeholder="First"
+                  v-model="userForm.firstName">
             </b-form-input>
           </b-col>
           <b-col>
@@ -30,7 +31,8 @@
             >
               <b-form-input
                   type="text"
-                  placeholder="Last">
+                  placeholder="Last"
+                  v-model="userForm.lastName">
               </b-form-input>
             </b-form-group>
           </b-col>
@@ -41,7 +43,8 @@
             <label for="inputLive">Email</label>
             <b-form-input
                   type="text"
-                  placeholder="First">
+                  placeholder="Email"
+                  v-model="userForm.email">
             </b-form-input>
           </b-col>
         </b-row>
@@ -49,26 +52,30 @@
         <b-row class="mt-4">
           <b-col>
             <b-form-group label="Account Level">
-              <b-form-radio-group id="radios2" v-model="selected" name="radioSubComponent">
-                <b-form-radio value="first">Admin</b-form-radio>
-                <b-form-radio value="second">User</b-form-radio>
+              <b-form-radio-group id="radios2" v-model="userForm.role" name="radioSubComponent">
+                <b-form-radio value="Admin">Admin</b-form-radio>
+                <b-form-radio value="User">User</b-form-radio>
 
               </b-form-radio-group>
             </b-form-group>
           </b-col>
         </b-row>
-          <willow-button class="mt-4 " >Cancel</willow-button>
-          <willow-button class="mt-4 float-right" primary>Send Invite</willow-button>
+          <willow-button class="mt-4">Cancel</willow-button>
+          <willow-button class="mt-4 float-right" primary @click.native="sendInvite()">Send Invite</willow-button>
        </b-card>
 
     </willow-annotated-section>
 
   </willow-layout>
 
+  <willow-messages v-for="(message, i) in messages" :key="i" :type="message.type">{{message.msg}}</willow-messages>
+
 </page>
 </template>
 
 <script>
+import api from '@/api/api'
+
 export default {
   data () {
     return {
@@ -79,7 +86,33 @@ export default {
             href: '/Settings/Accounts'
           }
         ]
-      }
+      },
+      userForm: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        role: ''
+      },
+      messages: {}
+    }
+  },
+  methods: {
+    sendInvite () {
+      api.sendInvite(this.userForm)
+        .then((res) => {
+          console.log(res)
+          var messages = [res.data]
+          messages.forEach(message => {
+            message.type = 'success'
+          })
+          this.messages = messages
+          setTimeout(() => {
+            this.messages = {}
+          }, 3000)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

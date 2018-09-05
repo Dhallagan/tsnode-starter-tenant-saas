@@ -6,7 +6,7 @@ import Login from '../pages/Login'
 import Recover from '../pages/Recover'
 import Reset from '../pages/Reset'
 import Settings from '../pages/Settings'
-// import InviteStaff from '../pages/InviteStaff'
+import InviteStaff from '../pages/InviteStaff'
 import Home from '../pages/Home'
 import Profile from '../pages/Profile'
 
@@ -172,12 +172,12 @@ export default new Router({
       meta: { layout: 'application', requiresAuth: true },
       component: General
     },
-    // {
-    //   path: '/Settings/Accounts/New',
-    //   name: 'InviteStaff',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: InviteStaff
-    // },
+    {
+      path: '/Settings/Accounts/New',
+      name: 'InviteStaff',
+      meta: { layout: 'application', requiresAuth: true },
+      component: InviteStaff
+    },
     {
       path: '/Settings/Accounts/Profile',
       name: 'Profile',

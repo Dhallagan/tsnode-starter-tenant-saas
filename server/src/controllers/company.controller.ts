@@ -43,7 +43,7 @@ export class CompanyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        const user = await this.userRepository.getUserById(req['user'])
+        const user = await this.userRepository.getUserByIdWithRelations(req['user'])
         if (user) {
             const company = user.Tenant.Company;
             if ( company == null ) {

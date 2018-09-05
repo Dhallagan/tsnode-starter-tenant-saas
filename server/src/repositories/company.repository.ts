@@ -8,7 +8,7 @@ import { Company, Tenant } from "../entity";
 export class CompanyRepository extends Repository<Company> {
 
 
-    public async createCompany(res: Response, name: string, accountEmail: string, companyEmail: string, legalName: string, phoneNumber: string, 
+    public async createCompany(name: string, accountEmail: string, companyEmail: string, legalName: string, phoneNumber: string, 
                                 street: string, apartmentSuite: string, city: string, zipCode: string, state: string, country: string, tenant){
         return await getConnection().manager.save( Company, {
                                                 Name: name, AccountMail: accountEmail, CompanyEmail: companyEmail, LegalName: legalName, Phone: phoneNumber,

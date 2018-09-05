@@ -171,4 +171,15 @@ export class UserController extends BaseController {
     public async upload(req: Request, res: Response) {
         return await this.userService.upload(req, res)
     }
+
+
+    public async invite(req: Request, res: Response) {
+        const viewModel = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.userService.createInviteUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.role, req['user']);
+    }
 }
