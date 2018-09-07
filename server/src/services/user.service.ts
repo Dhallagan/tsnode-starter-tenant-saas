@@ -6,8 +6,8 @@ import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
-import multer from 'multer';
-import { Uploader } from '../core/uploader';
+import { Uploader } from '../util/uploader';
+import { Storage } from '../core/storage'
 import { User } from "../entity/User";
 import { TenantService } from './tenant.service';
 
@@ -237,9 +237,11 @@ export class UserService {
 
 
     public async upload(req, res: Response) {
-        const uploader = new Uploader();
-        var fileName = await uploader.startUpload(req, res)
-
+        //// Local storage
+        // const uploader = new Uploader();
+        // var fileName = await uploader.startUpload(req, res)
+        const s3 = new Storage();
+        var fileName = await s3.uploadSingle(req, res);
         return res.status(200).json({'filename' : fileName})
     }
 

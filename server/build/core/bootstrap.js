@@ -46,6 +46,7 @@ var express = __importStar(require("express"));
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 var seeds_1 = require("./seeds");
+var storage_1 = require("./storage");
 var authentication_1 = require("./middleware/authentication");
 var routes_1 = require("../routes");
 var dotenv = __importStar(require("dotenv"));
@@ -81,7 +82,7 @@ var Bootstrap = /** @class */ (function () {
     Bootstrap.prototype.setupCors = function (app) {
         console.log("Setting up CORS...");
         app.use(function (req, res, next) {
-            res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+            res.header('Access-Control-Allow-Origin', 'http://localhost:8081');
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
             res.header('Access-Control-Allow-Credentials', 'true');
@@ -89,9 +90,12 @@ var Bootstrap = /** @class */ (function () {
         });
     };
     Bootstrap.prototype.setupStorage = function (app) {
-        console.log("Setting up storage...");
+        console.log("Setting up local storage...");
         // Maybe I do something here?
         app.use(express.static('./public'));
+        console.log("Setting up AWS storage...");
+        // Maybe I do something here?
+        var s = new storage_1.Storage();
     };
     Bootstrap.prototype.setupAuthentication = function (app) {
         console.log("Setting up authentication...");

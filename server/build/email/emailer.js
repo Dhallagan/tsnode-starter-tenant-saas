@@ -45,6 +45,18 @@ var Emailer = /** @class */ (function () {
         };
         Emailer.send(mailData);
     };
+    Emailer.inviteEmail = function (email, username, fromUsername, emailVerifyToken, password) {
+        console.log('Sending invite email to ' + email);
+        var mailData = {
+            to: email,
+            from: Emailer.fromEmail,
+            subject: fromUsername + ' invited you to TS-Node-Starter',
+            html: "<p>Welcome to TS-Node-Starter.  To finish registration please click or paste this link into your browser to complete the process. </p>" +
+                "<p><a href='http://localhost:8080/verify/" + emailVerifyToken + "'>http://localhost:8080/verify/" + emailVerifyToken + "</a> </p>" +
+                "<p>This is your temporary password: " + password + "</p>"
+        };
+        Emailer.send(mailData);
+    };
     Emailer.send = function (mailData) {
         var smtpConfig = {
             service: 'gmail',

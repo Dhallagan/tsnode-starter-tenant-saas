@@ -2,10 +2,6 @@ import { BaseRoute } from './base-route';
 import { UserController } from '../controllers/user.controller';
 import { Validation } from '../util/validation';
 import { Authentication } from '../core/middleware/authentication';
-import multer from 'multer'
-
-const upload =  multer({ dest: './src/uploads/' })
-
 export class UserRoutes extends BaseRoute {
     userController: UserController;
 

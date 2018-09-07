@@ -34,24 +34,70 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var AWS = __importStar(require("aws-sdk"));
 var multer_1 = __importDefault(require("multer"));
-var FileStorage = /** @class */ (function () {
-    function FileStorage() {
+var multer_s3_1 = __importDefault(require("multer-s3"));
+var crypto_1 = __importDefault(require("crypto"));
+var util_1 = __importDefault(require("util"));
+var Storage = /** @class */ (function () {
+    function Storage() {
+        this.bucket = process.env.AWS_BUCKET + '';
+        console.log(process.env.AWS_SECRET_ACCESS_KEY);
+        AWS.config.update({
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        });
+        this.s3 = new AWS.S3();
+        this.upload = multer_1.default({
+            storage: multer_s3_1.default({
+                s3: this.s3,
+                bucket: this.bucket,
+                // Set public read permissions
+                acl: 'public-read',
+                // Auto detect contet type
+                contentType: multer_s3_1.default.AUTO_CONTENT_TYPE,
+                // Set key/ filename as original uploaded name
+                key: function (req, file, cb) {
+                    crypto_1.default.pseudoRandomBytes(16, function (err, raw) {
+                        cb(null, raw.toString('hex') + Date.now() + '.' + file.originalname);
+                    });
+                }
+            })
+        });
     }
-    FileStorage.createFiler = function () {
+    Storage.prototype.uploadSingle = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var UPLOAD_PATH, upload;
+            var filename, upload, e_1;
             return __generator(this, function (_a) {
-                UPLOAD_PATH = 'uploads';
-                upload = multer_1.default({ dest: UPLOAD_PATH + "/" });
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        upload = util_1.default.promisify(this.upload.any());
+                        return [4 /*yield*/, upload(req, res)];
+                    case 1:
+                        _a.sent();
+                        filename = req.files[0].location;
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        console.log(e_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/, filename];
+                }
             });
         });
     };
-    return FileStorage;
+    return Storage;
 }());
-exports.FileStorage = FileStorage;
+exports.Storage = Storage;

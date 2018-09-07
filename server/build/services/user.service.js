@@ -45,18 +45,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var generate_password_1 = require("generate-password");
 var emailer_1 = require("../email/emailer");
-var user_repository_1 = require("../repositories/user.repository");
+var repositories_1 = require("../repositories");
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var moment_1 = __importDefault(require("moment"));
 var jwt = __importStar(require("jsonwebtoken"));
 var uuid_1 = require("uuid");
-var uploader_1 = require("../core/uploader");
+var storage_1 = require("../core/storage");
 var tenant_service_1 = require("./tenant.service");
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
-        this.userRepository = new user_repository_1.UserRepository();
+        this.userRepository = new repositories_1.UserRepository();
+        this.companyRepository = new repositories_1.CompanyRepository();
         this.tenantService = new tenant_service_1.TenantService();
     }
     UserService.prototype.generateToken = function (user) {
@@ -86,16 +88,54 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.tenantService.createTenant(domain)];
                     case 2:
                         tenant = _a.sent();
-                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                        return [4 /*yield*/, this.companyRepository.createCompany('', '', '', '', '', '', '', '', '', '', '', tenant)];
                     case 3:
+                        _a.sent();
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 4:
                         passwordHash = _a.sent();
                         return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4(), tenant)];
-                    case 4:
+                    case 5:
                         user = _a.sent();
                         console.log(user);
                         // Send email
                         emailer_1.Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
                         return [2 /*return*/, res.status(200).json({ 'msg': 'Registration success! An email has been sent to ' + email + '.  Check your email to complete the registration process.' })];
+                }
+            });
+        });
+    };
+    UserService.prototype.createInviteUser = function (res, firstname, lastname, email, role, invitedFrom) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userExists, userInviteSent, tenant, password, passwordHash, user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        firstname = firstname.toLowerCase();
+                        lastname = lastname.toLowerCase();
+                        email = email.toLowerCase();
+                        return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
+                    case 1:
+                        userExists = _a.sent();
+                        if (userExists) {
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Account with that email address already exists.' }] })];
+                        }
+                        return [4 /*yield*/, this.userRepository.getUserByIdWithRelations(invitedFrom)];
+                    case 2:
+                        userInviteSent = _a.sent();
+                        if (!userInviteSent) return [3 /*break*/, 5];
+                        tenant = userInviteSent.Tenant;
+                        password = generate_password_1.generate({ length: 10, numbers: true });
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 3:
+                        passwordHash = _a.sent();
+                        return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4(), tenant, role)];
+                    case 4:
+                        user = _a.sent();
+                        console.log(user);
+                        emailer_1.Emailer.inviteEmail(email, user.FirstName + " " + user.LastName, userInviteSent.FirstName + " " + userInviteSent.LastName, user.EmailVerifyToken, password);
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Invite sent!' })];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -282,12 +322,12 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.upload = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var uploader, fileName;
+            var s3, fileName;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        uploader = new uploader_1.Uploader();
-                        return [4 /*yield*/, uploader.startUpload(req, res)];
+                        s3 = new storage_1.Storage();
+                        return [4 /*yield*/, s3.uploadSingle(req, res)];
                     case 1:
                         fileName = _a.sent();
                         return [2 /*return*/, res.status(200).json({ 'filename': fileName })];

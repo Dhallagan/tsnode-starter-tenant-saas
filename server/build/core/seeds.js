@@ -85,7 +85,6 @@ var Seeds = /** @class */ (function () {
                         return [4 /*yield*/, planRepository.findOne({ Name: plan.Name })];
                     case 2:
                         existPlan = _a.sent();
-                        console.log(existPlan);
                         if (existPlan)
                             return [3 /*break*/, 4];
                         return [4 /*yield*/, planRepository.save(plan)];

@@ -3,10 +3,6 @@ import { BaseController } from './base-controller';
 import { UserRepository } from '../repositories/user.repository';
 import { CompanyService } from '../services/company.service';
 import { check, validationResult } from 'express-validator/check';
-import multer from 'multer';
-import { Uploader } from '../core/uploader';
-
-//app.post('/upload', uploader.startUpload);
 
 export class CompanyController extends BaseController {
 

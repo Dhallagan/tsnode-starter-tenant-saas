@@ -3,6 +3,7 @@ import * as http from 'http';
 import { Database } from '../core/database'
 import { Server } from './server';
 import { Seeds } from './seeds';
+import { Storage } from './storage';
 import { Authentication } from './middleware/authentication'
 import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes } from '../routes';
 import * as dotenv from 'dotenv';
@@ -25,7 +26,6 @@ export class Bootstrap {
         dotenv.config({ path: "./src/config/.env.development" });
     }
 
-
     public setupDatabase(app: express.Application): void {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
@@ -37,7 +37,6 @@ export class Bootstrap {
             Seeds.seedPlans();
         });
     }
-
 
     public setupCors(app: express.Application): void {
         console.log("Setting up CORS...")
@@ -51,9 +50,13 @@ export class Bootstrap {
     }
 
     public setupStorage(app: express.Application): void {
-        console.log("Setting up storage...")
+        console.log("Setting up local storage...")
         // Maybe I do something here?
         app.use(express.static('./public'))
+
+        console.log("Setting up AWS storage...")
+        // Maybe I do something here?
+        const s = new Storage()
     }
 
     public setupAuthentication(app: express.Application): void {

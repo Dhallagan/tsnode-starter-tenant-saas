@@ -47,7 +47,7 @@ var Database = /** @class */ (function () {
                 return [2 /*return*/, typeorm_1.createConnection({
                         type: "mysql",
                         host: process.env.DB_HOST,
-                        port: 8889,
+                        port: 3306,
                         username: process.env.DB_USER,
                         password: process.env.DB_PASS,
                         database: process.env.DB_DATABASE,

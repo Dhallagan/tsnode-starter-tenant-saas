@@ -1,11 +1,8 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    }
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -62,11 +59,12 @@ var UserRepository = /** @class */ (function (_super) {
     function UserRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken, tenant) {
+    UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken, tenant, role) {
+        if (role === void 0) { role = 'User'; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken, Tenant: tenant })];
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.save(User_1.User, { FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken, Tenant: tenant, Role: role })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -127,6 +125,16 @@ var UserRepository = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.getUserByIdWithRelations = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ where: { Id: id }, relations: ["Tenant"] })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

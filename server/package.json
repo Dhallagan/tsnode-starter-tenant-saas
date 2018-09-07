@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/aws-sdk": "^2.7.0",
     "@types/bcrypt": "^2.0.0",
     "@types/dotenv": "^4.0.3",
     "@types/es6-shim": "^0.31.37",
@@ -21,6 +22,7 @@
     "@types/nodemailer": "^4.6.2",
     "@types/nodemailer-direct-transport": "^1.0.31",
     "@types/nodemailer-smtp-transport": "^2.7.4",
+    "aws-sdk": "^2.309.0",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "date-fns": "^1.29.0",
@@ -31,6 +33,7 @@
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "multer": "^1.3.1",
+    "multer-s3": "^2.7.0",
     "mysql": "^2.16.0",
     "nodemailer": "^4.6.7",
     "reflect-metadata": "^0.1.12",

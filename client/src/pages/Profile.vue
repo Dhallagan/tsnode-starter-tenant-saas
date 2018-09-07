@@ -15,7 +15,8 @@
         <h6>Profile Overview</h6>
         <b-row class="mb-4">
           <b-col :cols="3">
-            <willow-avatar :username="user.firstName + ' ' + user.lastName" :src="'http://localhost:3000/' + user.avatar"></willow-avatar>
+            <willow-avatar v-if="url" :username="user.firstName + ' ' + user.lastName"></willow-avatar>
+            <willow-avatar v-else :src="user.avatar"></willow-avatar>
           </b-col>
           <b-col :cols="4">
             <willow-file-input :url="'http://localhost:3000/api/upload'" @uploadComplete="updateAvatar">Update Avatar</willow-file-input>
