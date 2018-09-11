@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '../pages/Register'
+import Register2 from '../pages/Register.2'
 import Verify from '../pages/Verify'
 import Login from '../pages/Login'
 import Recover from '../pages/Recover'
@@ -9,6 +10,7 @@ import Settings from '../pages/Settings'
 import InviteStaff from '../pages/InviteStaff'
 import Home from '../pages/Home'
 import Profile from '../pages/Profile'
+import ComponentTester from '../pages/ComponentTester'
 
 // import Reports from '../pages/Reports'
 import Account from '../pages/Account'
@@ -32,10 +34,22 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/component',
+      name: 'component',
+      meta: { layout: 'authentication' },
+      component: ComponentTester
+    },
+    {
       path: '/register',
       name: 'Register',
       meta: { layout: 'authentication' },
       component: Register
+    },
+    {
+      path: '/register/2',
+      name: 'Register2',
+      meta: { layout: 'authentication' },
+      component: Register2
     },
     {
       path: '/verify/:token',

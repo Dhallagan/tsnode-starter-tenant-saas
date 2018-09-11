@@ -358,3 +358,8 @@ body {
 .heading {
   font-weight: 600;
 }
+
+.btn {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.1rem;
+}

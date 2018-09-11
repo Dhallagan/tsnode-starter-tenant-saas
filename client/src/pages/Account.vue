@@ -98,8 +98,9 @@
 </template>
 
 <script>
-import {format} from 'date-fns'
 import api from '@/api/api'
+import {format} from 'date-fns'
+
 export default {
   mounted () {
     return this.fetch()
@@ -111,6 +112,7 @@ export default {
   },
   data () {
     return {
+      format: format,
       pageheader: {
         breadcrumbs: [
           {

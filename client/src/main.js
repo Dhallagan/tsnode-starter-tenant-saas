@@ -10,6 +10,8 @@ import BootstrapVue from 'bootstrap-vue'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import PortalVue from 'portal-vue'
+import * as fns from 'date-fns'
+import * as _ from 'lodash'
 
 // Proprietary Components Import
 import Avatar from 'vue-avatar'
@@ -48,8 +50,9 @@ import WillowFiltersFields from './components/WillowFiltersFields'
 import WillowFiltersFieldSelect from './components/WillowFiltersFieldSelect'
 import WillowFiltersFieldTextfield from './components/WillowFiltersFieldTextfield'
 import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
+import WillowTable from './components/WillowTable'
+import WillowPagination from './components/WillowPagination'
 
-// Proprietary components
 Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
 Vue.component('willow-annotated-section', WillowAnnotatedSection)
@@ -57,8 +60,14 @@ Vue.component('willow-avatar', Avatar)
 Vue.component('willow-breadcrumbs', WillowBreadcrumbs)
 Vue.component('willow-button', WillowButton)
 Vue.component('willow-callout-card', WillowCalloutCard)
-Vue.component('willow-file-input', WillowFileInput)
 Vue.component('willow-drawer', WillowDrawer)
+Vue.component('willow-file-input', WillowFileInput)
+Vue.component('willow-filters', WillowFilters)
+Vue.component('willow-filters-results', WillowFiltersResults)
+Vue.component('willow-filters-fields', WillowFiltersFields)
+Vue.component('willow-filters-field-select', WillowFiltersFieldSelect)
+Vue.component('willow-filters-field-textfield', WillowFiltersFieldTextfield)
+Vue.component('willow-filters-field-checkbox', WillowFiltersFieldCheckbox)
 Vue.component('willow-layout-section', WillowLayoutSection)
 Vue.component('willow-layout', WillowLayout)
 Vue.component('willow-menu-item', WillowMenuItem)
@@ -74,23 +83,24 @@ Vue.component('willow-theme-config-item', WillowThemeConfigItem)
 Vue.component('willow-theme-config-section', WillowThemeConfigSection)
 Vue.component('willow-notifications', WillowNotifications)
 Vue.component('willow-notification', WillowNotification)
+Vue.component('willow-pagination', WillowPagination)
 Vue.component('willow-resource-list', WillowResourceList)
 Vue.component('willow-resource-list-item', WillowResourceListItem)
 Vue.component('willow-resource-grid', WillowResourceGrid)
 Vue.component('willow-resource-grid-item', WillowResourceGridItem)
+Vue.component('willow-table', WillowTable)
 Vue.component('willow-description-list', WillowDescriptionList)
 Vue.component('willow-description-list-item', WillowDescriptionListItem)
-Vue.component('willow-filters', WillowFilters)
-Vue.component('willow-filters-results', WillowFiltersResults)
-Vue.component('willow-filters-fields', WillowFiltersFields)
-Vue.component('willow-filters-field-select', WillowFiltersFieldSelect)
-Vue.component('willow-filters-field-textfield', WillowFiltersFieldTextfield)
-Vue.component('willow-filters-field-checkbox', WillowFiltersFieldCheckbox)
+
 // Third Party Components
 Vue.component('icon', Icon)
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
 Vue.use(PortalVue)
+
+// Doing this to make it read only
+Object.defineProperty(Vue.prototype, 'fns', { value: fns })
+Object.defineProperty(Vue.prototype, '_', { value: _ })
 
 Vue.config.productionTip = false
 
