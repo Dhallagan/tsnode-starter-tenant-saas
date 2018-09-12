@@ -52,6 +52,7 @@ import WillowFiltersFieldTextfield from './components/WillowFiltersFieldTextfiel
 import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
 import WillowTable from './components/WillowTable'
 import WillowPagination from './components/WillowPagination'
+import WillowSelect from './components/WillowSelect'
 
 Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
@@ -91,6 +92,7 @@ Vue.component('willow-resource-grid-item', WillowResourceGridItem)
 Vue.component('willow-table', WillowTable)
 Vue.component('willow-description-list', WillowDescriptionList)
 Vue.component('willow-description-list-item', WillowDescriptionListItem)
+Vue.component('willow-select', WillowSelect)
 
 // Third Party Components
 Vue.component('icon', Icon)

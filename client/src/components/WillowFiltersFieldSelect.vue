@@ -1,5 +1,10 @@
 <template>
-  <b-form-select v-model="selected" :options="filter.options" class="mb-3" size="sm" @change="filter(filter)"/>
+  <willow-select
+    :value="selected"
+    :options="filter.options"
+    @change="filter(filter)"
+    subdued>
+  </willow-select>
 </template>
 
 <script>

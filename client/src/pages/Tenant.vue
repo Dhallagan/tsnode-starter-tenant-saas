@@ -11,6 +11,7 @@
       <!-- <willow-button primary>Create New User</willow-button> -->
     </template>
   </page-header>
+
   <willow-layout>
     <willow-layout-section primary >
       <b-card class="w-100">
@@ -35,7 +36,7 @@
         </template>
 
         <template slot="Action" slot-scope="data">
-          <willow-button primary :url="'/admin/tenants/' + $route.params.tenantId + '/users/' + data.item.Id" >Edit</willow-button>
+          <willow-button :url="'/admin/tenants/' + $route.params.tenantId + '/users/' + data.item.Id" >Edit</willow-button>
         </template>
 
       </willow-table>
@@ -46,18 +47,26 @@
     <willow-layout-section secondary v-if="tenant">
 
         <b-card  card-title="Secondary- Subdued" class="mb-2" style="background-color: #f8f9fa ;">
-          <b-form-group id="fieldsetHorizontal"
-                    description=""
-                    label="Account Status"
-                    label-for="inputHorizontal">
-          <b-select v-model="tenant.Active" @change="saveTenantStatus($event, 'active')" :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"></b-select>
+          <b-form-group>
+          <willow-select
+            :value="tenant.Active"
+            :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"
+            :label="'Account Status'"
+            @change="saveTenantStatus($event, 'active')"
+            subdued
+          ></willow-select>
         </b-form-group>
+
         <br>
-        <b-form-group id="fieldsetHorizontal"
-          description="Subscription level."
-          label="Plan"
-          label-for="inputHorizontal">
-            <b-select v-model="tenant.Plan.Id" :options="plans" @change="saveTenantStatus($event, 'plan')"></b-select>
+
+        <b-form-group>
+           <willow-select
+            :value="tenant.Plan.Id"
+            :options="plans"
+            :label="'Plan'"
+            @change="saveTenantStatus($event, 'plan')"
+            subdued
+          ></willow-select>
         </b-form-group>
 
       </b-card>

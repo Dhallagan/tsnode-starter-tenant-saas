@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-14">
-      <div class="dataTables_length bs-select" id="dtBasicExample_length">
+      <div>
         <label> Show
           <select class="form-control-sm" v-if="itemsPerPageOptions.length" @change="$emit('update:itemsPerPage', numItems)" v-model="numItems">
             <option :value="item"  v-for="(item, i) in itemsPerPageOptions" :key="i">{{item}}</option>
