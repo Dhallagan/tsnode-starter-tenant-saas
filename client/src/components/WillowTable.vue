@@ -67,7 +67,7 @@ export default {
   computed: {
     orderedRows: function () {
       var keys2 = Object.keys(this.rows[0])
-      console.log(this.itemsPerPage)
+      // console.log(this.itemsPerPage)
       var options = {
         shouldSort: true,
         threshold: 0.0,
@@ -98,7 +98,7 @@ export default {
       this.sortBy = heading
     },
     setItemsPerPage (itemsPerPage) {
-      console.log(itemsPerPage)
+      // console.log(itemsPerPage)
       this.itemsPerPage = itemsPerPage
     }
   }

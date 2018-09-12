@@ -2,23 +2,15 @@
   <div>
     <label class="col-form-label pt-0" :class="{heading: heading}">{{label}}</label>
 
-    <select
+    <input
       class="form-control" :class="{subdued: subdued}"
       :id="realId"
       :name="name"
       :value="value"
       :disabled="disabled"
-      placeholder="State"
-      @change="onChange"
-      >
-        <option v-if="placeholder" value="" disabled selected>{{placeholder}}</option>
-        <option v-for="option in options" :key="option"
-          :value="option.value"
-        >
-          {{ option.text }}
-        </option>
-
-    </select>
+      :placeholder="placeholder"
+      @change="handleChange"
+      />
     <p v-if="helpText" class="form-text text-muted">{{helpText}}</p>
   </div>
 </template>
@@ -31,12 +23,6 @@ export default {
   },
 
   props: {
-    options: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
     label: String,
     labelAction: Object,
     labelHidden: Boolean,
@@ -52,9 +38,10 @@ export default {
   },
 
   methods: {
-    onChange (e) {
-      console.log(e)
-      this.$emit('change', e.currentTarget.value)
+    handleChange (e) {
+      console.log('newValue', e)
+      var target = e.target || e.srcElement
+      this.$emit('change', target.value)
     }
   }
 }

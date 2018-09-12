@@ -66,6 +66,7 @@
             :label="'Plan'"
             @change="saveTenantStatus($event, 'plan')"
             subdued
+            heading
           ></willow-select>
         </b-form-group>
 
@@ -119,7 +120,7 @@ export default {
           this.tenant = tenant.data.Tenant
           this.pageheader.title = this.tenant.Domain
 
-          console.log(plans, tenantUsers, tenant)
+          // console.log(plans, tenantUsers, tenant)
         }))
     },
 

@@ -61,13 +61,12 @@
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">Role</label>
-            <b-form-input
-                  :value="userEditForm.role"
-                  v-model="userEditForm.role"
-                  placeholder="Role"
-                  >
-            </b-form-input>
+            <willow-select
+              :label="'Role'"
+              :value="userEditForm.role"
+              :options="[{ value: 'Admin', text: 'Admin' },{ value: 'User', text: 'User' }]"
+              v-model="userEditForm.role"
+            ></willow-select>
           </b-col>
           <b-col>
           </b-col>
@@ -75,13 +74,12 @@
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">Active</label>
-            <b-form-input
-                  :value="userEditForm.active"
-                  v-model="userEditForm.active"
-                  placeholder="   "
-                  >
-            </b-form-input>
+            <willow-select
+              :label="'Active'"
+              :value="userEditForm.role"
+              :options="[{ value: true, text: 'Active' },{ value: false, text: 'Inactive' }]"
+              :change.sync="userEditForm.role"
+            ></willow-select>
           </b-col>
           <b-col>
           </b-col>
@@ -99,10 +97,6 @@
             </b-form-input>
           </b-col>
           <b-col>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
             <label for="inputLive">Confirm Password</label>
             <b-form-input
                   :value="userEditForm.confirmPassword"
@@ -111,14 +105,13 @@
                   >
             </b-form-input>
           </b-col>
-          <b-col>
-          </b-col>
         </b-row>
         <b-row>
            <b-col>
             <willow-button class="float-right mt-0" @click.native="updatePassword()">Reset Password</willow-button>
            </b-col>
         </b-row>
+
        </b-card>
     </willow-annotated-section>
   </willow-layout>

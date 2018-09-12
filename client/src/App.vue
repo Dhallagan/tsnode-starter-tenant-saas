@@ -27,15 +27,22 @@
       <template slot='horizontal-menu-primary'>
         <!-- MENU ITEMS-->
           <willow-menu-item
+            icon='home'
             title='Home'
             href='/'
           ></willow-menu-item>
-          <willow-menu-item
-            title='Listings'
-            href='/listings'
+
+          <willow-menu-item v-if="hasRole('Admin')"
+            icon='users'
+            title='Tenants'
+            href='/admin/tenants'
           ></willow-menu-item>
-          <willow-horizontal-submenu>
-          </willow-horizontal-submenu>
+
+          <willow-menu-item
+            icon='cog'
+            title='Settings'
+            href='/Settings'
+          ></willow-menu-item>
 
       </template>
 

@@ -8,7 +8,6 @@ import { Authentication } from './middleware/authentication'
 import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes } from '../routes';
 import * as dotenv from 'dotenv';
 
-
 const root = './';
 
 export class Bootstrap {

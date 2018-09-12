@@ -17,32 +17,39 @@
        <b-card class="mb-2">
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading">Company Name</label>
-            <b-form-input
-                  v-model="generalForm.companyName"
-                  type="text"
-                  placeholder="Company">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.companyName"
+              :label="'Company Name'"
+              :placeholder="'Company'"
+               v-model="generalForm.companyName"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
+
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading">Primary Account Email</label>
-            <b-form-input
-                  v-model="generalForm.accountEmail"
-                  type="text"
-                  placeholder="Primary Email">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.accountEmail"
+              :label="'Primary Account Email'"
+              :placeholder="'Account Email'"
+              :helpText="'We’ll use this address if we need to contact you about your account.'"
+               v-model="generalForm.accountEmail"
+              heading
+            ></willow-textfield>
           </b-col>
           <b-col>
-            <label for="inputLive" class="heading">Company Email</label>
-            <b-form-input
-                  v-model="generalForm.companyEmail"
-                  type="text"
-                  placeholder="Company Email">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.companyEmail"
+              :label="'Company Email'"
+              :placeholder="'Company Email'"
+               v-model="generalForm.companyEmail"
+              :helpText="'Your customers will see this address if you email them'"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
+
        </b-card>
     </willow-annotated-section>
 
@@ -53,82 +60,82 @@
        <b-card class="mb-2">
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading">Legal Company Name</label>
-            <b-form-input
-                  v-model="generalForm.legalName"
-                  type="text"
-                  placeholder="Legal Company Name">
-            </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row class="mb-4">
-          <b-col>
-            <label for="inputLive" class="heading">Phone</label>
-            <b-form-input
-                  v-model="generalForm.phoneNumber"
-                  type="text"
-                  placeholder="Phone Number">
-            </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row class="mb-4">
-          <b-col>
-            <label for="inputLive" class="heading">Street</label>
-            <b-form-input
-                  v-model="generalForm.address1"
-                  type="text"
-                  placeholder="Street">
-            </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row class="mb-4">
-          <b-col>
-            <label for="inputLive" class="heading">Apartment Suite</label>
-            <b-form-input
-                  v-model="generalForm.address2"
-                  type="text"
-                  placeholder="Apt/Suite">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.legalName"
+              :label="'Legal Company Name'"
+               v-model="generalForm.legalName"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading">City</label>
-            <b-form-input
-                  v-model="generalForm.city"
-                  type="text"
-                  placeholder="Company">
-            </b-form-input>
-          </b-col>
-          <b-col>
-            <label for="inputLive" class="heading">Postal/ZIPcode</label>
-            <b-form-input
-                  v-model="generalForm.zipcode"
-                  type="text"
-                  placeholder="Company">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.phoneNumber"
+              :label="'Phone'"
+               v-model="generalForm.phoneNumber"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading">State</label>
-            <b-form-input
-                  v-model="generalForm.state"
-                  type="text"
-                  placeholder="State">
-            </b-form-input>
-          </b-col>
-          <b-col>
-            <label for="inputLive" class="heading">Country</label>
-            <b-form-input
-                  v-model="generalForm.country"
-                  type="text"
-                  placeholder="Country">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.address1"
+              :label="'Street'"
+               v-model="generalForm.address1"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
+
+        <b-row class="mb-4">
+          <b-col>
+            <willow-textfield
+              :value="generalForm.address2"
+              :label="'Apartment, suite, etc. (optional)'"
+              v-model="generalForm.address2"
+              heading
+            ></willow-textfield>
+          </b-col>
+        </b-row>
+
+        <b-row class="mb-4">
+          <b-col>
+            <willow-textfield
+              :value="generalForm.city"
+              :label="'City'"
+               v-model="generalForm.city"
+              heading
+            ></willow-textfield>
+          </b-col>
+          <b-col>
+            <willow-textfield
+              :value="generalForm.zipcode"
+              :label="'Postal / ZIP code'"
+               v-model="generalForm.zipcode"
+              heading
+            ></willow-textfield>
+          </b-col>
+        </b-row>
+
+        <b-row class="mb-4">
+          <b-col>
+            <willow-select
+              :value="generalForm.state"
+              :options="stateOptions"
+              :label="'State'"
+              :placeholder="'State'"
+               v-model="generalForm.state"
+              heading
+            ></willow-select>
+          </b-col>
+          <b-col>
+          </b-col>
+        </b-row>
+
        </b-card>
     </willow-annotated-section>
 
@@ -177,6 +184,59 @@ export default {
         state: '',
         country: ''
       },
+      stateOptions: [
+        { value: 'AL', text: 'Alabama' },
+        { value: 'AK', text: 'Alaska' },
+        { value: 'AZ', text: 'Arizona' },
+        { value: 'AR', text: 'Arkansas' },
+        { value: 'CA', text: 'California' },
+        { value: 'CO', text: 'Colorado' },
+        { value: 'CT', text: 'Connecticut' },
+        { value: 'DE', text: 'Delaware' },
+        { value: 'DC', text: 'District Of Columbia' },
+        { value: 'FL', text: 'Florida' },
+        { value: 'GA', text: 'Georgia' },
+        { value: 'HI', text: 'Hawaii' },
+        { value: 'ID', text: 'Idaho' },
+        { value: 'IL', text: 'Illinois' },
+        { value: 'IN', text: 'Indiana' },
+        { value: 'IA', text: 'Iowa' },
+        { value: 'KS', text: 'Kansas' },
+        { value: 'KY', text: 'Kentucky' },
+        { value: 'LA', text: 'Louisiana' },
+        { value: 'ME', text: 'Maine' },
+        { value: 'MD', text: 'Maryland' },
+        { value: 'MA', text: 'Massachusetts' },
+        { value: 'MI', text: 'Michigan' },
+        { value: 'MN', text: 'Minnesota' },
+        { value: 'MS', text: 'Mississippi' },
+        { value: 'MO', text: 'Missouri' },
+        { value: 'MT', text: 'Montana' },
+        { value: 'NE', text: 'Nebraska' },
+        { value: 'NV', text: 'Nevada' },
+        { value: 'NH', text: 'New Hampshire' },
+        { value: 'NJ', text: 'New Jersey' },
+        { value: 'NM', text: 'New Mexico' },
+        { value: 'NY', text: 'New York' },
+        { value: 'NC', text: 'North Carolina' },
+        { value: 'ND', text: 'North Dakota' },
+        { value: 'OH', text: 'Ohio' },
+        { value: 'OK', text: 'Oklahoma' },
+        { value: 'OR', text: 'Oregon' },
+        { value: 'PA', text: 'Pennsylvania' },
+        { value: 'RI', text: 'Rhode Island' },
+        { value: 'SC', text: 'South Carolina' },
+        { value: 'SD', text: 'South Dakota' },
+        { value: 'TN', text: 'Tennessee' },
+        { value: 'TX', text: 'Texas' },
+        { value: 'UT', text: 'Utah' },
+        { value: 'VT', text: 'Vermont' },
+        { value: 'VA', text: 'Virginia' },
+        { value: 'WA', text: 'Washington' },
+        { value: 'WV', text: 'West Virginia' },
+        { value: 'WI', text: 'Wisconsin' },
+        { value: 'WY', text: 'Wyoming' }
+      ],
       messages: {}
     }
   },
