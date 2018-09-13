@@ -15,43 +15,39 @@
       description="Give staff access to your store by sending them an invitation. "
     >
        <b-card class="mb-2">
-        <b-row>
+        <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">First Name</label>
-            <b-form-input
-                  type="text"
-                  placeholder="First"
-                  v-model="userForm.firstName">
-            </b-form-input>
+            <willow-textfield
+              :value="userForm.firstName"
+              :label="'First'"
+              v-model="userForm.firstName"
+              heading
+            ></willow-textfield>
           </b-col>
           <b-col>
-            <b-form-group
-              label="Last Name"
-              label-for="inputHorizontal"
-            >
-              <b-form-input
-                  type="text"
-                  placeholder="Last"
-                  v-model="userForm.lastName">
-              </b-form-input>
-            </b-form-group>
+            <willow-textfield
+              :value="userForm.lastName"
+              :label="'Last'"
+              v-model="userForm.lastName"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
-            <label for="inputLive">Email</label>
-            <b-form-input
-                  type="text"
-                  placeholder="Email"
-                  v-model="userForm.email">
-            </b-form-input>
+            <willow-textfield
+              :value="userForm.email"
+              :label="'Email'"
+              v-model="userForm.email"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row class="mt-4">
           <b-col>
-            <b-form-group label="Account Level">
+            <b-form-group label="Account Level" class="heading">
               <b-form-radio-group id="radios2" v-model="userForm.role" name="radioSubComponent">
                 <b-form-radio value="Admin">Admin</b-form-radio>
                 <b-form-radio value="User">User</b-form-radio>
@@ -91,7 +87,7 @@ export default {
         firstName: '',
         lastName: '',
         email: '',
-        role: ''
+        role: 'User'
       },
       messages: {}
     }

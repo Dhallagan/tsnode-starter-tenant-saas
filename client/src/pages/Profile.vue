@@ -12,56 +12,54 @@
   <!-- CARD -->
     <willow-annotated-section title="Profile Overview" description="Edit your personal account settings.">
        <b-card class="mb-2">
-        <h6>Profile Overview</h6>
         <b-row class="mb-4">
           <b-col :cols="3">
-            <willow-avatar v-if="url" :username="user.firstName + ' ' + user.lastName"></willow-avatar>
+            <willow-avatar v-if="!user.avatar" :username="user.firstName + ' ' + user.lastName"></willow-avatar>
             <willow-avatar v-else :src="user.avatar"></willow-avatar>
           </b-col>
           <b-col :cols="4">
-            <willow-file-input :url="'http://localhost:3000/api/upload'" @uploadComplete="updateAvatar">Update Avatar</willow-file-input>
+            <willow-file-input :url="uploadRoute" @uploadComplete="updateAvatar">Update Avatar</willow-file-input>
           </b-col>
           <b-col :cols="4">
             <willow-button :disabled="user.avatar !== null">Delete Avatar</willow-button>
           </b-col>
         </b-row>
-        <b-row class="mb-4">
+        <b-row class="mb-2">
           <b-col>
-            <label for="inputLive">First Name</label>
-            <b-form-input
-                  :value="user.FirstName"
-                  type="text"
-                  placeholder="First">
-            </b-form-input>
+            <willow-textfield
+              :value="user.FirstName"
+              :label="'First Name'"
+               v-model="user.FirstName"
+              heading
+            ></willow-textfield>
           </b-col>
           <b-col class="mb-4">
-            <label for="inputLive">Last</label>
-            <b-form-input
-                  :value="user.LastName"
-                  type="text"
-                  placeholder="Last">
-            </b-form-input>
+            <willow-textfield
+              :value="user.LastName"
+              :label="'Last'"
+               v-model="user.LastName"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">Email</label>
-            <b-form-input
-                  :value="user.Email"
-                  type="text"
-                  placeholder="example@me.com">
-            </b-form-input>
+            <willow-textfield
+              :value="user.Email"
+              :label="'Email'"
+               v-model="user.Email"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive">Phone</label>
-            <b-form-input
-                  :value="user.PhoneNumber"
-                  type="tel"
-                  placeholder="Phone"
-                  >
-            </b-form-input>
+            <willow-textfield
+              :value="user.PhoneNumber"
+              :label="'Phone'"
+               v-model="user.PhoneNumber"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
@@ -121,6 +119,7 @@ export default {
           }
         ]
       },
+      uploadRoute: 'http://localhost:3000/api/upload',
       user: {
         id: null,
         firstName: null,

@@ -20,7 +20,6 @@
             <willow-textfield
               :value="generalForm.companyName"
               :label="'Company Name'"
-              :placeholder="'Company'"
                v-model="generalForm.companyName"
               heading
             ></willow-textfield>
@@ -32,7 +31,6 @@
             <willow-textfield
               :value="generalForm.accountEmail"
               :label="'Primary Account Email'"
-              :placeholder="'Account Email'"
               :helpText="'We’ll use this address if we need to contact you about your account.'"
                v-model="generalForm.accountEmail"
               heading
@@ -42,7 +40,6 @@
             <willow-textfield
               :value="generalForm.companyEmail"
               :label="'Company Email'"
-              :placeholder="'Company Email'"
                v-model="generalForm.companyEmail"
               :helpText="'Your customers will see this address if you email them'"
               heading

@@ -2,7 +2,7 @@
   <li class="nav-item">
     <a class="nav-link text-nowrap dark" @click="goTo(href)">
       <icon class="mr-2" :name="icon"></icon>
-      <span vmini>{{title}}</span>
+      <span>{{title}}</span>
       <icon class="ml-1" v-if="disclosure" scale="0.6" name="caret-down"></icon>
       <b-badge class="ml-2" variant="primary" pill>{{badge}}</b-badge>
     </a>
@@ -27,3 +27,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.nav-link:hover {
+    font-weight: 600 ;
+}
+.nav-link:active {
+    font-weight: 600 ;
+}
+</style>

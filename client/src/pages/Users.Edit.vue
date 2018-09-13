@@ -208,7 +208,11 @@ export default {
       console.log(params)
       api.updateUserById(this.userEditForm.id, params)
         .then(res => {
-          // this.$router.go()
+          var messages = [res.data]
+          messages.forEach(message => {
+            message.type = 'success'
+          })
+          this.messages = messages
         })
         .catch(error => {
           var messages = error.response.data.errors
