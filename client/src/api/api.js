@@ -63,6 +63,10 @@ export default {
     return axios.get('/users/' + id)
   },
 
+  getUserPlan (id) {
+    return HTTP.get('/users/' + id + '/plan')
+  },
+
   getUserByToken () {
     return HTTP.get('/users/token')
   },
@@ -89,6 +93,13 @@ export default {
 
   sendInvite (params) {
     return HTTP.post('/invite', params)
-  }
+  },
 
+  createCustomer (params) {
+    return HTTP.post('/customer', params)
+  },
+
+  updatePlan (params) {
+    return HTTP.post('/plan', params)
+  }
 }
