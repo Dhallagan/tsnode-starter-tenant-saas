@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
+var stripe_1 = require("./stripe");
 var entity_1 = require("../entity");
 var Seeds = /** @class */ (function () {
     function Seeds() {
@@ -56,45 +57,83 @@ var Seeds = /** @class */ (function () {
             });
         });
     };
+    Seeds.seedProduct = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var productRepository, products, product;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        productRepository = typeorm_1.getRepository(entity_1.Product);
+                        return [4 /*yield*/, productRepository.find()];
+                    case 1:
+                        products = _a.sent();
+                        if (products.length)
+                            return [2 /*return*/, null];
+                        return [4 /*yield*/, stripe_1.Stripe.createProduct()];
+                    case 2:
+                        product = _a.sent();
+                        return [4 /*yield*/, productRepository.save({ StripeId: product.id })];
+                    case 3: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     Seeds.seedPlans = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var planRepository, plans, _i, plans_1, plan, existPlan;
+            var planRepository, plans, product, existPlan, _i, plans_1, plan, _plan;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         planRepository = typeorm_1.getRepository(entity_1.Plan);
                         plans = [
                             {
-                                Name: "Trial"
+                                Name: "Trial",
+                                Amount: 0,
+                                Interval: ""
                             },
                             {
-                                Name: "Basic"
+                                Name: "Basic",
+                                Amount: 10,
+                                Interval: "Every 1 month"
                             },
                             {
-                                Name: "Standard"
+                                Name: "Standard",
+                                Amount: 20,
+                                Interval: "Every 3 month"
                             },
                             {
-                                Name: "Premium"
+                                Name: "Premium",
+                                Amount: 30,
+                                Interval: "Every 6 month"
                             }
                         ];
-                        _i = 0, plans_1 = plans;
-                        _a.label = 1;
+                        return [4 /*yield*/, this.seedProduct()];
                     case 1:
-                        if (!(_i < plans_1.length)) return [3 /*break*/, 5];
-                        plan = plans_1[_i];
-                        return [4 /*yield*/, planRepository.findOne({ Name: plan.Name })];
+                        product = _a.sent();
+                        return [4 /*yield*/, planRepository.find()];
                     case 2:
                         existPlan = _a.sent();
-                        if (existPlan)
-                            return [3 /*break*/, 4];
-                        return [4 /*yield*/, planRepository.save(plan)];
+                        if (!product || existPlan.length)
+                            return [2 /*return*/];
+                        _i = 0, plans_1 = plans;
+                        _a.label = 3;
                     case 3:
-                        _a.sent();
-                        _a.label = 4;
+                        if (!(_i < plans_1.length)) return [3 /*break*/, 8];
+                        plan = plans_1[_i];
+                        if (!(plan.Name !== 'Trial')) return [3 /*break*/, 5];
+                        return [4 /*yield*/, stripe_1.Stripe.createPlan(product.StripeId, plan)];
                     case 4:
+                        _plan = _a.sent();
+                        plan['StripeId'] = _plan.id;
+                        _a.label = 5;
+                    case 5: return [4 /*yield*/, planRepository.save(plan)];
+                    case 6:
+                        _a.sent();
+                        _a.label = 7;
+                    case 7:
                         _i++;
-                        return [3 /*break*/, 1];
-                    case 5: return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 8: return [2 /*return*/];
                 }
             });
         });

@@ -2,7 +2,7 @@
 <page>
 
   <page-header
-    title="Plans"
+    title="Pick a plan for your site"
     :breadcrumbs="pageheader.breadcrumbs"
   >
 
@@ -10,6 +10,12 @@
 
   <willow-layout>
   <!-- CARD -->
+    <willow-plans
+      :plans="[
+        { name: 'Basic', price: '5', description:'Start with a basic', pricing: ['1 users included', '2 GB of storage', 'Email support', 'Help center access'], action:'Choose this plan'},
+        { name: 'Standard', price: '15', description:'Start with a standard', pricing: ['5 users included', '15 GB of storage', 'Priority email support', 'Help center access'], action:'Choose this plan'},
+        { name: 'Premium', price: '29', description:'Start with a premium', pricing: ['30 users included', '30 GB of storage', 'Phone and email support', 'Help center access'], action:'Choose this plan'}]"
+    ></willow-plans>
     <willow-annotated-section
       v-for="plan in plans"
       v-bind:key="plan.Id"
@@ -70,7 +76,7 @@
 import api from '@/api/api'
 import axios from 'axios'
 
-var stripe = window.Stripe('pk_test_BbiB91sCzXYnkGbYHB0ZkGG0')
+var stripe = window.Stripe('pk_test_SEMCPOlbdQXNeVOGjJWLIT7D')
 var elements = stripe.elements()
 var card
 

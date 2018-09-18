@@ -29,6 +29,7 @@ export class Bootstrap {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
         console.log('Setting up database connection...')
+        console.log(process.env.STRIPE_SKEY)
         Database.createConnection().then(async connection => {
             console.log('Connected to DB');
             console.log('Seeding database...');

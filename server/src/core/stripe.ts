@@ -1,6 +1,6 @@
 import { ProductRepository } from '../repositories/product.repository';
 import { PlanRepository } from '../repositories/plan.repository';
-var stripe = require('stripe')('sk_test_RuhSBz8nMz3hYIvrhJ28Vvgj')
+var stripe = require('stripe')(process.env.STRIPE_SKEY)
 
 export class Stripe {
 
@@ -10,6 +10,7 @@ export class Stripe {
     constructor() {
         this.planRepository = new PlanRepository();
         this.productRepository = new ProductRepository();
+        console.log(process.env.STRIPE_SKEY)
     }
 
     public static async createProduct() {

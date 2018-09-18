@@ -38,6 +38,9 @@ var UserRoutes = /** @class */ (function (_super) {
         this.router.post('/users/:id/avatar', function (req, res, next) { return _this.userController.updateAvatar(req, res).catch(next); });
         this.router.post('/upload', function (req, res, next) { return _this.userController.upload(req, res).catch(next); });
         this.router.post('/invite', authentication_1.Authentication.isAuthenticated, function (req, res, next) { return _this.userController.invite(req, res).catch(next); });
+        this.router.get('/users/:id/plan', authentication_1.Authentication.isAuthenticated, function (req, res, next) { return _this.userController.getPlan(req, res).catch(next); });
+        this.router.post('/customer', authentication_1.Authentication.isAuthenticated, function (req, res, next) { return _this.userController.createCustomer(req, res).catch(next); });
+        this.router.post('/plan', authentication_1.Authentication.isAuthenticated, function (req, res, next) { return _this.userController.updatePlan(req, res).catch(next); });
     };
     return UserRoutes;
 }(base_route_1.BaseRoute));
