@@ -28,6 +28,7 @@ import Building from '../pages/Building'
 // import Listing from '../pages/Listing'
 // import Tenants from '../pages/Tenants'
 // import AddLease from '../pages/AddLease'
+import Plans from '../pages/Plans'
 Vue.use(Router)
 
 export default new Router({
@@ -197,6 +198,12 @@ export default new Router({
       name: 'Profile',
       meta: { layout: 'application', requiresAuth: true },
       component: Profile
+    },
+    {
+      path: '/Settings/Plans',
+      name: 'Plans',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Plans
     }
   ]
 })

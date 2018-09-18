@@ -62,29 +62,29 @@
        </b-card>
     </willow-annotated-section>
 
-    <!-- <willow-annotated-section
+    <willow-annotated-section
       title="Subscription Status"
       description="Manage your subscription."
     >
-       <b-card class="mb-2">
-       <b-row>
-        <b-col>
-          <h6 class="heading">Take a break</h6>
-          <p class="card-text">
-            Take a break from Kastlewise. Your settings will be saved until you’re ready to manage again.
-          </p>
-          <willow-button variant="default">Pause Subscription</willow-button>
-        </b-col>
-        <b-col>
-          <h6 class="heading">Close your account</h6>
-          <p class="card-text">
-            Turn off your online listing app and management software. They’ll be saved for 30 days if you change your mind.
-          </p>
-          <willow-button variant="default">Close Account</willow-button>
-        </b-col>
-       </b-row>
-       </b-card>
-    </willow-annotated-section> -->
+      <b-card class="mb-2">
+      <b-row>
+      <b-col>
+        <h6 class="heading">Take a break</h6>
+        <p class="card-text">
+          Take a break from Kastlewise. Your settings will be saved until you’re ready to manage again.
+        </p>
+        <willow-button variant="default">Pause Subscription</willow-button>
+      </b-col>
+      <b-col>
+        <h6 class="heading">Close your account</h6>
+        <p class="card-text">
+          Turn off your online listing app and management software. They’ll be saved for 30 days if you change your mind.
+        </p>
+        <willow-button variant="default">Close Account</willow-button>
+      </b-col>
+      </b-row>
+      </b-card>
+    </willow-annotated-section>
 
   </willow-layout>
 

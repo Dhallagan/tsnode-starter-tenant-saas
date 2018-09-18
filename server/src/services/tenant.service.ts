@@ -85,4 +85,10 @@ export class TenantService {
         return res.status(200).json(updatedTenant);
     }
 
+
+    public async saveTenant(res: Response, tenant) {
+        const updatedTenant = await this.tenantRepository.updateTenant(tenant);
+        return res.status(200).json(updatedTenant);
+    }
+
 }
