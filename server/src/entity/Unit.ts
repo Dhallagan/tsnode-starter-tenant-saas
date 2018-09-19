@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
 import { Property } from './Property';
 
 @Entity()
@@ -8,6 +8,7 @@ export class Unit {
     UnitId: number;
 
     @ManyToOne( type => Property, property => property.Units)
+    @JoinColumn({ name: 'PropertyId'})
     Property: Property;
 
     @Column()

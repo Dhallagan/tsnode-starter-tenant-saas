@@ -43,6 +43,7 @@ var Property = /** @class */ (function () {
             eager: true,
             cascade: true
         }),
+        typeorm_1.JoinColumn({ name: "UnitId" }),
         __metadata("design:type", Array)
     ], Property.prototype, "Units", void 0);
     Property = __decorate([

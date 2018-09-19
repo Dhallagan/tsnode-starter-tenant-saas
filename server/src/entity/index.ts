@@ -5,3 +5,4 @@ export {Company} from './Company';
 export {Plan} from './Plan';
 export {Product} from './Product';
 export {Unit} from './Unit';
+export {Listing} from './Listing';
