@@ -107,6 +107,39 @@ var UserService = /** @class */ (function () {
             });
         });
     };
+    UserService.prototype.createUserNoVerification = function (res, firstname, lastname, email, password, domain) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userExists, tenant, passwordHash, user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        email = email.toLowerCase();
+                        return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
+                    case 1:
+                        userExists = _a.sent();
+                        if (userExists) {
+                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'Account with that email address already exists.' }] })];
+                        }
+                        return [4 /*yield*/, this.tenantService.createTenant(domain)];
+                    case 2:
+                        tenant = _a.sent();
+                        return [4 /*yield*/, this.companyRepository.createCompany('', '', '', '', '', '', '', '', '', '', '', tenant)];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                    case 4:
+                        passwordHash = _a.sent();
+                        return [4 /*yield*/, this.userRepository.createUser(res, firstname, lastname, email, passwordHash, uuid_1.v4(), tenant)];
+                    case 5:
+                        user = _a.sent();
+                        // Send email
+                        //Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
+                        console.log(user);
+                        return [2 /*return*/, res.status(200).json({ 'msg': 'Registration success! An email has been sent to ' + email + '.  Check your email to complete the registration process.', 'token': this.generateToken(user), 'user': user })];
+                }
+            });
+        });
+    };
     UserService.prototype.createInviteUser = function (res, firstname, lastname, email, role, invitedFrom) {
         return __awaiter(this, void 0, void 0, function () {
             var userExists, userInviteSent, tenant, password, passwordHash, user;
@@ -175,7 +208,7 @@ var UserService = /** @class */ (function () {
                         if (!user) {
                             return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'The email you’ve entered doesn’t match any account.' }] })];
                         }
-                        console.log('hi', user);
+                        console.log('User logged in:', user);
                         if (user.Active === false) {
                             return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'The account is not active. Contact your administrator.' }] })];
                         }

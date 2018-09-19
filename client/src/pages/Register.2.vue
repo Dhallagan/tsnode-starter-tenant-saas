@@ -1,6 +1,6 @@
 <template>
 <page>
-<div class="text-center">
+<div class="text-center mt-4">
   <div class="form-signin">
     <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
     <!-- <img class="mb-4" src="../assets/logo.png" alt="" width="72" height="72"> -->
@@ -11,7 +11,7 @@
          <h2>Add an address for your company</h2>
 
     <p>This will be used as your default business address</p>
-        <b-row class="mb-4">
+        <!-- <b-row class="mb-4">
           <b-col>
             <label for="inputLive" class="heading float-left">Legal Company Name</label>
             <b-form-input
@@ -20,7 +20,7 @@
                   placeholder="Legal Company Name">
             </b-form-input>
           </b-col>
-        </b-row>
+        </b-row> -->
 
         <b-row class="mb-4">
           <b-col>
@@ -28,7 +28,7 @@
             <b-form-input
                   v-model="registerForm.firstName"
                   type="text"
-                  placeholder="Legal Company Name">
+                 >
             </b-form-input>
           </b-col>
         <!-- </b-row>
@@ -38,83 +38,94 @@
             <b-form-input
                   v-model="registerForm.lastName"
                   type="text"
-                  placeholder="Legal Company Name">
+                  >
             </b-form-input>
           </b-col>
         </b-row>
 
         <!-- <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading float-left">Phone</label>
-            <b-form-input
-                  v-model="generalForm.phoneNumber"
-                  type="text"
-                  placeholder="Phone Number">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.legalName"
+              :label="'Legal Company Name'"
+               v-model="generalForm.legalName"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row> -->
+
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading float-left">Street</label>
-            <b-form-input
-                  v-model="generalForm.address1"
-                  type="text"
-                  placeholder="Street">
-            </b-form-input>
-          </b-col>
-        </b-row>
-        <b-row class="mb-4">
-          <b-col>
-            <label for="inputLive" class="heading float-left">Apartment Suite</label>
-            <b-form-input
-                  v-model="generalForm.address2"
-                  type="text"
-                  placeholder="Apt/Suite">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.address1"
+              :label="'Address'"
+               v-model="generalForm.address1"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading float-left">City</label>
-            <b-form-input
-                  v-model="generalForm.city"
-                  type="text"
-                  placeholder="Company">
-            </b-form-input>
-          </b-col>
-          <b-col>
-            <label for="inputLive" class="heading float-left">Postal/ZIPcode</label>
-            <b-form-input
-                  v-model="generalForm.zipcode"
-                  type="text"
-                  placeholder="Company">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.address2"
+              :label="'Apartment, suite, etc. (optional)'"
+              v-model="generalForm.address2"
+              heading
+            ></willow-textfield>
           </b-col>
         </b-row>
 
         <b-row class="mb-4">
           <b-col>
-            <label for="inputLive" class="heading float-left">State</label>
-            <b-form-input
-                  v-model="generalForm.state"
-                  type="text"
-                  placeholder="State">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.city"
+              :label="'City'"
+               v-model="generalForm.city"
+              heading
+            ></willow-textfield>
           </b-col>
           <b-col>
-            <label for="inputLive" class="heading  float-left">Country</label>
-            <b-form-input
-                  v-model="generalForm.country"
-                  type="text"
-                  placeholder="Country">
-            </b-form-input>
+            <willow-textfield
+              :value="generalForm.zipcode"
+              :label="'Postal / ZIP code'"
+               v-model="generalForm.zipcode"
+              heading
+            ></willow-textfield>
+          </b-col>
+        </b-row>
+
+        <b-row class="mb-4">
+          <b-col>
+            <willow-select
+              :value="generalForm.state"
+              :options="stateOptions"
+              :label="'State'"
+              :placeholder="'State'"
+               v-model="generalForm.state"
+              heading
+            ></willow-select>
+          </b-col>
+          <b-col>
+          </b-col>
+        </b-row>
+
+        <b-row class="mb-4">
+          <b-col>
+            <willow-textfield
+              :value="generalForm.phoneNumber"
+              :label="'Phone'"
+              v-model="generalForm.phoneNumber"
+              heading
+            ></willow-textfield>
+          </b-col>
+          <b-col>
           </b-col>
         </b-row>
 
         <hr>
-         <willow-button class="float-left" link>Back</willow-button>
-        <willow-button class="float-right" primary>Create account</willow-button>
+         <!-- <willow-button class="float-left" link>Back</willow-button> -->
+        <willow-button class="float-right" size="lg" primary @click.native="save()">Enter</willow-button>
        </b-card>
 
     </div>
@@ -125,14 +136,14 @@
 <script>
 import api from '@/api/api'
 export default {
+  mounted () {
+    this.fetch()
+  },
   data () {
     return {
       registerForm: {
-        username: '',
-        email: '',
-        domain: '',
-        password: '',
-        confirmPassword: ''
+        firstName: '',
+        lastName: ''
       },
       generalForm: {
         companyName: '',
@@ -147,40 +158,96 @@ export default {
         state: '',
         country: ''
       },
+      stateOptions: [
+        { value: 'AL', text: 'Alabama' },
+        { value: 'AK', text: 'Alaska' },
+        { value: 'AZ', text: 'Arizona' },
+        { value: 'AR', text: 'Arkansas' },
+        { value: 'CA', text: 'California' },
+        { value: 'CO', text: 'Colorado' },
+        { value: 'CT', text: 'Connecticut' },
+        { value: 'DE', text: 'Delaware' },
+        { value: 'DC', text: 'District Of Columbia' },
+        { value: 'FL', text: 'Florida' },
+        { value: 'GA', text: 'Georgia' },
+        { value: 'HI', text: 'Hawaii' },
+        { value: 'ID', text: 'Idaho' },
+        { value: 'IL', text: 'Illinois' },
+        { value: 'IN', text: 'Indiana' },
+        { value: 'IA', text: 'Iowa' },
+        { value: 'KS', text: 'Kansas' },
+        { value: 'KY', text: 'Kentucky' },
+        { value: 'LA', text: 'Louisiana' },
+        { value: 'ME', text: 'Maine' },
+        { value: 'MD', text: 'Maryland' },
+        { value: 'MA', text: 'Massachusetts' },
+        { value: 'MI', text: 'Michigan' },
+        { value: 'MN', text: 'Minnesota' },
+        { value: 'MS', text: 'Mississippi' },
+        { value: 'MO', text: 'Missouri' },
+        { value: 'MT', text: 'Montana' },
+        { value: 'NE', text: 'Nebraska' },
+        { value: 'NV', text: 'Nevada' },
+        { value: 'NH', text: 'New Hampshire' },
+        { value: 'NJ', text: 'New Jersey' },
+        { value: 'NM', text: 'New Mexico' },
+        { value: 'NY', text: 'New York' },
+        { value: 'NC', text: 'North Carolina' },
+        { value: 'ND', text: 'North Dakota' },
+        { value: 'OH', text: 'Ohio' },
+        { value: 'OK', text: 'Oklahoma' },
+        { value: 'OR', text: 'Oregon' },
+        { value: 'PA', text: 'Pennsylvania' },
+        { value: 'RI', text: 'Rhode Island' },
+        { value: 'SC', text: 'South Carolina' },
+        { value: 'SD', text: 'South Dakota' },
+        { value: 'TN', text: 'Tennessee' },
+        { value: 'TX', text: 'Texas' },
+        { value: 'UT', text: 'Utah' },
+        { value: 'VT', text: 'Vermont' },
+        { value: 'VA', text: 'Virginia' },
+        { value: 'WA', text: 'Washington' },
+        { value: 'WV', text: 'West Virginia' },
+        { value: 'WI', text: 'Wisconsin' },
+        { value: 'WY', text: 'Wyoming' }
+      ],
       messages: {}
     }
   },
 
   methods: {
-    register () {
-      const params = {
-        firstName: this.registerForm.firstName,
-        lastName: this.registerForm.lastName,
-        email: this.registerForm.email,
-        domain: this.registerForm.domain,
-        password: this.registerForm.password,
-        confirmPassword: this.registerForm.confirmPassword
-      }
-      api.register(params)
+    fetch () {
+      api.getCompany()
         .then(res => {
-          var messages = [res.data]
-
-          messages.forEach(message => {
-            message.type = 'success'
-          })
-
-          this.messages = messages
-          setTimeout(() => this.$router.push({ path: '/login' }), 5000)
+          const company = res.data.company
+          if (res.data.company) {
+            this.generalForm = {
+              companyName: company.Name,
+              accountEmail: company.AccountMail,
+              companyEmail: company.CompanyEmail,
+              legalName: company.LegalName,
+              phoneNumber: company.Phone,
+              address1: company.Street,
+              address2: company.ApartmentSuite,
+              city: company.City,
+              zipcode: company.Zipcode,
+              state: company.State,
+              country: company.Country
+            }
+          }
         })
-        .catch(error => {
-          console.log(error)
-          var messages = error.response.data.errors
+        .catch(err => {
+          console.log(err)
+        })
+    },
 
-          messages.forEach(message => {
-            message.type = 'danger'
-          })
-
-          this.messages = messages
+    save () {
+      api.saveCompany(this.generalForm)
+        .then(res => {
+          this.$router.push({ path: '/' })
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
   }

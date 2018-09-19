@@ -1,7 +1,7 @@
 <template>
 <div class="col-sm-24">
   <div class="pricing-header px-3 py-3 pt-md-10 pb-md-8 mx-auto text-center ">
-    <h1 class="display-4">{{title}}</h1>
+    <h1 class="display-6">{{title}}</h1>
     <p class="lead">{{lead}}</p>
   </div>
 

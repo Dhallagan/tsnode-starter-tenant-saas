@@ -10,7 +10,7 @@ import { Tenant } from "../entity/Tenant";
 export class UserRepository extends Repository<User> {
 
 
-    public async createUser(res: Response, firstname: string, lastname: string, email: string, passwordHash: string, emailVerifyToken: string, tenant, role:string = 'User'){
+    public async createUser(res: Response, firstname: string, lastname: string, email: string, passwordHash: string, emailVerifyToken: string, tenant, role:string = 'Admin'){
         return await getConnection().manager.save(User, {FirstName: firstname, LastName: lastname, Email: email, PasswordHash: passwordHash, EmailVerifyToken: emailVerifyToken, Tenant: tenant, Role: role});
     }
 

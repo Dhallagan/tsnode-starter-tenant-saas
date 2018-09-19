@@ -10,23 +10,23 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
-    <label for="inputEmail" class="sr-only =">First Name</label>
+    <!-- <label for="inputEmail" class="sr-only =">First Name</label>
     <input type="name" id="inputName" class="form-control mb-2" placeholder="First" required autofocus v-model="registerForm.firstName">
 
     <label for="inputEmail" class="sr-only">Last Name</label>
-    <input type="name" id="inputName" class="form-control mb-2" placeholder="Last" required autofocus v-model="registerForm.lastName">
+    <input type="name" id="inputName" class="form-control mb-2" placeholder="Last" required autofocus v-model="registerForm.lastName"> -->
 
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus v-model="registerForm.email">
-
-    <label for="inputEmail" class="sr-only">Domain</label>
-    <input type="text" id="inputText" class="form-control mb-2" placeholder="Domain" required autofocus v-model="registerForm.domain">
 
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required v-model="registerForm.password">
 
     <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
     <input type="password" id="inputConfirmPassword" class="form-control mb-3" placeholder="Confirm Password" required v-model="registerForm.confirmPassword">
+    <br>
+    <label for="inputEmail" class="sr-only">Domain</label>
+    <input type="text" id="inputText" class="form-control mb-2" placeholder="Domain" required autofocus v-model="registerForm.domain">
 
     <div class="checkbox mb-3">
         Already have account?<router-link to="/login"> Sign In.</router-link>
@@ -58,8 +58,6 @@ export default {
   methods: {
     register () {
       const params = {
-        firstName: this.registerForm.firstName,
-        lastName: this.registerForm.lastName,
         email: this.registerForm.email,
         domain: this.registerForm.domain,
         password: this.registerForm.password,
@@ -67,17 +65,19 @@ export default {
       }
       api.register(params)
         .then(res => {
-          var messages = [res.data]
+          console.log(res)
+          // var messages = [res.data.msg]
 
-          messages.forEach(message => {
-            message.type = 'success'
-          })
+          // messages.forEach(message => {
+          //   message.type = 'success'
+          // })
 
-          this.messages = messages
-          setTimeout(() => this.$router.push({ path: '/login' }), 5000)
+          // this.messages = messages
+          this.$store.dispatch('LOGIN_SUCCESS', res.data)
+          this.$router.push({ path: '/register/setup' })
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.response.data.errors)
           var messages = error.response.data.errors
 
           messages.forEach(message => {

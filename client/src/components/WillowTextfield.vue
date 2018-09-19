@@ -1,7 +1,6 @@
 <template>
   <div>
-    <label class="col-form-label pt-0" :class="{heading: heading}">{{label}}</label>
-
+    <label class="float-left col-form-label pt-0" :class="{heading: heading}">{{label}}</label>
     <input
       class="form-control" :class="{subdued: subdued}"
       :id="realId"

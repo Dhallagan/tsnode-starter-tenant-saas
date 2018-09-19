@@ -16,6 +16,7 @@
         { name: 'Standard', price: '15', description:'Start with a standard', pricing: ['5 users included', '15 GB of storage', 'Priority email support', 'Help center access'], action:'Choose this plan'},
         { name: 'Premium', price: '29', description:'Start with a premium', pricing: ['30 users included', '30 GB of storage', 'Phone and email support', 'Help center access'], action:'Choose this plan'}]"
     ></willow-plans>
+
     <willow-annotated-section
       v-for="plan in plans"
       v-bind:key="plan.Id"
@@ -44,6 +45,11 @@
         </b-row>
        </b-card>
     </willow-annotated-section>
+
+    <willow-modal
+      v-b-modal.modallg
+      :title="'Add Payment'"
+    ></willow-modal>
 
     <b-modal ref="stripeModal" hide-footer title="Add card">
       <form id="payment-form">
@@ -90,8 +96,8 @@ export default {
       pageheader: {
         breadcrumbs: [
           {
-            text: 'Plans',
-            href: '/Plans'
+            text: 'Settings',
+            href: '/Settings'
           }
         ]
       },

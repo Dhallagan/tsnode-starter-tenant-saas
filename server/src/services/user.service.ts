@@ -65,6 +65,29 @@ export class UserService {
     }
 
 
+    public async createUserNoVerification(res: Response, firstname: string, lastname: string, email: string, password: string, domain: string) {
+
+        email = email.toLowerCase();
+      
+        const userExists = await this.userRepository.getUserByEmail(email)
+        
+        if(userExists){
+            return  res.status(422).json({'errors': [{'msg': 'Account with that email address already exists.'}]})
+        }
+
+        const tenant = await this.tenantService.createTenant(domain);
+        await this.companyRepository.createCompany('', '', '', '', '', '', '', '', '', '', '', tenant);
+
+        const passwordHash = await bcrypt.hash(password, 10)
+        const user = await this.userRepository.createUser(res, firstname, lastname, email, passwordHash, UUId(), tenant);
+        
+        
+        // Send email
+        //Emailer.welcomeEmail(user.Email, user.FirstName + " " + user.LastName, user.EmailVerifyToken);
+        console.log(user)
+        return  res.status(200).json({'msg': 'Registration success! An email has been sent to '+ email + '.  Check your email to complete the registration process.', 'token': this.generateToken(user), 'user': user})
+    }
+
 
     public async createInviteUser(res: Response, firstname: string, lastname: string, email: string, role: string, invitedFrom: number) {
         firstname = firstname.toLowerCase();
@@ -122,7 +145,7 @@ export class UserService {
         if(!user){
             return  res.status(422).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
         }
-        console.log('hi', user)
+        console.log('User logged in:', user)
         if(user.Active === false) {
             return  res.status(422).json({'errors': [{'msg': 'The account is not active. Contact your administrator.'}]})
         }

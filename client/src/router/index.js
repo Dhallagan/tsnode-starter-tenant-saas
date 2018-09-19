@@ -47,7 +47,7 @@ export default new Router({
       component: Register
     },
     {
-      path: '/register/2',
+      path: '/register/setup',
       name: 'Register2',
       meta: { layout: 'authentication' },
       component: Register2

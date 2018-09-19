@@ -1,10 +1,17 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm"
+import { Unit } from './Unit';
 
 @Entity()
 export class Property {
 
     @PrimaryGeneratedColumn()
-    PropertyId!: number;
+    PropertyId: number;
+
+    @Column()
+    Street1: string;
+
+    @Column()
+    ApartmentSuite!: string;
 
     @Column()
     City!: string;
@@ -15,4 +22,9 @@ export class Property {
     @Column()
     Zipcode!: string;
 
+    @OneToMany(type => Unit, unit => unit.Property, {
+		eager: true,
+		cascade: true
+	})
+	Units: Unit[];
 }

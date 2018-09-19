@@ -42,7 +42,8 @@
                   </div>
               </div>
           </router-link>
-          <router-link class="col-xl col-md-24 pb-3" to="/settings/plans">
+
+          <router-link v-if="hasRole('Admin')" class="col-xl col-md-24 pb-3" to="/settings/plans" >
               <div class="card h-100">
                   <div class="row h-100 no-gutters">
                       <div class="col bg-light text-primary d-flex">

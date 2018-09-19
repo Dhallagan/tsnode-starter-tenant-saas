@@ -60,7 +60,7 @@ var UserRepository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     UserRepository.prototype.createUser = function (res, firstname, lastname, email, passwordHash, emailVerifyToken, tenant, role) {
-        if (role === void 0) { role = 'User'; }
+        if (role === void 0) { role = 'Admin'; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
