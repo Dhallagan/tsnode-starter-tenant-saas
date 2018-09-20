@@ -19,6 +19,9 @@ export class Plan {
     @Column({nullable: true})
     Amount!: number;
 
+    @Column("simple-array")
+    Pricing!: string[];
+
     @OneToMany(type => Tenant, Tenant => Tenant.Plan)
     Tenants: Tenant[];
 

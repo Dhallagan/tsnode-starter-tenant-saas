@@ -30,7 +30,5 @@ export class UserRoutes extends BaseRoute {
         this.router.post('/upload', (req, res, next) => this.userController.upload(req, res).catch(next));
         this.router.post('/invite', Authentication.isAuthenticated, (req, res, next) => this.userController.invite(req, res).catch(next));
         this.router.get('/users/:id/plan', Authentication.isAuthenticated, (req, res, next) => this.userController.getPlan(req, res).catch(next));
-        this.router.post('/customer', Authentication.isAuthenticated, (req, res, next) => this.userController.createCustomer(req, res).catch(next));
-        this.router.post('/plan', Authentication.isAuthenticated, (req, res, next) => this.userController.updatePlan(req, res).catch(next));
     }
 }

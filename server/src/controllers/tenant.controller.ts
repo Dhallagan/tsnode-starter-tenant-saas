@@ -88,4 +88,36 @@ export class TenantController extends BaseController {
 
         return await this.tenantService.updateTenant(res, viewModel.Id, viewModel.Domain, viewModel.Description, viewModel.Name, viewModel.Active, viewModel.Plan.Id);
     }
+
+    public async createCustomer(req: Request, res: Response) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const userId = req['user'];
+        const viewModel = req.body;
+
+        const user = await this.userRepository.getUserByIdWithRelations(userId);
+        
+        if (user) {
+            return await this.tenantService.createCustomer(res, user.Tenant, viewModel, user.Email);
+        }
+    }
+
+    public async updatePlan(req: Request, res: Response) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const userId = req['user'];
+        const viewModel = req.body;
+
+        const user = await this.userRepository.getUserByIdWithRelations(userId);
+        
+        if (user) {
+            return await this.tenantService.updatePlan(res, user.Tenant, viewModel);
+        }
+    }
 }

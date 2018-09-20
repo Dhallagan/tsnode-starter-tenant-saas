@@ -192,29 +192,4 @@ export class UserController extends BaseController {
 
         return await this.userService.getPlan(res, req.params.id)
     }
-
-
-    public async createCustomer(req: Request, res: Response) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-
-        const userId = req['user'];
-        const viewModel = req.body;
-        
-        return await this.userService.createCustomer(res, userId, viewModel);
-    }
-
-    public async updatePlan(req: Request, res: Response) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-
-        const userId = req['user'];
-        const viewModel = req.body;
-        
-        return await this.userService.updatePlan(res, userId, viewModel);
-    }
 }
