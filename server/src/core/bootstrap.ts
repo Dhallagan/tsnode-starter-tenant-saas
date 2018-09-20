@@ -5,7 +5,7 @@ import { Server } from './server';
 import { Seeds } from './seeds';
 import { Storage } from './storage';
 import { Authentication } from './middleware/authentication'
-import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes } from '../routes';
+import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes, PropertyRoutes } from '../routes';
 import * as dotenv from 'dotenv';
 
 const root = './';
@@ -81,5 +81,8 @@ export class Bootstrap {
 
         const planRouter = new PlanRoutes().router;
         app.use('/api', planRouter);
+
+        const propertyRouter = new PropertyRoutes().router;
+        app.use('/api', propertyRouter);
     }
 }

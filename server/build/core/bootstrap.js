@@ -115,6 +115,8 @@ var Bootstrap = /** @class */ (function () {
         app.use('/api', tenantRouter);
         var planRouter = new routes_1.PlanRoutes().router;
         app.use('/api', planRouter);
+        var propertyRouter = new routes_1.PropertyRoutes().router;
+        app.use('/api', propertyRouter);
     };
     return Bootstrap;
 }());

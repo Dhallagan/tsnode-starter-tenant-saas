@@ -10,3 +10,5 @@ var company_controller_1 = require("./company.controller");
 exports.CompanyController = company_controller_1.CompanyController;
 var plan_controller_1 = require("./plan.controller");
 exports.PlanController = plan_controller_1.PlanController;
+var property_controller_1 = require("./property.controller");
+exports.PropertyController = property_controller_1.PropertyController;

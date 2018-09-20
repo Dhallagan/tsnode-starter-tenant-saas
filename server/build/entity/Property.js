@@ -17,11 +17,11 @@ var Property = /** @class */ (function () {
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Property.prototype, "PropertyId", void 0);
+    ], Property.prototype, "Id", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Property.prototype, "Street1", void 0);
+    ], Property.prototype, "Street", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)

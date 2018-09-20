@@ -5,10 +5,10 @@ import { Unit } from './Unit';
 export class Property {
 
     @PrimaryGeneratedColumn()
-    PropertyId: number;
+    Id: number;
 
     @Column()
-    Street1: string;
+    Street: string;
 
     @Column()
     ApartmentSuite!: string;
