@@ -19,5 +19,7 @@ export class TenantRoutes extends BaseRoute {
         this.router.get('/tenants/:id', Authentication.isAuthenticated, (req, res, next) => this.tenantController.getTenantById(req, res).catch(next));
         this.router.get('/tenants/:id/users', Authentication.isAuthenticated, (req, res, next) => this.tenantController.getTenantUsers(req, res).catch(next));
         this.router.post('/tenants/:id', Authentication.isAuthenticated, (req, res, next) => this.tenantController.updateTenant(req, res).catch(next));
+        this.router.post('/plan', Authentication.isAuthenticated, (req, res, next) => this.tenantController.createCustomer(req, res).catch(next));
+        this.router.put('/plan', Authentication.isAuthenticated, (req, res, next) => this.tenantController.updatePlan(req, res).catch(next));
     }
 }

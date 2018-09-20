@@ -96,10 +96,10 @@ export default {
   },
 
   createCustomer (params) {
-    return HTTP.post('/customer', params)
+    return HTTP.post('/plan', params)
   },
 
   updatePlan (params) {
-    return HTTP.post('/plan', params)
+    return HTTP.put('/plan', params)
   }
 }

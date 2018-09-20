@@ -17,7 +17,8 @@
           <ul class="list-unstyled mt-3 mb-4">
             <li v-for="feature in plan.pricing" :key="feature">{{feature}}</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">{{plan.action}}</button>
+          <button v-if="plan.id != currentPlan" type="button" class="btn btn-lg btn-block btn-primary" v-on:click="$emit('subscribe', plan)">{{plan.action}}</button>
+          <h3 v-if="plan.id === currentPlan">Current Plan</h3>
         </div>
       </div>
     </div>
@@ -32,6 +33,9 @@ export default {
     lead: { type: String, default: 'Pick a plan to use when your free trial ends' },
     plans: {
       type: Array
+    },
+    currentPlan: {
+      type: Number
     }
   }
 }
