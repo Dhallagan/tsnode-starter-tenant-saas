@@ -26,9 +26,11 @@ export class UserService {
         var payload = {
             iss: "localhost",
             sub: user.Id,
+            tenant: user.Tenant.Id,
             iat: moment().unix(),
             exp: moment().add(14, 'days').unix()
         };
+        console.log(payload);
         return jwt.sign(payload, 'secretsecretsecret');
     }
 
@@ -135,7 +137,7 @@ export class UserService {
     
 
     public async login(res: Response, email: string, password: string) {
-        const user = await this.userRepository.getUserByEmail(email)
+        const user = await this.userRepository.getUserByEmailWithRelations(email)
         
         if(!user){
             return  res.status(422).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})

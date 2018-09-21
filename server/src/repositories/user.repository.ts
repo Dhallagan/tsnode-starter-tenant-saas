@@ -23,6 +23,12 @@ export class UserRepository extends Repository<User> {
 
 
 
+    public async getUserByEmailWithRelations(email: string) {
+        return await getRepository(User).findOne({ where: {Email: email}, relations: ["Tenant"] });
+    }
+
+
+
 
     public async getUserByToken(token: string){
         return await getRepository(User).findOne({EmailVerifyToken: token});
