@@ -4,7 +4,7 @@
 
     <select
       class="form-control" :class="{subdued: subdued}"
-      :id="realId"
+      id=""
       :name="name"
       :value="value"
       :disabled="disabled"

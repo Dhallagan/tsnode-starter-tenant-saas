@@ -12,33 +12,29 @@ export class PropertyService {
 
 
     public async createProperty(res: Response, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
-
-        const propertyExists = await this.propertyRepository.getSingleProperty({Street: street, City: city, State: state});
+        const propertyExists = await this.propertyRepository.getOne({Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
 
-        const newProperty = await this.propertyRepository.createProperty({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.create({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
 
         return res.json(200).json(newProperty);
     }
 
 
-
     public async getProperties() {
-        
-        const properties = await this.propertyRepository.getProperties();
+        const properties = await this.propertyRepository.getAll();
 
         return properties;
     }
 
 
-
-
     public async updateProperty(res: Response, id: number, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
         
-        var property = await this.propertyRepository.getSingleProperty({Id: id});
+        var property = await this.propertyRepository.getOne({Id: id});
+
         if(!property) {
             return  res.status(422).json({'errors': [{'msg': 'Property Id is invalid.'}]})
         }
@@ -49,7 +45,7 @@ export class PropertyService {
         property.State = state;
         property.Zipcode = zipcode;
         
-        var updatedProperty = await this.propertyRepository.updateProperty(id, property);
+        var updatedProperty = await this.propertyRepository.update(id, property);
         return res.status(200).json(updatedProperty);
     }
 

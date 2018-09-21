@@ -80,6 +80,16 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
+    UserRepository.prototype.getUserByEmailWithRelations = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({ where: { Email: email }, relations: ["Tenant"] })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
     UserRepository.prototype.getUserByToken = function (token) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -150,11 +160,54 @@ var UserRepository = /** @class */ (function (_super) {
             });
         });
     };
+    // public async create(params: Object){
+    //     return await getRepository(User).save(params);
+    // }
     UserRepository.prototype.updateUser = function (id, user) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).update(id, user)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.getOne = function (params) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.findOne(User_1.User, params)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.getAll = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_2.getConnection().manager.find(User_1.User)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.update = function (id, user) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).update(id, user)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserRepository.prototype.delete = function (userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).delete(userId)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

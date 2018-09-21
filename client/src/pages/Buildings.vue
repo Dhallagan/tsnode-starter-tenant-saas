@@ -5,77 +5,40 @@
     title="Buildings"
   >
   <template slot="action-right">
-    <willow-button primary>Add Building</willow-button>
+    <willow-button size="lg" primary>Add Building</willow-button>
   </template>
 
   </page-header>
 
   <b-card class="w-100">
-    <willow-button v-b-toggle.collapse1 outline>Filters +</willow-button>
 
-    <b-collapse id="collapse1" class="mt-2">
-      <b-card>
-        <p class="card-text">Advanced Options:</p>
-  <!--
-          <b-col cols="6">
-          <b-form-group id="fieldsetHorizontal"
-                        description="Less Than"
-                        label="Price"
-                        label-for="inputHorizontal">
-              <b-select :options="[{ value: null, text: "$1000" },{ value: "a", text: "$2000" }]"></b-select>
-            </b-form-group>
-          </b-col>
-          <b-col cols="6">
-            <b-form-group id="fieldsetHorizontal"
-                        description="Number of Bedrooms"
-                        label="Beds"
-                        label-for="inputHorizontal">
-              <b-select :options="[{ value: null, text: "1" },{ value: "a", text: "2" }]"></b-select>
-            </b-form-group>
-          </b-col>
-        </b-row>
-        -->
-        <b-row>
-          <b-col cols="6">
-            <b-form-group id="fieldsetHorizontal"
-                        description="City"
-                        label="City"
-                        label-for="inputHorizontal">
-              <b-select :options="[{ value: null, text: 'Newark' },{ value: 'a', text: 'Lyons' }]"></b-select>
-            </b-form-group>
-          </b-col>
-          <b-col cols="6">
-          <b-form-group id="fieldsetHorizontal"
-                        description="Condo, Duplex, Single Family, etc."
-                        label="Type"
-                        label-for="inputHorizontal">
-              <b-select :options="[{ value: null, text: 'Duplex' },{ value: 'a', text: 'Condo' }]"></b-select>
-            </b-form-group>
-          </b-col>
-          <b-col cols="6">
-            <b-form-group id="fieldsetHorizontal"
-                        description="Property Owner"
-                        label="Owner"
-                        label-for="inputHorizontal">
-              <b-select :options="[{ value: null, text: 'Apollo Residential' },{ value: 'a', text: 'Scott Wagner' }]"></b-select>
-            </b-form-group>
-          </b-col>
+    <willow-table hover :rows="buildings" :headings="fields">
 
-        </b-row>
-      </b-card>
-    </b-collapse>
-    <br><br>
+      <template slot="Id" slot-scope="data">
+        {{data.item.id}}
+      </template>
 
-      <b-form-input
-        placeholder="Search..."
-      ></b-form-input>
+      <template slot="Property" slot-scope="data">
+        {{data.item.property}}
+      </template>
 
-    <br>
+      <template slot="Type" slot-scope="data">
+        {{data.item.type}}
+      </template>
 
-    <b-table hover :items="buildings" :fields="fields"
-      @row-clicked="goTo"
-    >
-    </b-table>
+      <template slot="Location" slot-scope="data">
+        {{data.item.location}}
+      </template>
+
+      <template slot="Owner" slot-scope="data">
+        {{data.item.owner}}
+      </template>
+
+      <template slot="Action" slot-scope="data">
+        <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+      </template>
+
+    </willow-table>
 
   </b-card>
 
@@ -124,13 +87,130 @@ export default {
           { unit: '2A', beds: '2' },
           { unit: '2B', beds: '2' }
         ]
+      },
+      {
+        id: 1,
+        property: '74 Grove Street',
+        location: 'Boston, MA',
+        owner: 'Larsen',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: 'Studio' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '3' }
+        ]
+      },
+      {
+        id: 2,
+        property: '100 Main Ave',
+        location: 'Boston, MA',
+        owner: 'Geneva',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '2' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '1' }
+        ]
+      },
+      {
+        id: 3,
+        property: '100 Main Ave (duplex)',
+        location: 'Boston, MA',
+        owner: 'Jami',
+        type: 'Residential, Multi-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '2' }
+        ]
+      },
+      {
+        id: 1,
+        property: '74 Grove Street',
+        location: 'Boston, MA',
+        owner: 'Larsen',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: 'Studio' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '3' }
+        ]
+      },
+      {
+        id: 2,
+        property: '100 Main Ave',
+        location: 'Boston, MA',
+        owner: 'Geneva',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '2' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '1' }
+        ]
+      },
+      {
+        id: 3,
+        property: '100 Main Ave (duplex)',
+        location: 'Boston, MA',
+        owner: 'Jami',
+        type: 'Residential, Multi-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '2' }
+        ]
+      },
+      {
+        id: 1,
+        property: '74 Grove Street',
+        location: 'Boston, MA',
+        owner: 'Larsen',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: 'Studio' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '3' }
+        ]
+      },
+      {
+        id: 2,
+        property: '100 Main Ave',
+        location: 'Boston, MA',
+        owner: 'Geneva',
+        type: 'Residential, Single-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '2' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '1' }
+        ]
+      },
+      {
+        id: 3,
+        property: '100 Main Ave (duplex)',
+        location: 'Boston, MA',
+        owner: 'Jami',
+        type: 'Residential, Multi-Family',
+        units: [
+          { unit: '1A', beds: '1' },
+          { unit: '1B', beds: '1' },
+          { unit: '2A', beds: '2' },
+          { unit: '2B', beds: '2' }
+        ]
       }
     ]
   },
 
   data () {
     return {
-      fields: ['property', 'location', 'owner', 'type'],
+      fields: ['Property', 'Type', 'Location', 'Owner', 'Action'],
       buildings: null
     }
   },

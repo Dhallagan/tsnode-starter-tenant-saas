@@ -82,14 +82,6 @@ var User = /** @class */ (function () {
         typeorm_1.ManyToOne(function (type) { return Tenant_1.Tenant; }, function (tenant) { return tenant.Users; }),
         __metadata("design:type", Tenant_1.Tenant)
     ], User.prototype, "Tenant", void 0);
-    __decorate([
-        typeorm_1.Column({ nullable: true }),
-        __metadata("design:type", String)
-    ], User.prototype, "StripeCustomerId", void 0);
-    __decorate([
-        typeorm_1.Column({ nullable: true }),
-        __metadata("design:type", String)
-    ], User.prototype, "StripeSubscriptionId", void 0);
     User = __decorate([
         typeorm_1.Entity("user")
     ], User);
