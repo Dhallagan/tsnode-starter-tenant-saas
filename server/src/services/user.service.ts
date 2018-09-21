@@ -38,8 +38,6 @@ export class UserService {
     }
 
 
-
-
     public async createUser(res: Response, firstname: string, lastname: string, email: string, password: string, domain: string) {
         firstname = firstname.toLowerCase();
         lastname = lastname.toLowerCase();
@@ -116,8 +114,6 @@ export class UserService {
     } 
 
 
-
-
     public async verifyEmail(res: Response, verifyEmailToken: string) {
       
         var verifiedUser = await this.userRepository.getUserByToken(verifyEmailToken)
@@ -135,8 +131,6 @@ export class UserService {
     
         return res.status(200).json({'msg': 'Your email has been successfully verified.'});
     }
-
-
     
 
     public async login(res: Response, email: string, password: string) {
@@ -160,8 +154,6 @@ export class UserService {
     }
 
 
-
-
     public async recoverPassword(res: Response, email: string) {
         email = email.toLowerCase();
 
@@ -180,8 +172,6 @@ export class UserService {
 
         return res.status(200).json({'msg': 'An email has been sent to '+ email + ' with further instruction.'});
     }
-
-
 
 
     public async resetPassword(res: Response, token: string, password: string) {
@@ -203,8 +193,6 @@ export class UserService {
     }
 
 
-
-
     public async updatePassword(res: Response, userId: number, password: string, confirmPassword: string) {
         var user = await this.userRepository.getUserById(userId)
         if(!user) {
@@ -222,15 +210,10 @@ export class UserService {
     }
 
 
-
-
     public async getUsers(res: Response) {
         var users = await this.userRepository.getUsers()
         return res.status(200).json(users)
     }
-
-
-
 
 
     public async getUser(res: Response, userId: number) {
@@ -239,16 +222,12 @@ export class UserService {
     }
 
 
-
     public async getPlan(res: Response, userId: number) {
         var user = await this.userRepository.getUserByIdWithRelations(userId)
         console.log(user)
         if (user)
             return res.status(200).json(user.Tenant.Plan)
     }
-
-
-
 
 
     public async updateUser(res: Response, id: number, firstName: string, lastName: string, role: string, active: boolean) {
@@ -268,8 +247,6 @@ export class UserService {
     }
 
 
-
-
     public async upload(req, res: Response) {
         //// Local storage
         // const uploader = new Uploader();
@@ -278,8 +255,6 @@ export class UserService {
         var fileName = await s3.uploadSingle(req, res);
         return res.status(200).json({'filename' : fileName})
     }
-
-
 
 
     public async updateAvatar(res: Response, id: number, avatar: string) {
@@ -292,7 +267,6 @@ export class UserService {
         var updatedUser = await this.userRepository.updateUser(id, user)
         return res.status(200).json(updatedUser)
     }
-
 
 
     public async createCustomer(res: Response, id: number, viewModel: any) {
@@ -316,6 +290,7 @@ export class UserService {
 
         return res.status(200).json({'msg': 'Your subscription successfully created.'});
     }
+
 
     public async updatePlan(res: Response, id: number, viewModel: any) {
         var user = await this.userRepository.getUserByIdWithRelations(id);

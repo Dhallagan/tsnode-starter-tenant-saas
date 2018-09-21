@@ -32,6 +32,7 @@ var Authentication = /** @class */ (function () {
             return res.status(401).send({ message: 'Token has expired' });
         }
         req['user'] = payload.sub;
+        console.log(req['user']);
         next();
     };
     Authentication.issuerName = 'localhost';

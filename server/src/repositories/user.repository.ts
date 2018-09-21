@@ -15,13 +15,9 @@ export class UserRepository extends Repository<User> {
     }
 
 
-
-    
     public async getUserByEmail(email: string){
         return await getConnection().manager.findOne(User, {Email: email});
     }
-
-
 
 
     public async getUserByToken(token: string){
@@ -29,13 +25,9 @@ export class UserRepository extends Repository<User> {
     }
 
 
-
-
     public async getUserByTokenAndExpiration(token: string){
         return await getConnection().manager.findOne(User, { where: {PasswordResetToken: token , PasswordResetExpires: MoreThan(Date.now())} });
     }
-
-
 
 
     public async forgotPassword(user: User){
@@ -43,13 +35,9 @@ export class UserRepository extends Repository<User> {
     }
 
 
-
-
     public async saveUser(user: User){
         return await getConnection().manager.save(User, user);
     }
-
-
 
 
     public async getUserById(id: number){
@@ -57,12 +45,9 @@ export class UserRepository extends Repository<User> {
     }
 
 
-
     public async getUserByIdWithRelations(id: number) {
         return await getRepository(User).findOne({ where: {Id: id}, relations: ["Tenant"] });
     }
-
-
 
 
     public async getUsers(){
@@ -70,8 +55,33 @@ export class UserRepository extends Repository<User> {
     }
 
 
+    // public async create(params: Object){
+    //     return await getRepository(User).save(params);
+    // }
+
+
     public async updateUser(id: number, user: User){
         
         return await getRepository(User).update(id, user);
+    }
+
+
+    public async getOne(params: Object){
+        return await getConnection().manager.findOne(User, params);
+    }
+
+
+    public async getAll(user: User){
+        return await getConnection().manager.find(User);
+    }
+
+
+    public async update(id: number, user: User){
+        return await getRepository(User).update(id, user);
+    }
+    
+
+    public async delete(userId: number){
+        return await getRepository(User).delete(userId)
     }
 }
