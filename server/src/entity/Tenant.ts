@@ -52,7 +52,7 @@ export class Tenant {
 	@Column({nullable: true})
     StripeCustomerId: string;
 
-    @Column({nullable: true})
-    StripeSubscriptionId: string;
+	@Column({nullable: true})
+	StripeSubscriptionId: string;
 
 }
