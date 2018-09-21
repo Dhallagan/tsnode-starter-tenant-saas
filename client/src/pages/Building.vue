@@ -68,7 +68,6 @@
               :value="'on'"
               :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"
               :label="'Visibility'"
-              @change=""
               subdued
             ></willow-select>
 
@@ -122,7 +121,7 @@
           </b-col>
 
         </b-row> -->
-       </b-card>
+       <!-- </b-card> -->
 
     </willow-layout-section>
 
@@ -132,8 +131,7 @@
     <template slot="action-left">
       <willow-button :size="'lg'" destructive>Delete this building</willow-button>
     </template>
-
-    <!-- 
+    <!--
     <template slot="action-right">
       <willow-button :size="'lg'" primary>Save</willow-button>
     </template>

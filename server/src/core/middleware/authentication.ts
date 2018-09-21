@@ -26,7 +26,6 @@ export class Authentication {
           }
           req['user'] = payload.sub;
           req['tenant'] = payload.tenant;
-          console.log(payload);
           next();
     }
 }

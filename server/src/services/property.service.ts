@@ -18,7 +18,7 @@ export class PropertyService {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
 
-        const newProperty = await this.propertyRepository.createProperty({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.create({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
 
         return res.json(200).json(newProperty);
     }
