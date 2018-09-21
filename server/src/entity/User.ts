@@ -56,10 +56,4 @@ export class User {
     @ManyToOne( type => Tenant, tenant => tenant.Users)
     Tenant: Tenant;
 
-    @Column({nullable: true})
-    StripeCustomerId: string;
-
-    @Column({nullable: true})
-    StripeSubscriptionId: string;
-
 }

@@ -11,40 +11,10 @@
   <willow-layout>
   <!-- CARD -->
     <willow-plans
-      :plans="[
-        { name: 'Basic', price: '5', description:'Start with a basic', pricing: ['1 users included', '2 GB of storage', 'Email support', 'Help center access'], action:'Choose this plan'},
-        { name: 'Standard', price: '15', description:'Start with a standard', pricing: ['5 users included', '15 GB of storage', 'Priority email support', 'Help center access'], action:'Choose this plan'},
-        { name: 'Premium', price: '29', description:'Start with a premium', pricing: ['30 users included', '30 GB of storage', 'Phone and email support', 'Help center access'], action:'Choose this plan'}]"
+      :plans="plans"
+      :currentPlan="currentPlanId"
+      v-on:subscribe="subscribePlan($event)"
     ></willow-plans>
-
-    <willow-annotated-section
-      v-for="plan in plans"
-      v-bind:key="plan.Id"
-      v-bind:plan="plan"
-      v-if="plan.Amount != 0"
-      :title="plan.Name"
-    >
-       <b-card class="mb-2">
-        <b-row>
-          <b-col>
-            <h6 class="heading">Interval</h6>
-            <p class="card-text">
-              {{plan.Interval}}
-            </p>
-          </b-col>
-          <b-col>
-            <h6 class="heading">Amount</h6>
-            <p class="card-text">
-              ${{plan.Amount}}
-            </p>
-          </b-col>
-          <b-col>
-            <willow-button v-if="currentPlan.Id != plan.Id" @click.native="subscribePlan(plan)" primary>Subscribe</willow-button>
-            <h6 v-if="currentPlan.Id == plan.Id">Current Plan</h6>
-          </b-col>
-        </b-row>
-       </b-card>
-    </willow-annotated-section>
 
     <willow-modal
       v-b-modal.modallg
@@ -58,11 +28,7 @@
                 <label for="card-element">
                 Credit or debit card
                 </label>
-                <div ref="cardElement">
-                <!-- A Stripe Element will be inserted here. -->
-                </div>
-
-                <!-- Used to display form errors. -->
+                <div ref="cardElement"></div>
                 <div id="card-errors" role="alert"></div>
             </b-col>
             <b-col>
@@ -82,7 +48,7 @@
 import api from '@/api/api'
 import axios from 'axios'
 
-var stripe = window.Stripe('pk_test_SEMCPOlbdQXNeVOGjJWLIT7D')
+var stripe = window.Stripe('pk_test_BbiB91sCzXYnkGbYHB0ZkGG0')
 var elements = stripe.elements()
 var card
 
@@ -101,7 +67,7 @@ export default {
           }
         ]
       },
-      currentPlan: {},
+      currentPlanId: -1,
       newPlan: {},
       plans: [],
       stripe,
@@ -116,21 +82,32 @@ export default {
         api.getPlans()
       ])
         .then(axios.spread((res1, res2) => {
-          this.currentPlan = res1.data
-          this.plans = res2.data.Plans
-          console.log(this.currentPlan, this.plans)
+          this.currentPlanId = res1.data.Name === 'Trial' ? -1 : res1.data.Id
+          res2.data.Plans.shift()
+          this.setPlans(res2.data.Plans)
         }))
+    },
+    setPlans (plans) {
+      this.plans = plans.map(plan => {
+        return {
+          name: plan.Name,
+          description: `Start with a ${plan.Name.toLowerCase()}`,
+          price: plan.Amount,
+          pricing: plan.Pricing,
+          action: plan.Id === this.currentPlanId ? 'Current Plan' : 'Choose this plan',
+          id: plan.Id
+        }
+      })
     },
     subscribePlan (plan) {
       this.newPlan = plan
-      if (this.currentPlan.Name === 'Trial') {
+      if (this.currentPlanId === -1) {
         this.$refs.stripeModal.show()
       } else {
-        api.updatePlan(this.newPlan)
+        api.updatePlan({ plan: this.newPlan.id })
           .then(res => {
-            this.currentPlan = this.newPlan
+            this.currentPlanId = this.newPlan.id
             this.newPlan = null
-            console.log(res.data)
           })
           .catch(err => {
             console.log(err)
@@ -164,26 +141,21 @@ export default {
       })
     },
     stripeSubmit () {
-      const user = this.$store.getters.getUser
-      console.log(user)
       const _this = this
       this.$refs.stripeModal.hide()
       stripe.createToken(card).then(function (result) {
         if (result.error) {
-          // Inform the user if there was an error.
           var errorElement = document.getElementById('card-errors')
           errorElement.textContent = result.error.message
         } else {
-          // Send the token to your server.
           console.log(result.token)
           const param = {
             token: result.token,
-            plan: _this.newPlan
+            plan: _this.newPlan.id
           }
           api.createCustomer(param)
             .then(res => {
-              console.log(res.data)
-              _this.currentPlan = _this.newPlan
+              _this.currentPlanId = _this.newPlan.id
               _this.newPlan = null
             })
             .catch(err => {

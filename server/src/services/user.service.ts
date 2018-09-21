@@ -6,34 +6,31 @@ import bcrypt from 'bcrypt';
 import moment from 'moment';
 import * as jwt from 'jsonwebtoken';
 import { v4 as UUId } from 'uuid';
-import { Uploader } from '../util/uploader';
 import { Storage } from '../core/storage'
-import { User } from "../entity/User";
 import { TenantService } from './tenant.service';
-import { Stripe } from '../core/stripe';
 
 export class UserService {
 
     private userRepository: UserRepository;
     private companyRepository: CompanyRepository;
     private tenantService: TenantService;
-    private stripe: Stripe;
     
     constructor() {
         //super();
         this.userRepository = new UserRepository();
         this.companyRepository = new CompanyRepository();
         this.tenantService = new TenantService();
-        this.stripe = new Stripe();
     }
 
     public generateToken(user) {
         var payload = {
             iss: "localhost",
             sub: user.Id,
+            tenant: user.Tenant.Id,
             iat: moment().unix(),
             exp: moment().add(14, 'days').unix()
         };
+        console.log(payload);
         return jwt.sign(payload, 'secretsecretsecret');
     }
 
@@ -134,7 +131,7 @@ export class UserService {
     
 
     public async login(res: Response, email: string, password: string) {
-        const user = await this.userRepository.getUserByEmail(email)
+        const user = await this.userRepository.getUserByEmailWithRelations(email)
         
         if(!user){
             return  res.status(422).json({'errors': [{'msg': 'The email you’ve entered doesn’t match any account.'}]})
@@ -267,6 +264,7 @@ export class UserService {
         var updatedUser = await this.userRepository.updateUser(id, user)
         return res.status(200).json(updatedUser)
     }
+<<<<<<< HEAD
 
 
     public async createCustomer(res: Response, id: number, viewModel: any) {
@@ -305,4 +303,6 @@ export class UserService {
 
         return res.status(200).json({'msg': 'Plan updated.'});
     }
+=======
+>>>>>>> 72fee12883ffad3a0f233d918ab0a1593db26c68
 }

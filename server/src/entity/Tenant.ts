@@ -49,4 +49,10 @@ export class Tenant {
 	@JoinColumn()
 	Plan: Plan;
 
+	@Column({nullable: true})
+    StripeCustomerId: string;
+
+    @Column({nullable: true})
+    StripeSubscriptionId: string;
+
 }

@@ -1,22 +1,16 @@
-import { ProductRepository } from '../repositories/product.repository';
-import { PlanRepository } from '../repositories/plan.repository';
-var stripe = require('stripe')(process.env.STRIPE_SKEY)
+var stripe;
 
 export class Stripe {
-
-    private planRepository;
-    private productRepository;
+    
     
     constructor() {
-        this.planRepository = new PlanRepository();
-        this.productRepository = new ProductRepository();
-        console.log(process.env.STRIPE_SKEY)
+        stripe = require('stripe')(process.env.STRIPE_SKEY);
     }
 
     public static async createProduct() {
 
         const product = await stripe.products.create({
-            name: 'DevTenant Service Product',
+            name: 'Tenant Service',
             type: 'service',
         });
         return product;

@@ -31,22 +31,26 @@ export class Seeds {
         {
           Name: "Trial",
           Amount: 0,
-          Interval: ""
+          Interval: "",
+          Pricing: []
         },
         {
           Name: "Basic",
-          Amount: 10,
-          Interval: "Every 1 month"
+          Amount: 5,
+          Interval: "Every 1 month",
+          Pricing: ['1 users included', '2 GB of storage', 'Email support', 'Help center access']
         },
         {
           Name: "Standard",
-          Amount: 20,
-          Interval: "Every 3 month"
+          Amount: 15,
+          Interval: "Every 1 month",
+          Pricing: ['5 users included', '15 GB of storage', 'Priority email support', 'Help center access']
         },
         {
           Name: "Premium",
-          Amount: 30,
-          Interval: "Every 6 month"
+          Amount: 29,
+          Interval: "Every 1 month",
+          Pricing: ['30 users included', '30 GB of storage', 'Phone and email support', 'Help center access']
         }
     ]
 
