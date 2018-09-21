@@ -5,9 +5,10 @@
     :title="building.property"
     :breadcrumbs="pageheader.breadcrumbs"
   >
-    <template slot="action-right">
-      <willow-button primary>Edit</willow-button>
-    </template>
+    <!-- <template slot="action-right">
+      <willow-button :size="'lg'" plain>View</willow-button>
+    </template> -->
+
   </page-header>
 
   <willow-layout>
@@ -16,15 +17,31 @@
     <willow-layout-section primary >
        <b-card  card-title="Primary" class="mb-2">
         <h5>Units</h5>
-        <b-table hover :items="items"></b-table>
-       </b-card>
 
-       <b-card  card-title="Primary" class="mb-2">
-        <h5>Rent Roll</h5>
-       </b-card>
+        <willow-table hover :rows="items" :headings="fields">
 
-      <b-card  card-title="Primary" class="mb-2">
-       <h5>Events</h5>
+          <template slot="Number" slot-scope="data">
+            {{data.item.number}}
+          </template>
+
+          <template slot="Tenant" slot-scope="data">
+            {{data.item.tenant}}
+          </template>
+
+          <template slot="Beds" slot-scope="data">
+            {{data.item.beds}}
+          </template>
+
+          <template slot="Rent" slot-scope="data">
+            {{data.item.rent}}
+          </template>
+
+          <template slot="Action" slot-scope="data">
+            <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+          </template>
+
+        </willow-table>
+
        </b-card>
 
     </willow-layout-section>
@@ -32,33 +49,36 @@
         <!-- Secondary -->
     <willow-layout-section secondary>
        <b-card  card-title="Secondary" class="mb-2">
-        <h6>Property Details</h6>
-              <b-row>
-        <b-col>
-          <b-img thumbnail fluid src="https://dylanhallagan1.managebuilding.com/Manager/Upload/StreamFile.ashx?fileName=47a021aa94544561ac024fb469a7a407_210x158.jpg&isPreview=true" alt="Thumbnail" />
-        </b-col>
-        <b-col>
-          <p><strong>Address:</strong> <br>{{building.property}}<br>{{building.location}}</p>
-          <p><strong>Type:</strong> <br>{{building.type}}</p>
-          <p><strong>Owner:</strong> <br>{{building.owner}}</p>
-        </b-col>
+         <willow-button v-b-modal.modallg  plain size="sm" class="close sm" style="font-size: 0.75rem;">Edit</willow-button>
+         <h5>Property Details</h5>
+          <b-row>
+            <b-col>
+              <p><strong>Address:</strong> <br>{{building.property}}<br>{{building.location}}</p>
+              <p><strong>Type:</strong> <br>{{building.type}}</p>
+              <p><strong>Owner:</strong> <br>{{building.owner}}</p>
+            </b-col>
 
-      </b-row>
+          </b-row>
        </b-card>
 
        <b-card  card-title="Secondary- Subdued" class="mb-2" style="background-color: #f8f9fa ;">
-        <b-form-group id="fieldsetHorizontal"
-                  description="Turn on listing."
-                  label="Visibility"
-                  label-for="inputHorizontal">
-        <b-select :options="[{ value: null, text: 'Active' },{ value: 'a', text: 'Inactive' }]"></b-select>
-       </b-form-group>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card"s content.
-        </p>
-       </b-card>
+          <b-form-group>
+            <willow-select
+              :helpText="'Turn on listing'"
+              :value="'on'"
+              :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"
+              :label="'Visibility'"
+              @change=""
+              subdued
+            ></willow-select>
 
-             <b-card  card-title="Primary" class="mb-2">
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the bulk of the card"s content.
+            </p>
+        </b-form-group>
+        </b-card>
+
+             <!-- <b-card  card-title="Primary" class="mb-2">
       <willow-button v-b-modal.modallg  plain size="sm" class="close sm" style="font-size: 0.75rem;">Edit</willow-button>
        <h5>Amenities</h5>
         <b-row>
@@ -101,7 +121,7 @@
           </b-form-group>
           </b-col>
 
-        </b-row>
+        </b-row> -->
        </b-card>
 
     </willow-layout-section>
@@ -109,12 +129,15 @@
   </willow-layout>
 
   <page-actions>
-      <template slot="action-left">
-      <willow-button destructive>Delete this building</willow-button>
+    <template slot="action-left">
+      <willow-button :size="'lg'" destructive>Delete this building</willow-button>
     </template>
+
+    <!-- 
     <template slot="action-right">
-      <willow-button primary>Save</willow-button>
+      <willow-button :size="'lg'" primary>Save</willow-button>
     </template>
+     -->
   </page-actions>
 
 </page>
@@ -165,6 +188,7 @@ export default {
           }
         ]
       },
+      fields: ['Number', 'Tenant', 'Beds', 'Rent', 'Action'],
       items: items,
       building: {
         id: 1,

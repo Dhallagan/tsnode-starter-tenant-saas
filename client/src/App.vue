@@ -32,6 +32,12 @@
             href='/'
           ></willow-menu-item>
 
+          <willow-menu-item
+            icon='buildings'
+            title='Buildings'
+            href='/buildings'
+          ></willow-menu-item>
+
           <willow-menu-item v-if="hasRole('Admin')"
             icon='users'
             title='Tenants'
@@ -53,6 +59,12 @@
           title='Home'
           href='/'
         ></willow-menu-item>
+
+          <willow-menu-item
+            icon='building'
+            title='Buildings'
+            href='/buildings'
+          ></willow-menu-item>
 
         <!-- MENU ITEMS-->
         <!-- <willow-vertical-submenu

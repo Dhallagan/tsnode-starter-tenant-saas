@@ -264,45 +264,4 @@ export class UserService {
         var updatedUser = await this.userRepository.updateUser(id, user)
         return res.status(200).json(updatedUser)
     }
-<<<<<<< HEAD
-
-
-    public async createCustomer(res: Response, id: number, viewModel: any) {
-        var user = await this.userRepository.getUserByIdWithRelations(id);
-        if(!user) {
-            return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
-        }
-
-        const customer = await this.stripe.createCustomer(viewModel.token.id, user.Email);
-        user.StripeCustomerId = customer.id;
-
-        const newPlan = viewModel.plan;
-        const subscription = await this.stripe.planSubscribe(newPlan.StripeId, user.StripeCustomerId);
-        user.StripeSubscriptionId = subscription.id;
-
-        const updatedUser = await this.userRepository.saveUser(user);
-        const tenant = updatedUser.Tenant;
-        tenant.Plan = newPlan;
-
-        await this.tenantService.saveTenant(res, tenant);
-
-        return res.status(200).json({'msg': 'Your subscription successfully created.'});
-    }
-
-
-    public async updatePlan(res: Response, id: number, viewModel: any) {
-        var user = await this.userRepository.getUserByIdWithRelations(id);
-        if(!user) {
-            return  res.status(422).json({'errors': [{'msg': 'User Id is invalid.'}]})
-        }
-
-        await this.stripe.planChange(user.StripeSubscriptionId, viewModel.StripeId);
-        const tenant = user.Tenant;
-        tenant.Plan = viewModel;
-        await this.tenantService.saveTenant(res, tenant);
-
-        return res.status(200).json({'msg': 'Plan updated.'});
-    }
-=======
->>>>>>> 72fee12883ffad3a0f233d918ab0a1593db26c68
 }

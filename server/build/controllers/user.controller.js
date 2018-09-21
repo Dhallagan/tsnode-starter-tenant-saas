@@ -284,42 +284,6 @@ var UserController = /** @class */ (function (_super) {
             });
         });
     };
-    UserController.prototype.createCustomer = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var errors, userId, viewModel;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        errors = check_1.validationResult(req);
-                        if (!errors.isEmpty()) {
-                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
-                        }
-                        userId = req['user'];
-                        viewModel = req.body;
-                        return [4 /*yield*/, this.userService.createCustomer(res, userId, viewModel)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserController.prototype.updatePlan = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var errors, userId, viewModel;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        errors = check_1.validationResult(req);
-                        if (!errors.isEmpty()) {
-                            return [2 /*return*/, res.status(422).json({ errors: errors.array() })];
-                        }
-                        userId = req['user'];
-                        viewModel = req.body;
-                        return [4 /*yield*/, this.userService.updatePlan(res, userId, viewModel)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
     return UserController;
 }(base_controller_1.BaseController));
 exports.UserController = UserController;

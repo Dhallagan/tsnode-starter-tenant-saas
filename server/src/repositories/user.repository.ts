@@ -20,8 +20,6 @@ export class UserRepository extends Repository<User> {
     }
 
 
-<<<<<<< HEAD
-=======
 
     public async getUserByEmailWithRelations(email: string) {
         return await getRepository(User).findOne({ where: {Email: email}, relations: ["Tenant"] });
@@ -30,7 +28,6 @@ export class UserRepository extends Repository<User> {
 
 
 
->>>>>>> 72fee12883ffad3a0f233d918ab0a1593db26c68
     public async getUserByToken(token: string){
         return await getRepository(User).findOne({EmailVerifyToken: token});
     }

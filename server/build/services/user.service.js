@@ -54,22 +54,22 @@ var jwt = __importStar(require("jsonwebtoken"));
 var uuid_1 = require("uuid");
 var storage_1 = require("../core/storage");
 var tenant_service_1 = require("./tenant.service");
-var stripe_1 = require("../core/stripe");
 var UserService = /** @class */ (function () {
     function UserService() {
         //super();
         this.userRepository = new repositories_1.UserRepository();
         this.companyRepository = new repositories_1.CompanyRepository();
         this.tenantService = new tenant_service_1.TenantService();
-        this.stripe = new stripe_1.Stripe();
     }
     UserService.prototype.generateToken = function (user) {
         var payload = {
             iss: "localhost",
             sub: user.Id,
+            tenant: user.Tenant.Id,
             iat: moment_1.default().unix(),
             exp: moment_1.default().add(14, 'days').unix()
         };
+        console.log(payload);
         return jwt.sign(payload, 'secretsecretsecret');
     };
     UserService.prototype.createUser = function (res, firstname, lastname, email, password, domain) {
@@ -202,7 +202,7 @@ var UserService = /** @class */ (function () {
             var user, passwordMatch;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByEmail(email)];
+                    case 0: return [4 /*yield*/, this.userRepository.getUserByEmailWithRelations(email)];
                     case 1:
                         user = _a.sent();
                         if (!user) {
@@ -402,63 +402,6 @@ var UserService = /** @class */ (function () {
                     case 2:
                         updatedUser = _a.sent();
                         return [2 /*return*/, res.status(200).json(updatedUser)];
-                }
-            });
-        });
-    };
-    UserService.prototype.createCustomer = function (res, id, viewModel) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user, customer, newPlan, subscription, updatedUser, tenant;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByIdWithRelations(id)];
-                    case 1:
-                        user = _a.sent();
-                        if (!user) {
-                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'User Id is invalid.' }] })];
-                        }
-                        return [4 /*yield*/, this.stripe.createCustomer(viewModel.token.id, user.Email)];
-                    case 2:
-                        customer = _a.sent();
-                        user.StripeCustomerId = customer.id;
-                        newPlan = viewModel.plan;
-                        return [4 /*yield*/, this.stripe.planSubscribe(newPlan.StripeId, user.StripeCustomerId)];
-                    case 3:
-                        subscription = _a.sent();
-                        user.StripeSubscriptionId = subscription.id;
-                        return [4 /*yield*/, this.userRepository.saveUser(user)];
-                    case 4:
-                        updatedUser = _a.sent();
-                        tenant = updatedUser.Tenant;
-                        tenant.Plan = newPlan;
-                        return [4 /*yield*/, this.tenantService.saveTenant(res, tenant)];
-                    case 5:
-                        _a.sent();
-                        return [2 /*return*/, res.status(200).json({ 'msg': 'Your subscription successfully created.' })];
-                }
-            });
-        });
-    };
-    UserService.prototype.updatePlan = function (res, id, viewModel) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user, tenant;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.userRepository.getUserByIdWithRelations(id)];
-                    case 1:
-                        user = _a.sent();
-                        if (!user) {
-                            return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'User Id is invalid.' }] })];
-                        }
-                        return [4 /*yield*/, this.stripe.planChange(user.StripeSubscriptionId, viewModel.StripeId)];
-                    case 2:
-                        _a.sent();
-                        tenant = user.Tenant;
-                        tenant.Plan = viewModel;
-                        return [4 /*yield*/, this.tenantService.saveTenant(res, tenant)];
-                    case 3:
-                        _a.sent();
-                        return [2 /*return*/, res.status(200).json({ 'msg': 'Plan updated.' })];
                 }
             });
         });
