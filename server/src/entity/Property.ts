@@ -28,5 +28,5 @@ export class Property extends TenantScope {
     Units: Unit[];
 
     @Column()
-    Type: string;
+    Type: number;
 }

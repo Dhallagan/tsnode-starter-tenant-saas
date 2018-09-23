@@ -79,7 +79,18 @@ export class PropertyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.propertyService.deleteProperty(res, tenantId, viewModel.id);
+        return await this.propertyService.deleteProperty(res, tenantId, id);
+    }
+
+    public async getPropertyTypes(req: Request, res: Response){
+        const errors = validationResult(req);
+        const tenantId = req['tenant'];
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.propertyService.getPropertyTypes(res, tenantId);
     }
 
 }

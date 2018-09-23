@@ -19,6 +19,7 @@ import WillowAuthenticationLayout from './components/WillowAuthenticationLayout'
 import WillowApplicationLayout from './components/WillowApplicationLayout'
 import WillowAnnotatedSection from './components/WillowAnnotatedSection'
 import WillowButton from './components/WillowButton'
+import WillowCheckbox from './components/WillowCheckBox'
 import WillowBreadcrumbs from './components/WillowBreadcrumbs'
 import WillowCalloutCard from './components/WillowCalloutCard.vue'
 import WillowFileInput from './components/WillowFileInput.vue'
@@ -65,6 +66,7 @@ Vue.component('willow-avatar', Avatar)
 Vue.component('willow-breadcrumbs', WillowBreadcrumbs)
 Vue.component('willow-button', WillowButton)
 Vue.component('willow-callout-card', WillowCalloutCard)
+Vue.component('willow-checkbox', WillowCheckbox)
 Vue.component('willow-drawer', WillowDrawer)
 Vue.component('willow-description-list', WillowDescriptionList)
 Vue.component('willow-description-list-item', WillowDescriptionListItem)

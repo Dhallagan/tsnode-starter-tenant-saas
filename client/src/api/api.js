@@ -103,6 +103,10 @@ export default {
     return HTTP.put('/plan', params)
   },
 
+  getPropertyTypes () {
+    return HTTP.get('/propertytypes')
+  },
+
   createBuilding (params) {
     return HTTP.post('/properties', params)
   },
@@ -116,6 +120,6 @@ export default {
   },
 
   deleteBuilding (id) {
-    return HTTP.get('/properties/' + id)
+    return HTTP.delete('/properties/' + id)
   }
 }

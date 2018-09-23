@@ -58,7 +58,7 @@ var Property = /** @class */ (function (_super) {
     ], Property.prototype, "Units", void 0);
     __decorate([
         typeorm_1.Column(),
-        __metadata("design:type", String)
+        __metadata("design:type", Number)
     ], Property.prototype, "Type", void 0);
     Property = __decorate([
         typeorm_1.Entity()
