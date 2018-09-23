@@ -149,6 +149,8 @@
 
 <script>
 import api from '@/api/api'
+import axios from 'axios'
+
 const items = [
   {
     number: '1',
@@ -215,11 +217,20 @@ export default {
   },
   methods: {
     fetch () {
-      api.getBuilding(this.$route.params.building_id)
-        .then(res => {
-          console.log(res)
-          // this.building = res.data
-        })
+      axios.all([
+        api.getBuilding(this.$route.params.building_id),
+        api.getTenant()
+      ])
+        .then(axios.spread((res1, res2) => {
+          this.building = {
+            id: res1.data.Id,
+            property: res1.data.ApartmentSuite,
+            location: res1.data.City + ', ' + res1.data.State,
+            owner: res2.data.Tenant.Domain,
+            type: res1.data.Type,
+            units: res1.data.units
+          }
+        }))
     }
   }
 }

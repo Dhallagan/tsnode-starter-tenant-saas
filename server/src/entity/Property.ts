@@ -23,10 +23,7 @@ export class Property extends TenantScope {
     @Column()
     Zipcode!: string;
 
-    @OneToMany(type => Unit, unit => unit.Property, {
-      eager: true,
-      cascade: true
-    })
+    @OneToMany(type => Unit, unit => unit.Property)
     @JoinColumn({ name: "UnitId" })
     Units: Unit[];
 
