@@ -23,6 +23,7 @@ import UsersEdit from '../pages/Users.Edit'
 // import Applicant from '../pages/Applicant'
 import Buildings from '../pages/Buildings'
 import Building from '../pages/Building'
+import NewBuilding from '../pages/NewBuilding'
 // import Components from '../pages/Components'
 // import Listings from '../pages/Listings'
 // import Listing from '../pages/Listing'
@@ -131,6 +132,12 @@ export default new Router({
       name: 'Buildings',
       meta: { layout: 'application', requiresAuth: true },
       component: Buildings
+    },
+    {
+      path: '/Buildings/New',
+      name: 'NewBuilding',
+      meta: { layout: 'application', requiresAuth: true },
+      component: NewBuilding
     },
     {
       path: '/Buildings/:building_id',

@@ -35,6 +35,21 @@ export class UserService {
     }
 
 
+    public generateUserViewModel(user) {
+        return {
+            Id: user.Id,
+            Avatar: user.Avatar,
+            Email: user.Email,
+            FirstName: user.FirstName,
+            LastName: user.LastName,
+            PhoneNumber: user.PhoneNumber,
+            Role: user.Role,
+            Active: user.Active,
+            DateCreated: user.DateCreated
+        };
+    }
+
+
     public async createUser(res: Response, firstname: string, lastname: string, email: string, password: string, domain: string) {
         firstname = firstname.toLowerCase();
         lastname = lastname.toLowerCase();
@@ -146,7 +161,7 @@ export class UserService {
         if(!passwordMatch){
             return  res.status(422).json({'errors': [{'msg': 'The password you’ve entered is incorrect.'}]})
         } else {
-            return  res.status(200).json({token: this.generateToken(user), user: user})
+            return  res.status(200).json({token: this.generateToken(user), user: this.generateUserViewModel(user)})
         }
     }
 
@@ -208,14 +223,17 @@ export class UserService {
 
 
     public async getUsers(res: Response) {
-        var users = await this.userRepository.getUsers()
-        return res.status(200).json(users)
+        const users = await this.userRepository.getUsers()
+        const usersViewModel = users.map(user => this.generateUserViewModel(user));
+        return res.status(200).json(usersViewModel);
     }
 
 
+
+
     public async getUser(res: Response, userId: number) {
-        var user = await this.userRepository.getUserById(userId)
-        return res.status(200).json(user)
+        var user = await this.userRepository.getUserById(userId);
+        return res.status(200).json(this.generateUserViewModel(user));
     }
 
 
@@ -239,8 +257,8 @@ export class UserService {
         user.Role = role
         user.Active = active
         
-        var updatedUser = await this.userRepository.updateUser(id, user)
-        return res.status(200).json(updatedUser)
+        var updatedUser = await this.userRepository.updateUser(id, user);
+        return res.status(200).json(this.generateUserViewModel(updatedUser));
     }
 
 
@@ -262,6 +280,6 @@ export class UserService {
         user.Avatar = avatar
         
         var updatedUser = await this.userRepository.updateUser(id, user)
-        return res.status(200).json(updatedUser)
+        return res.status(200).json(this.generateUserViewModel(updatedUser))
     }
 }

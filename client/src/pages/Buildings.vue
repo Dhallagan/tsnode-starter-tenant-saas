@@ -5,7 +5,7 @@
     title="Buildings"
   >
   <template slot="action-right">
-    <willow-button size="lg" primary>Add Building</willow-button>
+    <willow-button size="lg" primary :url="'/buildings/new'">Add Building</willow-button>
   </template>
 
   </page-header>
@@ -46,8 +46,13 @@
 </template>
 
 <script>
+import api from '@/api/api'
+import axios from 'axios'
+
 export default {
   mounted () {
+    this.fetch()
+    /*
     this.buildings = [
       {
         id: 1,
@@ -206,6 +211,7 @@ export default {
         ]
       }
     ]
+    */
   },
 
   data () {
@@ -216,6 +222,25 @@ export default {
   },
 
   methods: {
+    fetch () {
+      axios.all([
+        api.getTenant(),
+        api.getBuildings()
+      ])
+        .then(axios.spread((res1, res2) => {
+          console.log(res1, res2)
+          this.buildings = res2.data.map(property => {
+            return {
+              id: property.Id,
+              property: property.ApartmentSuite,
+              location: property.City + ', ' + property.State,
+              owner: res1.data.Tenant.Name,
+              type: property.Type,
+              units: []
+            }
+          })
+        }))
+    },
     goTo (building, index) {
       console.log(building)
       this.$router.push({ path: '/Buildings/' + building.id })
