@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import api from '@/api/api'
 const items = [
   {
     number: '1',
@@ -176,6 +177,9 @@ export default {
   //   console.log('Building:' + building)
   //   this.building = building
   // },
+  mounted () {
+    this.fetch()
+  },
   data () {
     return {
       pageheader: {
@@ -201,6 +205,15 @@ export default {
           { unit: '2B', beds: '3' }
         ]
       }
+    }
+  },
+  methods: {
+    fetch () {
+      api.getBuilding(this.$route.params.building_id)
+        .then(res => {
+          console.log(res)
+          // this.building = res.data
+        })
     }
   }
 }

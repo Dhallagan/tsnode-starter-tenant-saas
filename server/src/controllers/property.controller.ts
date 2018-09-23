@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { PropertyService } from '../services';
+import { validationResult } from 'express-validator/check';
 
 export class PropertyController extends BaseController {
 
@@ -13,24 +14,59 @@ export class PropertyController extends BaseController {
 
 
     public async getProperties(req: Request, res: Response){
-        const properties = await this.propertyService.getProperties();
         
-        if (properties)
-            return res.status(200).json({Properties: properties});
+        
+        const errors = validationResult(req);
+        const tenant = req['tenant'];
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.propertyService.getPropertiesByTenant(res, tenant);
     }
 
 
-    public async updateProperty(req: Request, res: Response) {
-        //const errors = [];
+    public async getProperty(req: Request, res: Response) {
+
+        const errors = validationResult(req);
+        const id = req.params.id;
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.propertyService.getPropertyWithRelations(res, id);
+
+    }
+
+
+    public async createProperty(req: Request, res: Response) {
+        const errors = validationResult(req);
         const viewModel = req.body;
+        const tenant = req['tenant'];
 
-        console.log(viewModel.Street, viewModel.ApartmentSuite, viewModel.City, viewModel.State, viewModel.Zipcode);
-        //Will Add later    
-        //if (!errors.isEmpty()) {
-        //    return res.status(422).json({ errors: errors.array() });
-        //}
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
 
-        return await this.propertyService.createProperty(res, viewModel.Street, viewModel.ApartmentSuite, viewModel.City, viewModel.State, viewModel.Zipcode);
+        console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        
+        return await this.propertyService.createProperty(res, tenant, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+    }
+
+    public async updateProperty(req: Request, res: Response) {
+        const errors = validationResult(req);
+        const viewModel = req.body;
+        const id = req.params.id;
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        
+        return await this.propertyService.createProperty(res, id, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
     }
 
 }

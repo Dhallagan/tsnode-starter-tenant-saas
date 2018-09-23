@@ -38,11 +38,7 @@ export class TenantController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        const tenants = await this.tenantService.getTenants()
-        console.log(tenants)
-        if (tenants) {
-            return res.status(200).json({Tenants: tenants});
-        }
+        return await this.tenantService.getTenants(res);
     }
 
 

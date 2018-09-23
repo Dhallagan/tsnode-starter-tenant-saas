@@ -15,14 +15,23 @@ export class PropertyRepository  {
         return await getConnection().manager.findOne(Property, params);
     }
 
+    public async getPropertyWithRelations(id: number) {
+        return await getRepository(Property).findOne({ where: {Id: id}, relations: ["Units"] });
+    }
+
 
     public async getAll(){
         return await getConnection().manager.find(Property);
     }
 
 
+    public async getPropertiesByTenant(tenantId: number) {
+        return await getConnection().manager.find(Property, {TenantId: tenantId})
+    }
+
+
     public async save(property: Property) {
-        return await getConnection().manager.save(Property, property);
+        return await getConnection().manager.save(property);
     }
 
 

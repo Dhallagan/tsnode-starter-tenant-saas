@@ -34,11 +34,11 @@ export class TenantService {
     }
 
 
-    public async getTenants() {
+    public async getTenants(res: Response) {
         const tenants = await this.tenantRepository.getTenants();
         console.log(tenants);
 
-        return tenants;
+        return res.status(200).json({Tenants: tenants});
     }
 
 
