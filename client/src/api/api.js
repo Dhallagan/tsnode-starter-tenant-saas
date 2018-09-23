@@ -113,5 +113,9 @@ export default {
 
   getBuilding (id) {
     return HTTP.get('/properties/' + id)
+  },
+
+  deleteBuilding (id) {
+    return HTTP.get('/properties/' + id)
   }
 }

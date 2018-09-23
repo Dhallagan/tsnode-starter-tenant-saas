@@ -19,19 +19,19 @@
       </template>
 
       <template slot="Property" slot-scope="data">
-        {{data.item.property}}
+        {{data.item.Street}}
       </template>
 
       <template slot="Type" slot-scope="data">
-        {{data.item.type}}
+        {{data.item.Type}}
       </template>
 
       <template slot="Location" slot-scope="data">
-        {{data.item.location}}
+        {{data.item.City + ', ' + data.item.State}}
       </template>
 
       <template slot="Owner" slot-scope="data">
-        {{data.item.owner}}
+        {{data.item.Owner}}
       </template>
 
       <template slot="Action" slot-scope="data">
@@ -47,171 +47,10 @@
 
 <script>
 import api from '@/api/api'
-import axios from 'axios'
 
 export default {
   mounted () {
     this.fetch()
-    /*
-    this.buildings = [
-      {
-        id: 1,
-        property: '74 Grove Street',
-        location: 'Boston, MA',
-        owner: 'Larsen',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: 'Studio' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '3' }
-        ]
-      },
-      {
-        id: 2,
-        property: '100 Main Ave',
-        location: 'Boston, MA',
-        owner: 'Geneva',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '2' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '1' }
-        ]
-      },
-      {
-        id: 3,
-        property: '100 Main Ave (duplex)',
-        location: 'Boston, MA',
-        owner: 'Jami',
-        type: 'Residential, Multi-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '2' }
-        ]
-      },
-      {
-        id: 1,
-        property: '74 Grove Street',
-        location: 'Boston, MA',
-        owner: 'Larsen',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: 'Studio' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '3' }
-        ]
-      },
-      {
-        id: 2,
-        property: '100 Main Ave',
-        location: 'Boston, MA',
-        owner: 'Geneva',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '2' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '1' }
-        ]
-      },
-      {
-        id: 3,
-        property: '100 Main Ave (duplex)',
-        location: 'Boston, MA',
-        owner: 'Jami',
-        type: 'Residential, Multi-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '2' }
-        ]
-      },
-      {
-        id: 1,
-        property: '74 Grove Street',
-        location: 'Boston, MA',
-        owner: 'Larsen',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: 'Studio' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '3' }
-        ]
-      },
-      {
-        id: 2,
-        property: '100 Main Ave',
-        location: 'Boston, MA',
-        owner: 'Geneva',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '2' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '1' }
-        ]
-      },
-      {
-        id: 3,
-        property: '100 Main Ave (duplex)',
-        location: 'Boston, MA',
-        owner: 'Jami',
-        type: 'Residential, Multi-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '2' }
-        ]
-      },
-      {
-        id: 1,
-        property: '74 Grove Street',
-        location: 'Boston, MA',
-        owner: 'Larsen',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: 'Studio' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '3' }
-        ]
-      },
-      {
-        id: 2,
-        property: '100 Main Ave',
-        location: 'Boston, MA',
-        owner: 'Geneva',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '2' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '1' }
-        ]
-      },
-      {
-        id: 3,
-        property: '100 Main Ave (duplex)',
-        location: 'Boston, MA',
-        owner: 'Jami',
-        type: 'Residential, Multi-Family',
-        units: [
-          { unit: '1A', beds: '1' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '2' }
-        ]
-      }
-    ]
-    */
   },
 
   data () {
@@ -223,23 +62,10 @@ export default {
 
   methods: {
     fetch () {
-      axios.all([
-        api.getTenant(),
-        api.getBuildings()
-      ])
-        .then(axios.spread((res1, res2) => {
-          console.log(res1, res2)
-          this.buildings = res2.data.map(property => {
-            return {
-              id: property.Id,
-              property: property.Street,
-              location: property.City + ', ' + property.State,
-              owner: res1.data.Tenant.Name,
-              type: property.Type,
-              units: []
-            }
-          })
-        }))
+      api.getBuildings()
+        .then(res => {
+          this.buildings = res.data
+        })
     },
     goTo (building, index) {
       console.log(building)

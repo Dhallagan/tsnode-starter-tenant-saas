@@ -52,10 +52,7 @@ var Property = /** @class */ (function (_super) {
         __metadata("design:type", String)
     ], Property.prototype, "Zipcode", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return Unit_1.Unit; }, function (unit) { return unit.Property; }, {
-            eager: true,
-            cascade: true
-        }),
+        typeorm_1.OneToMany(function (type) { return Unit_1.Unit; }, function (unit) { return unit.Property; }),
         typeorm_1.JoinColumn({ name: "UnitId" }),
         __metadata("design:type", Array)
     ], Property.prototype, "Units", void 0);

@@ -14,29 +14,27 @@ export class PropertyController extends BaseController {
 
 
     public async getProperties(req: Request, res: Response){
-        
-        
         const errors = validationResult(req);
-        const tenant = req['tenant'];
+        const tenantId = req['tenant'];
 
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.propertyService.getPropertiesByTenant(res, tenant);
+        return await this.propertyService.getPropertiesByTenant(res, tenantId);
     }
 
 
     public async getProperty(req: Request, res: Response) {
-
         const errors = validationResult(req);
         const id = req.params.id;
+        const tenantId = req['tenant'];
 
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return await this.propertyService.getPropertyWithRelations(res, id);
+        return await this.propertyService.getPropertyWithRelations(res, tenantId, id);
 
     }
 
@@ -44,7 +42,7 @@ export class PropertyController extends BaseController {
     public async createProperty(req: Request, res: Response) {
         const errors = validationResult(req);
         const viewModel = req.body;
-        const tenant = req['tenant'];
+        const tenantId = req['tenant'];
 
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
@@ -52,12 +50,13 @@ export class PropertyController extends BaseController {
 
         console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
         
-        return await this.propertyService.createProperty(res, tenant, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
     }
 
     public async updateProperty(req: Request, res: Response) {
         const errors = validationResult(req);
         const viewModel = req.body;
+        const tenantId = req['tenant'];
         const id = req.params.id;
 
         if (!errors.isEmpty()) {
@@ -66,7 +65,21 @@ export class PropertyController extends BaseController {
 
         console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
         
-        return await this.propertyService.createProperty(res, id, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+    }
+
+
+    public async deleteProperty(req: Request, res: Response) {
+        const errors = validationResult(req);
+        const viewModel = req.body;
+        const tenantId = req['tenant'];
+        const id = req.params.id;
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.propertyService.deleteProperty(res, tenantId, viewModel.id);
     }
 
 }

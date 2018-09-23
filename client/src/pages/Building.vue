@@ -2,7 +2,7 @@
 <page>
 
   <page-header
-    :title="building.property"
+    :title="building.Street"
     :breadcrumbs="pageheader.breadcrumbs"
   >
     <!-- <template slot="action-right">
@@ -59,9 +59,9 @@
          <h5>Property Details</h5>
           <b-row>
             <b-col>
-              <p><strong>Address:</strong> <br>{{building.property}}<br>{{building.location}}</p>
-              <p><strong>Type:</strong> <br>{{building.type}}</p>
-              <p><strong>Owner:</strong> <br>{{building.owner}}</p>
+              <p><strong>Address:</strong> <br>{{building.Street}}<br>{{building.City}}, {{building.State}} {{building.Zipcode}}</p>
+              <p><strong>Type:</strong> <br>{{building.Type}}</p>
+              <p><strong>Owner:</strong> <br>{{building.Owner}}</p>
             </b-col>
 
           </b-row>
@@ -151,40 +151,7 @@
 import api from '@/api/api'
 import axios from 'axios'
 
-const items = [
-  {
-    number: '1',
-    tenant: 'None',
-    beds: 'Studio',
-    rent: '$500'
-  },
-  {
-    number: '1',
-    tenant: 'None',
-    beds: '2',
-    rent: '$500'
-  },
-  {
-    number: '3',
-    tenant: 'Ran Swanson',
-    beds: '1',
-    rent: '$500'
-  },
-  {
-    number: '4',
-    tenant: 'None',
-    beds: '3',
-    rent: '$500'
-  }
-]
 export default {
-  // mounted () {
-  //   var building = this.$store.getters.getBuildingById(
-  //     this.$route.params.building_id
-  //   )
-  //   console.log('Building:' + building)
-  //   this.building = building
-  // },
   mounted () {
     this.fetch()
   },
@@ -199,38 +166,20 @@ export default {
         ]
       },
       fields: ['Number', 'Tenant', 'Beds', 'Rent', 'Action'],
-      items: items,
-      building: {
-        id: 1,
-        property: '74 Grove Street',
-        location: 'Boston, MA',
-        owner: 'Larsen',
-        type: 'Residential, Single-Family',
-        units: [
-          { unit: '1A', beds: 'Studio' },
-          { unit: '1B', beds: '1' },
-          { unit: '2A', beds: '2' },
-          { unit: '2B', beds: '3' }
-        ]
-      }
+      building: null
     }
   },
   methods: {
     fetch () {
       axios.all([
-        api.getBuilding(this.$route.params.building_id),
-        api.getTenant()
+        api.getBuilding(this.$route.params.building_id)
       ])
-        .then(axios.spread((res1, res2) => {
-          this.building = {
-            id: res1.data.Id,
-            property: res1.data.ApartmentSuite,
-            location: res1.data.City + ', ' + res1.data.State,
-            owner: res2.data.Tenant.Domain,
-            type: res1.data.Type,
-            units: res1.data.units
-          }
+        .then(axios.spread((res1) => {
+          this.building = res1.data
         }))
+    },
+    deleteBuilding () {
+      api.deleteBuilding(this.$route.params.building_id)
     }
   }
 }

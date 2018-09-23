@@ -6,14 +6,14 @@ import { Property } from "../entity";
 export class PropertyRepository extends Repository<Property> {
 
 
-    // public async create(property: Object){
-    //     return await getConnection().manager.save(Property, property);
-    // }
+    public async createOne(property: Object){
+        return await getConnection().manager.save(Property, property);
+    }
 
 
-    // public async getOne(params: Object){
-    //     return await getConnection().manager.findOne(Property, params);
-    // }
+    public async getOne(params: Object){
+        return await getConnection().manager.findOne(Property, params);
+    }
 
     public async getPropertyWithRelations(id: number) {
         return await getRepository(Property).findOne({ where: {Id: id}, relations: ["Units"] });
@@ -32,15 +32,5 @@ export class PropertyRepository extends Repository<Property> {
 
     public async saver(property: Property) {
         return await getConnection().manager.save(property);
-    }
-
-
-    // public async update(id: number, property: Property){
-    //     return await getRepository(Property).update(id, property);
-    // }
-
-
-    public async delete(id: number){
-        return await getRepository(Property).delete(id);
     }
 }
