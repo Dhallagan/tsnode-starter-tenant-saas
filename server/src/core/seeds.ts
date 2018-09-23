@@ -1,6 +1,6 @@
 import {getRepository} from "typeorm";
 import {Stripe} from './stripe';
-import {User, Plan, Product} from "../entity";
+import {User, Plan, Product, PropertyType} from "../entity";
 
 export class Seeds {
 
@@ -11,6 +11,31 @@ export class Seeds {
     var user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false }
     await userRepository.save(user);
     
+  }
+
+  public static async seedPropertyTypes() {
+    const propertyTypeRepository = getRepository(PropertyType);
+
+    const propertyTypes = [
+      { Type: "Condo/Townhome" },
+      { Type: "Multi-Family" },
+      { Type: "Single-Fmaily" },
+      { Type: "Industrial" },
+      { Type: "Offuice" },
+      { Type: "Shopping Center" },
+      { Type: "Retail" },
+      { Type: "Storage" },
+      { Type: "Parking" }
+    ]
+
+    const existPropertyTypes = await propertyTypeRepository.find();
+
+    if (existPropertyTypes.length)
+      return;
+
+    for (const type of propertyTypes) {
+      await propertyTypeRepository.save(type);
+    }
   }
 
   public static async seedProduct() {

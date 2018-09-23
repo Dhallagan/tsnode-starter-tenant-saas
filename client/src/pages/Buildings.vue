@@ -35,7 +35,7 @@
       </template>
 
       <template slot="Action" slot-scope="data">
-        <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+        <willow-button :url="'/buildings/' + data.item.Id" >View</willow-button>
       </template>
 
     </willow-table>

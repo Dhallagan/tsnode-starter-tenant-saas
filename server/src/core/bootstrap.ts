@@ -35,6 +35,7 @@ export class Bootstrap {
             console.log('Seeding database...');
             // Seeds.seedUsers();
             Seeds.seedPlans();
+            Seeds.seedPropertyTypes();
         });
     }
 

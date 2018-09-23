@@ -12,13 +12,13 @@ export class PropertyService {
 
 
     public async createProperty(res: Response, tenantId: number, type: string, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
-        const propertyExists = await this.propertyRepository.getOne({TenantId: tenantId, Street: street, City: city, State: state});
+        const propertyExists = await this.propertyRepository.findOne({TenantId: tenantId, Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
 
-        const newProperty = await this.propertyRepository.createOne({TenantId:tenantId, Type: type, Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.create({TenantId:tenantId, Type: type, Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
 
         return res.status(200).json(newProperty);
     }

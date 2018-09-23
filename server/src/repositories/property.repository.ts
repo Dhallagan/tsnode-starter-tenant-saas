@@ -29,8 +29,4 @@ export class PropertyRepository extends Repository<Property> {
         return await getConnection().manager.find(Property, {TenantId: tenantId})
     }
 
-
-    public async saver(property: Property) {
-        return await getConnection().manager.save(property);
-    }
 }

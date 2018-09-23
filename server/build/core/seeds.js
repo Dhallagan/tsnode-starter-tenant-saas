@@ -57,6 +57,46 @@ var Seeds = /** @class */ (function () {
             });
         });
     };
+    Seeds.seedPropertyTypes = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var propertyTypeRepository, propertyTypes, existPropertyTypes, _i, propertyTypes_1, type;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        propertyTypeRepository = typeorm_1.getRepository(entity_1.PropertyType);
+                        propertyTypes = [
+                            { Type: "Condo/Townhome" },
+                            { Type: "Multi-Family" },
+                            { Type: "Single-Fmaily" },
+                            { Type: "Industrial" },
+                            { Type: "Offuice" },
+                            { Type: "Shopping Center" },
+                            { Type: "Retail" },
+                            { Type: "Storage" },
+                            { Type: "Parking" }
+                        ];
+                        return [4 /*yield*/, propertyTypeRepository.find()];
+                    case 1:
+                        existPropertyTypes = _a.sent();
+                        if (existPropertyTypes.length)
+                            return [2 /*return*/];
+                        _i = 0, propertyTypes_1 = propertyTypes;
+                        _a.label = 2;
+                    case 2:
+                        if (!(_i < propertyTypes_1.length)) return [3 /*break*/, 5];
+                        type = propertyTypes_1[_i];
+                        return [4 /*yield*/, propertyTypeRepository.save(type)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     Seeds.seedProduct = function () {
         return __awaiter(this, void 0, void 0, function () {
             var productRepository, products, product;

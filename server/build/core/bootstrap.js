@@ -76,6 +76,7 @@ var Bootstrap = /** @class */ (function () {
                 console.log('Seeding database...');
                 // Seeds.seedUsers();
                 seeds_1.Seeds.seedPlans();
+                seeds_1.Seeds.seedPropertyTypes();
                 return [2 /*return*/];
             });
         }); });

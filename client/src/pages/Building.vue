@@ -125,7 +125,6 @@
             <b-form-checkbox id="checkbox15" v-model="status" value="accepted" unchecked-value="not_accepted">Concierge Service</b-form-checkbox>
           </b-form-group>
           </b-col>
-
         </b-row> -->
        <!-- </b-card> -->
 
@@ -150,7 +149,6 @@
 <script>
 import api from '@/api/api'
 import axios from 'axios'
-
 export default {
   mounted () {
     this.fetch()
@@ -186,5 +184,4 @@ export default {
 </script>
 
 <style>
-
 </style>
