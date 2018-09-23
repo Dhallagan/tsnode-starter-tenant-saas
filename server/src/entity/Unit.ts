@@ -7,7 +7,10 @@ export class Unit {
     @PrimaryGeneratedColumn()
     UnitId: number;
 
-    @ManyToOne( type => Property, property => property.Units)
+    @ManyToOne( type => Property, property => property.Units, {
+        eager: true,
+        cascade: true
+    })
     @JoinColumn({ name: 'PropertyId'})
     Property: Property;
 
