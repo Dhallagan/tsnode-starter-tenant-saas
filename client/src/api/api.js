@@ -101,5 +101,17 @@ export default {
 
   updatePlan (params) {
     return HTTP.put('/plan', params)
+  },
+
+  createBuilding (params) {
+    return HTTP.post('/properties', params)
+  },
+
+  getBuildings () {
+    return HTTP.get('/properties')
+  },
+
+  getBuilding (id) {
+    return HTTP.get('/properties/' + id)
   }
 }

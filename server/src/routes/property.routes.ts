@@ -14,7 +14,9 @@ export class PropertyRoutes extends BaseRoute {
 
 
     initRoutes() {
-        this.router.get('/properties', (req, res, next) => this.propertyController.getProperties(req, res).catch(next));
-        this.router.post('/properties',  (req, res, next) => this.propertyController.updateProperty(req, res).catch(next));
+        this.router.get('/properties', Authentication.isAuthenticated, (req, res, next) => this.propertyController.getProperties(req, res).catch(next));
+        this.router.post('/properties', Authentication.isAuthenticated, (req, res, next) => this.propertyController.createProperty(req, res).catch(next));
+        this.router.get('/properties/:id',  Authentication.isAuthenticated, (req, res, next) => this.propertyController.getProperty(req, res).catch(next))
+        this.router.put('/properties/:id', Authentication.isAuthenticated, (req, res, next) => this.propertyController.updateProperty(req, res).catch(next));
     }
 }

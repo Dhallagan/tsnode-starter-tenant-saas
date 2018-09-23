@@ -29,4 +29,7 @@ export class Property extends TenantScope {
     })
     @JoinColumn({ name: "UnitId" })
     Units: Unit[];
+
+    @Column()
+    Type: string;
 }

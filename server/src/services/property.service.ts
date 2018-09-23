@@ -11,16 +11,16 @@ export class PropertyService {
     }
 
 
-    public async createProperty(res: Response, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
-        const propertyExists = await this.propertyRepository.findOne({Street: street, City: city, State: state});
+    public async createProperty(res: Response, tenantId: number, type: string, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
+        const propertyExists = await this.propertyRepository.getOne({Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
 
-        const newProperty = await this.propertyRepository.save({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.create({TenantId:tenantId, Type: type, Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
 
-        return res.json(200).json(newProperty);
+        return res.status(200).json(newProperty);
     }
 
 
@@ -31,7 +31,7 @@ export class PropertyService {
     }
 
 
-    public async updateProperty(res: Response, id: number, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
+    public async updateProperty(res: Response, id: number, type: string, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
         
         var property = await this.propertyRepository.findOne({Id: id});
 
@@ -44,21 +44,22 @@ export class PropertyService {
         property.City = city;
         property.State = state;
         property.Zipcode = zipcode;
+        property.Type = type;
         
         var updatedProperty = await this.propertyRepository.update(id, property);
         return res.status(200).json(updatedProperty);
     }
 
-    public async deleteProperty(res: Response, id: number) {
-        
-        var property = await this.propertyRepository.findOne({Id: id});
 
-        if(!property) {
-            return  res.status(422).json({'errors': [{'msg': 'Property Id is invalid.'}]})
-        }
-        
-        var updatedProperty = await this.propertyRepository.delete(id);
-        return res.status(200).json(updatedProperty);
+    public async getPropertiesByTenant(res: Response, tenantId: number) {
+        const properties = await this.propertyRepository.getPropertiesByTenant(tenantId);
+        return res.status(200).json(properties);
+    }
+
+
+    public async getPropertyWithRelations(res: Response, id: number) {
+        const property = await this.propertyRepository.getPropertyWithRelations(id);
+        return res.status(200).json(property);
     }
 
 }

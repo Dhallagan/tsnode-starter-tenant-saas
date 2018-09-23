@@ -131,8 +131,8 @@ Router.beforeEach((to, from, next) => {
       })
     } else {
       if (!Store.getters.getUser) {
-        Store.dispatch('SET_USER')
-        next()
+        const promise = Store.dispatch('SET_USER')
+        promise.then(res => next(), err => console.log(err))
       } else {
         next()
       }
