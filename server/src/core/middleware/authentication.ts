@@ -12,7 +12,6 @@ export class Authentication {
             return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
           }
           var token = (req.headers.authorization as string ).split(' ')[1];
-          // console.log(token)
         
           var payload;
           try {
@@ -27,6 +26,7 @@ export class Authentication {
           }
           req['user'] = payload.sub;
           req['tenant'] = payload.tenant;
+
           next();
     }
 }

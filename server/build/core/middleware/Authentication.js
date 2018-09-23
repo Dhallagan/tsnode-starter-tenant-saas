@@ -21,6 +21,7 @@ var Authentication = /** @class */ (function () {
             return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
         }
         var token = req.headers.authorization.split(' ')[1];
+        // console.log(token)
         var payload;
         try {
             payload = jwt.verify(token, 'secretsecretsecret');

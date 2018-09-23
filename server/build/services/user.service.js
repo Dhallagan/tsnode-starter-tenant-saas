@@ -72,6 +72,19 @@ var UserService = /** @class */ (function () {
         console.log(payload);
         return jwt.sign(payload, 'secretsecretsecret');
     };
+    UserService.prototype.generateUserViewModel = function (user) {
+        return {
+            Id: user.Id,
+            Avatar: user.Avatar,
+            Email: user.Email,
+            FirstName: user.FirstName,
+            LastName: user.LastName,
+            PhoneNumber: user.PhoneNumber,
+            Role: user.Role,
+            Active: user.Active,
+            DateCreated: user.DateCreated
+        };
+    };
     UserService.prototype.createUser = function (res, firstname, lastname, email, password, domain) {
         return __awaiter(this, void 0, void 0, function () {
             var userExists, tenant, passwordHash, user;
@@ -219,7 +232,7 @@ var UserService = /** @class */ (function () {
                             return [2 /*return*/, res.status(422).json({ 'errors': [{ 'msg': 'The password you’ve entered is incorrect.' }] })];
                         }
                         else {
-                            return [2 /*return*/, res.status(200).json({ token: this.generateToken(user), user: user })];
+                            return [2 /*return*/, res.status(200).json({ token: this.generateToken(user), user: this.generateUserViewModel(user) })];
                         }
                         return [2 /*return*/];
                 }
@@ -307,13 +320,15 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.getUsers = function (res) {
         return __awaiter(this, void 0, void 0, function () {
-            var users;
+            var users, usersViewModel;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.userRepository.getUsers()];
                     case 1:
                         users = _a.sent();
-                        return [2 /*return*/, res.status(200).json(users)];
+                        usersViewModel = users.map(function (user) { return _this.generateUserViewModel(user); });
+                        return [2 /*return*/, res.status(200).json(usersViewModel)];
                 }
             });
         });
@@ -326,7 +341,7 @@ var UserService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.userRepository.getUserById(userId)];
                     case 1:
                         user = _a.sent();
-                        return [2 /*return*/, res.status(200).json(user)];
+                        return [2 /*return*/, res.status(200).json(this.generateUserViewModel(user))];
                 }
             });
         });
@@ -366,7 +381,7 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.updateUser(id, user)];
                     case 2:
                         updatedUser = _a.sent();
-                        return [2 /*return*/, res.status(200).json(updatedUser)];
+                        return [2 /*return*/, res.status(200).json(this.generateUserViewModel(updatedUser))];
                 }
             });
         });
@@ -401,7 +416,7 @@ var UserService = /** @class */ (function () {
                         return [4 /*yield*/, this.userRepository.updateUser(id, user)];
                     case 2:
                         updatedUser = _a.sent();
-                        return [2 /*return*/, res.status(200).json(updatedUser)];
+                        return [2 /*return*/, res.status(200).json(this.generateUserViewModel(updatedUser))];
                 }
             });
         });

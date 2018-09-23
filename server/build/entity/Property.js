@@ -59,6 +59,10 @@ var Property = /** @class */ (function (_super) {
         typeorm_1.JoinColumn({ name: "UnitId" }),
         __metadata("design:type", Array)
     ], Property.prototype, "Units", void 0);
+    __decorate([
+        typeorm_1.Column(),
+        __metadata("design:type", String)
+    ], Property.prototype, "Type", void 0);
     Property = __decorate([
         typeorm_1.Entity()
     ], Property);

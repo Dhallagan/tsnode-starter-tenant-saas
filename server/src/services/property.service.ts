@@ -12,7 +12,7 @@ export class PropertyService {
 
 
     public async createProperty(res: Response, tenantId: number, type: string, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
-        const propertyExists = await this.propertyRepository.getOne({Street: street, City: city, State: state});
+        const propertyExists = await this.propertyRepository.findOne({Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
@@ -26,7 +26,7 @@ export class PropertyService {
 
     public async getProperties() {
         const properties = await this.propertyRepository.findAll();
-
+        console.log(properties)
         return properties;
     }
 

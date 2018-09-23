@@ -30,7 +30,7 @@ export class PropertyRepository extends Repository<Property> {
     }
 
 
-    public async save(property: Property) {
+    public async saver(property: Property) {
         return await getConnection().manager.save(property);
     }
 

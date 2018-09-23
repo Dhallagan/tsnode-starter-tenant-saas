@@ -232,7 +232,7 @@ export default {
           this.buildings = res2.data.map(property => {
             return {
               id: property.Id,
-              property: property.ApartmentSuite,
+              property: property.Street,
               location: property.City + ', ' + property.State,
               owner: res1.data.Tenant.Name,
               type: property.Type,
