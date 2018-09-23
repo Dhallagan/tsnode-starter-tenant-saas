@@ -51,6 +51,8 @@ import WillowFiltersFieldSelect from './components/WillowFiltersFieldSelect'
 import WillowFiltersFieldTextfield from './components/WillowFiltersFieldTextfield'
 import WillowFiltersFieldCheckbox from './components/WillowFiltersFieldCheckbox'
 import WillowTable from './components/WillowTable'
+import WillowProductImages from './components/WillowProductImages'
+import WillowProductImagesThumbnail from './components/WillowProductImagesThumbnail'
 import WillowPagination from './components/WillowPagination'
 import WillowSelect from './components/WillowSelect'
 import WillowTextfield from './components/WillowTextfield'
@@ -92,6 +94,8 @@ Vue.component('willow-resource-grid', WillowResourceGrid)
 Vue.component('willow-resource-grid-item', WillowResourceGridItem)
 Vue.component('willow-select', WillowSelect)
 Vue.component('willow-table', WillowTable)
+Vue.component('willow-product-images', WillowProductImages)
+Vue.component('willow-product-images-thumbnail', WillowProductImagesThumbnail)
 Vue.component('willow-textfield', WillowTextfield)
 Vue.component('willow-theme-config', WillowThemeConfig)
 Vue.component('willow-theme-config-item', WillowThemeConfigItem)

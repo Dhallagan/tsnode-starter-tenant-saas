@@ -41,7 +41,13 @@
           </template>
 
         </willow-table>
+        </b-card>
 
+        <b-card>
+          <h5>Images</h5>
+          <willow-product-images
+            :images="['http://www.ryukyu.ac.jp/wp-content/uploads/2012/09/Koala-400x300.jpg','https://cdn.dribbble.com/users/141074/screenshots/1101614/blackbird-400x300.png','http://xinature.com/wp-content/uploads/2016/10/flowers-love-rose-flower-delicte-blue-wallpapers-big-size.jpg','https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Blue_rose-artificially_coloured.jpg/220px-Blue_rose-artificially_coloured.jpg','http://placehold.it/400x300','http://placehold.it/400x300']"
+          ></willow-product-images>
        </b-card>
 
     </willow-layout-section>

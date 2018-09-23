@@ -12,20 +12,20 @@ export class PropertyService {
 
 
     public async createProperty(res: Response, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
-        const propertyExists = await this.propertyRepository.getOne({Street: street, City: city, State: state});
+        const propertyExists = await this.propertyRepository.findOne({Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
 
-        const newProperty = await this.propertyRepository.create({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.save({Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
 
         return res.json(200).json(newProperty);
     }
 
 
     public async getProperties() {
-        const properties = await this.propertyRepository.getAll();
+        const properties = await this.propertyRepository.findAll();
 
         return properties;
     }
@@ -33,7 +33,7 @@ export class PropertyService {
 
     public async updateProperty(res: Response, id: number, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
         
-        var property = await this.propertyRepository.getOne({Id: id});
+        var property = await this.propertyRepository.findOne({Id: id});
 
         if(!property) {
             return  res.status(422).json({'errors': [{'msg': 'Property Id is invalid.'}]})
@@ -46,6 +46,18 @@ export class PropertyService {
         property.Zipcode = zipcode;
         
         var updatedProperty = await this.propertyRepository.update(id, property);
+        return res.status(200).json(updatedProperty);
+    }
+
+    public async deleteProperty(res: Response, id: number) {
+        
+        var property = await this.propertyRepository.findOne({Id: id});
+
+        if(!property) {
+            return  res.status(422).json({'errors': [{'msg': 'Property Id is invalid.'}]})
+        }
+        
+        var updatedProperty = await this.propertyRepository.delete(id);
         return res.status(200).json(updatedProperty);
     }
 

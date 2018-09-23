@@ -33,7 +33,6 @@ var Authentication = /** @class */ (function () {
         }
         req['user'] = payload.sub;
         req['tenant'] = payload.tenant;
-        console.log(payload);
         next();
     };
     Authentication.issuerName = 'localhost';
