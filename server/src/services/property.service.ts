@@ -40,8 +40,8 @@ export class PropertyService {
         if(!property) {
             return  res.status(422).json({'errors': [{'msg': 'Property Id is invalid.'}]})
         }
-
-        property.Street = name;
+        console.log(property)
+        property.Street = street;
         property.ApartmentSuite = aptsuite;
         property.City = city;
         property.State = state;

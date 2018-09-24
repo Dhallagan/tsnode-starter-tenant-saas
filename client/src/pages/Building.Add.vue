@@ -75,7 +75,7 @@
             <b-col>
               <willow-select
                 :value="buildingForm.type"
-                :options="propertyTypes"
+                :options="this.$store.getters.getPropertyTypes"
                 :label="'Property Type'"
                 v-model="buildingForm.type"
                 heading
@@ -133,30 +133,20 @@ export default {
         ]
       },
       buildingForm: {
-        type: 1,
         apartmentSuite: '',
         street: '',
         state: '',
         city: '',
         zipcode: '',
+        type: 1,
         units: []
       },
       propertyTypes: null
     }
   },
   methods: {
-    fetch () {
-      api.getPropertyTypes()
-        .then(res => {
-          this.propertyTypes = res.data.map(propertyType => {
-            return {
-              value: propertyType.Id,
-              text: propertyType.Type
-            }
-          })
-        })
-    },
     saveBuilding () {
+      console.log(this.buildingForm)
       api.createBuilding(this.buildingForm)
         .then(res => {
           this.$router.push({ path: '/Buildings' })

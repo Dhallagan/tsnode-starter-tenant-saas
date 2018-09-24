@@ -48,7 +48,7 @@ export class PropertyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        console.log(viewModel);
         
         return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
     }
@@ -63,9 +63,9 @@ export class PropertyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        console.log(viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        console.log(viewModel);
         
-        return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        return await this.propertyService.updateProperty(res, tenantId, id, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
     }
 
 

@@ -121,5 +121,9 @@ export default {
 
   deleteBuilding (id) {
     return HTTP.delete('/properties/' + id)
+  },
+
+  updateBuilding (id, params) {
+    return HTTP.put('/properties/' + id, params)
   }
 }

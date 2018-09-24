@@ -19,23 +19,23 @@
       </template>
 
       <template slot="Property" slot-scope="data">
-        {{data.item.Street}}
+        {{data.item.street}}
       </template>
 
       <template slot="Type" slot-scope="data">
-        {{data.item.Type}}
+        {{data.item.type}}
       </template>
 
       <template slot="Location" slot-scope="data">
-        {{data.item.City + ', ' + data.item.State}}
+        {{data.item.city + ', ' + data.item.state}}
       </template>
 
       <template slot="Owner" slot-scope="data">
-        {{data.item.Owner}}
+        {{data.item.owner}}
       </template>
 
       <template slot="Action" slot-scope="data">
-        <willow-button :url="'/buildings/' + data.item.Id" >View</willow-button>
+        <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
       </template>
 
     </willow-table>
@@ -64,7 +64,18 @@ export default {
     fetch () {
       api.getBuildings()
         .then(res => {
-          this.buildings = res.data
+          this.buildings = res.data.map(building => {
+            return {
+              id: building.Id,
+              street: building.Street,
+              apartmentsuite: building.ApartmentSuite,
+              city: building.City,
+              state: building.State,
+              zipcode: building.Zipcode,
+              owner: building.Owner,
+              type: building.Type
+            }
+          })
         })
     },
     goTo (building, index) {

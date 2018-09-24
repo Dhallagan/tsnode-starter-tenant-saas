@@ -181,6 +181,10 @@
 
 <script>
 export default {
+  mounted () {
+    this.$store.dispatch('LOAD_PROPERTY_TYPES')
+  },
+
   name: 'App',
 
   data () {

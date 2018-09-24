@@ -1,5 +1,8 @@
+import api from '@/api/api'
+
 const Common = {
   state: {
+    propertyTypes: null,
     stateOptions: [
       { value: 'AL', text: 'Alabama' },
       { value: 'AK', text: 'Alaska' },
@@ -55,15 +58,32 @@ const Common = {
     ]
   },
 
-  // mutations: {
-  //   setBuildings: function (state, buildings) {
-  //     state.buildings = buildings
-  //   }
-  // },
-
   getters: {
     getStateOptions (state) {
       return state.stateOptions
+    },
+    getPropertyTypes (state) {
+      return state.propertyTypes
+    }
+  },
+  mutations: {
+    setPropertyTypes (state, options) {
+      state.propertyTypes = options
+    }
+  },
+  actions: {
+    LOAD_PROPERTY_TYPES: function (context) {
+      api.getPropertyTypes()
+        .then(res => {
+          var propertyTypes = res.data.map(propertyType => {
+            return {
+              value: propertyType.Id,
+              text: propertyType.Type
+            }
+          })
+          console.log('LOAD_PROPERTY_TYPES_SUCCESS')
+          context.commit('setPropertyTypes', propertyTypes)
+        })
     }
   }
 }

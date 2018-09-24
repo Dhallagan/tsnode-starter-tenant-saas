@@ -2,11 +2,11 @@
 <page>
 
   <page-header
-    :title="building.Street"
+    :title="building.street"
     :breadcrumbs="pageheader.breadcrumbs"
   >
     <!-- <template slot="action-right">
-      <willow-button :size="'lg'" plain>View</willow-button>
+      <willow-button  class="float-right mt-3" size="lg" primary @click.native="saveBuilding()">Save</willow-button>
     </template> -->
 
   </page-header>
@@ -25,9 +25,9 @@
           <b-row class="mb-3">
             <b-col>
               <willow-textfield
-                :value="building.Street"
+                :value="building.street"
                 :label="'Street'"
-                v-model="building.Street"
+                v-model="building.street"
                 heading
               ></willow-textfield>
             </b-col>
@@ -35,29 +35,29 @@
           <b-row class="mb-3">
             <b-col>
               <willow-textfield
-                :value="building.City"
+                :value="building.city"
                 :label="'City'"
-                v-model="building.City"
+                v-model="building.city"
                 heading
               ></willow-textfield>
             </b-col>
             <b-col>
 
               <willow-select
-              :value="building.State"
+              :value="building.state"
               :options="this.$store.getters.getStateOptions"
               :label="'State'"
               :placeholder="'State'"
-               v-model="building.State"
+               v-model="building.state"
               heading
             ></willow-select>
 
             </b-col>
              <b-col>
               <willow-textfield
-                :value="building.Zipcode"
+                :value="building.zipcode"
                 :label="'Zipcode'"
-                v-model="building.Zipcode"
+                v-model="building.zipcode"
                 heading
               ></willow-textfield>
 
@@ -67,19 +67,20 @@
           <b-row class="mb-3">
             <b-col>
               <willow-textfield
-                :value="building.Owner"
+                :value="building.owner"
                 :label="'Owner'"
-                v-model="building.Owner"
+                v-model="building.owner"
                 heading
               ></willow-textfield>
             </b-col>
             <b-col>
-              <willow-textfield
-                :value="building.Type"
-                :label="'Type'"
-                v-model="building.Type"
+              <willow-select
+                :value="building.type"
+                :options="this.$store.getters.getPropertyTypes"
+                :label="'Property Type'"
+                v-model="building.type"
                 heading
-              ></willow-textfield>
+              ></willow-select>
             </b-col>
             <b-col>
             </b-col>
@@ -196,11 +197,11 @@
     <template slot="action-left">
       <willow-button :size="'lg'" destructive  @click.native="deleteBuilding()">Delete this building</willow-button>
     </template>
-    <!--
+
     <template slot="action-right">
-      <willow-button :size="'lg'" primary>Save</willow-button>
+      <willow-button size="lg" primary @click.native="saveBuilding()">Save</willow-button>
     </template>
-     -->
+
   </page-actions>
 
 </page>
@@ -224,7 +225,15 @@ export default {
         ]
       },
       fields: ['Number', 'Tenant', 'Beds', 'Rent', 'Action'],
-      building: null
+      building: {
+        street: '',
+        apartmentSuite: '',
+        city: '',
+        state: '',
+        zipcode: '',
+        type: 1,
+        units: []
+      }
     }
   },
   methods: {
@@ -233,11 +242,27 @@ export default {
         api.getBuilding(this.$route.params.building_id)
       ])
         .then(axios.spread((res1) => {
-          this.building = res1.data
+          console.log(res1)
+          this.building.street = res1.data.Street
+          this.building.apartmentSuite = res1.data.ApartmentSuite
+          this.building.city = res1.data.City
+          this.building.state = res1.data.State
+          this.building.zipcode = res1.data.Zipcode
+          this.building.type = res1.data.Type
+          this.building.units = res1.data.Units
         }))
     },
     deleteBuilding () {
       api.deleteBuilding(this.$route.params.building_id)
+        .then(res => {
+          this.$router.push({ path: '/Buildings' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    saveBuilding () {
+      api.updateBuilding(this.$route.params.building_id, this.building)
         .then(res => {
           this.$router.push({ path: '/Buildings' })
         })
