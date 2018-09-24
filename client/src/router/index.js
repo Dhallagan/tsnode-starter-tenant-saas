@@ -24,12 +24,14 @@ import UsersEdit from '../pages/Users.Edit'
 import Buildings from '../pages/Buildings'
 import Building from '../pages/Building'
 import NewBuilding from '../pages/Building.Add'
+import NewBuildingUnit from '../pages/Building.Unit.Add'
 // import Components from '../pages/Components'
 // import Listings from '../pages/Listings'
 // import Listing from '../pages/Listing'
 // import Tenants from '../pages/Tenants'
 // import AddLease from '../pages/AddLease'
 import Plans from '../pages/Plans'
+
 Vue.use(Router)
 
 export default new Router({
@@ -144,6 +146,12 @@ export default new Router({
       name: 'Building',
       meta: { layout: 'application', requiresAuth: true },
       component: Building
+    },
+    {
+      path: '/Buildings/:building_id/unit/add',
+      name: 'NewBuildingUnit',
+      meta: { layout: 'application', requiresAuth: true },
+      component: NewBuildingUnit
     },
     // {
     //   path: '/Tenants',

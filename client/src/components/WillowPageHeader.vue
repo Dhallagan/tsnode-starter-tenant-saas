@@ -9,14 +9,16 @@
       <h2>{{title}}</h2>
     </b-row>
 
-    <div class="mb-2">
-      <div class="float-left">
-        <slot name="action-left"/>
-      </div>
-      <div class="float-right">
-        <slot name="action-right"/>
-      </div>
-      <br><br>
+    <div class="row mb-3">
+      <div class="col-sm-24">
+        <div class="float-left">
+          <slot name="action-left"/>
+        </div>
+        <div class="float-right">
+          <slot name="action-right"/>
+        </div>
+        <br><br>
+        </div>
     </div>
 </div>
 </template>

@@ -21,7 +21,7 @@ export class Seeds {
       { Type: "Multi-Family" },
       { Type: "Single-Fmaily" },
       { Type: "Industrial" },
-      { Type: "Offuice" },
+      { Type: "Office" },
       { Type: "Shopping Center" },
       { Type: "Retail" },
       { Type: "Storage" },

@@ -5,9 +5,9 @@
     :title="building.street"
     :breadcrumbs="pageheader.breadcrumbs"
   >
-    <!-- <template slot="action-right">
-      <willow-button  class="float-right mt-3" size="lg" primary @click.native="saveBuilding()">Save</willow-button>
-    </template> -->
+    <template slot="action-right">
+      <willow-button  class="float-right mt-3" size="lg" primary @click.native="addUnit()">Add Unit</willow-button>
+    </template>
 
   </page-header>
 
@@ -189,6 +189,26 @@
           ></willow-select>
         </b-form-group>
       </b-card>
+
+            <b-card  card-title="Primary" class="mb-2">
+        <h5>Units</h5>
+
+        <willow-table hover :rows="this.building.units" :headings="fields">
+
+          <template slot="Number" slot-scope="data">
+            {{data.item.number}}
+          </template>
+
+          <template slot="Tenant" slot-scope="data">
+            {{data.item.tenant}}
+          </template>
+
+          <template slot="Action" slot-scope="data">
+            <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+          </template>
+
+        </willow-table>
+      </b-card>
     </willow-layout-section>
 
   </willow-layout>
@@ -210,6 +230,34 @@
 <script>
 import api from '@/api/api'
 import axios from 'axios'
+
+const items = [
+  {
+    number: '1A',
+    tenant: 'None',
+    beds: 'Studio',
+    rent: '$500'
+  },
+  {
+    number: '1B',
+    tenant: 'None',
+    beds: '2',
+    rent: '$500'
+  },
+  {
+    number: '2A',
+    tenant: 'Ran Swanson',
+    beds: '3',
+    rent: '$500'
+  },
+  {
+    number: '2B',
+    tenant: 'None',
+    beds: '3',
+    rent: '$500'
+  }
+]
+
 export default {
   mounted () {
     this.fetch()
@@ -224,7 +272,7 @@ export default {
           }
         ]
       },
-      fields: ['Number', 'Tenant', 'Beds', 'Rent', 'Action'],
+      fields: ['Number', 'Tenant', 'Action'],
       building: {
         street: '',
         apartmentSuite: '',
@@ -233,7 +281,8 @@ export default {
         zipcode: '',
         type: 1,
         units: []
-      }
+      },
+      units: null
     }
   },
   methods: {
@@ -251,6 +300,7 @@ export default {
           this.building.type = res1.data.Type
           this.building.units = res1.data.Units
         }))
+      this.building.units = items
     },
     deleteBuilding () {
       api.deleteBuilding(this.$route.params.building_id)
@@ -269,6 +319,16 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    addUnit () {
+      // api.updateBuilding(this.$route.params.building_id, this.building)
+      //   .then(res => {
+      //     this.$router.push({ path: '/Buildings' })
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
+      this.$router.push({ path: '/Buildings/' + this.$route.params.building_id + '/unit/add' })
     }
   }
 }
