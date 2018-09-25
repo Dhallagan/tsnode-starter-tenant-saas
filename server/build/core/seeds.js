@@ -48,7 +48,7 @@ var Seeds = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         userRepository = typeorm_1.getRepository(entity_1.User);
-                        user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false };
+                        user = { Username: "superadmin", Email: "superadmin@tsnodestarter.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false };
                         return [4 /*yield*/, userRepository.save(user)];
                     case 1:
                         _a.sent();

@@ -33,12 +33,18 @@
           ></willow-menu-item>
 
           <willow-menu-item
-            icon='buildings'
+            icon='building'
             title='Buildings'
             href='/buildings'
           ></willow-menu-item>
 
-          <willow-menu-item v-if="hasRole('Admin')"
+          <willow-menu-item
+            icon='newspaper'
+            title='Listings'
+            href='/Listings'
+          ></willow-menu-item>
+
+          <willow-menu-item v-if="hasRole('SuperAdmin')"
             icon='users'
             title='Tenants'
             href='/admin/tenants'
@@ -64,6 +70,12 @@
             icon='building'
             title='Buildings'
             href='/buildings'
+          ></willow-menu-item>
+
+          <willow-menu-item
+            icon='newspaper'
+            title='Listings'
+            href='/Listings'
           ></willow-menu-item>
 
         <!-- MENU ITEMS-->
@@ -104,7 +116,7 @@
           ></willow-menu-item>
         </willow-vertical-submenu> -->
 
-        <willow-menu-item v-if="hasRole('Admin')"
+        <willow-menu-item v-if="hasRole('SuperAdmin')"
           icon='users'
           title='Tenants'
           href='/admin/tenants'

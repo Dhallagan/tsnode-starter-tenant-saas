@@ -4,3 +4,4 @@ export { TenantRepository } from './tenant.repository';
 export { UserRepository } from './user.repository';
 export { PropertyRepository } from './property.repository';
 export { UnitRepository } from './unit.repository';
+export { ListingRepository } from './listing.repository';

@@ -8,7 +8,7 @@ export class Seeds {
 
     const userRepository = getRepository(User);
    
-    var user = { Username: "test", Email: "test@test.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false }
+    var user = { Username: "superadmin", Email: "superadmin@tsnodestarter.com", EmailConfirmed: false, PhoneNumber: "5555555555", PhoneNumberConfirmed: false, TwoFactorEnabled: false }
     await userRepository.save(user);
     
   }

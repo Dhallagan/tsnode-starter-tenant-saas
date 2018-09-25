@@ -1,8 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
 import { Property } from './Property';
+import { TenantScope } from './TenantScope';
 
 @Entity()
-export class Unit {
+export class Unit extends TenantScope {
 
     @PrimaryGeneratedColumn()
     UnitId: number;

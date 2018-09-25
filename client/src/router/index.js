@@ -27,8 +27,10 @@ import NewBuilding from '../pages/Building.Add'
 import NewBuildingUnit from '../pages/Building.Unit.Add'
 import BuildingUnit from '../pages/Building.Unit'
 // import Components from '../pages/Components'
-// import Listings from '../pages/Listings'
-// import Listing from '../pages/Listing'
+import Listings from '../pages/Listings'
+import Listing from '../pages/Listing'
+import ListingsMockup from '../pages/ListingsMockup'
+import ListingMockup from '../pages/ListingMockup'
 // import Tenants from '../pages/Tenants'
 // import AddLease from '../pages/AddLease'
 import Plans from '../pages/Plans'
@@ -167,18 +169,30 @@ export default new Router({
     //   component: Tenants
     // },
     // // add tenants/tenant_id
-    // {
-    //   path: '/Listings',
-    //   name: 'Listings',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: Listings
-    // },
-    // {
-    //   path: '/Listings/:listing_id',
-    //   name: 'Listing',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: Listing
-    // },
+    {
+      path: '/Listings',
+      name: 'Listings',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Listings
+    },
+    {
+      path: '/Listings/:listing_id',
+      name: 'Listing',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Listing
+    },
+    {
+      path: '/ListingsMockup',
+      name: 'Listings',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Listings
+    },
+    {
+      path: '/ListingsMockup/:listing_id',
+      name: 'Listing',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Listing
+    },
     // {
     //   path: '/Lease',
     //   name: 'Lease',
