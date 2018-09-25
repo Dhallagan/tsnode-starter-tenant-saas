@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-sm-24 col-md-14">
+    <div class="col-sm-24" v-if="perPage">
       <div>
         <label> Show
           <select class="form-control-sm" v-if="itemsPerPageOptions.length" @change="$emit('update:itemsPerPage', numItems)" v-model="numItems">
@@ -10,7 +10,7 @@
       </div>
       <!-- <div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div> -->
     </div>
-    <div class="col-sm-24 col-md-10">
+    <div class="col-sm-24">
       <nav class="pagination">
         <ul class="pagination justify-content-end">
           <li class="page-item" :class="{disabled: page == 1}">
@@ -70,6 +70,9 @@ export default {
       default () {
         return [10, 25, 50, 100, 500]
       }
+    },
+    perPage: {
+      type: Boolean
     }
   },
 

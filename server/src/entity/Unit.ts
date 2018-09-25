@@ -34,6 +34,4 @@ export class Unit {
 
     @Column()
     Description!: string;
-
-    //Add photos
 }

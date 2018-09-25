@@ -31,7 +31,7 @@ export default {
   name: 'willow-page-header',
 
   props: {
-    title: { type: String, default: 'Page Title Here' },
+    title: { type: String, default: '' },
     icon: String,
     breadcrumb: String,
     separator: Boolean,

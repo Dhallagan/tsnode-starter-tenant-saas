@@ -28,8 +28,6 @@ export class TenantService {
 
         const tenant = await this.tenantRepository.createTenant(domain, plan);
 
-        console.log(tenant);
-
         return tenant;
     }
 

@@ -196,7 +196,7 @@
         <willow-table hover :rows="this.building.units" :headings="fields">
 
           <template slot="Number" slot-scope="data">
-            {{data.item.number}}
+            {{data.item.unitNumber}}
           </template>
 
           <template slot="Tenant" slot-scope="data">
@@ -204,7 +204,7 @@
           </template>
 
           <template slot="Action" slot-scope="data">
-            <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+            <willow-button :url="`/buildings/${building.id}/units/${data.item.id}`" >View</willow-button>
           </template>
 
         </willow-table>
@@ -231,33 +231,6 @@
 import api from '@/api/api'
 import axios from 'axios'
 
-const items = [
-  {
-    number: '1A',
-    tenant: 'None',
-    beds: 'Studio',
-    rent: '$500'
-  },
-  {
-    number: '1B',
-    tenant: 'None',
-    beds: '2',
-    rent: '$500'
-  },
-  {
-    number: '2A',
-    tenant: 'Ran Swanson',
-    beds: '3',
-    rent: '$500'
-  },
-  {
-    number: '2B',
-    tenant: 'None',
-    beds: '3',
-    rent: '$500'
-  }
-]
-
 export default {
   mounted () {
     this.fetch()
@@ -274,33 +247,41 @@ export default {
       },
       fields: ['Number', 'Tenant', 'Action'],
       building: {
-        street: '',
-        apartmentSuite: '',
-        city: '',
-        state: '',
-        zipcode: '',
+        id: null,
+        street: null,
+        apartmentSuite: null,
+        city: null,
+        state: null,
+        zipcode: null,
         type: 1,
         units: []
-      },
-      units: null
+      }
     }
   },
   methods: {
     fetch () {
       axios.all([
-        api.getBuilding(this.$route.params.building_id)
+        api.getBuilding(this.$route.params.building_id),
+        api.getBuildingUnits(this.$route.params.building_id)
       ])
-        .then(axios.spread((res1) => {
-          console.log(res1)
-          this.building.street = res1.data.Street
-          this.building.apartmentSuite = res1.data.ApartmentSuite
-          this.building.city = res1.data.City
-          this.building.state = res1.data.State
-          this.building.zipcode = res1.data.Zipcode
-          this.building.type = res1.data.Type
-          this.building.units = res1.data.Units
+        .then(axios.spread((building, units) => {
+          this.building.id = building.data.Id
+          this.building.street = building.data.Street
+          this.building.apartmentSuite = building.data.ApartmentSuite
+          this.building.city = building.data.City
+          this.building.state = building.data.State
+          this.building.zipcode = building.data.Zipcode
+          this.building.type = building.data.Type
+
+          this.building.units = units.data.Units.map(unit => {
+            return {
+              id: unit.UnitId,
+              unitNumber: unit.UnitNumber,
+              tenant: 'None'
+            }
+          })
         }))
-      this.building.units = items
+      console.log(this.building.units)
     },
     deleteBuilding () {
       api.deleteBuilding(this.$route.params.building_id)
@@ -321,13 +302,6 @@ export default {
         })
     },
     addUnit () {
-      // api.updateBuilding(this.$route.params.building_id, this.building)
-      //   .then(res => {
-      //     this.$router.push({ path: '/Buildings' })
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
       this.$router.push({ path: '/Buildings/' + this.$route.params.building_id + '/unit/add' })
     }
   }

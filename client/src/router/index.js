@@ -25,6 +25,7 @@ import Buildings from '../pages/Buildings'
 import Building from '../pages/Building'
 import NewBuilding from '../pages/Building.Add'
 import NewBuildingUnit from '../pages/Building.Unit.Add'
+import BuildingUnit from '../pages/Building.Unit'
 // import Components from '../pages/Components'
 // import Listings from '../pages/Listings'
 // import Listing from '../pages/Listing'
@@ -148,10 +149,16 @@ export default new Router({
       component: Building
     },
     {
-      path: '/Buildings/:building_id/unit/add',
+      path: '/Buildings/:building_id/Unit/add',
       name: 'NewBuildingUnit',
       meta: { layout: 'application', requiresAuth: true },
       component: NewBuildingUnit
+    },
+    {
+      path: '/Buildings/:building_id/Units/:unit_id',
+      name: 'BuildingUnit',
+      meta: { layout: 'application', requiresAuth: true },
+      component: BuildingUnit
     },
     // {
     //   path: '/Tenants',

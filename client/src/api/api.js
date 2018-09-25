@@ -44,11 +44,11 @@ export default {
   },
 
   getTenantById (id) {
-    return HTTP.get('/tenants/' + id)
+    return HTTP.get(`/tenants/${id}`)
   },
 
   updateTenant (id, params) {
-    return HTTP.post('/tenants/' + id, params)
+    return HTTP.post(`/tenants/${id}`, params)
   },
 
   getTenants (params) {
@@ -56,15 +56,15 @@ export default {
   },
 
   getTenantUsers (id) {
-    return HTTP.get('/tenants/' + id + '/users')
+    return HTTP.get(`/tenants/${id}/users`)
   },
 
   getUserById (id) {
-    return axios.get('/users/' + id)
+    return axios.get(`/users/${id}`)
   },
 
   getUserPlan (id) {
-    return HTTP.get('/users/' + id + '/plan')
+    return HTTP.get(`/users/${id}/plan`)
   },
 
   getUserByToken () {
@@ -72,7 +72,7 @@ export default {
   },
 
   updateUserById (id, params) {
-    return axios.post('/users/' + id, params)
+    return axios.post(`/users/${id}`, params)
   },
 
   getCompany () {
@@ -84,7 +84,7 @@ export default {
   },
 
   updateAvatar (id, params) {
-    return axios.post('/users/' + id + '/avatar', params)
+    return axios.post(`/users/${id}/avatar`, params)
   },
 
   getPlans () {
@@ -116,14 +116,34 @@ export default {
   },
 
   getBuilding (id) {
-    return HTTP.get('/properties/' + id)
+    return HTTP.get(`/properties/${id}`)
   },
 
   deleteBuilding (id) {
-    return HTTP.delete('/properties/' + id)
+    return HTTP.delete(`/properties/${id}`)
   },
 
   updateBuilding (id, params) {
-    return HTTP.put('/properties/' + id, params)
+    return HTTP.put(`/properties/${id}`, params)
+  },
+
+  createBuildingUnit (propertyId, params) {
+    return HTTP.post(`/properties/${propertyId}/units`, params)
+  },
+
+  getBuildingUnits (propertyId) {
+    return HTTP.get(`/properties/${propertyId}/units`)
+  },
+
+  getBuildingUnit (propertyId, unitId, params) {
+    return HTTP.get(`/properties/${propertyId}/units/${unitId}`)
+  },
+
+  updateBuildingUnit (propertyId, unitId, params) {
+    return HTTP.put(`/properties/${propertyId}/units/${unitId}`, params)
+  },
+
+  deleteBuildingUnit (propertyId, unitId) {
+    return HTTP.delete(`/properties/${propertyId}/units/${unitId}`)
   }
 }

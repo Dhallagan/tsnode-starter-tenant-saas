@@ -1,12 +1,12 @@
-<template>
+s<template>
 <page>
 
   <page-header
-    :title="'Add Unit to ' + building.street"
+    :title="`${unitForm.unitNumber}, ${building.street}`"
     :breadcrumbs="pageHeader.breadcrumbs"
   >
     <template slot="action-right">
-      <willow-button  class="float-right mt-3" size="lg" primary @click.native="createUnit()">Save</willow-button>
+      <willow-button  class="float-right mt-3" size="lg" primary @click.native="updateUnit()">Save</willow-button>
     </template>
   </page-header>
 
@@ -46,7 +46,7 @@
             <b-col xs="24" sm="8" md="6" lg="4">
               <willow-select
                 :value="unitForm.baths"
-                :options="[{value: '1', text: '1'},{value: '1.5', text: '1.5'},{value: '2', text: '2'},{value: '2.5', text: '2.5'},{value: '3', text: '3'},{value: '3.5', text: '3.5'},{value: '4', text: '4+'}]"
+                :options="[{value: 1, text: '1'},{value: '1.5', text: '1.5'},{value: '2', text: '2'},{value: '2.5', text: '2.5'},{value: '3', text: '3'},{value: '3.5', text: '3.5'},{value: '4', text: '4+'}]"
                 :label="'Baths'"
                 v-model="unitForm.baths"
                 heading
@@ -95,10 +95,14 @@
   </willow-layout>
 
     <page-actions>
-    <template slot="action-right">
-      <willow-button  class="float-right mt-3" size="lg" primary @click.native="createUnit()">Save</willow-button>
-    </template>
-  </page-actions>
+      <template slot="action-left">
+        <willow-button :size="'lg'" destructive  @click.native="deleteBuildingUnit()">Delete this building</willow-button>
+      </template>
+
+      <template slot="action-right">
+        <willow-button  class="float-right mt-3" size="lg" primary @click.native="updateUnit()">Save</willow-button>
+      </template>
+    </page-actions>
 
 </page>
 </template>
@@ -141,20 +145,36 @@ export default {
   methods: {
     fetch () {
       axios.all([
-        api.getBuilding(this.$route.params.building_id)
+        api.getBuilding(this.$route.params.building_id),
+        api.getBuildingUnit(this.$route.params.building_id, this.$route.params.unit_id)
       ])
-        .then(axios.spread((building) => {
-          console.log(building.data.Id)
+        .then(axios.spread((building, unit) => {
+          console.log(unit)
           this.building.id = building.data.Id
           this.building.street = building.data.Street
           this.pageHeader.breadcrumbs[0].text = building.data.Street
           this.pageHeader.breadcrumbs[0].href = '/buildings/' + building.data.Id
+          this.unitForm.unitId = unit.data.Unit.UnitId
+          this.unitForm.unitNumber = unit.data.Unit.UnitNumber
+          this.unitForm.bedrooms = unit.data.Unit.Bedrooms
+          this.unitForm.baths = unit.data.Unit.Baths
+          this.unitForm.marketRent = ''
         }))
     },
-    createUnit () {
-      console.log(this.unitForm)
-      api.createBuildingUnit(this.building.id, this.unitForm)
+    updateUnit () {
+      api.updateBuildingUnit(this.building.id, this.unitForm.unitId, this.unitForm)
         .then(res => {
+          console.log(res)
+          this.$router.push({ path: this.pageHeader.breadcrumbs[0].href })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteBuildingUnit () {
+      api.deleteBuildingUnit(this.building.id, this.unitForm.unitId)
+        .then(res => {
+          console.log(res)
           this.$router.push({ path: this.pageHeader.breadcrumbs[0].href })
         })
         .catch(err => {
