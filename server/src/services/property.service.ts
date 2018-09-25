@@ -87,13 +87,13 @@ export class PropertyService {
 
 
     public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean) {
-        const propertyExists = await this.unitRepository.findOne({TenantId: tenantId, PropertyId: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
+        const propertyExists = await this.unitRepository.findOne({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Unit already exists.'}]});
         }
 
-        const newProperty = await this.unitRepository.create({TenantId: tenantId, PropertyId: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
+        const newProperty = await this.unitRepository.create({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
 
         return res.status(200).json(newProperty);
     }
@@ -101,7 +101,7 @@ export class PropertyService {
 
     public async getPropertyUnits(res: Response, tenantId: number, propertyId: number) {
 
-        const propertyUnits = await this.unitRepository.find({ TenantId: tenantId, PropertyId: propertyId });
+        const propertyUnits = await this.unitRepository.find({ TenantId: tenantId, Property: propertyId });
 
         return res.status(200).json({ Units: propertyUnits });
     }
@@ -109,14 +109,14 @@ export class PropertyService {
 
     public async getPropertyUnit(res: Response, tenantId: number, propertyId: number, unitId: number) {
 
-        const propertyUnit = await this.unitRepository.findOne({ where: { TenantId: tenantId, PropertyId: propertyId, UnitId: unitId } });
+        const propertyUnit = await this.unitRepository.findOne({ where: { TenantId: tenantId, Property: propertyId, UnitId: unitId } });
 
         return res.status(200).json({ Unit: propertyUnit });
     }
 
 
     public async updatePropertyUnit(res: Response, tenantId: number, propertyId: number, unitId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean) {
-        const unit = await this.unitRepository.findOne({TenantId: tenantId, PropertyId: propertyId, UnitId: unitId});
+        const unit = await this.unitRepository.findOne({TenantId: tenantId, Property: propertyId, UnitId: unitId});
         
         if (!unit) {
             return res.status(422).json({'errors': [{'msg': 'Unit not found.'}]});
