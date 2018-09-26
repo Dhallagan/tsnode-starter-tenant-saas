@@ -35,4 +35,7 @@ export class Unit extends TenantScope {
 
     @Column()
     Description!: string;
+
+    @Column({default: false, nullable: false})
+    IsListed: Boolean
 }

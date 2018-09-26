@@ -20,9 +20,9 @@ export class UnitService {
           return res.status(422).json({'errors': [{'msg': 'Unit already exists.'}]});
       }
 
-      const newProperty = await this.unitRepository.create({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber});
+      const newUnit= await this.unitRepository.create({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber});
 
-      return res.status(200).json(newProperty);
+      return res.status(200).json(newUnit);
   }
 
 

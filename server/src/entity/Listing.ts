@@ -20,20 +20,23 @@ export class Listing extends TenantScope {
     Unit: Unit;
 
     @Column()
-    MonthlyRent: number;
+    ListedRent: number;
+
+    @Column()
+    SecurityDeposity: number;
 
     @Column()
     Deposit!: number;
-
-    @Column()
-    AvailableDate!: Date;
-
-    @Column()
-    ListedDate!: Date;
 
     @Column()
     Terms!: number;
 
     @Column()
     Section8!: boolean;
+
+    @Column()
+    AvailableDate!: Date;
+
+    @Column()
+    ListedDate!: Date;
 }
