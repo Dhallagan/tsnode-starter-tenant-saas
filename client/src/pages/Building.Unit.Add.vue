@@ -155,6 +155,7 @@ export default {
       console.log(this.unitForm)
       api.createBuildingUnit(this.building.id, this.unitForm)
         .then(res => {
+          console.log(res)
           this.$router.push({ path: this.pageHeader.breadcrumbs[0].href })
         })
         .catch(err => {

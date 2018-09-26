@@ -6,8 +6,8 @@ import { Unit } from "../entity";
 export class UnitRepository {
 
 
-    public async create(property: Object){
-        return await getRepository(Unit).save(property);
+    public async create(unit: Object){
+        return await getRepository(Unit).save(unit);
     }
 
 
