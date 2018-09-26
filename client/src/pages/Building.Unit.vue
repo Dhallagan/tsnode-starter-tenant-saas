@@ -1,4 +1,4 @@
-s<template>
+<template>
 <page>
 
   <page-header

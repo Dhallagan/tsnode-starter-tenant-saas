@@ -181,7 +181,6 @@
       <b-card  card-title="Secondary- Subdued" class="mb-2" style="background-color: #f8f9fa ;">
         <b-form-group>
           <willow-select
-
             :value="'on'"
             :options="[{ value: true, text: 'Active' },{ value: false, text: 'Deactivated' }]"
             :label="'Status'"
