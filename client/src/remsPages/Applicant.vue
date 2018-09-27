@@ -2,7 +2,7 @@
 <page>
 
   <page-header
-    :title="application.applicant"
+    :title="'1'"
     :breadcrumbs="pageheader.breadcrumbs"
   >
   <template slot="action-left">
@@ -10,9 +10,9 @@
   </template>
   <template slot="action-right">
 
-      <willow-button plain class="ml-1"><icon class="mr-1" name="thumbs-up"></icon>Approve</willow-button>
-       <willow-button plain class="ml-1"><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
-       <willow-button plain class="ml-1"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
+      <willow-button class="ml-1"><icon class="mr-1" name="thumbs-up"></icon>Approve</willow-button>
+       <willow-button class="ml-1"><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
+       <willow-button class="ml-1"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
         <willow-button primary class="ml-1">&nbsp;Move In</willow-button>
   </template>
 
@@ -110,7 +110,7 @@ export default {
           }
         ]
       },
-      application: null,
+      application: {  },
       selected: [], // Must be an array reference!
       options: [
         { text: 'Credit Check', value: '1' },

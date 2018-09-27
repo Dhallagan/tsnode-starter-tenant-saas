@@ -73,7 +73,14 @@ export default {
   data () {
     return {
       fields: ['applicant', 'property', 'phone', 'status', 'last_updated'],
-      applications: null
+      applications: [
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Rejected', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Rejected', last_updated: '10/10/2010' }
+      ]
     }
   },
 

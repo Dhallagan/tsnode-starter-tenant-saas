@@ -19,8 +19,8 @@ import Tenants from '../pages/Tenants'
 // import UsersEdit from '../pages/Users.Edit'
 import Tenant from '../pages/Tenant'
 import UsersEdit from '../pages/Users.Edit'
-// import Applicants from '../pages/Applicants'
-// import Applicant from '../pages/Applicant'
+import Applicants from '../remsPages/Applicants'
+import Applicant from '../remsPages/Applicant'
 import Buildings from '../pages/Buildings'
 import Building from '../pages/Building'
 import NewBuilding from '../pages/Building.Add'
@@ -110,26 +110,26 @@ export default new Router({
     //   meta: { layout: 'application', requiresAuth: true },
     //   component: Reports
     // },
-    // {
-    //   path: '/Applicants',
-    //   name: 'Applicants',
-    //   component: Applicants,
-    //   meta: {
-    //     breadcrumb: 'Applicants',
-    //     layout: 'application',
-    //     requiresAuth: true
-    //   }
-    // },
-    // {
-    //   path: '/applicants/:applicant_id',
-    //   name: 'Applicant',
-    //   component: Applicant,
-    //   meta: {
-    //     breadcrumb: ':applicant_id',
-    //     layout: 'application',
-    //     requiresAuth: true
-    //   }
-    // },
+    {
+      path: '/Applicants',
+      name: 'Applicants',
+      component: Applicants,
+      meta: {
+        breadcrumb: 'Applicants',
+        layout: 'application',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/applicants/:applicant_id',
+      name: 'Applicant',
+      component: Applicant,
+      meta: {
+        breadcrumb: ':applicant_id',
+        layout: 'application',
+        requiresAuth: true
+      }
+    },
     {
       path: '/Buildings',
       name: 'Buildings',

@@ -39,9 +39,15 @@
           ></willow-menu-item>
 
           <willow-menu-item
-            icon='newspaper'
+            icon='table'
             title='Listings'
             href='/Listings'
+          ></willow-menu-item>
+
+          <willow-menu-item
+            icon='newspaper'
+            title='Applications'
+            href='/Applications'
           ></willow-menu-item>
 
           <willow-menu-item v-if="hasRole('SuperAdmin')"
@@ -76,6 +82,12 @@
             icon='newspaper'
             title='Listings'
             href='/Listings'
+          ></willow-menu-item>
+
+          <willow-menu-item
+            icon='newspaper'
+            title='Applications'
+            href='/Applications'
           ></willow-menu-item>
 
         <!-- MENU ITEMS-->
