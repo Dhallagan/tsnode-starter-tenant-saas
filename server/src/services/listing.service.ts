@@ -25,6 +25,14 @@ export class ListingService {
 
     //     return res.json(200).json(newListing);
     // }
+    public async getListing(res: Response, id: number) {
+        const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
+        if (listing) {
+            return res.status(200).json(listing);
+        }
+    }
+
+
 
     public async getListedListings(res: Response, tenantId: number) {
         const listings = await this.listingRepository.find({where: {TenantId: tenantId}, relations: ["Unit"]});
