@@ -12,9 +12,17 @@ export class ListingController extends BaseController {
         this.listingService = new ListingService();
     }
 
-    // public async getlisting(req: Request, res: Response) {
+    public async getListing(req: Request, res: Response) {
+        const errors = validationResult(req);
 
-    // }
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const id = req.params.id;
+
+        return await this.listingService.getListing(res, id);
+    }
 
     public async getListedListings(req: Request, res: Response) {
         const errors = validationResult(req);

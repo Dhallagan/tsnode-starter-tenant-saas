@@ -16,7 +16,7 @@
         <b-row class="mb-2">
           <b-col >
             <label for="inputLive">Unit</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.unit">
             </b-form-input>
           </b-col>
 
@@ -25,19 +25,19 @@
         <b-row class="mb-2">
           <b-col :cols="6">
             <label for="inputLive">Beds</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.beds">
             </b-form-input>
           </b-col>
 
           <b-col :cols="6">
             <label for="inputLive">Baths</label>
-            <b-form-input type="text">
+            <b-form-input type="text"  v-model="listing.baths">
             </b-form-input>
           </b-col>
 
           <b-col :cols="6">
             <label for="inputLive">SqFt</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.sqft">
             </b-form-input>
           </b-col>
 
@@ -147,7 +147,7 @@
         <b-row>
           <b-col :cols="6">
             <label for="inputLive">Unit</label>
-            <b-form-input type="text" disabled>
+            <b-form-input type="text" disabled v-model="listing.unit">
             </b-form-input>
           </b-col>
 
@@ -156,7 +156,7 @@
         <b-row>
           <b-col>
             <label for="inputLive">Property</label>
-            <b-form-input type="text" disabled>
+            <b-form-input type="text" disabled v-model="listing.property">
             </b-form-input>
           </b-col>
 
@@ -165,13 +165,13 @@
         <b-row>
           <b-col :cols="6">
             <label for="inputLive">Rent</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.rent">
             </b-form-input>
           </b-col>
 
           <b-col :cols="6">
             <label for="inputLive">Deposit</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.deposit">
             </b-form-input>
           </b-col>
 
@@ -180,7 +180,7 @@
         <b-row>
           <b-col :cols="6">
             <label for="inputLive">Lease Terms</label>
-            <b-form-input type="text">
+            <b-form-input type="text" v-model="listing.lease_terms">
             </b-form-input>
 
           </b-col>
@@ -192,6 +192,7 @@
             <b-form-input
               type="date"
               placeholder="First"
+              v-model="listing.date_available"
             >
             </b-form-input>
           </b-col>
@@ -218,7 +219,13 @@
 </template>
 
 <script>
+import api from '@/api/api'
+import {format} from 'date-fns'
+
 export default {
+  mounted () {
+    this.fetch()
+  },
   data () {
     return {
       pageheader: {
@@ -228,7 +235,39 @@ export default {
             href: '/Listings'
           }
         ]
+      },
+      listing: {
+        unit: '',
+        beds: '',
+        baths: '',
+        sqft: '',
+        property: '',
+        rent: '',
+        deposit: '',
+        lease_terms: '',
+        date_available: '',
+        section8: false
       }
+    }
+  },
+  methods: {
+    fetch () {
+      api.getListing(this.$route.params.listing_id)
+        .then(res => {
+          console.log(res.data)
+          this.listing = {
+            unit: res.data.Unit.UnitNumber,
+            beds: res.data.Unit.Bedrooms,
+            baths: res.data.Unit.Baths,
+            sqft: res.data.Unit.SqFt,
+            property: res.data.Unit.Property.Street,
+            rent: res.data.ListedRent,
+            deposit: res.data.Deposit,
+            lease_terms: '',
+            date_available: format(res.data.AvailableDate, 'YYYY-MM-DD'),
+            section8: res.data.Section8
+          }
+        })
     }
   }
 }
