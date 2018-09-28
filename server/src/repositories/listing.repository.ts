@@ -28,6 +28,10 @@ export class ListingRepository {
         return await getRepository(Listing).update(id, listing)
     }
 
+    public async save(listing: Listing) {
+        return await getRepository(Listing).save(listing)
+    }
+
     // THIS NEEDS TO DO THIS:
     // BASICALLY GET ALL PROPERTY AND UNIT COMBOS WHERE THERE IS NOT A LISTING RECORD 
     //

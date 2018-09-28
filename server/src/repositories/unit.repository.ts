@@ -20,6 +20,12 @@ export class UnitRepository {
         return await getRepository(Unit).find(params);
     }
 
+
+    public async save(unit: Unit){
+        return await getRepository(Unit).save(unit)
+    }
+
+
     public async delete(id: number){
         return await getRepository(Unit).delete(id)
     }

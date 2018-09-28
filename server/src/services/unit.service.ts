@@ -1,16 +1,17 @@
 
 import { Response } from 'express';
-import { UnitRepository } from "../repositories";
-import { ListingRepository } from "../repositories";
+import { UnitRepository, ListingRepository, PropertyRepository } from "../repositories";
 
 export class UnitService {
    
     private unitRepository: UnitRepository;
     private listingRepository: ListingRepository;
+    private propertyRepository: PropertyRepository;
 
     constructor() {
         this.unitRepository = new UnitRepository();
         this.listingRepository = new ListingRepository();
+        this.propertyRepository = new PropertyRepository();
     }
 
     public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean) {
@@ -19,8 +20,12 @@ export class UnitService {
       if (propertyExists) {
           return res.status(422).json({'errors': [{'msg': 'Unit already exists.'}]});
       }
-
-      const newUnit= await this.unitRepository.create({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber});
+      
+      const newUnit= await this.unitRepository.create({TenantId: tenantId, Bedrooms: bedrooms, Baths: baths, Property: propertyId, UnitNumber: unitNumber});
+      
+      const property = await this.propertyRepository.findOne({Id: propertyId});
+      
+      await this.listingRepository.create({TenantId: tenantId, Unit: newUnit, Property: property});
 
       return res.status(200).json(newUnit);
   }

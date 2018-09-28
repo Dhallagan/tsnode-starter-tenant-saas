@@ -145,5 +145,21 @@ export default {
 
   deleteBuildingUnit (propertyId, unitId) {
     return HTTP.delete(`/properties/${propertyId}/units/${unitId}`)
+  },
+
+  getListing (id) {
+    return HTTP.get(`/listings/${id}`)
+  },
+
+  getListedListings () {
+    return HTTP.get('/listings/listed')
+  },
+
+  getUnlistedListings () {
+    return HTTP.get('/listings/unlisted')
+  },
+
+  listListing (id) {
+    return HTTP.put(`/listings/${id}`)
   }
 }

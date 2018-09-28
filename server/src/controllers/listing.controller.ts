@@ -1,81 +1,54 @@
 import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
-import { UnitService } from '../services';
+import { ListingService } from '../services';
 import { validationResult } from 'express-validator/check';
 
-export class UnitController extends BaseController {
+export class ListingController extends BaseController {
 
-    private unitService: UnitService;
+    private listingService: ListingService;
 
     constructor() {
         super();
-        this.unitService = new UnitService();
+        this.listingService = new ListingService();
     }
 
-    public async createPropertyUnit(req: Request, res: Response) {
-      const errors = validationResult(req);
-      const viewModel = req.body;
-      const tenantId = req['tenant'];
-      const propertyId = req.params.id;
-      console.log(req.params)
-      if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-      }
-      
-      return await this.unitService.createPropertyUnit(res, tenantId, propertyId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage);
-  }
+    // public async getlisting(req: Request, res: Response) {
+
+    // }
+
+    public async getListedListings(req: Request, res: Response) {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.listingService.getListedListings(res, req['tenant']);
+    }
 
 
-  public async deletePropertyUnit(req: Request, res: Response) {
-      const errors = validationResult(req);
-      const viewModel = req.body;
-      const tenantId = req['tenant'];
-      const propertyId = req.params.id;
-      const unitId = req.params.unitId;
 
-      if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-      }
+    public async getUnlistedListings(req: Request, res: Response) {
+        const errors = validationResult(req);
 
-      return await this.unitService.deletePropertyUnit(res, tenantId, propertyId, unitId);
-  }
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
 
-  public async getPropertyUnit(req: Request, res: Response) {
-      const errors = validationResult(req);
-      const tenantId = req['tenant'];
-      const propertyId = req.params.id;
-      const unitId = req.params.unitId;
-
-      if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-      }
-      
-      return await this.unitService.getPropertyUnit(res, tenantId, propertyId, unitId);
-  }
-
-  public async getPropertyUnits(req: Request, res: Response) {
-      const errors = validationResult(req);
-      const tenantId = req['tenant'];
-      const propertyId = req.params.id;
-
-      if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-      }
-      
-      return await this.unitService.getPropertyUnits(res, tenantId, propertyId);
-  }
+        return await this.listingService.getUnlistedListings(res, req['tenant']);
+    }
 
 
-  public async updatePropertyUnit(req: Request, res: Response) {
-      const errors = validationResult(req);
-      const viewModel = req.body;
-      const tenantId = req['tenant'];
-      const propertyId = req.params.id;
-      const unitId = req.params.unitId;
-      if (!errors.isEmpty()) {
-          return res.status(422).json({ errors: errors.array() });
-      }
-      
-      return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage);
-  }
+
+    public async listListing(req: Request, res: Response) {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const id = req.params.id;
+
+        return await this.listingService.listListing(res, id);
+    }
 }

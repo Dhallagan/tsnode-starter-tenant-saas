@@ -19,24 +19,24 @@ export class Listing extends TenantScope {
     @JoinColumn({ name: "UnitId" })
     Unit: Unit;
 
-    @Column()
+    @Column({nullable: true})
     ListedRent: number;
 
-    @Column()
+    @Column({nullable: true})
     SecurityDeposity: number;
 
-    @Column()
+    @Column({nullable: true})
     Deposit!: number;
 
-    @Column()
+    @Column({nullable: true})
     Terms!: number;
 
-    @Column()
+    @Column({nullable: true})
     Section8!: boolean;
 
-    @Column()
+    @Column({nullable: true})
     AvailableDate!: Date;
 
-    @Column()
+    @Column({nullable: true})
     ListedDate!: Date;
 }
