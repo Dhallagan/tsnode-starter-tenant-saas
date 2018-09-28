@@ -110,7 +110,7 @@ export default {
           }
         ]
       },
-      application: {  },
+      application: { },
       selected: [], // Must be an array reference!
       options: [
         { text: 'Credit Check', value: '1' },

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { UserRepository } from '../repositories/user.repository';
-import { TenantService } from '../services/Tenant.service';
+import { TenantService } from '../services/tenant.service';
 import { validationResult } from 'express-validator/check';
 
 export class TenantController extends BaseController {

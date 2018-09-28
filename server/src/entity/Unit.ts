@@ -24,16 +24,16 @@ export class Unit extends TenantScope {
     @Column()
     Baths!: number;
 
-    @Column()
+    @Column({nullable: true})
     SqFt!: number;
 
-    @Column()
+    @Column({nullable: true})
     Garage!: Boolean;
 
-    @Column()
+    @Column({nullable: true})
     Smoking!: Boolean;
 
-    @Column()
+    @Column({nullable: true})
     Description!: string;
 
     @Column({default: false, nullable: false})

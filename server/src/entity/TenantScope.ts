@@ -3,6 +3,6 @@ import { Column } from 'typeorm';
 import { User } from './User';
 
 export class TenantScope {
-    @Column()
+    @Column({nullable: true})
     public TenantId: number;
 }
