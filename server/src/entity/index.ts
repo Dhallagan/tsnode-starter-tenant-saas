@@ -7,3 +7,5 @@ export {Unit} from './Unit';
 export {Listing} from './Listing';
 export {Property} from "./Property";
 export {PropertyType} from './PropertyType';
+export {UnitImage} from './UnitImage';
+export {PropertyImage} from './PropertyImage';

@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany} from "typeorm"
 import { Property } from './Property';
 import { TenantScope } from './TenantScope';
+import { UnitImage } from './UnitImage';
 
 @Entity()
 export class Unit extends TenantScope {
@@ -37,5 +38,8 @@ export class Unit extends TenantScope {
     Description!: string;
 
     @Column({default: false, nullable: false})
-    IsListed: Boolean
+    IsListed: Boolean;
+
+    @OneToMany(type => UnitImage, unitImage => unitImage.Unit)
+    UnitImages: UnitImage[];
 }
