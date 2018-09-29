@@ -1,6 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn} from "typeorm"
 import { Unit } from './Unit';
 import { TenantScope } from './TenantScope';
+import { PropertyImage } from './PropertyImage';
 
 @Entity()
 export class Property extends TenantScope {
@@ -29,4 +30,7 @@ export class Property extends TenantScope {
 
     @Column()
     Type: number;
+
+    @OneToMany(type => PropertyImage, propertyImage => propertyImage.Property)
+    PropertyImages: PropertyImage[];
 }
