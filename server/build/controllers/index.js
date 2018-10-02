@@ -14,3 +14,5 @@ var property_controller_1 = require("./property.controller");
 exports.PropertyController = property_controller_1.PropertyController;
 var unit_controller_1 = require("./unit.controller");
 exports.UnitController = unit_controller_1.UnitController;
+var listing_controller_1 = require("./listing.controller");
+exports.ListingController = listing_controller_1.ListingController;

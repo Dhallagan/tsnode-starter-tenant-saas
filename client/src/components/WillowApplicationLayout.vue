@@ -152,7 +152,6 @@
 
   <main role="main" :class="{
     'col-md-19 ml-sm-auto col-lg-21 pt-3 px-4': vertical,
-    'col-md-22 ml-sm-auto col-lg-23 pt-3 px-4': mini,
     'col-md-24 ml-sm-auto col-lg-24 pt-3 px-4': !vertical}"
   >
 

@@ -57,7 +57,7 @@ export default {
             // LOGIN USER ->
             this.$store.dispatch('LOGIN_SUCCESS', res.data)
             console.log(res.data)
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: '/admin' })
           }
         })
         .catch(error => {

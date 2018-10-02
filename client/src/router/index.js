@@ -32,6 +32,8 @@ import Listing from '../pages/Listing'
 // import Tenants from '../pages/Tenants'
 // import AddLease from '../pages/AddLease'
 import Plans from '../pages/Plans'
+import fourohfour from '../pages/404'
+import Dashboard from '../pages/Dashboard'
 
 Vue.use(Router)
 
@@ -39,7 +41,19 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/component',
+      path: '/admin/',
+      name: 'Dashboard',
+      meta: { layout: 'application', requiresAuth: true },
+      component: Dashboard
+    },
+    {
+      path: '*',
+      name: '404',
+      meta: { layout: 'authentication' },
+      component: fourohfour
+    },
+    {
+      path: '/admin/component',
       name: 'component',
       meta: { layout: 'authentication' },
       component: ComponentTester
@@ -81,13 +95,13 @@ export default new Router({
       component: Reset
     },
     {
-      path: '/',
+      path: '/admin/',
       name: 'Home',
       meta: { layout: 'application', requiresAuth: true },
       component: Home
     },
     {
-      path: '/admin/tenants',
+      path: '/admin/admin/tenants',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
       component: Tenants
@@ -111,7 +125,7 @@ export default new Router({
     //   component: Reports
     // },
     {
-      path: '/Applicants',
+      path: '/admin/Applicants',
       name: 'Applicants',
       component: Applicants,
       meta: {
@@ -121,7 +135,7 @@ export default new Router({
       }
     },
     {
-      path: '/applicants/:applicant_id',
+      path: '/admin/applicants/:applicant_id',
       name: 'Applicant',
       component: Applicant,
       meta: {
@@ -131,31 +145,31 @@ export default new Router({
       }
     },
     {
-      path: '/Buildings',
+      path: '/admin/Buildings',
       name: 'Buildings',
       meta: { layout: 'application', requiresAuth: true },
       component: Buildings
     },
     {
-      path: '/Buildings/New',
+      path: '/admin/Buildings/New',
       name: 'NewBuilding',
       meta: { layout: 'application', requiresAuth: true },
       component: NewBuilding
     },
     {
-      path: '/Buildings/:building_id',
+      path: '/admin/Buildings/:building_id',
       name: 'Building',
       meta: { layout: 'application', requiresAuth: true },
       component: Building
     },
     {
-      path: '/Buildings/:building_id/Unit/add',
+      path: '/admin/Buildings/:building_id/Unit/add',
       name: 'NewBuildingUnit',
       meta: { layout: 'application', requiresAuth: true },
       component: NewBuildingUnit
     },
     {
-      path: '/Buildings/:building_id/Units/:unit_id',
+      path: '/admin/Buildings/:building_id/Units/:unit_id',
       name: 'BuildingUnit',
       meta: { layout: 'application', requiresAuth: true },
       component: BuildingUnit
@@ -168,13 +182,13 @@ export default new Router({
     // },
     // // add tenants/tenant_id
     {
-      path: '/Listings',
+      path: '/admin/Listings',
       name: 'Listings',
       meta: { layout: 'application', requiresAuth: true },
       component: Listings
     },
     {
-      path: '/Listings/:listing_id',
+      path: '/admin/Listings/:listing_id',
       name: 'Listing',
       meta: { layout: 'application', requiresAuth: true },
       component: Listing
@@ -192,37 +206,37 @@ export default new Router({
     //   component: Components
     // },
     {
-      path: '/Settings',
+      path: '/admin/Settings',
       name: 'Settings',
       meta: { layout: 'application', requiresAuth: true },
       component: Settings
     },
     {
-      path: '/Settings/Accounts',
+      path: '/admin/admin/Settings/Accounts',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
       component: Account
     },
     {
-      path: '/Settings/General',
+      path: '/admin/Settings/General',
       name: 'General',
       meta: { layout: 'application', requiresAuth: true },
       component: General
     },
     {
-      path: '/Settings/Accounts/New',
+      path: '/admin/Settings/Accounts/New',
       name: 'InviteStaff',
       meta: { layout: 'application', requiresAuth: true },
       component: InviteStaff
     },
     {
-      path: '/Settings/Accounts/Profile',
+      path: '/admin/Settings/Accounts/Profile',
       name: 'Profile',
       meta: { layout: 'application', requiresAuth: true },
       component: Profile
     },
     {
-      path: '/Settings/Plans',
+      path: '/admin/Settings/Plans',
       name: 'Plans',
       meta: { layout: 'application', requiresAuth: true },
       component: Plans

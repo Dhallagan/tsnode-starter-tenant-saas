@@ -123,24 +123,30 @@ Object.defineProperty(Vue.prototype, '_', { value: _ })
 Vue.config.productionTip = false
 
 Router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    console.log(Store.getters.getAuthToken)
-    if (!Store.getters.getAuthToken) {
-      next({
-        path: '/login'
-      })
-    } else {
-      if (!Store.getters.getUser) {
-        const promise = Store.dispatch('SET_USER')
-        promise.then(res => next(), err => console.log(err))
+  if (window.location.hostname.split('.')[0] !== null) {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      console.log(Store.getters.getAuthToken)
+      if (!Store.getters.getAuthToken) {
+        next({
+          path: '/login'
+        })
       } else {
-        next()
+        if (!Store.getters.getUser) {
+          const promise = Store.dispatch('SET_USER')
+          promise.then(res => next(), err => console.log(err))
+        } else {
+          next()
+        }
       }
+    } else {
+      next()
     }
   } else {
-    next()
+    next({
+      path: '*'
+    })
   }
 })
 

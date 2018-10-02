@@ -22,6 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var Unit_1 = require("./Unit");
 var TenantScope_1 = require("./TenantScope");
+var PropertyImage_1 = require("./PropertyImage");
 var Property = /** @class */ (function (_super) {
     __extends(Property, _super);
     function Property() {
@@ -52,7 +53,10 @@ var Property = /** @class */ (function (_super) {
         __metadata("design:type", String)
     ], Property.prototype, "Zipcode", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return Unit_1.Unit; }, function (unit) { return unit.Property; }),
+        typeorm_1.OneToMany(function (type) { return Unit_1.Unit; }, function (unit) { return unit.Property; }, {
+            eager: true,
+            cascade: true
+        }),
         typeorm_1.JoinColumn({ name: "UnitId" }),
         __metadata("design:type", Array)
     ], Property.prototype, "Units", void 0);
@@ -60,6 +64,10 @@ var Property = /** @class */ (function (_super) {
         typeorm_1.Column(),
         __metadata("design:type", Number)
     ], Property.prototype, "Type", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return PropertyImage_1.PropertyImage; }, function (propertyImage) { return propertyImage.Property; }),
+        __metadata("design:type", Array)
+    ], Property.prototype, "PropertyImages", void 0);
     Property = __decorate([
         typeorm_1.Entity()
     ], Property);

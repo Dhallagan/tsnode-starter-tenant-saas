@@ -41,8 +41,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = __importStar(require("express"));
+var cors_1 = __importDefault(require("cors"));
 var database_1 = require("../core/database");
 var server_1 = require("./server");
 var seeds_1 = require("./seeds");
@@ -83,13 +87,14 @@ var Bootstrap = /** @class */ (function () {
     };
     Bootstrap.prototype.setupCors = function (app) {
         console.log("Setting up CORS...");
-        app.use(function (req, res, next) {
-            res.header('Access-Control-Allow-Origin', 'http://localhost:8081');
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-            res.header('Access-Control-Allow-Credentials', 'true');
-            next();
-        });
+        // app.use((req, res, next) => {
+        //     res.header('Access-Control-Allow-Origin', 'http://localhost:8081' );
+        //     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        //     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+        //     res.header('Access-Control-Allow-Credentials', 'true');
+        //     next();
+        // });
+        app.use(cors_1.default());
     };
     Bootstrap.prototype.setupStorage = function (app) {
         console.log("Setting up local storage...");
@@ -120,6 +125,8 @@ var Bootstrap = /** @class */ (function () {
         app.use('/api', propertyRouter);
         var unitRouter = new routes_1.UnitRoutes().router;
         app.use('/api', unitRouter);
+        var listingRouter = new routes_1.ListingRoutes().router;
+        app.use('/api', listingRouter);
     };
     return Bootstrap;
 }());

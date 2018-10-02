@@ -35,8 +35,10 @@ export class ListingService {
 
 
     public async getListedListings(res: Response, tenantId: number) {
+        console.log('at service')
         const listings = await this.listingRepository.find({where: {TenantId: tenantId}, relations: ["Unit"]});
         const listedListings = listings.filter( listing => listing.Unit.IsListed);
+
         return res.status(200).json(listedListings);
     }
 

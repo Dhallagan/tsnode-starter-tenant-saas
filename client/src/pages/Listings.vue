@@ -172,7 +172,9 @@ export default {
     getListedListings () {
       api.getListedListings()
         .then(res => {
+          console.log(res)
           const listedListings = []
+          console.log(res)
           res.data.forEach(list => {
             const listing = {
               id: list.ListingId,
@@ -191,6 +193,9 @@ export default {
 
           this.listedTable.listed = listedListings
           console.log(listedListings)
+        })
+        .catch(err => {
+          console.log(err)
         })
     },
     getUnlistedListings () {
