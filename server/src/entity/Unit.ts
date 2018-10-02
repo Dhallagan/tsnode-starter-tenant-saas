@@ -9,7 +9,11 @@ export class Unit extends TenantScope {
     @PrimaryGeneratedColumn()
     UnitId: number;
 
-    @ManyToOne( type => Property, property => property.Units)
+    @ManyToOne( type => Property, property => property.Units, {
+        eager: true,
+        cascade: true,
+        onDelete: 'CASCADE'
+    })
     @JoinColumn({ name: 'PropertyId'})
     Property: Property;
 
