@@ -13,18 +13,6 @@ export class ListingService {
     }
 
 
-    // public async createListing(res: Response, name: string, stripeId: string, interval: string, amount: number) {
-
-    //     const listing = await this.listingRepository.findOne(name);
-        
-    //     if (listing) {
-    //         return res.status(422).json({'errors': [{'msg': 'Listing is already exists.'}]});
-    //     }
-
-    //     const newListing = await this.listingRepository.create(name, stripeId, interval, amount);
-
-    //     return res.json(200).json(newListing);
-    // }
     public async getListing(res: Response, id: number) {
         const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
         if (listing) {

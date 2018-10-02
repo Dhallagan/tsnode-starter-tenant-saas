@@ -10,6 +10,6 @@ export class UnitImage {
     @Column({nullable: true})
     public Url: string;
 
-    @ManyToOne(type => Unit, unit => unit.UnitImages)
+    @ManyToOne(type => Unit, unit => unit.UnitImages, {onDelete: 'CASCADE'})
     public Unit: Unit;
 }
