@@ -148,7 +148,7 @@ export default {
           this.building.id = building.data.Id
           this.building.street = building.data.Street
           this.pageHeader.breadcrumbs[0].text = building.data.Street
-          this.pageHeader.breadcrumbs[0].href = '/buildings/' + building.data.Id
+          this.pageHeader.breadcrumbs[0].href = '/Admin/buildings/' + building.data.Id
         }))
     },
     createUnit () {

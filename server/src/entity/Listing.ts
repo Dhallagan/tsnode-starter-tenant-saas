@@ -13,7 +13,7 @@ export class Listing extends TenantScope {
     @JoinColumn({ name: "PropertyId" })
     Property: Property;
 
-    @ManyToOne(type => Unit, unit => unit.Property, {onDelete: 'CASCADE'})
+    @ManyToOne(type => Unit, unit => unit.Property)
     @JoinColumn({ name: "UnitId" })
     Unit: Unit;
 

@@ -87,7 +87,7 @@ export default {
   methods: {
     goTo (record, index) {
       console.log(record)
-      this.$router.push({ path: '/Applicants/' + record.id })
+      this.$router.push({ path: '/Admin/Applicants/' + record.id })
     }
   }
 }

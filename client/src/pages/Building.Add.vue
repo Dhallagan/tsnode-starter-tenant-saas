@@ -128,7 +128,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Buildings',
-            href: '/Buildings'
+            href: '/Admin/Buildings'
           }
         ]
       },
@@ -149,7 +149,7 @@ export default {
       console.log(this.buildingForm)
       api.createBuilding(this.buildingForm)
         .then(res => {
-          this.$router.push({ path: '/Buildings' })
+          this.$router.push({ path: '/Admin/Buildings' })
         })
         .catch(err => {
           console.log(err)

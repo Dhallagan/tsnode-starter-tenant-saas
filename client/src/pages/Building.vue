@@ -109,7 +109,7 @@
           </template>
 
           <template slot="Action" slot-scope="data">
-            <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+            <willow-button :url="'/Admin/buildings/' + data.item.id" >View</willow-button>
           </template>
 
         </willow-table>
@@ -240,7 +240,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Buildings',
-            href: '/Buildings'
+            href: '/Admin/Buildings'
           }
         ]
       },
@@ -285,7 +285,7 @@ export default {
     deleteBuilding () {
       api.deleteBuilding(this.$route.params.building_id)
         .then(res => {
-          this.$router.push({ path: '/Buildings' })
+          this.$router.push({ path: '/Admin/Buildings' })
         })
         .catch(err => {
           console.log(err)
@@ -294,14 +294,14 @@ export default {
     saveBuilding () {
       api.updateBuilding(this.$route.params.building_id, this.building)
         .then(res => {
-          this.$router.push({ path: '/Buildings' })
+          this.$router.push({ path: '/Admin/Buildings' })
         })
         .catch(err => {
           console.log(err)
         })
     },
     addUnit () {
-      this.$router.push({ path: '/Buildings/' + this.$route.params.building_id + '/unit/add' })
+      this.$router.push({ path: '/Admin/Buildings/' + this.$route.params.building_id + '/unit/add' })
     }
   }
 }

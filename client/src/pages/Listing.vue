@@ -232,7 +232,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Listings',
-            href: '/Listings'
+            href: '/Admin/Listings'
           }
         ]
       },

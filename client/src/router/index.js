@@ -212,7 +212,7 @@ export default new Router({
       component: Settings
     },
     {
-      path: '/admin/admin/Settings/Accounts',
+      path: '/admin/Settings/Accounts',
       name: 'Accounts',
       meta: { layout: 'application', requiresAuth: true },
       component: Account
