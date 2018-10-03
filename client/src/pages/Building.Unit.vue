@@ -153,7 +153,7 @@ export default {
           this.building.id = building.data.Id
           this.building.street = building.data.Street
           this.pageHeader.breadcrumbs[0].text = building.data.Street
-          this.pageHeader.breadcrumbs[0].href = '/buildings/' + building.data.Id
+          this.pageHeader.breadcrumbs[0].href = '/admin/buildings/' + building.data.Id
           this.unitForm.unitId = unit.data.Unit.UnitId
           this.unitForm.unitNumber = unit.data.Unit.UnitNumber
           this.unitForm.bedrooms = unit.data.Unit.Bedrooms

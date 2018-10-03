@@ -6,3 +6,5 @@ export { PlanController } from './plan.controller';
 export { PropertyController } from './property.controller';
 export { UnitController } from './unit.controller';
 export { ListingController } from './listing.controller';
+export { UnitImageController } from './unit-image.controller';
+export { PropertyImageController } from './property-image.controller';

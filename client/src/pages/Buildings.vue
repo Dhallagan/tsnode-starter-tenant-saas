@@ -5,7 +5,7 @@
     title="Buildings"
   >
   <template slot="action-right">
-    <willow-button size="lg" primary :url="'/buildings/new'">Add Building</willow-button>
+    <willow-button size="lg" primary :url="'/admin/buildings/new'">Add Building</willow-button>
   </template>
 
   </page-header>
@@ -35,7 +35,7 @@
       </template>
 
       <template slot="Action" slot-scope="data">
-        <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+        <willow-button :url="'/admin/buildings/' + data.item.id" >View</willow-button>
       </template>
 
     </willow-table>
@@ -80,7 +80,7 @@ export default {
     },
     goTo (building, index) {
       console.log(building)
-      this.$router.push({ path: '/Buildings/' + building.id })
+      this.$router.push({ path: '/Admin/Buildings/' + building.id })
     }
   }
 }
