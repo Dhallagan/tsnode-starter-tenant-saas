@@ -10,8 +10,8 @@ export class Unit extends TenantScope {
     UnitId: number;
 
     @ManyToOne( type => Property, property => property.Units, {
-        eager: true,
         cascade: true,
+        eager: true,
         onDelete: 'CASCADE'
     })
     @JoinColumn({ name: 'PropertyId'})
