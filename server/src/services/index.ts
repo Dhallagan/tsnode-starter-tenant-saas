@@ -5,3 +5,5 @@ export { UserService } from './user.service';
 export { PropertyService } from './property.service';
 export { UnitService } from './unit.service';
 export { ListingService } from './listing.service';
+export { UnitImageService } from './unit-image.service';
+export { PropertyImageService } from './property-image.service';

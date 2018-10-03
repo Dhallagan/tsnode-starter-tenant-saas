@@ -5,3 +5,5 @@ export { UserRepository } from './user.repository';
 export { PropertyRepository } from './property.repository';
 export { UnitRepository } from './unit.repository';
 export { ListingRepository } from './listing.repository';
+export { UnitImageRepository } from './unit-image.repository';
+export { PropertyImageRepository } from './property-image.repository';
