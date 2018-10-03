@@ -115,7 +115,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Accounts',
-            href: '/Settings/Accounts'
+            href: '/Admin/Settings/Accounts'
           }
         ]
       },

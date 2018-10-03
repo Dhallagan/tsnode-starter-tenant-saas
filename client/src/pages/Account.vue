@@ -43,7 +43,7 @@
     >
        <b-card class="mb-2">
        <h6 class="heading">Account Owner</h6>
-       <router-link to="/Settings/Accounts/Profile">
+       <router-link to="/Admin/Settings/Accounts/Profile">
         <willow-button plain>{{this.$store.getters.getUser.FirstName}} {{this.$store.getters.getUser.LastName}}</willow-button>
        </router-link>
        </b-card>
@@ -58,7 +58,7 @@
        <p class="card-text">
         Invite a staff member to join you.
        </p>
-      <willow-button primary url="/Settings/Accounts/New">Add staff account</willow-button>
+      <willow-button primary url="/Admin/Settings/Accounts/New">Add staff account</willow-button>
        </b-card>
     </willow-annotated-section>
 
@@ -117,7 +117,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Settings',
-            href: '/Settings'
+            href: '/Admin/Settings'
           }
         ]
       },

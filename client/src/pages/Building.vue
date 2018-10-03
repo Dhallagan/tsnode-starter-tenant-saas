@@ -109,7 +109,7 @@
           </template>
 
           <template slot="Action" slot-scope="data">
-            <willow-button :url="'/buildings/' + data.item.id" >View</willow-button>
+            <willow-button :url="'/Admin/buildings/' + data.item.id" >View</willow-button>
           </template>
 
         </willow-table>

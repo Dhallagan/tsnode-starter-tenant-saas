@@ -35,19 +35,19 @@
           <willow-menu-item
             icon='building'
             title='Buildings'
-            href='/buildings'
+            href='/Admin/buildings'
           ></willow-menu-item>
 
           <willow-menu-item
             icon='table'
             title='Listings'
-            href='/Listings'
+            href='/Admin/Listings'
           ></willow-menu-item>
 
           <willow-menu-item
             icon='newspaper'
             title='Applications'
-            href='/Applications'
+            href='/Admin/Applications'
           ></willow-menu-item>
 
           <willow-menu-item v-if="hasRole('SuperAdmin')"
@@ -59,7 +59,7 @@
           <willow-menu-item
             icon='cog'
             title='Settings'
-            href='/Settings'
+            href='/Admin/Settings'
           ></willow-menu-item>
 
       </template>
@@ -69,25 +69,25 @@
         <willow-menu-item
           icon='home'
           title='Home'
-          href='/'
+          href='/Admin/'
         ></willow-menu-item>
 
           <willow-menu-item
             icon='building'
             title='Buildings'
-            href='/buildings'
+            href='/Admin/buildings'
           ></willow-menu-item>
 
           <willow-menu-item
             icon='newspaper'
             title='Listings'
-            href='/Listings'
+            href='/Admin/Listings'
           ></willow-menu-item>
 
           <willow-menu-item
             icon='newspaper'
             title='Applications'
-            href='/Applications'
+            href='/Admin/Applications'
           ></willow-menu-item>
 
         <!-- MENU ITEMS-->
@@ -137,7 +137,7 @@
         <willow-menu-item
           icon='cog'
           title='Settings'
-          href='/Settings'
+          href='/Admin/Settings'
         ></willow-menu-item>
 
       </template>

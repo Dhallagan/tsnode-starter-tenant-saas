@@ -63,7 +63,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Settings',
-            href: '/Settings'
+            href: '/Admin/Settings'
           }
         ]
       },

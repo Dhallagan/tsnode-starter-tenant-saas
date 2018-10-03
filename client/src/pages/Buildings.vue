@@ -5,7 +5,7 @@
     title="Buildings"
   >
   <template slot="action-right">
-    <willow-button size="lg" primary :url="'/admin/buildings/new'">Add Building</willow-button>
+    <willow-button size="lg" primary :url="'/Admin/buildings/new'">Add Building</willow-button>
   </template>
 
   </page-header>
@@ -35,7 +35,7 @@
       </template>
 
       <template slot="Action" slot-scope="data">
-        <willow-button :url="'/admin/buildings/' + data.item.id" >View</willow-button>
+        <willow-button :url="'/Admin/buildings/' + data.item.id" >View</willow-button>
       </template>
 
     </willow-table>
