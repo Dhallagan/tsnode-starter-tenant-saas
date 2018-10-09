@@ -9,3 +9,5 @@ export {Property} from "./Property";
 export {PropertyType} from './PropertyType';
 export {UnitImage} from './UnitImage';
 export {PropertyImage} from './PropertyImage';
+export {PropertyFeatures} from './PropertyFeatures';
+export {UnitFeatures} from './UnitFeatures';
