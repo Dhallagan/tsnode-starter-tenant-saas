@@ -7,3 +7,5 @@ export { UnitRepository } from './unit.repository';
 export { ListingRepository } from './listing.repository';
 export { UnitImageRepository } from './unit-image.repository';
 export { PropertyImageRepository } from './property-image.repository';
+export { UnitFeaturesRepository } from './unit-features.repository';
+export { PropertyFeaturesRepository } from './property-features.repository';

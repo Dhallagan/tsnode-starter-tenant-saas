@@ -18,7 +18,7 @@ export class UnitImageService {
             return res.status(422).json({'errors': [{'msg': 'Unit Image already exists.'}]});
         }
         const unit = await this.unitRepository.findOne({UnitId: unitId});
-        const newUnitImage = await this.unitRepository.create({Url: url, Unit: unit});
+        const newUnitImage = await this.unitImageRepository.create({Url: url, Unit: unit});
         return res.status(200).json(newUnitImage);
     }
 

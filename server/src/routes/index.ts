@@ -7,3 +7,5 @@ export { UnitRoutes } from './unit.routes';
 export { ListingRoutes } from './listing.routes';
 export { UnitImageRoutes } from './unit-image.routes';
 export { PropertyImageRoutes } from './property-image.routes';
+export { UnitFeaturesRoutes } from './unit-features.routes';
+export { PropertyFeaturesRoutes } from './property-features.routes';

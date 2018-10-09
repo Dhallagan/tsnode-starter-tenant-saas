@@ -8,3 +8,5 @@ export { UnitController } from './unit.controller';
 export { ListingController } from './listing.controller';
 export { UnitImageController } from './unit-image.controller';
 export { PropertyImageController } from './property-image.controller';
+export { UnitFeaturesController } from './unit-features.controller';
+export { PropertyFeaturesController } from './property-features.controller';

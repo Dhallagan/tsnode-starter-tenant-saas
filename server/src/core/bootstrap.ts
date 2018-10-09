@@ -6,7 +6,20 @@ import { Server } from './server';
 import { Seeds } from './seeds';
 import { Storage } from './storage';
 import { Authentication } from './middleware/authentication'
-import { UserRoutes, CompanyRoutes, TenantRoutes, PlanRoutes, PropertyRoutes, UnitRoutes, ListingRoutes, UnitImageRoutes, PropertyImageRoutes } from '../routes';
+import { 
+    UserRoutes,
+    CompanyRoutes,
+    TenantRoutes,
+    PlanRoutes,
+    PropertyRoutes,
+    UnitRoutes,
+    ListingRoutes,
+    UnitImageRoutes,
+    PropertyImageRoutes,
+    UnitFeaturesRoutes,
+    PropertyFeaturesRoutes
+} from '../routes';
+
 import * as dotenv from 'dotenv';
 
 const root = './';
@@ -99,5 +112,12 @@ export class Bootstrap {
 
         const propertyImageRoutes = new PropertyImageRoutes().router;
         app.use('/api', propertyImageRoutes);
+
+        const propertyFeaturesRoutes = new PropertyFeaturesRoutes().router;
+        app.use('/api', propertyFeaturesRoutes);
+
+        const unitFeaturesRoutes = new UnitFeaturesRoutes().router;
+        app.use('/api', unitFeaturesRoutes);
+
     }
 }

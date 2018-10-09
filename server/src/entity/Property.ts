@@ -2,6 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn} from "typ
 import { Unit } from './Unit';
 import { TenantScope } from './TenantScope';
 import { PropertyImage } from './PropertyImage';
+import { PropertyFeatures } from './PropertyFeatures';
 
 @Entity()
 export class Property extends TenantScope {
@@ -33,4 +34,7 @@ export class Property extends TenantScope {
 
     @OneToMany(type => PropertyImage, propertyImage => propertyImage.Property)
     PropertyImages: PropertyImage[];
+
+    @OneToMany(type => PropertyFeatures, propertyFeatures => propertyFeatures.Property)
+    PropertyFeatures: PropertyFeatures[];
 }
