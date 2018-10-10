@@ -17,7 +17,8 @@ import {
     UnitImageRoutes,
     PropertyImageRoutes,
     UnitFeaturesRoutes,
-    PropertyFeaturesRoutes
+    PropertyFeaturesRoutes,
+    ApplicantRoutes
 } from '../routes';
 
 import * as dotenv from 'dotenv';
@@ -118,6 +119,9 @@ export class Bootstrap {
 
         const unitFeaturesRoutes = new UnitFeaturesRoutes().router;
         app.use('/api', unitFeaturesRoutes);
+
+        const applicantRoutes = new ApplicantRoutes().router;
+        app.use('/api', applicantRoutes);
 
     }
 }

@@ -9,3 +9,4 @@ export { UnitImageRoutes } from './unit-image.routes';
 export { PropertyImageRoutes } from './property-image.routes';
 export { UnitFeaturesRoutes } from './unit-features.routes';
 export { PropertyFeaturesRoutes } from './property-features.routes';
+export { ApplicantRoutes } from './applicant.routes';

@@ -11,3 +11,4 @@ export {UnitImage} from './UnitImage';
 export {PropertyImage} from './PropertyImage';
 export {PropertyFeatures} from './PropertyFeatures';
 export {UnitFeatures} from './UnitFeatures';
+export {Applicant} from './Applicant';

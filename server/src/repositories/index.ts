@@ -9,3 +9,4 @@ export { UnitImageRepository } from './unit-image.repository';
 export { PropertyImageRepository } from './property-image.repository';
 export { UnitFeaturesRepository } from './unit-features.repository';
 export { PropertyFeaturesRepository } from './property-features.repository';
+export { ApplicantRepository } from './applicant.repository';

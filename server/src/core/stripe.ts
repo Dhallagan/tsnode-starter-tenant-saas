@@ -2,7 +2,6 @@ var stripe;
 
 export class Stripe {
     
-    
     constructor() {
         stripe = require('stripe')(process.env.STRIPE_SKEY);
     }
