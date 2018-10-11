@@ -58,6 +58,7 @@ import WillowPagination from './components/WillowPagination'
 import WillowSelect from './components/WillowSelect'
 import WillowTextfield from './components/WillowTextfield'
 import WillowPlans from './components/WillowPlans'
+import WillowFileInputMultiple from './components/WillowFileInputMultiple'
 
 Vue.component('authentication-layout', WillowAuthenticationLayout)
 Vue.component('application-layout', WillowApplicationLayout)
@@ -111,6 +112,7 @@ Vue.component('willow-filters-field-select', WillowFiltersFieldSelect)
 Vue.component('willow-filters-field-textfield', WillowFiltersFieldTextfield)
 Vue.component('willow-filters-field-checkbox', WillowFiltersFieldCheckbox)
 Vue.component('willow-plans', WillowPlans)
+Vue.component('willow-file-input-multiple', WillowFileInputMultiple)
 Vue.component('icon', Icon)
 Vue.use(Vuex)
 Vue.use(BootstrapVue)

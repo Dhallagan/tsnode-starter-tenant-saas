@@ -127,6 +127,16 @@ var Bootstrap = /** @class */ (function () {
         app.use('/api', unitRouter);
         var listingRouter = new routes_1.ListingRoutes().router;
         app.use('/api', listingRouter);
+        var unitImageRouter = new routes_1.UnitImageRoutes().router;
+        app.use('/api', unitImageRouter);
+        var propertyImageRoutes = new routes_1.PropertyImageRoutes().router;
+        app.use('/api', propertyImageRoutes);
+        var propertyFeaturesRoutes = new routes_1.PropertyFeaturesRoutes().router;
+        app.use('/api', propertyFeaturesRoutes);
+        var unitFeaturesRoutes = new routes_1.UnitFeaturesRoutes().router;
+        app.use('/api', unitFeaturesRoutes);
+        var applicantRoutes = new routes_1.ApplicantRoutes().router;
+        app.use('/api', applicantRoutes);
     };
     return Bootstrap;
 }());

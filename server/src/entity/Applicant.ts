@@ -1,8 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm"
 import { Tenant } from './Tenant';
+import { TenantScope } from './TenantScope';
 
 @Entity()
-export class Applicant {
+export class Applicant extends TenantScope {
 
     @PrimaryGeneratedColumn()
     Id: number;
@@ -158,6 +159,12 @@ export class Applicant {
 
     @Column({nullable: true})
     Comments: String;
+
+    @Column({nullable: true})
+    ESignature: String;
+
+    @Column({nullable: true})
+    AgreedToTerms: String;
 
     @CreateDateColumn()
     CreatedAt: Date;

@@ -17,6 +17,7 @@
     <willow-layout-section primary >
 
       <b-card  card-title="Secondary" class="mb-2">
+        <h6 class="heading">Details</h6>
         <b-row>
           <b-col>
             <!-- <willow-button v-b-modal.modallg  plain size="sm" class="close sm" style="font-size: 0.75rem;">Edit</willow-button> -->
@@ -115,63 +116,52 @@
         </willow-table>
       </b-card> -->
 
-      <!-- <b-card  card-title="Primary" class="mb-2">
-        <willow-button v-b-modal.modallg  plain size="sm" class="close sm" style="font-size: 0.75rem;">Edit</willow-button>
-        <h5>Amenities</h5>
-          <b-row>
-            <b-col>
-            <b-form-group>
-              <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Business Center</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Fitness Center</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox3" v-model="status" value="accepted" unchecked-value="not_accepted">Residents" Lounge</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
+      <b-card class="mb-2" >
+        <h6 class="heading">Features</h6>
+        <b-row class="mb-2">
+          <b-col :cols="8">
+          <b-form-group>
+            <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Business Center</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Fitness Center</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox3" v-model="status" value="accepted" unchecked-value="not_accepted">Residents" Lounge</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
+          </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox16" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
             </b-form-group>
-            </b-col>
-            <b-col>
-            <b-form-group>
-              <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
+        </b-col>
+        <b-col :cols="8">
+          <b-form-group>
+            <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
+          </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
             </b-form-group>
-                      </b-col>
-            <b-col>
-            <b-form-group>
-              <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
+        </b-col>
+        <b-col :cols="8">
+          <b-form-group>
+            <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
+            </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
+          </b-form-group><b-form-group>
+            <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
             </b-form-group>
-                      </b-col>
-            <b-col>
-            <b-form-group>
-              <b-form-checkbox id="checkbox16" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox15" v-model="status" value="accepted" unchecked-value="not_accepted">Concierge Service</b-form-checkbox>
-            </b-form-group>
-            </b-col>
-          </b-row>
-        </b-card> -->
+          </b-col>
 
-        <!-- <b-card>
-          <h5>Images</h5>
-          <willow-product-images
-            :images="['http://www.ryukyu.ac.jp/wp-content/uploads/2012/09/Koala-400x300.jpg','https://cdn.dribbble.com/users/141074/screenshots/1101614/blackbird-400x300.png','http://xinature.com/wp-content/uploads/2016/10/flowers-love-rose-flower-delicte-blue-wallpapers-big-size.jpg','https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Blue_rose-artificially_coloured.jpg/220px-Blue_rose-artificially_coloured.jpg','http://placehold.it/400x300','http://placehold.it/400x300']"
-          ></willow-product-images>
-        </b-card> -->
+        </b-row>
+
+       </b-card>
 
     </willow-layout-section>
 
@@ -208,6 +198,7 @@
 
         </willow-table>
       </b-card>
+
     </willow-layout-section>
 
   </willow-layout>
