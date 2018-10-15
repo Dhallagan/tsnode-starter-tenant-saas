@@ -52,7 +52,21 @@ var Database = /** @class */ (function () {
                         password: process.env.DB_PASS,
                         database: process.env.DB_DATABASE,
                         synchronize: true,
-                        entities: [entity_1.User, entity_1.Tenant, entity_1.Company, entity_1.Property, entity_1.Plan, entity_1.Product, entity_1.Unit, entity_1.Listing, entity_1.PropertyType, entity_1.UnitImage, entity_1.PropertyImage]
+                        entities: [
+                            entity_1.User,
+                            entity_1.Tenant,
+                            entity_1.Property,
+                            entity_1.Company,
+                            entity_1.Plan,
+                            entity_1.Product,
+                            entity_1.Unit,
+                            entity_1.Listing,
+                            entity_1.PropertyType,
+                            entity_1.UnitImage,
+                            entity_1.PropertyImage,
+                            entity_1.UnitFeatures,
+                            entity_1.PropertyFeatures
+                        ]
                     })];
             });
         });

@@ -98,6 +98,13 @@ var Storage = /** @class */ (function () {
             });
         });
     };
+    Storage.prototype.uploadMultiple = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
     return Storage;
 }());
 exports.Storage = Storage;

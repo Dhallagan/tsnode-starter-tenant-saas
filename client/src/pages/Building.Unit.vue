@@ -92,6 +92,7 @@
 
           <b-col :cols="8">
 
+
             <b-form-group>
               <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Garage</b-form-checkbox>
             </b-form-group>
