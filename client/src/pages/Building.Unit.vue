@@ -179,7 +179,7 @@ export default {
         unitNumber: '',
         bedrooms: '',
         baths: '',
-        sqFt: '',
+        sqFt: 0,
         smoking: '',
         description: '',
         marketRent: ''
@@ -206,7 +206,7 @@ export default {
           this.unitForm.unitNumber = unit.data.Unit.UnitNumber
           this.unitForm.bedrooms = unit.data.Unit.Bedrooms
           this.unitForm.baths = unit.data.Unit.Baths
-          this.unitForm.marketRent = ''
+          this.unitForm.marketRent = unit.data.Unit.MarketRent
         }))
     },
     updateUnit () {

@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToMany, JoinTable} from "typeorm"
 import { Unit } from './Unit';
 import { TenantScope } from './TenantScope';
 import { PropertyImage } from './PropertyImage';
@@ -35,6 +35,7 @@ export class Property extends TenantScope {
     @OneToMany(type => PropertyImage, propertyImage => propertyImage.Property)
     PropertyImages: PropertyImage[];
 
-    @OneToMany(type => PropertyFeatures, propertyFeatures => propertyFeatures.Property)
+    @ManyToMany(type => PropertyFeatures, propertyFeatures => propertyFeatures.Property)
+    @JoinTable({ name: "property_property_features"})
     PropertyFeatures: PropertyFeatures[];
 }

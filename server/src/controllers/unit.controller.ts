@@ -22,7 +22,7 @@ export class UnitController extends BaseController {
           return res.status(422).json({ errors: errors.array() });
       }
       
-      return await this.unitService.createPropertyUnit(res, tenantId, propertyId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage);
+      return await this.unitService.createPropertyUnit(res, tenantId, propertyId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent);
   }
 
 
@@ -76,6 +76,6 @@ export class UnitController extends BaseController {
           return res.status(422).json({ errors: errors.array() });
       }
       
-      return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage);
+      return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent);
   }
 }

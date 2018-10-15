@@ -208,7 +208,7 @@
           </b-col>
         </b-row>
 
-       </b-card>
+      </b-card>
 
        
 
@@ -242,7 +242,7 @@ export default {
         unit: '',
         beds: '',
         baths: '',
-        sqft: '',
+        sqft: 0,
         property: '',
         rent: '',
         deposit: '',

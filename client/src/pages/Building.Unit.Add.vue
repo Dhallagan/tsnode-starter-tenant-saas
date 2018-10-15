@@ -127,7 +127,7 @@ export default {
         unitNumber: '',
         bedrooms: '',
         baths: '',
-        sqFt: '',
+        sqFt: 0,
         smoking: '',
         description: '',
         marketRent: ''
