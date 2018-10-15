@@ -34,12 +34,19 @@ import Listing from '../pages/Listing'
 import Plans from '../pages/Plans'
 import fourohfour from '../pages/404'
 import Dashboard from '../pages/Dashboard'
+import Apply from '@/pages/public/Apply'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/apply',
+      name: 'Apply',
+      meta: { layout: 'authentication' },
+      component: Apply
+    },
     {
       path: '/admin/',
       name: 'Dashboard',

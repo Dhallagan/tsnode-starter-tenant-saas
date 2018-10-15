@@ -38,6 +38,10 @@
           <b-badge variant="primary" pill>{{data.item.applicants}}</b-badge>
         </template>
 
+        <template slot="Action" slot-scope="data">
+          <willow-button :url="`/admin/listings/${data.item.id}`" >View</willow-button>
+        </template>
+
       </willow-table>
 
     </b-tab>
@@ -81,7 +85,7 @@ export default {
   data () {
     return {
       listedTable: {
-        fields: ['Listed', 'Available', 'Beds', 'Baths', 'Rent', 'Applicants'],
+        fields: ['Listed', 'Available', 'Beds', 'Baths', 'Rent', 'Action'],
         listed: []
       },
       unlistedTable: {

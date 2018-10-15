@@ -40,7 +40,7 @@
 
           <willow-menu-item
             icon='table'
-            title='Listings'
+            title='Leasing'
             href='/Admin/Listings'
           ></willow-menu-item>
 

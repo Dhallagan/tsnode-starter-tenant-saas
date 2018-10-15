@@ -53,4 +53,20 @@ export class Storage {
     return filename
   }
 
+  public async uploadMultiple(req, res) {
+    // let filename;
+
+    // try {
+    //     const upload = util.promisify(this.upload.any());
+    //     await upload(req, res);
+    //     filename = req.files[0].location
+
+    // } catch (e) {
+    //     console.log(e)
+    // }
+
+    // return filename
+  }
+
+
 }

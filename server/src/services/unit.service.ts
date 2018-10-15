@@ -14,14 +14,14 @@ export class UnitService {
         this.propertyRepository = new PropertyRepository();
     }
 
-    public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean) {
+    public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean, marketRent: number) {
       const propertyExists = await this.unitRepository.findOne({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
       
       if (propertyExists) {
           return res.status(422).json({'errors': [{'msg': 'Unit already exists.'}]});
       }
       
-      const newUnit= await this.unitRepository.create({TenantId: tenantId, Bedrooms: bedrooms, Baths: baths, Property: propertyId, UnitNumber: unitNumber});
+      const newUnit= await this.unitRepository.create({TenantId: tenantId, Bedrooms: bedrooms, Baths: baths, Property: propertyId, UnitNumber: unitNumber, MarketRent: marketRent});
       
       const property = await this.propertyRepository.findOne({Id: propertyId});
       
@@ -47,7 +47,7 @@ export class UnitService {
   }
 
 
-  public async updatePropertyUnit(res: Response, tenantId: number, propertyId: number, unitId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean) {
+  public async updatePropertyUnit(res: Response, tenantId: number, propertyId: number, unitId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean, marketRent: number) {
       const unit = await this.unitRepository.findOne({TenantId: tenantId, Property: propertyId, UnitId: unitId});
       
       if (!unit) {
@@ -60,6 +60,7 @@ export class UnitService {
       unit.SqFt= sqFt;
       unit.Smoking = smoking;
       unit.Garage = garage;
+      unit.MarketRent = marketRent;
 
       await this.unitRepository.update(unitId, unit);
 

@@ -1,8 +1,13 @@
 <template>
-  <div class="custom-control custom-checkbox custom-control-inline">
-    <label :for="id" class="custom-control-label">
-    <input type="checkbox" class="custom-control-input" :value="value" checked>
-    {{label}}</label>
+  <div class="custom-control custom-checkbox">
+    <label :for="id" >
+    <input  type="checkbox" class="custom-control-input"
+      :checked="checked"
+      :value="value"
+      @change="onChange"
+    >
+      <slot/>
+    </label>
     </div>
 </template>
 
@@ -16,9 +21,14 @@ export default {
   props: {
     id: String,
     label: String,
-    value: String,
-    checked: Boolean,
-    disabled: Boolean
+    checked: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: true
+    }
   },
 
   methods: {
