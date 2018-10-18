@@ -80,4 +80,15 @@ export class UnitFeaturesController extends BaseController{
         return await this.unitFeaturesService.deleteUnitFeatures(res, featuresId);
     }
 
+    public async getUnitFeaturesByTenantId(req: Request, res: Response){
+        const errors = validationResult(req);
+        const tenantId = req['tenant'];
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.unitFeaturesService.getUnitFeaturesByTenantId(res, tenantId);
+    }
+
 }

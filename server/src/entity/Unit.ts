@@ -48,7 +48,14 @@ export class Unit extends TenantScope {
     @OneToMany(type => UnitImage, unitImage => unitImage.Unit)
     UnitImages: UnitImage[];
 
-    @ManyToMany(type => UnitFeatures, unitFeatures => unitFeatures.Unit)
-    @JoinTable({name: "unit_unit_features"})
+    @ManyToMany(type => UnitFeatures, unitFeatures => unitFeatures.Unit, {
+        cascade : true
+    })
+    @JoinTable({name: "unit_unit_features", joinColumns: [
+        { name: 'unitId' }
+    ],
+    inverseJoinColumns: [
+        { name: 'unitFeaturesId' }
+    ]})
     UnitFeatures: UnitFeatures[];
 }
