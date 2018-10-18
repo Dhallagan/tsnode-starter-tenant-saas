@@ -3,6 +3,8 @@ import api from '@/api/api'
 const Common = {
   state: {
     propertyTypes: null,
+    propertyFeatures: null,
+    unitFeatures: null,
     stateOptions: [
       { value: 'AL', text: 'Alabama' },
       { value: 'AK', text: 'Alaska' },
@@ -64,11 +66,23 @@ const Common = {
     },
     getPropertyTypes (state) {
       return state.propertyTypes
+    },
+    getPropertyFeatures (state) {
+      return state.propertyFeatures
+    },
+    getUnitFeatures (state) {
+      return state.unitFeatures
     }
   },
   mutations: {
     setPropertyTypes (state, options) {
       state.propertyTypes = options
+    },
+    setPropertyFeatures (state, options) {
+      state.propertyFeatures = options
+    },
+    setUnitFeatures (state, options) {
+      state.unitFeatures = options
     }
   },
   actions: {
@@ -83,6 +97,32 @@ const Common = {
           })
           console.log('LOAD_PROPERTY_TYPES_SUCCESS')
           context.commit('setPropertyTypes', propertyTypes)
+        })
+    },
+    LOAD_PROPERTY_FEATURES: function (context) {
+      api.getPropertyFeatures()
+        .then(res => {
+          var propertyFeatures = res.data.map(propertyFeatures => {
+            return {
+              value: propertyFeatures.Id,
+              text: propertyFeatures.Name
+            }
+          })
+          console.log('LOAD_PROPERTY_FEATURES_SUCCESS')
+          context.commit('setPropertyFeatures', propertyFeatures)
+        })
+    },
+    LOAD_UNIT_FEATURES: function (context) {
+      api.getUnitFeatures()
+        .then(res => {
+          var unitFeatures = res.data.map(unitFeatures => {
+            return {
+              value: unitFeatures.Id,
+              text: unitFeatures.Name
+            }
+          })
+          console.log('LOAD_UNIT_FEATURES_SUCCESS')
+          context.commit('setUnitFeatures', unitFeatures)
         })
     }
   }

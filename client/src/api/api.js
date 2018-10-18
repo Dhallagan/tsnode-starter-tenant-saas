@@ -161,5 +161,13 @@ export default {
 
   listListing (id) {
     return HTTP.put(`/listings/${id}`)
+  },
+
+  getPropertyFeatures () {
+    return HTTP.get('/propertyfeatures')
+  },
+
+  getUnitFeatures () {
+    return HTTP.get('/unitfeatures')
   }
 }

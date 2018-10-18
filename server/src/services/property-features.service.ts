@@ -67,4 +67,14 @@ export class PropertyFeaturesService {
         return res.status(200).json({'msg': 'Successfully removed the property features.'});
     }
 
+    public async getPropertyFeaturesByTenantId(res: Response, tenantId: number) {
+
+        const propertyFeatures = await this.propertyFeaturesRepository.find({TenantId: tenantId});
+        if (!propertyFeatures) {
+            return res.status(422).json({'errors': [{'msg': 'Property Features not exists.'}]});
+        }
+
+        return res.status(200).json(propertyFeatures);
+    }
+
 }

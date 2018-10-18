@@ -129,7 +129,7 @@
             </b-form-group><b-form-group>
             <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
           </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox16" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
+            <b-form-checkbox id="checkbox15" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
             </b-form-group>
         </b-col>
         <b-col :cols="8">

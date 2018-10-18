@@ -77,48 +77,12 @@
        <b-card class="mb-2" >
         <h6 class="heading">Features</h6>
         <b-row class="mb-2">
-
           <b-col :cols="8">
-            <b-form-group>
-              <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Balcony</b-form-checkbox>
-            </b-form-group>
-            <b-form-group>
-              <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Deck</b-form-checkbox>
-            </b-form-group>
-            <b-form-group>
-              <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
+            <b-form-group v-for="unitFeatures in this.$store.getters.getUnitFeatures" v-bind:key="unitFeatures">
+              <b-form-checkbox :id="unitFeatures.value" v-model="unitForm.unitFeatures" :value="unitFeatures.value" @change="saveCheckboxes($event.target.value)">{{unitFeatures.text}}</b-form-checkbox>
             </b-form-group>
           </b-col>
-
-          <b-col :cols="8">
-
-
-            <b-form-group>
-              <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Garage</b-form-checkbox>
-            </b-form-group>
-
-            <b-form-group>
-                <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Hardwood floors</b-form-checkbox>
-            </b-form-group>
-
-            <b-form-group>
-              <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">In Unit Laundry</b-form-checkbox>
-            </b-form-group>
-          </b-col>
-
-        <b-col :cols="8">
-
-          <b-form-group>
-            <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Cable REady</b-form-checkbox>
-          </b-form-group>
-          <b-form-group>
-            <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dishwasher</b-form-checkbox>
-          </b-form-group>
-          <b-form-group>
-            <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Fireplace</b-form-checkbox>
-          </b-form-group>
-        </b-col>
-      </b-row>
+        </b-row>
 
        </b-card>
 
@@ -182,7 +146,8 @@ export default {
         sqFt: 0,
         smoking: '',
         description: '',
-        marketRent: ''
+        marketRent: '',
+        unitFeatures: []
       },
       building: {
         id: null,
@@ -207,6 +172,7 @@ export default {
           this.unitForm.bedrooms = unit.data.Unit.Bedrooms
           this.unitForm.baths = unit.data.Unit.Baths
           this.unitForm.marketRent = unit.data.Unit.MarketRent
+          this.unitForm.unitFeatures = unit.data.Unit.UnitFeatures
         }))
     },
     updateUnit () {
@@ -228,6 +194,9 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    saveCheckboxes (id) {
+      this.unitForm.unitFeatures.push(id)
     }
   }
 }

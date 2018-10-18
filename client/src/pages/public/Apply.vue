@@ -143,7 +143,6 @@
       </b-col>
     </b-row>
 
-    
     <b-row class="mb-2">
       <b-col :cols="24">
         <willow-textfield
@@ -244,8 +243,6 @@
       </b-col>
     </b-row>
 
-
-
     <b-row class="mb-2">
       <b-col :cols="12">
         <willow-textfield
@@ -278,7 +275,6 @@
       </b-col>
     </b-row>
 
-    
     <b-row class="mb-2">
       <b-col :cols="12">
         <willow-textfield
@@ -307,14 +303,12 @@
       <b-col :cols="12">
         <willow-textfield
           :label="'If you have a pet what breed?'"
-          
         ></willow-textfield>
       </b-col>
 
       <b-col :cols="12">
         <willow-textfield
           :label="'Weight'"
-          
         ></willow-textfield>
       </b-col>
 
@@ -331,7 +325,6 @@
       <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted">Yes</b-form-radio>
       <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted">No</b-form-radio>
     </b-form-group>
-
 
     <b-row class="mb-2">
       <b-col :cols="24">
@@ -355,9 +348,9 @@
       <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted">No</b-form-radio>
     </b-form-group>
     <p><strong>Terms and conditions:</strong><br>
-        I understand that this is a routine application to establish credit, character, employment, and 
+        I understand that this is a routine application to establish credit, character, employment, and
         rental history. I also understand that this is NOT an agreement to rent and that all applications
-        must be approved. I authorize verification of references given. I declare that the statements 
+        must be approved. I authorize verification of references given. I declare that the statements
         above are true and correct, and I agree that the landlord may terminate my agreement entered
           into in reliance on any misstatement made above.
     </p>
@@ -372,9 +365,6 @@
     </b-row>
 
   </b-card>
-
-
-
 
   </page>
 </div>

@@ -68,4 +68,13 @@ export class UnitFeaturesService {
         return res.status(200).json({'msg': 'Successfully removed the unit features.'});
     }
 
+    public async getUnitFeaturesByTenantId(res: Response, tenantId: number) {
+
+        const unitFeatures = await this.unitFeaturesRepository.find({TenantId: tenantId});
+        if (!unitFeatures) {
+            return res.status(422).json({'errors': [{'msg': 'Unit Features not exists.'}]});
+        }
+
+        return res.status(200).json(unitFeatures);
+    }
 }

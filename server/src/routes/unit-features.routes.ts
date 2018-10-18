@@ -19,5 +19,6 @@ export class UnitFeaturesRoutes extends BaseRoute {
         this.router.put('/units/:id/features/:featuresId', Authentication.isAuthenticated, (req, res, next) => this.unitFeaturesController.updateUnitFeatures(req, res).catch(next));
         this.router.post('/units/:id/features', Authentication.isAuthenticated, (req, res, next) => this.unitFeaturesController.createUnitFeatures(req, res).catch(next));
         this.router.delete('/units/:id/features/:featuresId', Authentication.isAuthenticated, (req, res, next) => this.unitFeaturesController.deleteUnitFeatures(req, res).catch(next));
+        this.router.get('/unitfeatures', Authentication.isAuthenticated, (req, res, next) => this.unitFeaturesController.getUnitFeaturesByTenantId(req, res).catch(next));
     }
 }

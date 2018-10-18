@@ -73,4 +73,15 @@ export class PropertyFeaturesController extends BaseController{
         return await this.propertyFeaturesService.deletePropertyFeatures(res, req.params.id);
     }
 
+    public async getPropertyFeaturesByTenantId(req: Request, res: Response){
+        const errors = validationResult(req);
+        const tenantId = req['tenant'];
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return await this.propertyFeaturesService.getPropertyFeaturesByTenantId(res, tenantId);
+    }
+
 }

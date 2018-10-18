@@ -19,5 +19,6 @@ export class PropertyFeaturesRoutes extends BaseRoute {
         this.router.put('/propertys/:id/features/:featuresId', Authentication.isAuthenticated, (req, res, next) => this.propertyFeaturesController.updatePropertyFeatures(req, res).catch(next));
         this.router.post('/propertys/:id/features', Authentication.isAuthenticated, (req, res, next) => this.propertyFeaturesController.createPropertyFeatures(req, res).catch(next));
         this.router.delete('/propertys/:id/features/:featuresId', Authentication.isAuthenticated, (req, res, next) => this.propertyFeaturesController.deletePropertyFeatures(req, res).catch(next));
+        this.router.get('/propertyfeatures', Authentication.isAuthenticated, (req, res, next) => this.propertyFeaturesController.getPropertyFeaturesByTenantId(req, res).catch(next));
     }
 }

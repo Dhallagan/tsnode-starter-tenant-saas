@@ -207,6 +207,8 @@
 export default {
   mounted () {
     this.$store.dispatch('LOAD_PROPERTY_TYPES')
+    this.$store.dispatch('LOAD_PROPERTY_FEATURES')
+    this.$store.dispatch('LOAD_UNIT_FEATURES')
   },
 
   name: 'App',
