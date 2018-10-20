@@ -119,45 +119,43 @@
       <b-card class="mb-2" >
         <h6 class="heading">Features</h6>
         <b-row class="mb-2">
-          <b-col :cols="8">
-          <b-form-group>
-            <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Business Center</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Fitness Center</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox3" v-model="status" value="accepted" unchecked-value="not_accepted">Residents" Lounge</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox15" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
-            </b-form-group>
-        </b-col>
-        <b-col :cols="8">
-          <b-form-group>
-            <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
-            </b-form-group>
-        </b-col>
-        <b-col :cols="8">
-          <b-form-group>
-            <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="property_features"
+                name="property_features"
+                v-model="building.propertyFeatures"
+                :options="this.$store.getters.getPropertyFeatures">
+              </b-form-checkbox-group>
             </b-form-group>
           </b-col>
+          <!-- <b-col :cols="8">
+            <b-form-group>
+              <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
+            </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
+              </b-form-group>
+          </b-col>
+          <b-col :cols="8">
+            <b-form-group>
+              <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
+              </b-form-group><b-form-group>
+              <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
+            </b-form-group>
+            <b-form-group>
+              <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
+            </b-form-group>
+          </b-col> -->
 
         </b-row>
 
@@ -244,6 +242,7 @@ export default {
         state: null,
         zipcode: null,
         type: 1,
+        propertyFeatures: [],
         units: []
       }
     }
@@ -262,6 +261,7 @@ export default {
           this.building.state = building.data.State
           this.building.zipcode = building.data.Zipcode
           this.building.type = building.data.Type
+          this.building.propertyFeatures = building.data.PropertyFeatures.map(p => p.Id)
 
           this.building.units = units.data.Units.map(unit => {
             return {

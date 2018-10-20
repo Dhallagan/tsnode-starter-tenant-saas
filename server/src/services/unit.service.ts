@@ -67,16 +67,15 @@ export class UnitService {
 
       var _unitFeatures: UnitFeatures[] = [];
 
-        for ( let uf of unitFeatures) {
+      for ( let uf of unitFeatures) {
           var _unitFeature  = await this.unitFeatureRepository.findOne({Id: uf});
           if( _unitFeature ) {
               _unitFeatures.push(_unitFeature);
           }
-        }
+      }
       unit.UnitFeatures = _unitFeatures;
-      console.log("Unit : ", JSON.stringify(unit));
 
-      await this.unitRepository.update(unitId, unit);  
+      await this.unitRepository.save(unit);
 
       return res.status(200).json({ Unit: unit });
   }

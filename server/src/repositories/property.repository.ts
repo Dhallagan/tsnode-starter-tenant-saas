@@ -25,6 +25,10 @@ export class PropertyRepository {
         return await getRepository(PropertyType).find()
     }
 
+    public async save(property: Property) {
+        return await getRepository(Property).save(property);
+    }
+
     public async delete(id: number){
         return await getRepository(Property).delete(id)
     }

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { PropertyService } from '../services';
 import { validationResult } from 'express-validator/check';
+import _ from 'lodash';
 
 export class PropertyController extends BaseController {
 
@@ -63,9 +64,10 @@ export class PropertyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        console.log(viewModel);
+        const propertyFeatures: number[] = _.filter(viewModel.propertyFeatures, v => !isNaN(v));
+        console.log(propertyFeatures)
         
-        return await this.propertyService.updateProperty(res, tenantId, id, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        return await this.propertyService.updateProperty(res, tenantId, id, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode, propertyFeatures);
     }
 
 
