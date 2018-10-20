@@ -77,9 +77,14 @@
        <b-card class="mb-2" >
         <h6 class="heading">Features</h6>
         <b-row class="mb-2">
-          <b-col :cols="8">
-            <b-form-group v-for="unitFeatures in this.$store.getters.getUnitFeatures" v-bind:key="unitFeatures">
-              <b-form-checkbox :id="unitFeatures.value" v-model="unitForm.unitFeatures" :value="unitFeatures.value" @change="saveCheckboxes($event.target.value)">{{unitFeatures.text}}</b-form-checkbox>
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="unit_features"
+                name="unit_features"
+                v-model="unitForm.unitFeatures"
+                :options="this.$store.getters.getUnitFeatures">
+              </b-form-checkbox-group>
             </b-form-group>
           </b-col>
         </b-row>
@@ -172,7 +177,8 @@ export default {
           this.unitForm.bedrooms = unit.data.Unit.Bedrooms
           this.unitForm.baths = unit.data.Unit.Baths
           this.unitForm.marketRent = unit.data.Unit.MarketRent
-          this.unitForm.unitFeatures = unit.data.Unit.UnitFeatures
+          this.unitForm.unitFeatures = unit.data.Unit.UnitFeatures.map(u => u.Id)
+          console.log(this.unitForm)
         }))
     },
     updateUnit () {

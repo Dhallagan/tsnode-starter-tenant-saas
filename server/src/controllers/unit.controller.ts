@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { BaseController } from './base-controller';
 import { UnitService } from '../services';
 import { validationResult } from 'express-validator/check';
+import _ from 'lodash';
 
 export class UnitController extends BaseController {
 
@@ -75,7 +76,9 @@ export class UnitController extends BaseController {
       if (!errors.isEmpty()) {
           return res.status(422).json({ errors: errors.array() });
       }
+      // Exclude anything that isNaN
+      const unitFeatures: number[] = _.filter(viewModel.unitFeatures, v => !isNaN(v));
       
-      return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent, viewModel.unitFeatures);
+      return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent, unitFeatures);
   }
 }
