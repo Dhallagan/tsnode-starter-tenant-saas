@@ -98,18 +98,18 @@ export class Seeds {
 
   }
 
-  public static async seedPropertyFeatures() {
+  public static async seedPropertyFeatures(TenantId: number) {
 
     const propertyFeaturesRepository = getRepository(PropertyFeatures);
    
     const propertyFeatures = [
-      { Name: "Balcony", TenantId: 1, Property: [] },
-      { Name: "Patio", TenantId: 1, Property: [] },
-      { Name: "Pool", TenantId: 1, Property: [] },
-      { Name: "Weight Room", TenantId: 1, Property: [] }
+      { Name: "Balcony", TenantId, Property: [] },
+      { Name: "Patio", TenantId, Property: [] },
+      { Name: "Pool", TenantId, Property: [] },
+      { Name: "Weight Room", TenantId, Property: [] }
     ]
 
-    const existPropertyFeatures = await propertyFeaturesRepository.find();
+    const existPropertyFeatures = await propertyFeaturesRepository.find({TenantId});
     if (existPropertyFeatures.length)
       return;
 
@@ -118,17 +118,17 @@ export class Seeds {
     }    
   }
 
-  public static async seedUnitFeatures() {
+  public static async seedUnitFeatures(TenantId: number) {
 
     const unitFeaturesRepository = getRepository(UnitFeatures);
    
     const unitFeatures = [
-      { Name: "Balcony", TenantId: 1, Unit: [] },
-      { Name: "Deck", TenantId: 1, Unit: [] },
-      { Name: "Garage", TenantId: 1, Unit: [] },
-      { Name: "Wheel Access", TenantId: 1, Unit: [] }
+      { Name: "Balcony", TenantId, Unit: [] },
+      { Name: "Deck", TenantId, Unit: [] },
+      { Name: "Garage", TenantId, Unit: [] },
+      { Name: "Wheel Access", TenantId, Unit: [] }
     ]
-    const existUnitFeatures = await unitFeaturesRepository.find();
+    const existUnitFeatures = await unitFeaturesRepository.find({TenantId});
     if (existUnitFeatures.length)
       return;
 

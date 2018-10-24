@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { TenantRepository, PlanRepository } from "../repositories";
 import { Stripe } from '../core/stripe';
 import { Tenant } from '../entity';
+import { Seeds } from '../core/seeds';
 
 export class TenantService {
 
@@ -18,7 +19,7 @@ export class TenantService {
 
     
     public async createTenant(domain: string) {
-        const tenantExists = await this.tenantRepository.getTenantByDomain(domain);
+        let tenantExists = await this.tenantRepository.getTenantByDomain(domain);
 
         if (tenantExists) {
             return tenantExists;
@@ -27,6 +28,16 @@ export class TenantService {
         const plan = await this.planRepository.getPlanByName('Trial');
 
         const tenant = await this.tenantRepository.createTenant(domain, plan);
+
+        tenantExists = await this.tenantRepository.getTenantByDomain(tenant.Domain);
+
+        if (tenantExists) {
+            console.log('New Tenant!');
+            console.log('Seeding Property & Unit Features...');
+            await Seeds.seedPropertyFeatures(tenantExists.Id);
+            await Seeds.seedUnitFeatures(tenantExists.Id);
+            console.log('Finished...');
+        }
 
         return tenant;
     }
