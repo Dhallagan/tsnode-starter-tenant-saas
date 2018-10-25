@@ -74,6 +74,23 @@
           </b-row>
        </b-card>
 
+       <b-card class="mb-2" >
+        <h6 class="heading">Features</h6>
+        <b-row class="mb-2">
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="unit_features"
+                name="unit_features"
+                v-model="unitForm.unitFeatures"
+                :options="this.$store.getters.getUnitFeatures">
+              </b-form-checkbox-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
+
+       </b-card>
+
     </willow-layout-section>
 
         <!-- Secondary -->
@@ -130,7 +147,8 @@ export default {
         sqFt: 0,
         smoking: '',
         description: '',
-        marketRent: ''
+        marketRent: '',
+        unitFeatures: []
       },
       building: {
         id: null,

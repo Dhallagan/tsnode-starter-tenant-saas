@@ -51,6 +51,8 @@ export class Bootstrap {
             // Seeds.seedUsers();
             Seeds.seedPlans();
             Seeds.seedPropertyTypes();
+            // Seeds.seedPropertyFeatures();
+            // Seeds.seedUnitFeatures();
         });
     }
 

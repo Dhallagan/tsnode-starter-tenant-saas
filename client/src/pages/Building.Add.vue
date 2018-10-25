@@ -86,6 +86,22 @@
           </b-row>
        </b-card>
 
+       <b-card class="mb-2" >
+        <h6 class="heading">Features</h6>
+        <b-row class="mb-2">
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="property_features"
+                name="property_features"
+                v-model="buildingForm.propertyFeatures"
+                :options="this.$store.getters.getPropertyFeatures">
+              </b-form-checkbox-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
+       </b-card>
+
     </willow-layout-section>
 
         <!-- Secondary -->
@@ -139,6 +155,7 @@ export default {
         city: '',
         zipcode: '',
         type: 1,
+        propertyFeatures: [],
         units: []
       },
       propertyTypes: null
