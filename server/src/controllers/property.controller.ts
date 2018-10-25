@@ -49,9 +49,10 @@ export class PropertyController extends BaseController {
             return res.status(422).json({ errors: errors.array() });
         }
 
+        const propertyFeatures: number[] = _.filter(viewModel.propertyFeatures, v => !isNaN(v));
         console.log(viewModel);
         
-        return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode);
+        return await this.propertyService.createProperty(res, tenantId, viewModel.type, viewModel.street, viewModel.apartmentSuite, viewModel.city, viewModel.state, viewModel.zipcode, propertyFeatures);
     }
 
     public async updateProperty(req: Request, res: Response) {

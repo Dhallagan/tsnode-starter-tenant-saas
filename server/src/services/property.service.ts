@@ -16,14 +16,22 @@ export class PropertyService {
     }
 
 
-    public async createProperty(res: Response, tenantId: number, type: number, street: string, aptsuite: string, city: string, state: string, zipcode: string) {
+    public async createProperty(res: Response, tenantId: number, type: number, street: string, aptsuite: string, city: string, state: string, zipcode: string, propertyFeatures: number[]) {
         const propertyExists = await this.propertyRepository.findOne({TenantId: tenantId, Street: street, City: city, State: state});
         
         if (propertyExists) {
             return res.status(422).json({'errors': [{'msg': 'Property already exists.'}]});
         }
+        
+        var PropertyFeatures: PropertyFeatures[] = [];
+        for ( let pf of propertyFeatures ) {
+            var _propertyFeature = await this.propertyFeaturesRepository.findOne({Id: pf});
+            if (_propertyFeature) {
+                PropertyFeatures.push(_propertyFeature);
+            }
+        }
 
-        const newProperty = await this.propertyRepository.create({TenantId:tenantId, Type: type, Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode});
+        const newProperty = await this.propertyRepository.create({TenantId:tenantId, Type: type, Street: street, ApartmentSuite: aptsuite, City: city, State: state, Zipcode: zipcode, PropertyFeatures});
 
         return res.status(200).json(newProperty);
     }

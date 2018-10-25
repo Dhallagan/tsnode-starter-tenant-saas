@@ -17,14 +17,22 @@ export class UnitService {
         this.unitFeatureRepository = new UnitFeaturesRepository();
     }
 
-    public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean, marketRent: number) {
+    public async createPropertyUnit(res: Response, tenantId: number, propertyId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean, marketRent: number, unitFeatures: number[]) {
       const propertyExists = await this.unitRepository.findOne({TenantId: tenantId, Property: propertyId, UnitNumber: unitNumber, Bedrooms: bedrooms, Baths: baths, SqFt: sqFt, Smoking: smoking, Garage: garage});
       
       if (propertyExists) {
           return res.status(422).json({'errors': [{'msg': 'Unit already exists.'}]});
       }
       
-      const newUnit= await this.unitRepository.create({TenantId: tenantId, Bedrooms: bedrooms, Baths: baths, Property: propertyId, UnitNumber: unitNumber, MarketRent: marketRent});
+      var UnitFeatures: UnitFeatures[] = [];
+      for ( let uf of unitFeatures) {
+          var _unitFeature  = await this.unitFeatureRepository.findOne({Id: uf});
+          if( _unitFeature ) {
+            UnitFeatures.push(_unitFeature);
+          }
+      }
+      
+      const newUnit= await this.unitRepository.create({TenantId: tenantId, Bedrooms: bedrooms, Baths: baths, Property: propertyId, UnitNumber: unitNumber, MarketRent: marketRent, UnitFeatures});
       
       const property = await this.propertyRepository.findOne({Id: propertyId});
       

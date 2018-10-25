@@ -28,7 +28,7 @@ export class TenantService {
         const plan = await this.planRepository.getPlanByName('Trial');
 
         const tenant = await this.tenantRepository.createTenant(domain, plan);
-
+        
         tenantExists = await this.tenantRepository.getTenantByDomain(tenant.Domain);
 
         if (tenantExists) {
@@ -38,6 +38,7 @@ export class TenantService {
             await Seeds.seedUnitFeatures(tenantExists.Id);
             console.log('Finished...');
         }
+        
 
         return tenant;
     }

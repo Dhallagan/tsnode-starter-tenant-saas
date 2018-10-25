@@ -22,8 +22,10 @@ export class UnitController extends BaseController {
       if (!errors.isEmpty()) {
           return res.status(422).json({ errors: errors.array() });
       }
+
+      const unitFeatures: number[] = _.filter(viewModel.unitFeatures, v => !isNaN(v));
       
-      return await this.unitService.createPropertyUnit(res, tenantId, propertyId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent);
+      return await this.unitService.createPropertyUnit(res, tenantId, propertyId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent, unitFeatures);
   }
 
 
@@ -76,7 +78,7 @@ export class UnitController extends BaseController {
       if (!errors.isEmpty()) {
           return res.status(422).json({ errors: errors.array() });
       }
-      // Exclude anything that isNaN
+
       const unitFeatures: number[] = _.filter(viewModel.unitFeatures, v => !isNaN(v));
       
       return await this.unitService.updatePropertyUnit(res, tenantId, propertyId, unitId, viewModel.unitNumber, viewModel.bedrooms, viewModel.baths, viewModel.sqFt, viewModel.smoking, viewModel.garage, viewModel.marketRent, unitFeatures);
