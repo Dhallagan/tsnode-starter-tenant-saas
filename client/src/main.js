@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Router from './router'
 import Store from './store'
@@ -12,6 +10,8 @@ import Icon from 'vue-awesome/components/Icon'
 import PortalVue from 'portal-vue'
 import * as fns from 'date-fns'
 import * as _ from 'lodash'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Proprietary Components Import
 import Avatar from 'vue-avatar'
@@ -123,48 +123,6 @@ Object.defineProperty(Vue.prototype, 'fns', { value: fns })
 Object.defineProperty(Vue.prototype, '_', { value: _ })
 
 Vue.config.productionTip = false
-
-Router.beforeEach((to, from, next) => {
-  if (window.location.hostname.split('.')[0] !== null) {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      // this route requires auth, check if logged in
-      // if not, redirect to login page.
-      console.log(Store.getters.getAuthToken)
-      if (!Store.getters.getAuthToken) {
-        next({
-          path: '/login'
-        })
-      } else {
-        if (!Store.getters.getUser) {
-          const promise = Store.dispatch('SET_USER')
-          promise.then(res => next(), err => console.log(err))
-        } else {
-          next()
-        }
-      }
-    } else {
-      next()
-    }
-  } else {
-    next({
-      path: '*'
-    })
-  }
-})
-
-Vue.mixin({
-  methods: {
-    hasRole (role) {
-      console.log(role)
-      console.log(Store.getters.getUser.Role)
-      if (Store.getters.getUser.Role === role) {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
-})
 
 /* eslint-disable no-new */
 new Vue({

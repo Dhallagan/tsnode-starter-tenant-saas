@@ -1,6 +1,6 @@
-# ts-node-starter-client
+# rems-client
 
-> A typrscript starter project in node and vue
+> Client for saas app
 
 ## Build Setup
 

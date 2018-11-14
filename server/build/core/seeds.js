@@ -182,6 +182,93 @@ var Seeds = /** @class */ (function () {
             });
         });
     };
+    Seeds.seedPropertyFeatures = function (TenantId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var propertyFeaturesRepository, propertyFeatures, existPropertyFeatures, _i, propertyFeatures_1, type;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        propertyFeaturesRepository = typeorm_1.getRepository(entity_1.PropertyFeatures);
+                        propertyFeatures = [
+                            { Name: "Club House", TenantId: TenantId, Property: [] },
+                            { Name: "Doorman", TenantId: TenantId, Property: [] },
+                            { Name: "Elevator", TenantId: TenantId, Property: [] },
+                            { Name: "Fitness Center", TenantId: TenantId, Property: [] },
+                            { Name: "Laundry Room", TenantId: TenantId, Property: [] },
+                            { Name: "LParking", TenantId: TenantId, Property: [] },
+                            { Name: "Pool", TenantId: TenantId, Property: [] },
+                            { Name: "Storage Units", TenantId: TenantId, Property: [] },
+                            { Name: "Wheelchair Accesss", TenantId: TenantId, Property: [] },
+                            { Name: "Bike Rack", TenantId: TenantId, Property: [] },
+                            { Name: "Community Rooftop", TenantId: TenantId, Property: [] },
+                            { Name: "Offstreet Parking", TenantId: TenantId, Property: [] }
+                        ];
+                        return [4 /*yield*/, propertyFeaturesRepository.find({ TenantId: TenantId })];
+                    case 1:
+                        existPropertyFeatures = _a.sent();
+                        if (existPropertyFeatures.length)
+                            return [2 /*return*/];
+                        _i = 0, propertyFeatures_1 = propertyFeatures;
+                        _a.label = 2;
+                    case 2:
+                        if (!(_i < propertyFeatures_1.length)) return [3 /*break*/, 5];
+                        type = propertyFeatures_1[_i];
+                        return [4 /*yield*/, propertyFeaturesRepository.save(type)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Seeds.seedUnitFeatures = function (TenantId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var unitFeaturesRepository, unitFeatures, existUnitFeatures, _i, unitFeatures_1, type;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        unitFeaturesRepository = typeorm_1.getRepository(entity_1.UnitFeatures);
+                        unitFeatures = [
+                            { Name: "Air Conditioning", TenantId: TenantId, Unit: [] },
+                            { Name: "Balcony, Deck, Patio", TenantId: TenantId, Unit: [] },
+                            { Name: "Cable", TenantId: TenantId, Unit: [] },
+                            { Name: "High Speed Internet", TenantId: TenantId, Unit: [] },
+                            { Name: "Garage", TenantId: TenantId, Unit: [] },
+                            { Name: "Cable", TenantId: TenantId, Unit: [] },
+                            { Name: "Dishwasher", TenantId: TenantId, Unit: [] },
+                            { Name: "Washing Machine", TenantId: TenantId, Unit: [] },
+                            { Name: "Dryer", TenantId: TenantId, Unit: [] },
+                            { Name: "Fenced Yard", TenantId: TenantId, Unit: [] },
+                            { Name: "Fireplace", TenantId: TenantId, Unit: [] },
+                            { Name: "Hardwood Floors", TenantId: TenantId, Unit: [] },
+                            { Name: "Cable", TenantId: TenantId, Unit: [] },
+                        ];
+                        return [4 /*yield*/, unitFeaturesRepository.find({ TenantId: TenantId })];
+                    case 1:
+                        existUnitFeatures = _a.sent();
+                        if (existUnitFeatures.length)
+                            return [2 /*return*/];
+                        _i = 0, unitFeatures_1 = unitFeatures;
+                        _a.label = 2;
+                    case 2:
+                        if (!(_i < unitFeatures_1.length)) return [3 /*break*/, 5];
+                        type = unitFeatures_1[_i];
+                        return [4 /*yield*/, unitFeaturesRepository.save(type)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return Seeds;
 }());
 exports.Seeds = Seeds;

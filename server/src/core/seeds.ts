@@ -103,10 +103,18 @@ export class Seeds {
     const propertyFeaturesRepository = getRepository(PropertyFeatures);
    
     const propertyFeatures = [
-      { Name: "Balcony", TenantId, Property: [] },
-      { Name: "Patio", TenantId, Property: [] },
+      { Name: "Club House", TenantId, Property: [] },
+      { Name: "Doorman", TenantId, Property: [] },
+      { Name: "Elevator", TenantId, Property: [] },
+      { Name: "Fitness Center", TenantId, Property: [] },
+      { Name: "Laundry Room", TenantId, Property: [] },
+      { Name: "Parking", TenantId, Property: [] },
       { Name: "Pool", TenantId, Property: [] },
-      { Name: "Weight Room", TenantId, Property: [] }
+      { Name: "Storage Units", TenantId, Property: [] },
+      { Name: "Wheelchair Accesss", TenantId, Property: [] },
+      { Name: "Bike Rack", TenantId, Property: [] },
+      { Name: "Community Rooftop", TenantId, Property: [] }, 
+      { Name: "Offstreet Parking", TenantId, Property: [] }
     ]
 
     const existPropertyFeatures = await propertyFeaturesRepository.find({TenantId});
@@ -123,10 +131,19 @@ export class Seeds {
     const unitFeaturesRepository = getRepository(UnitFeatures);
    
     const unitFeatures = [
-      { Name: "Balcony", TenantId, Unit: [] },
-      { Name: "Deck", TenantId, Unit: [] },
+      { Name: "Air Conditioning", TenantId, Unit: [] },
+      { Name: "Balcony, Deck, Patio", TenantId, Unit: [] },
+      { Name: "Cable", TenantId, Unit: [] },
+      { Name: "High Speed Internet", TenantId, Unit: [] },
       { Name: "Garage", TenantId, Unit: [] },
-      { Name: "Wheel Access", TenantId, Unit: [] }
+      { Name: "Cable", TenantId, Unit: [] },
+      { Name: "Dishwasher", TenantId, Unit: [] },
+      { Name: "Washing Machine", TenantId, Unit: [] },
+      { Name: "Dryer", TenantId, Unit: [] },
+      { Name: "Fenced Yard", TenantId, Unit: [] },
+      { Name: "Fireplace", TenantId, Unit: [] },
+      { Name: "Hardwood Floors", TenantId, Unit: [] },
+      { Name: "Cable", TenantId, Unit: [] },
     ]
     const existUnitFeatures = await unitFeaturesRepository.find({TenantId});
     if (existUnitFeatures.length)

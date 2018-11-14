@@ -1,8 +1,8 @@
 {
-  "name": "ts-node-starter-client",
+  "name": "rems-client",
   "version": "1.0.0",
-  "description": "A typrscript starter project in node and vue",
-  "author": " ",
+  "description": "Client for saas app",
+  "author": "dhallagan <dylanhallagan@msn.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -12,17 +12,14 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "date-fns": "^1.29.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "fuse.js": "^3.2.1",
-    "lodash": "^4.17.10",
-    "rems-vue": "^0.1.0",
+    "fuse.js": "^3.3.0",
+    "portal-vue": "^1.4.0",
     "vue": "^2.5.2",
     "vue-avatar": "^2.1.6",
+    "vue-awesome": "^3.2.0",
     "vue-router": "^3.0.1",
-    "vue-tables-2": "^1.4.64",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

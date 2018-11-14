@@ -67,7 +67,8 @@ var Property = /** @class */ (function (_super) {
         __metadata("design:type", Array)
     ], Property.prototype, "PropertyImages", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return PropertyFeatures_1.PropertyFeatures; }, function (propertyFeatures) { return propertyFeatures.Property; }),
+        typeorm_1.ManyToMany(function (type) { return PropertyFeatures_1.PropertyFeatures; }, function (propertyFeatures) { return propertyFeatures.Property; }),
+        typeorm_1.JoinTable({ name: "property_property_features" }),
         __metadata("design:type", Array)
     ], Property.prototype, "PropertyFeatures", void 0);
     Property = __decorate([
