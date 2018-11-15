@@ -44,7 +44,10 @@ export class ApplicantController extends BaseController {
         }
 
         const viewModel = req.body;
-        return await this.applicantService.getApplicant(res, viewModel);
+        const listingId = viewModel.ListingApplyTo;
+        console.log(viewModel);
+        
+        return await this.applicantService.createApplicant(res, viewModel, listingId);
     }
 
     

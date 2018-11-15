@@ -8,6 +8,9 @@ export class Applicant extends TenantScope {
     @PrimaryGeneratedColumn()
     Id: number;
 
+    @Column({nullable: false})
+    ListingApplyTo: number;
+
     @Column({nullable: true})
     FirstName: string;
 

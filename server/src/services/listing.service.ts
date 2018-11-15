@@ -1,15 +1,16 @@
 import { Response } from 'express';
-import { ListingRepository } from "../repositories";
-import { UnitRepository } from '../repositories';
+import { ListingRepository, UnitRepository, TenantRepository } from "../repositories";
 
 export class ListingService {
 
     private listingRepository: ListingRepository;
     private unitRepository: UnitRepository;
+    private tenantRepository: TenantRepository;
 
     constructor() {
         this.listingRepository = new ListingRepository();
         this.unitRepository = new UnitRepository();
+        this.tenantRepository = new TenantRepository();
     }
 
 
@@ -18,6 +19,29 @@ export class ListingService {
         if (listing) {
             return res.status(200).json(listing);
         }
+    }
+
+
+    public async getAllListings(res: Response, domain: string) {
+
+        let query = { where: {}, relations: ["Unit"] };
+
+        if(domain) {
+            const tenantExists = await this.tenantRepository.getTenantByDomain(domain);
+
+            if(!tenantExists) {
+                return res.status(422).json({'errors': [{'msg': 'No Tenant found.'}]});
+            }
+            query.where = {TenantId: tenantExists.Id};
+        }
+
+        const listings = await this.listingRepository.find(query);
+
+        if (!listings) {
+            return res.status(422).json({'errors': [{'msg': 'No Listings found.'}]});
+        }
+
+        return res.status(200).json(listings);
     }
 
 
