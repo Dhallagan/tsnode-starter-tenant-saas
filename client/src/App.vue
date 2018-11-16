@@ -312,16 +312,20 @@
 
     <h3>General</h3>
 
-    <b-form-group>
-      <p>Do you smoke?</p>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Smoke">Yes</b-form-radio>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Smoke">No</b-form-radio>
+    <b-form-group  >
+      <p>Do you smoke? </p>
+    <b-form-radio-group name="smoke" v-model="applicantForm.Smoke" >
+      <b-form-radio name="smoke"  :value="true"  >Yes</b-form-radio>
+      <b-form-radio name="smoke"    :value="false"  >No</b-form-radio>
+    </b-form-radio-group>
     </b-form-group>
 
     <b-form-group>
       <p>Do you have pets?</p>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Pets">Yes</b-form-radio>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Pets">No</b-form-radio>
+      <b-form-radio-group name="pets" v-model="applicantForm.Pets" >
+      <b-form-radio :value="true" >Yes</b-form-radio>
+      <b-form-radio :value="false" >No</b-form-radio>
+      </b-form-radio-group>
     </b-form-group>
 
     <b-row class="mb-2">
@@ -343,14 +347,19 @@
 
     <b-form-group>
       <p>Have you ever been late on rent?</p>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.DelinquentRent">Yes</b-form-radio>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.DelinquentRent">No</b-form-radio>
+      <b-form-radio-group name="DelinquentRent" v-model="applicantForm.DelinquentRent" >
+      <b-form-radio :value="true" >Yes</b-form-radio>
+      <b-form-radio :value="false" >No</b-form-radio>
+      </b-form-radio-group>
+  
     </b-form-group>
 
     <b-form-group>
       <p>Have you ever been party to a lawsuit? </p>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Dued">Yes</b-form-radio>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.Dued">No</b-form-radio>
+       <b-form-radio-group name="Sued" v-model="applicantForm.Sued" >
+      <b-form-radio :value="true" >Yes</b-form-radio>
+      <b-form-radio :value="false" >No</b-form-radio>
+      </b-form-radio-group>
     </b-form-group>
 
     <b-row class="mb-2">
@@ -373,8 +382,10 @@
 
     <b-form-group>
       <p><strong>I have read, understand, and agreed to the terms and conditions</strong></p>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.AgreedToTerms">Yes</b-form-radio>
-      <b-form-radio id="checkbox1"  value="accepted" unchecked-value="not_accepted" v-model="applicantForm.AgreedToTerms">No</b-form-radio>
+       <b-form-radio-group name="AgreedToTerms" v-model="applicantForm.AgreedToTerms" >
+      <b-form-radio :value="true" >Yes</b-form-radio>
+      <b-form-radio :value="false" >No</b-form-radio>
+      </b-form-radio-group>
     </b-form-group>
     <p><strong>Terms and conditions:</strong><br>
         I understand that this is a routine application to establish credit, character, employment, and
@@ -422,13 +433,11 @@ export default {}
 
   <script>
 import api from '@/api/api'
-
 export default {
   mounted () {
     this.fetch()
   },
   props: ["domain"],
-
   data () {
     return {
       listings: [],
@@ -511,7 +520,6 @@ export default {
         })
     },
     saveApplicant () {
-      console.log(this.applicantForm)
       api.createApplicant(this.applicantForm)
         .then(res => {
           this.$router.push({ path: '/apply' })
