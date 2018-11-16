@@ -195,7 +195,7 @@ var Seeds = /** @class */ (function () {
                             { Name: "Elevator", TenantId: TenantId, Property: [] },
                             { Name: "Fitness Center", TenantId: TenantId, Property: [] },
                             { Name: "Laundry Room", TenantId: TenantId, Property: [] },
-                            { Name: "LParking", TenantId: TenantId, Property: [] },
+                            { Name: "Parking", TenantId: TenantId, Property: [] },
                             { Name: "Pool", TenantId: TenantId, Property: [] },
                             { Name: "Storage Units", TenantId: TenantId, Property: [] },
                             { Name: "Wheelchair Accesss", TenantId: TenantId, Property: [] },

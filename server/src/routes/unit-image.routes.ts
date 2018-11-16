@@ -14,7 +14,10 @@ export class UnitImageRoutes extends BaseRoute {
 
 
     initRoutes() {
-        this.router.post('/unitimage/:id', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.createUnitImage(req, res).catch(next));
-        this.router.post('/unitimage/upload', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.upload(req, res).catch(next));
+        this.router.get('/units/:id/images', (req, res, next) => this.unitImageController.getUnitImages(req, res).catch(next))
+        this.router.post('/units/:id/images', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.createUnitImage(req, res).catch(next));
+        // Is the upload route necessary... I can't quite remember...
+        this.router.post('/units/upload', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.uploadMultiple(req, res).catch(next));
+        this.router.delete('/units/:id/images/:imageId', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.createUnitImage(req, res).catch(next));
     }
 }

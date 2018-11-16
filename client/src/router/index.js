@@ -9,6 +9,21 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/apply',
+      name: 'Apply',
+      component: Home
+    },
+    {
+      path: '/listings',
+      name: 'Listings',
+      component: Home
+    },
+    {
+      path: '/listings/:listing_id',
+      name: 'Listing',
+      component: Home
     }
   ]
 })

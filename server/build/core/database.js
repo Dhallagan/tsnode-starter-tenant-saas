@@ -53,6 +53,7 @@ var Database = /** @class */ (function () {
                         database: process.env.DB_DATABASE,
                         synchronize: true,
                         entities: [
+                            entity_1.Applicant,
                             entity_1.User,
                             entity_1.Tenant,
                             entity_1.Property,

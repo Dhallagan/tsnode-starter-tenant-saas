@@ -1,7 +1,5 @@
 <template>
 <div>
-
-
   <page>
    <h1>Apply</h1>
   <b-card class="mb-2 mt-4">
@@ -407,27 +405,12 @@
 </template>
 
 <script>
-import * as api from "./api/api"
-export default {}
-</script>
-
-<style>
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-}
-</style>
-
-  <script>
 import api from '@/api/api'
-
 export default {
   mounted () {
     this.fetch()
   },
-  props: ["domain"],
+  props: ['domain'],
 
   data () {
     return {
@@ -490,14 +473,13 @@ export default {
     }
   },
   methods: {
-    
     fetch () {
       console.log(this.domain)
       this.getListings()
     },
     getListings () {
       console.log(this.domain)
-      api.getListingsByDomain({domain:this.domain})
+      api.getListingsByDomain({ domain: this.domain })
         .then(res => {
           this.listings = res.data.map(listing => {
             return {
@@ -519,8 +501,16 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    },
-  
+    }
   }
 }
 </script>
+
+<style>
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+</style>
