@@ -412,6 +412,8 @@
   </page-actions>
 
   </page>
+        <router-view class="view"></router-view>
+
 </div>
 </template>
 
@@ -436,7 +438,7 @@ export default {
   mounted () {
     this.fetch()
   },
-  props: ['domain'],
+  props: ["domain"],
 
   data () {
     return {
@@ -499,13 +501,14 @@ export default {
     }
   },
   methods: {
+    
     fetch () {
       console.log(this.domain)
       this.getListings()
     },
     getListings () {
       console.log(this.domain)
-      api.getListingsByDomain({ domain: this.domain })
+      api.getListingsByDomain({domain:this.domain})
         .then(res => {
           this.listings = res.data.map(listing => {
             return {
@@ -526,16 +529,8 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+  
   }
 }
 </script>
-
-<style>
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-}
-</style>

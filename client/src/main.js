@@ -133,7 +133,9 @@ new Vue({
   el: '#app',
   router: Router,
   store: Store,
-  components: { App },
-  template: '<App :domain="domain"/>',
-  data: { domain: getUrlSubdomain(window.location.origin) }
+  template: `
+  <router-view></router-view>
+  
+  `,
+  data:{domain:getUrlSubdomain(window.location.origin)}
 })
