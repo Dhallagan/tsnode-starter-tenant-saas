@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from './router'
 import Store from './store'
 import Vuex from 'vuex'
-import App from './App'
 // Third party
 import BootstrapVue from 'bootstrap-vue'
 import 'vue-awesome/icons'
@@ -133,9 +132,15 @@ new Vue({
   el: '#app',
   router: Router,
   store: Store,
+<<<<<<< HEAD
   template: `
   <router-view></router-view>
   
   `,
   data:{domain:getUrlSubdomain(window.location.origin)}
+=======
+  components: { App },
+  template: '<App :domain="domain"/>',
+  data: { domain: getUrlSubdomain(window.location.origin) }
+>>>>>>> 7c288eafbdf3ba9983d6a4f176343a34a21dbaf8
 })

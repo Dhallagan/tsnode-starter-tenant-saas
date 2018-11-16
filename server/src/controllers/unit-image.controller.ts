@@ -12,6 +12,18 @@ export class UnitImageController extends BaseController{
         this.unitImageService = new UnitImageService();
     };
 
+    public async getUnitImages(req: Request, res: Response) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+           return res.status(422).json({ errors: errors.array() });
+        }
+        const unitId = req.params.id;
+
+        return await this.unitImageService.getAllUnitImages(res, unitId);
+        
+        return await this.unitImageService.createUnitImage(res, req.params.id, req.body.url);
+    }
+
     public async createUnitImage(req: Request, res: Response) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -21,7 +33,7 @@ export class UnitImageController extends BaseController{
         return await this.unitImageService.createUnitImage(res, req.params.id, req.body.url);
     }
 
-    public async upload(req: Request, res: Response) {
-        return await this.unitImageService.upload(req, res);
+    public async uploadMultiple(req: Request, res: Response) {
+        return await this.unitImageService.uploadMultiple(req, res);
     }
 }

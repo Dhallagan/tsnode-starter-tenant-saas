@@ -14,7 +14,6 @@ export class UserController extends BaseController {
         this.userService = new UserService();
     }
 
-
     public async register(req: Request, res: Response) {
         const viewModel = req.body;
         console.log(viewModel);
@@ -27,9 +26,6 @@ export class UserController extends BaseController {
         return await this.userService.createUserNoVerification(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.password, viewModel.domain)
     }
 
-
-
-    
     public async verifyRegistration(req: Request, res: Response) {
         const viewModel = req.body;
 
@@ -37,9 +33,6 @@ export class UserController extends BaseController {
             await this.userService.verifyEmail(res, viewModel.token)
         );
     }
-
-
-
 
     public async updatePassword(req: Request, res: Response) {
         const viewModel = req.body;
@@ -51,9 +44,6 @@ export class UserController extends BaseController {
 
         await this.userService.updatePassword(res, viewModel.id, viewModel.password, viewModel.confirmPassword)
     }
-
-
-
 
    public async login(req: Request, res: Response) {
         const viewModel = req.body;
@@ -68,18 +58,12 @@ export class UserController extends BaseController {
 
    }
 
-
-
-
    public async recoverPassword(req: Request, res: Response) {
         const viewModel = req.body;
 
         return await this.userService.recoverPassword(res, viewModel.email)
         
     }
-
-
-
 
     public async resetPassword(req: Request, res: Response) {
         const viewModel = req.body;
@@ -95,9 +79,6 @@ export class UserController extends BaseController {
         
     }
 
-
-
-
     public async getUsers(req: Request, res: Response) {
         const viewModel = req.body;
         console.log(viewModel)
@@ -112,9 +93,6 @@ export class UserController extends BaseController {
         
     }
 
-
-
-
     public async getUser(req: Request, res: Response) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -124,9 +102,6 @@ export class UserController extends BaseController {
         return await this.userService.getUser(res, req.params.id)
     }
 
-
-
-
     public async getUserByToken(req: Request, res: Response) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -135,10 +110,6 @@ export class UserController extends BaseController {
         
         return await this.userService.getUser(res, req['user'])
     }
-
-
-
-
 
     public async updateUser(req: Request, res: Response) {
         const viewModel = req.body;
@@ -150,10 +121,6 @@ export class UserController extends BaseController {
         return await this.userService.updateUser(res, req.params.id, viewModel.firstName, viewModel.lastName, viewModel.role, viewModel.active)
     }
 
-
-
-
-
     public async updateAvatar(req, res: Response) {
         const viewModel = req.body;
         const errors = validationResult(req);
@@ -164,13 +131,9 @@ export class UserController extends BaseController {
         return await this.userService.updateAvatar(res, req.params.id, viewModel.avatar)
     }
 
-
-
-
     public async upload(req: Request, res: Response) {
         return await this.userService.upload(req, res)
     }
-
 
     public async invite(req: Request, res: Response) {
         const viewModel = req.body;
@@ -181,7 +144,6 @@ export class UserController extends BaseController {
 
         return await this.userService.createInviteUser(res, viewModel.firstName, viewModel.lastName, viewModel.email, viewModel.role, req['user']);
     }
-
 
     public async getPlan(req: Request, res: Response) {
 

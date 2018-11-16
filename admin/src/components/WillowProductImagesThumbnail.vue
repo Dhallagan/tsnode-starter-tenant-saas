@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-6 col-md-12 col-xs-12 px-1">
     <div class="d-block mb-4 h-100 product-image__base">
-      <span class="close product-image__close" title="Remove">&times;</span>
+      <span v-if="close" class="close product-image__close" title="Remove" @click="$emit('remove-img', img)">&times;</span>
       <img class="img-fluid img-thumbnail" :src="img">
     </div>
   </div>
@@ -10,7 +10,11 @@
 <script>
 export default {
   props: {
-    img: String
+    img: String,
+    close: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>

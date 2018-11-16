@@ -12,6 +12,10 @@ export class UnitImageService {
         this.unitRepository = new UnitRepository();
     }
 
+    public async getAllUnitImages(res: Response, unitId: number) {
+        throw new Error("Method not implemented.");
+    }
+
     public async createUnitImage(res: Response, unitId: number, url: string) {
         const unitImage = await this.unitImageRepository.findOne({Url: url});
         if (unitImage) {
@@ -22,7 +26,7 @@ export class UnitImageService {
         return res.status(200).json(newUnitImage);
     }
 
-    public async upload(req, res: Response) {
+    public async uploadMultiple(req, res: Response) {
         const s3 = new Storage();
         var fileName = await s3.uploadSingle(req, res);
         return res.status(200).json({'filename' : fileName})

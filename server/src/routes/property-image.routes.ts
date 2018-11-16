@@ -9,12 +9,15 @@ export class PropertyImageRoutes extends BaseRoute {
         super();
         this.propertyImageController = new PropertyImageController();
 
-        this.initRoutes();
+        // this.initRoutes();
     }
 
 
-    initRoutes() {
-        this.router.post('/propertyimage/:id', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.createPropertyImage(req, res).catch(next));
-        this.router.post('/propertyimage/upload', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.upload(req, res).catch(next));
-    }
+    // initRoutes() {
+    //     this.router.get('/propertys/:id/images', (req, res, next) => this.propertyImageController.getUnitImages(req, res).catch(next))
+    //     this.router.post('/propertys/:id/images', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.createUnitImage(req, res).catch(next));
+    //     // Is the upload route necessary... I can't quite remember...
+    //     this.router.post('/propertys/upload', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.uploadMultiple(req, res).catch(next));
+    //     this.router.delete('/propertys/:id/images/:imageId', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.createUnitImage(req, res).catch(next));
+    // }
 }
