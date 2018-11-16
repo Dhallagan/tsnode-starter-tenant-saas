@@ -1,5 +1,6 @@
 import { createConnection } from "typeorm";
 import {
+  Applicant,
   User,
   Tenant,
   Property,
@@ -29,6 +30,7 @@ export class Database {
         database: process.env.DB_DATABASE,
         synchronize: true,
         entities: [
+          Applicant,
           User,
           Tenant,
           Property,

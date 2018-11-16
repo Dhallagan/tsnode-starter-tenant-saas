@@ -123,6 +123,11 @@ Object.defineProperty(Vue.prototype, 'fns', { value: fns })
 Object.defineProperty(Vue.prototype, '_', { value: _ })
 
 Vue.config.productionTip = false
+function getUrlSubdomain(url) {
+  let url1 = url.replace(/(^\w+:|^)\/\//, '')
+  return url1.split('.')[0]
+   
+}
 
 /* eslint-disable no-new */
 new Vue({
@@ -130,5 +135,6 @@ new Vue({
   router: Router,
   store: Store,
   components: { App },
-  template: '<App/>'
+  template: '<App :domain="domain"/>',
+  data:{domain:getUrlSubdomain(window.location.origin)}
 })

@@ -1,13 +1,15 @@
 import { Response } from 'express';
-import { ApplicantRepository } from '../repositories';
+import { ApplicantRepository, ListingRepository } from '../repositories';
 
 export class ApplicantService {
 
     private applicantRepository: ApplicantRepository;
+    private listingRepository: ListingRepository;
 
 
     constructor() {
         this.applicantRepository = new ApplicantRepository();
+        this.listingRepository = new ListingRepository();
     }
 
     public async getApplicant(res: Response, id: number) {
@@ -32,7 +34,13 @@ export class ApplicantService {
     }
 
 
-    public async createApplicant(res: Response, ViewModel: any) {
+    public async createApplicant(res: Response, ViewModel: any, listingId: number) {
+
+        const currentListing = await this.listingRepository.findOne({ListingId: listingId});
+
+        if (currentListing) {
+            ViewModel.TenantId = currentListing.TenantId;
+        }
 
         const applicant = await this.applicantRepository.create({...ViewModel});
         return res.status(200).json(applicant);

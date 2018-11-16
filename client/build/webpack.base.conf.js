@@ -31,6 +31,9 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  devServer: {
+    disableHostCheck: true
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
