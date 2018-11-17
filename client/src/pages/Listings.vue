@@ -23,55 +23,51 @@
       </b-row>
       <b-row class="float-right">
          <b-button >View Details</b-button>
-         <router-link to="/apply" ><b-button class="ml-1" >Apply Now</b-button></router-link>
+         <router-link :to="`/apply?listingId=${listing.value}`" ><b-button class="ml-1" >Apply Now</b-button></router-link>
 
       </b-row>
     </b-card>
 
-    <b-row>
-       
-    </b-row>
 </b-container>
 </template>
 
 <script>
-import api from "@/api/api";
+import api from '@/api/api'
 
 export default {
-  mounted() {
-    this.fetch();
+  mounted () {
+    this.fetch()
   },
-  props: ["domain"],
-
-  data() {
+  props: ['domain'],
+  data () {
     return {
-      listings: [],
-    };
+      listings: []
+    }
   },
   methods: {
-    fetch() {
-      this.getListings();
+    fetch () {
+      this.getListings()
     },
-    getListings() {
+    getListings () {
       api
         .getListingsByDomain({ domain: this.domain })
         .then(res => {
           this.listings = res.data.map(listing => {
             return {
               value: listing.ListingId,
-              text: listing.Unit.UnitNumber,
-            };
-          });
+              text: listing.Unit.UnitNumber
+            }
+          })
         })
         .catch(err => {
-          console.log(err);
-        });
-    },
-  },
-};
+          console.log(err)
+        })
+    }
+  }
+}
 </script>
 <style lang="">
-  .typo1{
+  .typo1 {
     width: 6% !important;
     height: 50px;
     border-right: 1px solid #ccc
