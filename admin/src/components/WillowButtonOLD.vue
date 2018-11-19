@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "Willow-Button",
+  name: 'Willow-Button',
 
   props: {
     destructive: Boolean,

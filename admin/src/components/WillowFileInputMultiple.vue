@@ -4,12 +4,11 @@
     <willow-button @click.native="$refs.filesInput.click()">
       <slot/>
     </willow-button>
-    <p v-for="file in selectedFiles" :key="file">{{file.name}}</p>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/api/api'
 export default {
   props: {
     url: {
@@ -28,26 +27,21 @@ export default {
 
   methods: {
     onFileSelected (event) {
-      const files = event.target.files
-      this.selectedFiles = [...this.selectedFiles, ...files]
-      // this.selectedFiles
-      // this.onUpload()
+      this.selectedFiles = [...event.target.files]
+      this.upload()
     },
-
-    onUpload () {
+    upload () {
+      console.log(this.selectedFiles)
       const formData = new FormData()
       this.selectedFiles.forEach(file => {
-        formData.append(this.identifier, this.selectedFile, this.selectedFile.name)
+        formData.append(this.identifier, file)
       })
-
-      axios.post(this.url, formData, {onUploadProgress: uploadEvent => {
-        // console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total) * 100 + '%')
-      }})
-        .then(res => {
-          this.$emit('uploadComplete', res.data)
-        })
+      api.uploadMultipleFiles(this.url, formData).then(res => {
+        this.$emit('uploadedFiles', res.data)
+      }).catch(err => {
+        console.log('err', err)
+      })
     },
-
     fileSizeInMB (fileSize) {
       return (fileSize / (1024 * 1024)).toFixed(2)
     },
