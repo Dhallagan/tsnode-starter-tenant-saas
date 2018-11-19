@@ -143,6 +143,20 @@ export default {
     return HTTP.put(`/properties/${propertyId}/units/${unitId}`, params)
   },
 
+  uploadMultipleFiles (url, fromData) {
+    return HTTP.post(url, fromData, {headers: {
+      'Content-Type': 'multipart/form-data'
+    }})
+  },
+
+  getUnitImages (unitId) {
+    return HTTP.get(`/units/${unitId}/images`)
+  },
+
+  deleteUnitImage (unitImagekey) {
+    return HTTP.delete(`/units/images/${unitImagekey}`)
+  },
+
   deleteBuildingUnit (propertyId, unitId) {
     return HTTP.delete(`/properties/${propertyId}/units/${unitId}`)
   },

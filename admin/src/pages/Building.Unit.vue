@@ -91,7 +91,7 @@
 
       </b-card>
 
-            <b-card class="mb-2" >
+      <b-card class="mb-2" >
         <h6 class="heading">Images</h6>
         <!-- <b-row class="mb-2">
           <b-col >
@@ -118,21 +118,16 @@
         <b-row class="mb-2">
           <b-col :cols="24">
             <div class="float-right p-1">
-              <willow-file-input-multiple :url="'ggole'">
-                Add images
-              </willow-file-input-multiple>
+              <form id="uploadform" >
+                <willow-file-input-multiple @uploadedFiles="getImages" :url="`/units/${this.$route.params.unit_id}/upload`" identifier="image">
+                  Add images
+                </willow-file-input-multiple>
+              </form>
             </div>
           </b-col>
           <b-col :cols="24">
               <willow-product-images
-                :images="[
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195444/618_Bushwick_Avenue__121-2.jpg?1521885681' },
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195451/618_Bushwick_Avenue__121-10.jpg?1521885678' },
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195447/618_Bushwick_Avenue__121-5.jpg?1521885683' },
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195445/618_Bushwick_Avenue__121-3.jpg?1521885670' },
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195443/618_Bushwick_Avenue__121-1.jpg?1521885676' },
-                  { url: 'https://s3.amazonaws.com/nooklyn-pro/square/195450/618_Bushwick_Avenue__121-9.jpg?1521885686' },
-                ]"
+                :images="images"
               @remove-img="deleteImage($event)"
               >
               </willow-product-images>
@@ -208,16 +203,18 @@ export default {
       building: {
         id: null,
         street: null
-      }
+      },
+      images: []
     }
   },
   methods: {
     fetch () {
       axios.all([
         api.getBuilding(this.$route.params.building_id),
-        api.getBuildingUnit(this.$route.params.building_id, this.$route.params.unit_id)
+        api.getBuildingUnit(this.$route.params.building_id, this.$route.params.unit_id),
+        api.getUnitImages(this.$route.params.unit_id)
       ])
-        .then(axios.spread((building, unit) => {
+        .then(axios.spread((building, unit, images) => {
           console.log(unit)
           this.building.id = building.data.Id
           this.building.street = building.data.Street
@@ -230,7 +227,13 @@ export default {
           this.unitForm.marketRent = unit.data.Unit.MarketRent
           this.unitForm.unitFeatures = unit.data.Unit.UnitFeatures.map(u => u.Id)
           console.log(this.unitForm)
+          this.images = images.data
         }))
+    },
+    getImages (images) {
+      images.forEach(image => {
+        this.images.push(image)
+      })
     },
     updateUnit () {
       api.updateBuildingUnit(this.building.id, this.unitForm.unitId, this.unitForm)
@@ -255,9 +258,12 @@ export default {
     saveCheckboxes (id) {
       this.unitForm.unitFeatures.push(id)
     },
-    deleteImage (image) {
-      alert(image)
-      // Make a delete request
+    deleteImage (data) {
+      if (data.image.Key) {
+        api.deleteUnitImage(data.image.Key).then(res => {
+          this.images.splice(data.i, 1)
+        })
+      }
     }
   }
 }

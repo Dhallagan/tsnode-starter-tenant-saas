@@ -3,6 +3,7 @@ import multer from 'multer';
 import multerS3 from 'multer-s3';
 import crypto from "crypto"
 import util from "util"
+import { AnyMxRecord } from 'dns';
 
 export class Storage {
 
@@ -37,6 +38,18 @@ export class Storage {
     })
   }
 
+  public async deleteImage(key){
+
+    try {
+        await this.s3.deleteObject({Bucket: this.bucket, Key: key})
+        return true
+
+    } catch (e) {
+        throw e
+    }
+
+  }
+
 
   public async uploadSingle(req, res) {
     let filename;
@@ -45,6 +58,7 @@ export class Storage {
         const upload = util.promisify(this.upload.any());
         await upload(req, res);
         filename = req.files[0].location
+        console.log('req', req.files[0])
 
     } catch (e) {
         console.log(e)
@@ -52,21 +66,21 @@ export class Storage {
 
     return filename
   }
+  
 
   public async uploadMultiple(req, res) {
-    // let filename;
-
-    // try {
-    //     const upload = util.promisify(this.upload.any());
-    //     await upload(req, res);
-    //     filename = req.files[0].location
-
-    // } catch (e) {
-    //     console.log(e)
-    // }
-
-    // return filename
+    let fileNames:any[] = []
+    try {
+        const upload = util.promisify(this.upload.any());
+        await upload(req, res);
+        req.files.forEach((file: any) => {
+          const {location: Url, key: Key} = file
+          fileNames.push({Url, Key})
+        });
+    } catch (e) {
+        console.log(e)
+    }
+    return fileNames
   }
-
 
 }
