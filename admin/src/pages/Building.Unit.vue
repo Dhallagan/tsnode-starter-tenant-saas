@@ -118,11 +118,9 @@
         <b-row class="mb-2">
           <b-col :cols="24">
             <div class="float-right p-1">
-              <form id="uploadform" >
                 <willow-file-input-multiple @uploadedFiles="getImages" :url="`/units/${this.$route.params.unit_id}/upload`" identifier="image">
                   Add images
                 </willow-file-input-multiple>
-              </form>
             </div>
           </b-col>
           <b-col :cols="24">

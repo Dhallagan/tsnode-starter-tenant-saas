@@ -18,23 +18,10 @@ export class UnitImageController extends BaseController{
            return res.status(422).json({ errors: errors.array() });
         }
         const unitId = req.params.id;
-        console.log("unitId", unitId)
-
         return await this.unitImageService.getAllUnitImages(res, unitId);
         
     }
 
-    public async createUnitImages(req: Request, res: Response) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-           return res.status(422).json({ errors: errors.array() });
-        }
-        
-        const unitId = req.params.id;
-        const images = req.body
-
-        // return await this.unitImageService.saveUnitImages(res, unitId, images);
-    }
 
 
     public async uploadMultiple(req: Request, res: Response) {
