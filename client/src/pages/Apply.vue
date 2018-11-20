@@ -424,7 +424,6 @@ export default {
   mounted () {
     this.fetch()
     this.applicantForm.ListingApplyTo = this.$route.query.listingId
-    console.alert(this.$route.query.listingId)
   },
   props: ['domain'],
 

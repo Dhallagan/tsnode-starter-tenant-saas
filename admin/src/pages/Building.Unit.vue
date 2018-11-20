@@ -83,7 +83,10 @@
                 id="unit_features"
                 name="unit_features"
                 v-model="unitForm.unitFeatures"
-                :options="this.$store.getters.getUnitFeatures">
+                >
+                <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in this.$store.getters.getUnitFeatures" :key="i">
+                  {{feature.text}}
+                </b-form-checkbox>
               </b-form-checkbox-group>
             </b-form-group>
           </b-col>

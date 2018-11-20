@@ -76,9 +76,28 @@ var Storage = /** @class */ (function () {
             })
         });
     }
+    Storage.prototype.deleteImage = function (key) {
+        return __awaiter(this, void 0, void 0, function () {
+            var e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.s3.deleteObject({ Bucket: this.bucket, Key: key })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, true];
+                    case 2:
+                        e_1 = _a.sent();
+                        throw e_1;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     Storage.prototype.uploadSingle = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var filename, upload, e_1;
+            var filename, upload, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -88,10 +107,11 @@ var Storage = /** @class */ (function () {
                     case 1:
                         _a.sent();
                         filename = req.files[0].location;
+                        console.log('req', req.files[0]);
                         return [3 /*break*/, 3];
                     case 2:
-                        e_1 = _a.sent();
-                        console.log(e_1);
+                        e_2 = _a.sent();
+                        console.log(e_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/, filename];
                 }
@@ -100,8 +120,29 @@ var Storage = /** @class */ (function () {
     };
     Storage.prototype.uploadMultiple = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
+            var fileNames, upload, e_3;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        fileNames = [];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        upload = util_1.default.promisify(this.upload.any());
+                        return [4 /*yield*/, upload(req, res)];
+                    case 2:
+                        _a.sent();
+                        req.files.forEach(function (file) {
+                            var Url = file.location, Key = file.key;
+                            fileNames.push({ Url: Url, Key: Key });
+                        });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_3 = _a.sent();
+                        console.log(e_3);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, fileNames];
+                }
             });
         });
     };
