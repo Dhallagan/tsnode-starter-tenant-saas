@@ -12,16 +12,23 @@ export class PropertyImageController extends BaseController{
         this.propertyImageService = new PropertyImageService();
     };
 
-    public async createPropertyImage(req: Request, res: Response) {
+    public async getBuildingImages (req: Request, res: Response) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
            return res.status(422).json({ errors: errors.array() });
         }
+        const buildingId = req.params.id;
+        return await this.propertyImageService.getAllBuildingImages(res, buildingId);
         
-        return await this.propertyImageService.createPropertyImage(res, req.params.id, req.body.url);
+    }
+    public async uploadMultiple(req: Request, res: Response) {
+        return await this.propertyImageService.uploadMultiple(req, res);
+    }
+    public async deletePropertyImage(req: Request, res: Response){
+        return await this.propertyImageService.deleteImage(req, res);
+
     }
 
-    public async upload(req: Request, res: Response) {
-        return await this.propertyImageService.upload(req, res);
-    }
+
+
 }

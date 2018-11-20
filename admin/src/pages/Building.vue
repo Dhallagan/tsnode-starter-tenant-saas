@@ -161,6 +161,22 @@
           </b-col> -->
 
         </b-row>
+         <b-row class="mb-2">
+          <b-col :cols="24">
+            <div class="float-right p-1">
+              <willow-file-input-multiple @uploadedFiles="getImages" :url="`/propertys/${this.$route.params.building_id}/upload`" identifier="image">
+                  Add images
+                </willow-file-input-multiple>
+            </div>
+          </b-col>
+          <b-col :cols="24">
+              <willow-product-images
+                :images="images"
+              @remove-img="deleteImage($event)"
+              >
+              </willow-product-images>
+          </b-col>
+        </b-row>
 
        </b-card>
 
@@ -247,16 +263,19 @@ export default {
         type: 1,
         propertyFeatures: [],
         units: []
-      }
+      },
+      images: []
     }
   },
   methods: {
     fetch () {
       axios.all([
         api.getBuilding(this.$route.params.building_id),
-        api.getBuildingUnits(this.$route.params.building_id)
+        api.getBuildingUnits(this.$route.params.building_id),
+        api.getBuildingImages(this.$route.params.building_id)
+
       ])
-        .then(axios.spread((building, units) => {
+        .then(axios.spread((building, units, images) => {
           this.building.id = building.data.Id
           this.building.street = building.data.Street
           this.building.apartmentSuite = building.data.ApartmentSuite
@@ -273,8 +292,21 @@ export default {
               tenant: 'None'
             }
           })
+          console.log('images', images)
+          this.images = images.data
         }))
-      console.log(this.building.units)
+    },
+    getImages (images) {
+      images.forEach(image => {
+        this.images.push(image)
+      })
+    },
+    deleteImage (data) {
+      if (data.image.Key) {
+        api.deleteBuildingImage(data.image.Key).then(res => {
+          this.images.splice(data.i, 1)
+        })
+      }
     },
     deleteBuilding () {
       api.deleteBuilding(this.$route.params.building_id)

@@ -118,7 +118,9 @@ export default {
   getBuilding (id) {
     return HTTP.get(`/properties/${id}`)
   },
-
+  getBuildingImages (id) {
+    return HTTP.get(`/propertys/${id}/images`)
+  },
   deleteBuilding (id) {
     return HTTP.delete(`/properties/${id}`)
   },
@@ -141,6 +143,9 @@ export default {
 
   updateBuildingUnit (propertyId, unitId, params) {
     return HTTP.put(`/properties/${propertyId}/units/${unitId}`, params)
+  },
+  deleteBuildingImage (buildingImageKey) {
+    return HTTP.delete(`/propertys/images/${buildingImageKey}`)
   },
 
   uploadMultipleFiles (url, fromData) {
