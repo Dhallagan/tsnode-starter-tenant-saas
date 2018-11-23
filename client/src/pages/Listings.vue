@@ -22,12 +22,10 @@
       </b-col>
       </b-row>
       <b-row class="float-right">
-         <b-button >View Details</b-button>
+          <router-link :to="{ name: 'listingDetails', params: { id: listing.value }}"><b-button  >View Details</b-button></router-link>
          <router-link :to="`/apply?listingId=${listing.value}`" ><b-button class="ml-1" >Apply Now</b-button></router-link>
-
       </b-row>
     </b-card>
-
 </b-container>
 </template>
 
