@@ -125,10 +125,7 @@
                 id="property_features"
                 name="property_features"
                 v-model="building.propertyFeatures"
-                >
-                <b-form-checkbox class="col-sm-6" :value="feature.value" v-for="(feature, i) in this.$store.getters.getPropertyFeatures" :key="i">
-                  {{feature.text}}
-                </b-form-checkbox>
+                :options="this.$store.getters.getPropertyFeatures">
               </b-form-checkbox-group>
             </b-form-group>
           </b-col>

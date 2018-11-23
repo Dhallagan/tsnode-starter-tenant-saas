@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/Home'
 import Listings from './../pages/Listings'
+import listingDetails from './../pages/listingDetails'
 import Apply from './../pages/Apply'
 Vue.use(Router)
 function getUrlSubdomain (url) {
@@ -32,6 +33,12 @@ export default new Router({
       path: '/listings',
       name: 'listings',
       component: Listings,
+      props: { domain: getUrlSubdomain(window.location.origin) }
+    },
+    {
+      path: '/listing/:id',
+      name: 'listingDetails',
+      component: listingDetails,
       props: { domain: getUrlSubdomain(window.location.origin) }
     }
   ]

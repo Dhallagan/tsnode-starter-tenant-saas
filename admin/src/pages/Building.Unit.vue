@@ -83,10 +83,7 @@
                 id="unit_features"
                 name="unit_features"
                 v-model="unitForm.unitFeatures"
-                >
-                <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in this.$store.getters.getUnitFeatures" :key="i">
-                  {{feature.text}}
-                </b-form-checkbox>
+                :options="this.$store.getters.getUnitFeatures">
               </b-form-checkbox-group>
             </b-form-group>
           </b-col>
@@ -96,28 +93,6 @@
 
       <b-card class="mb-2" >
         <h6 class="heading">Images</h6>
-        <!-- <b-row class="mb-2">
-          <b-col >
-            <div class="nklyn-container-medium no-gutters row">
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195444/618_Bushwick_Avenue__121-2.jpg?1521885681" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195451/618_Bushwick_Avenue__121-10.jpg?1521885678"     />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195447/618_Bushwick_Avenue__121-5.jpg?1521885683"  />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195445/618_Bushwick_Avenue__121-3.jpg?1521885670" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/195445/618_Bushwick_Avenue__121-3.jpg?1521885670" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195443/618_Bushwick_Avenue__121-1.jpg?1521885676" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/195443/618_Bushwick_Avenue__121-1.jpg?1521885676" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195450/618_Bushwick_Avenue__121-9.jpg?1521885686" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/195450/618_Bushwick_Avenue__121-9.jpg?1521885686" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/195449/618_Bushwick_Avenue__121-7.jpg?1521885673" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/195449/618_Bushwick_Avenue__121-7.jpg?1521885673" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201034/618_Bushwick_Avenue__Laundry-2.jpg?1521885698" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201034/618_Bushwick_Avenue__Laundry-2.jpg?1521885698" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201029/618_Bushwick_Avenue__Rooftop-2.jpg?1521885688" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201029/618_Bushwick_Avenue__Rooftop-2.jpg?1521885688" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201030/618_Bushwick_Avenue__Rooftop-1.jpg?1521885701" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201030/618_Bushwick_Avenue__Rooftop-1.jpg?1521885701" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201031/618_Bushwick_Avenue__Parking-3.jpg?1521885704" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201031/618_Bushwick_Avenue__Parking-3.jpg?1521885704" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201033/618_Bushwick_Avenue__New_Building_Lobby-2.jpg?1521885693" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201033/618_Bushwick_Avenue__New_Building_Lobby-2.jpg?1521885693" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201032/618_Bushwick_Avenue__New_Building_Lobby-3.jpg?1521885690" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201032/618_Bushwick_Avenue__New_Building_Lobby-3.jpg?1521885690" />
-              <willow-product-images-thumbnail img="https://s3.amazonaws.com/nooklyn-pro/square/201035/618_Bushwick_Avenue__Exterior-6.jpg?1521885708" class="lazy img-fluid" width="584" height="584" src="https://s3.amazonaws.com/nooklyn-pro/square/201035/618_Bushwick_Avenue__Exterior-6.jpg?1521885708" />
-            </div>
-          </b-col>
-
-        </b-row> -->
-
         <b-row class="mb-2">
           <b-col :cols="24">
             <div class="float-right p-1">

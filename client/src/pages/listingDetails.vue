@@ -1,16 +1,8 @@
 <template>
 <page>
-
-  <page-header
-    title="List Unit"
-    :breadcrumbs="pageheader.breadcrumbs"
-  >
-  </page-header>
-
   <willow-layout >
   <!-- CARD -->
       <willow-layout-section primary>
-
        <b-card class="mb-2" >
         <h6 class="heading">Unit Details</h6>
         <b-row class="mb-2">
@@ -19,9 +11,7 @@
             <b-form-input type="text" v-model="listing.unit">
             </b-form-input>
           </b-col>
-
         </b-row>
-
         <b-row class="mb-2">
           <b-col :cols="6">
             <label for="inputLive">Beds</label>
@@ -104,50 +94,11 @@
 
        </b-card>
 
-      <b-card class="mb-2" >
-        <h6 class="heading"> Building Images</h6>
-        <b-row class="mb-2">
-          <b-col :cols="24">
-            <div class="float-right p-1">
-              <willow-file-input-multiple @uploadedFiles="getBuildingImages" :url="`/propertys/${this.propertyId}/upload`" identifier="image">
-                  Add images
-                </willow-file-input-multiple>
-            </div>
-          </b-col>
-          <b-col :cols="24">
-              <willow-product-images
-                :images="buildingImages"
-              @remove-img="deleteBuildingImage($event)"
-              >
-              </willow-product-images>
-          </b-col>
-        </b-row>
-       </b-card>
-        <b-card class="mb-2" >
-        <h6 class="heading"> Units Images</h6>
-        <b-row class="mb-2">
-          <b-col :cols="24">
-            <div class="float-right p-1">
-              <willow-file-input-multiple @uploadedFiles="getUnitImages" :url="`/units/${this.unitId}/upload`" identifier="image">
-                  Add images
-                </willow-file-input-multiple>
-            </div>
-          </b-col>
-          <b-col :cols="24">
-              <willow-product-images
-                :images="unitImages"
-              @remove-img="deleteUnitImage($event)"
-              >
-              </willow-product-images>
-          </b-col>
-        </b-row>
-       </b-card>
-
     </willow-layout-section>
 
-    <willow-layout-section secondary>
+    <willow-layout-section primary>
 
-       <b-card class="mb-2" style="background-color: #f8f9fa ;">
+       <b-card class="mb-1" style="background-color: #f8f9fa ;">
         <h6 class="heading">Listing Settings</h6>
         <b-row>
           <b-col :cols="6">
@@ -215,11 +166,20 @@
         </b-row>
 
       </b-card>
-
+      <b-row>
+        <b-card class="mb-2" >
+        <h6 class="heading">Images</h6>
+        <b-row class="mb-2">
+          <b-col >
+            <div class="nklyn-container-medium no-gutters row">
+                <img style="margin-left:10px" v-for="(image,index) in listingImages " :key='index' :src="image.Url" width="300" height="300" alt="">
+            </div>
+          </b-col>
+        </b-row>
+       </b-card>
+      </b-row>
     </willow-layout-section>
-
   </willow-layout>
-
 </page>
 </template>
 
@@ -234,14 +194,6 @@ export default {
   },
   data () {
     return {
-      pageheader: {
-        breadcrumbs: [
-          {
-            text: 'Listings',
-            href: '/Admin/Listings'
-          }
-        ]
-      },
       status: false,
       propertyId: 0,
       unitId: 0,
@@ -258,12 +210,13 @@ export default {
         section8: false
       },
       buildingImages: [],
-      unitImages: []
+      unitImages: [],
+      listingImages: []
     }
   },
   methods: {
     fetch () {
-      api.getListing(this.$route.params.listing_id)
+      api.getListingDetails(this.$route.params.id)
         .then(res => {
           this.listing = {
             unit: res.data.Unit.UnitNumber,
@@ -287,6 +240,7 @@ export default {
           ]).then(axios.spread((buildingImagesData, unitImagesData) => {
             this.buildingImages = buildingImagesData.data
             this.unitImages = unitImagesData.data
+            this.listingImages = [...this.buildingImages, ...this.unitImages]
           }))
         })
     },
@@ -295,16 +249,6 @@ export default {
     },
     getUnitImages (images) {
       this.unitImages = [...this.buildingImages, ...images]
-    },
-    deleteUnitImage (data) {
-      api.deleteUnitImage(data.image.Key).then(res => {
-        this.unitImages.splice(data.i, 1)
-      })
-    },
-    deleteBuildingImage (data) {
-      api.deleteBuildingImage(data.image.Key).then(res => {
-        this.buildingImages.splice(data.i, 1)
-      })
     }
   }
 
