@@ -125,57 +125,37 @@
                 id="property_features"
                 name="property_features"
                 v-model="building.propertyFeatures"
-                :options="this.$store.getters.getPropertyFeatures">
+                >
+                  <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in  this.$store.getters.getPropertyFeatures" :key="i"
+                    >
+                    {{feature.text}}
+                  </b-form-checkbox>
               </b-form-checkbox-group>
             </b-form-group>
           </b-col>
-          <!-- <b-col :cols="8">
-            <b-form-group>
-              <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
-            </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
-              </b-form-group>
-          </b-col>
-          <b-col :cols="8">
-            <b-form-group>
-              <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
-              </b-form-group><b-form-group>
-              <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
-            </b-form-group>
-            <b-form-group>
-              <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
-            </b-form-group>
-          </b-col> -->
-
         </b-row>
-         <b-row class="mb-2">
-          <b-col :cols="24">
-            <div class="float-right p-1">
-              <willow-file-input-multiple @uploadedFiles="getImages" :url="`/propertys/${this.$route.params.building_id}/upload`" identifier="image">
-                  Add images
-                </willow-file-input-multiple>
-            </div>
-          </b-col>
-          <b-col :cols="24">
-              <willow-product-images
-                :images="images"
-              @remove-img="deleteImage($event)"
-              >
-              </willow-product-images>
-          </b-col>
-        </b-row>
+      </b-card>
 
-       </b-card>
+      <b-card>
+        <h6 class="heading">Images</h6>
+        <b-row class="mb-2">
+        <b-col :cols="24">
+          <div class="float-right p-1">
+            <willow-file-input-multiple @uploadedFiles="getImages" :url="`/propertys/${this.$route.params.building_id}/upload`" identifier="image">
+                Add images
+              </willow-file-input-multiple>
+          </div>
+        </b-col>
+        <b-col :cols="24">
+            <willow-product-images
+              :images="images"
+            @remove-img="deleteImage($event)"
+            >
+            </willow-product-images>
+        </b-col>
+      </b-row>
+
+      </b-card>
 
     </willow-layout-section>
 
