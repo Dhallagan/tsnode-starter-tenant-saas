@@ -61,7 +61,9 @@
         <h6 class="heading">Features</h6>
         <b-row class="mb-2">
           <b-col :cols="8">
-          <b-form-group>
+            LIKE IMAGES WE NEED THE UNIT AND BUILDING FEATURES, WE ARE TRYING TO COLLECT ALL THE DATA IN ONE SPOT NOW
+
+          <!-- <b-form-group>
             <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Business Center</b-form-checkbox>
             </b-form-group><b-form-group>
             <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Fitness Center</b-form-checkbox>
@@ -71,7 +73,7 @@
             <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
           </b-form-group><b-form-group>
             <b-form-checkbox id="checkbox16" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
-            </b-form-group>
+            </b-form-group> -->
         </b-col>
         <b-col :cols="8">
           <b-form-group>
