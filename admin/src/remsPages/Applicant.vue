@@ -106,7 +106,7 @@ export default {
         breadcrumbs: [
           {
             text: 'Applicants',
-            href: '/Applicants'
+            href: '/Admin/Applicants'
           }
         ]
       },
