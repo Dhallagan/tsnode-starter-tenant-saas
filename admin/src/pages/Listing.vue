@@ -52,59 +52,48 @@
                             :max-rows="6">
             </b-form-textarea>
           </b-col>
-
         </b-row>
 
        </b-card>
 
       <b-card class="mb-2" >
-        <h6 class="heading">Features</h6>
+        <h6 class="heading">Building Features</h6>
         <b-row class="mb-2">
-          <b-col :cols="8">
-            LIKE IMAGES WE NEED THE UNIT AND BUILDING FEATURES, WE ARE TRYING TO COLLECT ALL THE DATA IN ONE SPOT NOW
-
-          <!-- <b-form-group>
-            <b-form-checkbox id="checkbox1" v-model="status" value="accepted" unchecked-value="not_accepted">Business Center</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox2" v-model="status" value="accepted" unchecked-value="not_accepted">Fitness Center</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox3" v-model="status" value="accepted" unchecked-value="not_accepted">Residents" Lounge</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox4" v-model="status" value="accepted" unchecked-value="not_accepted">Wheelchair Access</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox16" v-model="status" value="accepted" unchecked-value="not_accepted">Swimming Pool</b-form-checkbox>
-            </b-form-group> -->
-        </b-col>
-        <b-col :cols="8">
-          <b-form-group>
-            <b-form-checkbox id="checkbox5" v-model="status" value="accepted" unchecked-value="not_accepted">Garage Parking</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox6" v-model="status" value="accepted" unchecked-value="not_accepted">Roof Deck</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox7" v-model="status" value="accepted" unchecked-value="not_accepted">Door Person</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox8" v-model="status" value="accepted" unchecked-value="not_accepted">Onsite Management</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox13" v-model="status" value="accepted" unchecked-value="not_accepted">Elevator</b-form-checkbox>
-            </b-form-group>
-        </b-col>
-        <b-col :cols="8">
-          <b-form-group>
-            <b-form-checkbox id="checkbox9" v-model="status" value="accepted" unchecked-value="not_accepted">Dry Cleaning</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox10" v-model="status" value="accepted" unchecked-value="not_accepted">Outdoor Space</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox11" v-model="status" value="accepted" unchecked-value="not_accepted">Storage</b-form-checkbox>
-            </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox12" v-model="status" value="accepted" unchecked-value="not_accepted">Package Service</b-form-checkbox>
-          </b-form-group><b-form-group>
-            <b-form-checkbox id="checkbox14" v-model="status" value="accepted" unchecked-value="not_accepted">Laundry</b-form-checkbox>
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="property_features"
+                name="property_features"
+                v-model="propertyFeatures"
+                >
+                  <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in  this.$store.getters.getPropertyFeatures" :key="i"
+                    >
+                    {{feature.text}}
+                  </b-form-checkbox>
+              </b-form-checkbox-group>
             </b-form-group>
           </b-col>
-
         </b-row>
 
-       </b-card>
+        <h6 class="heading">Unit Features</h6>
+        <b-row class="mb-2">
+          <b-col>
+            <b-form-group>
+              <b-form-checkbox-group
+                id="unit_features"
+                name="unit_features"
+                v-model="unitFeatures"
+                >
+                  <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in  this.$store.getters.getUnitFeatures" :key="i"
+                  >
+                  {{feature.text}}
+                </b-form-checkbox>
+              </b-form-checkbox-group>
+            </b-form-group>
+          </b-col>
+        </b-row>
+
+      </b-card>
 
       <b-card class="mb-2" >
         <h6 class="heading"> Building Images</h6>
@@ -260,7 +249,9 @@ export default {
         section8: false
       },
       buildingImages: [],
-      unitImages: []
+      unitImages: [],
+      buildingFeatures: null,
+      unitFeatures: 'ye;'
     }
   },
   methods: {
@@ -284,11 +275,15 @@ export default {
           this.unitId = res.data.Unit.UnitId
           axios.all([
             api.getBuildingImages(this.propertyId),
-            api.getUnitImages(this.unitId)
+            api.getUnitImages(this.unitId),
+            api.getBuilding(this.propertyId),
+            api.getBuildingUnit(this.propertyId, this.unitId)
 
-          ]).then(axios.spread((buildingImagesData, unitImagesData) => {
+          ]).then(axios.spread((buildingImagesData, unitImagesData, buildingDetails, unitDetails) => {
             this.buildingImages = buildingImagesData.data
             this.unitImages = unitImagesData.data
+            this.buildingFeatures = buildingDetails.data.PropertyFeatures.map(p => p.Id)
+            this.unitFeatures = unitDetails.data.Unit.UnitFeatures.map(u => u.Id)
           }))
         })
     },
