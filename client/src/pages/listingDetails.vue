@@ -77,7 +77,7 @@
         <b-row class="mb-2">
           <b-col >
             <div class="nklyn-container-medium no-gutters row">
-                <img style="margin-left:10px" v-for="(image,index) in listingImages " :key='index' :src="image.Url" width="300" height="300" alt="">
+                <img style="margin-left:10px" v-for="(image,index) in listingImages " :key='index' :src="image.Url" width="300" height="300" :alt="image.url">
             </div>
           </b-col>
         </b-row>

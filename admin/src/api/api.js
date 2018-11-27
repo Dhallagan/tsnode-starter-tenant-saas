@@ -188,5 +188,9 @@ export default {
 
   getUnitFeatures () {
     return HTTP.get('/unitfeatures')
+  },
+
+  getApplicants () {
+    return HTTP.get('/applicants')
   }
 }

@@ -47,7 +47,7 @@
           <willow-menu-item
             icon='newspaper'
             title='Applications'
-            href='/Admin/Applications'
+            href='/Admin/Applicants'
           ></willow-menu-item>
 
           <willow-menu-item v-if="hasRole('SuperAdmin')"
@@ -87,7 +87,7 @@
           <willow-menu-item
             icon='newspaper'
             title='Applications'
-            href='/Admin/Applications'
+            href='/Admin/Applicants'
           ></willow-menu-item>
 
         <!-- MENU ITEMS-->

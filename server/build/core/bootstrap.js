@@ -73,10 +73,9 @@ var Bootstrap = /** @class */ (function () {
         // Retrieve all queries
         // TODO: not sure if .then is wrong because queries is empty until then (should be await)
         console.log('Setting up database connection...');
-        console.log(process.env.STRIPE_SKEY);
         database_1.Database.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log('Connected to DB');
+                console.log('Connected to DB', connection.options.database);
                 console.log('Seeding database...');
                 // Seeds.seedUsers();
                 seeds_1.Seeds.seedPlans();

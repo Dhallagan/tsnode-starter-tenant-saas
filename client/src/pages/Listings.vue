@@ -3,6 +3,7 @@
       <b-card v-for="(listing,index) in listings" :key="index" >
        <b-row >
        <b-col><img src="https://via.placeholder.com/150" alt=""></b-col>
+       {{listing}}
       <b-col cols="9"  >
         <div class="d-flex flex-nowrap">
         <div class="order-1 p-2">
@@ -51,9 +52,12 @@ export default {
         .getListingsByDomain({ domain: this.domain })
         .then(res => {
           this.listings = res.data.map(listing => {
+            console.log(listing)
             return {
               value: listing.ListingId,
-              text: listing.Unit.UnitNumber
+              text: listing.Unit.UnitNumber,
+              unit: listing.Unit,
+              property: listing.Property
             }
           })
         })

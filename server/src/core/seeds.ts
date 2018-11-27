@@ -23,7 +23,7 @@ export class Seeds {
       { Type: "Industrial" },
       { Type: "Office" },
       { Type: "Shopping Center" },
-      { Type: "Retail" },
+      { Type: "Retail" },  
       { Type: "Storage" },
       { Type: "Parking" }
     ]
