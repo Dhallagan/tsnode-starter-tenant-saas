@@ -20,7 +20,7 @@ import Tenants from '../pages/Tenants'
 import Tenant from '../pages/Tenant'
 import UsersEdit from '../pages/Users.Edit'
 import Applicants from '../pages/Applicants'
-import Applicant from '../remsPages/Applicant'
+import Applicant from '../pages/Applicant'
 import Buildings from '../pages/Buildings'
 import Building from '../pages/Building'
 import NewBuilding from '../pages/Building.Add'
@@ -139,7 +139,6 @@ export default new Router({
       name: 'Applicant',
       component: Applicant,
       meta: {
-        breadcrumb: ':applicant_id',
         layout: 'application',
         requiresAuth: true
       }

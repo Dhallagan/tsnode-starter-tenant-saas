@@ -100,9 +100,10 @@ export default {
         })
     },
 
-    goTo (record, index) {
-      console.log(record)
-      this.$router.push({ path: '/Admin/Applicants/' + record.id })
+    goTo ($event) {
+      var obj = $event
+      console.log(obj.Id)
+      this.$router.push({ path: '/Admin/Applicants/' + obj.Id })
     }
   }
 }

@@ -192,5 +192,9 @@ export default {
 
   getApplicants () {
     return HTTP.get('/applicants')
+  },
+
+  getApplicantById (id) {
+    return HTTP.get(`/applicants/${id}`)
   }
 }
