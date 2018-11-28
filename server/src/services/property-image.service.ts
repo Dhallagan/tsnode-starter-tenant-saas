@@ -15,9 +15,9 @@ export class PropertyImageService {
     public async getAllBuildingImages(res: Response, buildingId: number) {
         const building = await this.propertyRepository.findOne({where: {Id: buildingId}, relations: ['PropertyImages']});
         if (building) {
-            return res.status(200).json(building['PropertyImages']);
+            return building['PropertyImages'];
         } else {
-            return res.status(422).json({'errors': [{'msg': 'Unit does not exist.'}]});
+            return null;;
         }
     }
 

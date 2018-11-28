@@ -30,6 +30,7 @@ export class PropertyController extends BaseController {
         const errors = validationResult(req);
         const id = req.params.id;
         const tenantId = req['tenant'];
+        console.log("sadsad",tenantId)
 
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });

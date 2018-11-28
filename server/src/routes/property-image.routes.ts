@@ -18,8 +18,7 @@ export class PropertyImageRoutes extends BaseRoute {
         this.router.post('/propertys/:id/upload', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.uploadMultiple(req, res).catch(next));
         this.router.delete('/propertys/images/:imageKey', Authentication.isAuthenticated, (req, res, next) => this.propertyImageController.deletePropertyImage(req, res).catch(next));
         
-        // client routes 
-        this.router.get('/property/:id/images', (req, res, next) => this.propertyImageController.getBuildingImages(req, res).catch(next))
+      
 
     }
 }

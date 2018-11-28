@@ -83,8 +83,13 @@ export class PropertyService {
         const property = await this.propertyRepository.findOne({ where: {Id: id}, relations: ["Units", "PropertyFeatures"] });
         return res.status(200).json(property);
     }
+    public async getPropertyFeatures(id:number){
+        const property = await this.propertyRepository.findOne({ where: {Id: id}, relations: [ "PropertyFeatures"] });
+        if(property){
+            return property['PropertyFeatures']
+        }
 
-
+    }
     public async deleteProperty(res: Response, tenantId: number, id: number) {
         const propertyExists = await this.propertyRepository.find({TenantId: tenantId, Id: id});
         

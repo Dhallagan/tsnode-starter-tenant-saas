@@ -64,7 +64,7 @@
               <b-form-checkbox-group
                 id="property_features"
                 name="property_features"
-                v-model="propertyFeatures"
+                v-model="buildingFeatures"
                 >
                   <b-form-checkbox class="col-sm-5" :value="feature.value" v-for="(feature, i) in  this.$store.getters.getPropertyFeatures" :key="i"
                     >
@@ -218,7 +218,6 @@
 import api from '@/api/api'
 import {format} from 'date-fns'
 import axios from 'axios'
-
 export default {
   mounted () {
     this.fetch()
@@ -271,14 +270,12 @@ export default {
             section8: res.data.Section8
           }
           this.propertyId = res.data.Unit.Property.Id
-
           this.unitId = res.data.Unit.UnitId
           axios.all([
             api.getBuildingImages(this.propertyId),
             api.getUnitImages(this.unitId),
             api.getBuilding(this.propertyId),
             api.getBuildingUnit(this.propertyId, this.unitId)
-
           ]).then(axios.spread((buildingImagesData, unitImagesData, buildingDetails, unitDetails) => {
             this.buildingImages = buildingImagesData.data
             this.unitImages = unitImagesData.data
@@ -304,7 +301,6 @@ export default {
       })
     }
   }
-
 }
 </script>
 
@@ -314,12 +310,10 @@ export default {
   -webkit-column-count: 2;
   column-count: 2;
 }
-
 .listing-heading {
   font-size: 1.25rem;
   font-weight: 500;
 }
-
 .subheading {
   font-weight: 700;
   line-height: 1.6rem;
