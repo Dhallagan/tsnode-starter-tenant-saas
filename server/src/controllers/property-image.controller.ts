@@ -18,7 +18,12 @@ export class PropertyImageController extends BaseController{
            return res.status(422).json({ errors: errors.array() });
         }
         const buildingId = req.params.id;
-        return await this.propertyImageService.getAllBuildingImages(res, buildingId);
+        const buildingImages =  await this.propertyImageService.getAllBuildingImages(res, buildingId);
+        if (buildingImages) {
+            return res.status(200).json(buildingImages);
+        } else {
+            return res.status(422).json({'errors': [{'msg': 'Unit does not exist.'}]});
+        }
         
     }
     public async uploadMultiple(req: Request, res: Response) {

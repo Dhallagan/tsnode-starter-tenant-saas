@@ -21,7 +21,7 @@ export class ListingRoutes extends BaseRoute {
         this.router.post('/listings', (req, res, next) => this.listingController.getAllListings(req, res).catch(next));
         this.router.put('/listings/:id', Authentication.isAuthenticated, (req, res, next) => this.listingController.listListing(req, res).catch(next));
         //client route 
-        this.router.get('/listing/:id', (req, res, next) => this.listingController.getListing(req, res).catch(next));
+        this.router.get('/listing/:id', (req, res, next) => this.listingController.getListingForClient(req, res).catch(next));
 
     }
 }

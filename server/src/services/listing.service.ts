@@ -1,16 +1,28 @@
 import { Response } from 'express';
 import { ListingRepository, UnitRepository, TenantRepository } from "../repositories";
+import { PropertyImageService } from './property-image.service';
+import { UnitImageService } from './unit-image.service';
+import { PropertyService } from './property.service';
+import { UnitService } from './unit.service';
 
 export class ListingService {
 
     private listingRepository: ListingRepository;
     private unitRepository: UnitRepository;
     private tenantRepository: TenantRepository;
+    private propertyImageService:PropertyImageService
+    private unitImageService : UnitImageService
+    private propertyService: PropertyService
+    private unitService:UnitService
 
     constructor() {
         this.listingRepository = new ListingRepository();
         this.unitRepository = new UnitRepository();
         this.tenantRepository = new TenantRepository();
+        this.propertyImageService = new PropertyImageService()
+        this.unitImageService = new UnitImageService()
+        this.propertyService = new PropertyService()
+        this.unitService = new UnitService()
     }
 
 
@@ -18,6 +30,21 @@ export class ListingService {
         const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
         if (listing) {
             return res.status(200).json(listing);
+        }
+    }
+    public async getListingForClient(res: Response, id: number) {
+        const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
+        if (listing) {
+            const buildingImages =  await this.propertyImageService.getAllBuildingImages(res, listing.Unit.Property.Id)
+            const unitImages = await this.unitImageService.getAllUnitImages(res, listing.Unit.UnitId);
+            const buldingFeatures = await this.propertyService.getPropertyFeatures(listing.Unit.Property.Id)
+            const unitFeatures = await this.unitService.getUnitFeatures(listing.Unit.Property.Id,listing.Unit.UnitId)
+
+            return res.status(200).json({listing,buildingImages,unitImages,buldingFeatures,unitFeatures});
+        }
+        else {
+            return res.status(422).json({'errors': [{'msg': 'No Listing found.'}]});
+
         }
     }
 

@@ -16,9 +16,9 @@ export class UnitImageService {
     public async getAllUnitImages(res: Response, unitId: number) {
         const unit = await this.unitRepository.findOne({where: {UnitId: unitId}, relations: ['UnitImages']});
         if (unit) {
-            return res.status(200).json(unit['UnitImages']);
+            return unit['UnitImages'];
         } else {
-            return res.status(422).json({'errors': [{'msg': 'Unit does not exist.'}]});
+            return null;
         }
     }
 

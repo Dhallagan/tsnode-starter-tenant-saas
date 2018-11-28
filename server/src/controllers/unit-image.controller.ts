@@ -18,7 +18,12 @@ export class UnitImageController extends BaseController{
            return res.status(422).json({ errors: errors.array() });
         }
         const unitId = req.params.id;
-        return await this.unitImageService.getAllUnitImages(res, unitId);
+        const unitImage = await this.unitImageService.getAllUnitImages(res, unitId);
+        if (unitImage) {
+            return res.status(200).json(unitImage);
+        } else {
+            return res.status(422).json({'errors': [{'msg': 'Unit does not exist.'}]});
+        }
         
     }
 

@@ -3,13 +3,13 @@
   <page-header
     title="Applicants"
   >
-  <!-- <template slot="action-right">
+  <template slot="action-right">
     <willow-button plain>Print Application</willow-button>
   </template>
 
   <template slot="action-right">
     <willow-button primary>Create New Application</willow-button>
-  </template> -->
+  </template>
 
   </page-header>
 
@@ -49,57 +49,42 @@
     @row-clicked="goTo"
   >
       <template slot="applicant" slot-scope="data">
-       {{data.item.FirstName}} {{data.item.LastName}}
+       {{data.item.applicant}}
     </template>
-
-    <template slot="property" slot-scope="data">
-       {{data.item.ListingApplyTo}}
-    </template>
-
-    <template slot="phone" slot-scope="data">
-       {{data.item.Phone}}
-    </template>
-
     <template slot="status" slot-scope="data">
-       <b-badge v-if="data.item.status === 'In Review'" variant="secondary" pill>{{data.item.ListingApplyTo}}</b-badge>
+       <b-badge v-if="data.item.status === 'In Review'" variant="secondary" pill>{{data.item.status}}</b-badge>
        <b-badge v-if="data.item.status === 'Accepted'" variant="success" pill>Approved</b-badge>
        <b-badge v-if="data.item.status === 'Rejected'" variant="danger" pill>Declined</b-badge>
-    </template>
 
-    <template slot="last_updated" slot-scope="data">
-       {{data.item.CreatedAt}}
     </template>
   </b-table>
 
   </b-card>
-  {{applications}}
+
 </page>
 </template>
 
 <script>
-import api from '@/api/api'
-// import axios from 'axios'
 export default {
   mounted () {
-    // this.applications = this.$store.getters.getApplications
-    this.fetch()
+    this.applications = this.$store.getters.getApplications
   },
 
   data () {
     return {
       fields: ['applicant', 'property', 'phone', 'status', 'last_updated'],
-      applications: []
+      applications: [
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Rejected', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Accepted', last_updated: '10/10/2010' },
+        { applicant: 'Marky Marky', property: '1234 AOk Drive', phone: '(555) 555-5555', status: 'Rejected', last_updated: '10/10/2010' }
+      ]
     }
   },
 
   methods: {
-    fetch () {
-      api.getApplicants()
-        .then(res => {
-          this.applications = res.data
-        })
-    },
-
     goTo (record, index) {
       console.log(record)
       this.$router.push({ path: '/Admin/Applicants/' + record.id })

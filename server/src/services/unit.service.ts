@@ -56,6 +56,12 @@ export class UnitService {
 
       return res.status(200).json({ Unit: propertyUnit });
   }
+  public async getUnitFeatures(propertyId: number, unitId: number){
+    const propertyUnit = await this.unitRepository.findOne({ where: {  Property: propertyId, UnitId: unitId }, relations:["UnitFeatures"] });
+    if(propertyUnit){
+        return propertyUnit['UnitFeatures']
+    }
+  }
 
 
   public async updatePropertyUnit(res: Response, tenantId: number, propertyId: number, unitId: number, unitNumber: string, bedrooms: number, baths: number, sqFt: number, smoking: boolean, garage: boolean, marketRent: number, unitFeatures: number[]) {

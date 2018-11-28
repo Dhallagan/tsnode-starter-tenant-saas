@@ -17,8 +17,7 @@ export class UnitImageRoutes extends BaseRoute {
         this.router.post('/units/:id/upload', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.uploadMultiple(req, res).catch(next));
         this.router.delete('/units/images/:imageKey', Authentication.isAuthenticated, (req, res, next) => this.unitImageController.deleteUnitImage(req, res).catch(next));
 
-        // client routes 
-        this.router.get('/unit/:id/images', (req, res, next) => this.unitImageController.getUnitImages(req, res).catch(next))
+
 
 
 
