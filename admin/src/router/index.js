@@ -30,7 +30,7 @@ import BuildingUnit from '../pages/Building.Unit'
 import Listings from '../pages/Listings'
 import Listing from '../pages/Listing'
 // import Tenants from '../pages/Tenants'
-// import AddLease from '../pages/AddLease'
+import AddLease from '../pages/Lease.Add'
 import Plans from '../pages/Plans'
 import fourohfour from '../pages/404'
 import Dashboard from '../pages/Dashboard'
@@ -192,12 +192,12 @@ export default new Router({
       meta: { layout: 'application', requiresAuth: true },
       component: Listing
     },
-    // {
-    //   path: '/Lease',
-    //   name: 'Lease',
-    //   meta: { layout: 'application', requiresAuth: true },
-    //   component: AddLease
-    // },
+    {
+      path: '/admin/Leases/New',
+      name: 'Lease',
+      meta: { layout: 'application', requiresAuth: true },
+      component: AddLease
+    },
     // {
     //   path: '/Components',
     //   name: 'Components',

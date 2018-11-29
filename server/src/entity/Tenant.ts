@@ -37,7 +37,6 @@ export class Tenant {
 		eager: true,
 		cascade: true
 	})
-
 	@JoinColumn()
 	Company: Company;
 

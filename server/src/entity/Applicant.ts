@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm"
-import { Tenant } from './Tenant';
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne} from "typeorm"
+import { ApplicationStatusType } from './ApplicationStatusType';
 import { TenantScope } from './TenantScope';
 
 @Entity()
@@ -174,4 +174,12 @@ export class Applicant extends TenantScope {
 
     @UpdateDateColumn()
     UpdatedAt: Date;
+
+    // IS this ApplicationStatusType => ApplicationStatusType.Id supposed to be .Id?
+    @OneToOne(type => ApplicationStatusType, ApplicationStatusType => ApplicationStatusType.Id, {
+		eager: true,
+		cascade: true
+	})
+    @Column({nullable: true})
+    ApplicationStatus: ApplicationStatusType
 }
