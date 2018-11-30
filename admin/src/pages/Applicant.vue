@@ -10,10 +10,9 @@
     </template>
 
     <template slot="action-right">
-        <willow-button class="ml-1"><icon class="mr-1" name="thumbs-up"></icon>Approve</willow-button>
-        <willow-button class="ml-1"><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
-        <willow-button class="ml-1"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
-        <willow-button primary class="ml-1">&nbsp;Move In</willow-button>
+        <willow-button class="ml-1" :primary="application.status =='Approved'?true:false"  @click.native="changeApplicantStatus('Approved')"><icon class="mr-1" name="thumbs-up" ></icon>Approve</willow-button>
+        <willow-button class="ml-1" :primary="application.status =='Pending'?true:false"  @click.native="changeApplicantStatus('Pending')" ><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
+        <willow-button class="ml-1" :primary="application.status =='Rejected'?true:false"  @click.native="changeApplicantStatus('Rejected')"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
     </template>
 
   </page-header>
@@ -479,6 +478,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import api from '@/api/api'
 import {Helpers} from '@/mixins'
 export default {
@@ -501,6 +501,7 @@ export default {
         ]
       },
       application: { },
+      applicationsStatus: [],
       listings: [],
       selected: [], // Must be an array reference!
       options: [
@@ -514,14 +515,30 @@ export default {
 
   methods: {
     fetch () {
-      api.getListedListings()
-        .then(res => {
-          this.listings = res.data
+      axios.all([
+        api.getApplicationStatusTypes(),
+        api.getListedListings(),
+        api.getApplicantById(this.$route.params.applicant_id)
+      ]).then(res => {
+        res[0].data.map((obj) => {
+          let applicants = obj.Applicants.map((el) => {
+            return el.Id
+          })
+          this.applicationsStatus[obj.Name] = applicants
         })
-      api.getApplicantById(this.$route.params.applicant_id)
-        .then(res => {
-          this.application = res.data
-        })
+
+        this.listings = res[1].data
+        this.application = res[2].data
+        this.application.status = this.applicationsStatus['None'].includes(this.application.Id) ? 'None' : (this.applicationsStatus['Approved'].includes(this.application.Id) ? 'Approved' : (this.applicationsStatus['Pending'].includes(this.application.Id) ? 'Pending' : 'Rejected'))
+
+        console.log('asada', this.application)
+      })
+    },
+    changeApplicantStatus (data) {
+      api.updateApplicantStatus(this.$route.params.applicant_id, {status: data}).then(res => {
+        this.application.status = data
+        this.$forceUpdate()
+      })
     }
   }
 }
