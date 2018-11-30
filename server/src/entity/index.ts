@@ -12,3 +12,4 @@ export {PropertyImage} from './PropertyImage';
 export {PropertyFeatures} from './PropertyFeatures';
 export {UnitFeatures} from './UnitFeatures';
 export {Applicant} from './Applicant';
+export {ApplicationStatusType} from './ApplicationStatusType';

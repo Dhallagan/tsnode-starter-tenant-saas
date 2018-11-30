@@ -75,4 +75,18 @@ export class ApplicantController extends BaseController {
         return await this.applicantService.deleteApplicant(res, id);
     }
 
+    public async updateApplicantStatus(req: Request, res: Response) {
+
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const id = req.params.id;
+        const status = req.body.status;
+
+        return await this.applicantService.updateApplicantStatus(res, id, status);
+
+    }
+
 }

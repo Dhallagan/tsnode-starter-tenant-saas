@@ -17,5 +17,6 @@ export class ApplicantRoutes extends BaseRoute {
         this.router.post('/applicants', (req, res, next) => this.applicantController.createApplicant(req, res).catch(next));
         this.router.put('/applicants/:id', (req, res, next) => this.applicantController.updateApplicant(req, res).catch(next));
         this.router.delete('/applicants/:id', (req, res, next) => this.applicantController.deleteApplicant(req, res).catch(next));
+        this.router.post('/applicants/:id/status', (req, res, next) => this.applicantController.updateApplicantStatus(req, res).catch(next));
     }
 }

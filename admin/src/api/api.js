@@ -193,8 +193,19 @@ export default {
   getApplicants () {
     return HTTP.get('/applicants')
   },
+  getApplicantsSatuts () {
+    return HTTP.get('/application-status-types')
+  },
 
   getApplicantById (id) {
     return HTTP.get(`/applicants/${id}`)
+  },
+
+  getApplicationStatusTypes () {
+    return HTTP.get('/application-status-types')
+  },
+
+  updateApplicantStatus (id, params) {
+    return HTTP.post(`/applicants/${id}/status`, params)
   }
 }

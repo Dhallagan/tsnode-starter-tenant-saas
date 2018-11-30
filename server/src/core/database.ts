@@ -1,6 +1,7 @@
 import { createConnection } from "typeorm";
 import {
   Applicant,
+  ApplicationStatusType,
   User,
   Tenant,
   Property,
@@ -31,6 +32,7 @@ export class Database {
         synchronize: true,
         entities: [
           Applicant,
+          ApplicationStatusType,
           User,
           Tenant,
           Property,

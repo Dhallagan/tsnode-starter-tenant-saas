@@ -11,3 +11,4 @@ export { PropertyImageController } from './property-image.controller';
 export { UnitFeaturesController } from './unit-features.controller';
 export { PropertyFeaturesController } from './property-features.controller';
 export { ApplicantController } from './applicant.controller';
+export { ApplicationStatusTypeController } from './application-status-type.controller';
