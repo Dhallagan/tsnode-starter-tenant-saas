@@ -1,6 +1,6 @@
 import {getRepository} from "typeorm";
 import {Stripe} from './stripe';
-import {User, Plan, Product, PropertyType, PropertyFeatures, UnitFeatures} from "../entity";
+import {User, Plan, Product, PropertyType, PropertyFeatures, UnitFeatures, ApplicationStatusType} from "../entity";
 
 export class Seeds {
 
@@ -23,7 +23,7 @@ export class Seeds {
       { Type: "Industrial" },
       { Type: "Office" },
       { Type: "Shopping Center" },
-      { Type: "Retail" },  
+      { Type: "Retail" },
       { Type: "Storage" },
       { Type: "Parking" }
     ]
@@ -143,14 +143,34 @@ export class Seeds {
       { Name: "Fenced Yard", TenantId, Unit: [] },
       { Name: "Fireplace", TenantId, Unit: [] },
       { Name: "Hardwood Floors", TenantId, Unit: [] },
-      { Name: "Cable", TenantId, Unit: [] },
+      { Name: "Cable", TenantId, Unit: [] }
     ]
+    
     const existUnitFeatures = await unitFeaturesRepository.find({TenantId});
     if (existUnitFeatures.length)
       return;
 
     for (const type of unitFeatures) {
       await unitFeaturesRepository.save(type);
+    }    
+  }
+
+  public static async seedApplicantStatusTypes() {
+
+    const applicantStatusTypeRepository = getRepository(ApplicationStatusType);
+   
+    const types = [
+      { Name: "None", Applicants: [] },
+      { Name: "Pending", Applicants: [] },
+      { Name: "Rejected", Applicants: [] },
+      { Name: "Approved", Applicants: [] }
+    ];
+
+    for (const type of types) {
+      const existType = await applicantStatusTypeRepository.findOne({Name: type.Name});
+      if (!existType) {
+        await applicantStatusTypeRepository.save(type);
+      }
     }    
   }
 }

@@ -10,3 +10,4 @@ export { PropertyImageService } from './property-image.service';
 export { UnitFeaturesService } from './unit-features.service';
 export { PropertyFeaturesService } from './property-features.service';
 export { ApplicantService } from './applicant.service';
+export { ApplicationStatusTypeService } from './application-status-type.service';

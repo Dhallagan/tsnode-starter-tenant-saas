@@ -1,15 +1,17 @@
 import { Response } from 'express';
-import { ApplicantRepository, ListingRepository } from '../repositories';
+import { Applicant } from '../entity';
+import { ApplicantRepository, ListingRepository, ApplicationStatusTypeRepository } from '../repositories';
 
 export class ApplicantService {
 
     private applicantRepository: ApplicantRepository;
     private listingRepository: ListingRepository;
-
+    private applicationStatusRepository: ApplicationStatusTypeRepository;
 
     constructor() {
         this.applicantRepository = new ApplicantRepository();
         this.listingRepository = new ListingRepository();
+        this.applicationStatusRepository = new ApplicationStatusTypeRepository();
     }
 
     public async getApplicant(res: Response, id: number) {
@@ -42,7 +44,9 @@ export class ApplicantService {
             ViewModel.TenantId = currentListing.TenantId;
         }
 
-        const applicant = await this.applicantRepository.create({...ViewModel});
+        const status = await this.applicationStatusRepository.findOne({Name: 'None'});
+        const applicant = await this.applicantRepository.create({...ViewModel, ApplicationStatus: status});
+
         return res.status(200).json(applicant);
     }
     
@@ -70,6 +74,24 @@ export class ApplicantService {
         await this.applicantRepository.delete(id);
 
         return res.status(200).json({'msg': 'Successfully removed the applicant.'});
+    }
+
+    public async updateApplicantStatus(res: Response, id: number, status: string) {
+
+        const applicant = await this.applicantRepository.findOne(id);
+        if (!applicant) {
+            return res.status(422).json({'errors': [{'msg': 'Applicant does not exist.'}]});
+        }
+
+        const _status = await this.applicationStatusRepository.findOne({Name: status})
+        if (!_status) {
+            return res.status(422).json({'errors': [{'msg': 'Status does not exist.'}]});
+        }
+        
+        applicant.ApplicationStatus = _status;
+        await this.applicantRepository.update(id, applicant);
+        
+        return res.status(200).json({'msg': 'Successfully updated the status.'});
     }
 
 }
