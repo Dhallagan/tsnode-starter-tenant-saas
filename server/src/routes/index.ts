@@ -11,3 +11,4 @@ export { UnitFeaturesRoutes } from './unit-features.routes';
 export { PropertyFeaturesRoutes } from './property-features.routes';
 export { ApplicantRoutes } from './applicant.routes';
 export { ApplicationStatusTypeRoutes } from './application-status-type.routes';
+export { LeaseRoutes } from './lease.routes';

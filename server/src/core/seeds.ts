@@ -1,6 +1,15 @@
 import {getRepository} from "typeorm";
 import {Stripe} from './stripe';
-import {User, Plan, Product, PropertyType, PropertyFeatures, UnitFeatures, ApplicationStatusType} from "../entity";
+import {
+  User,
+  Plan,
+  Product,
+  PropertyType,
+  PropertyFeatures,
+  UnitFeatures,
+  ApplicationStatusType,
+  TermType
+} from "../entity";
 
 export class Seeds {
 
@@ -172,5 +181,23 @@ export class Seeds {
         await applicantStatusTypeRepository.save(type);
       }
     }    
+  }
+
+  public static async seedTermTypes() {
+
+    const termTypeRepository = getRepository(TermType);
+
+    const types = [
+      { Id: 0, Type: 'Fixed' },
+      { Id: 1, Type: 'Fixed - Rollover' },
+      { Id: 2, Type: 'Month to Month' }
+    ];
+
+    for (const type of types) {
+      const existType = await termTypeRepository.findOne({Id: type.Id});
+      if (!existType) {
+        await termTypeRepository.save(type);
+      }
+    }
   }
 }

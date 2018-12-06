@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany, JoinTable } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany, OneToOne, ManyToMany, JoinTable } from "typeorm"
 import { Property } from './Property';
 import { TenantScope } from './TenantScope';
 import { UnitImage } from './UnitImage';
 import { UnitFeatures } from './UnitFeatures';
+import { Lease } from './Lease';
 
 @Entity()
 export class Unit extends TenantScope {
@@ -58,4 +59,9 @@ export class Unit extends TenantScope {
         { name: 'unitFeaturesId' }
     ]})
     UnitFeatures: UnitFeatures[];
+
+    @OneToOne(type => Lease, lease => lease.Unit, {
+        nullable: true
+    })
+    Lease: Lease;
 }

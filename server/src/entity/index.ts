@@ -13,3 +13,6 @@ export {PropertyFeatures} from './PropertyFeatures';
 export {UnitFeatures} from './UnitFeatures';
 export {Applicant} from './Applicant';
 export {ApplicationStatusType} from './ApplicationStatusType';
+export {Lease} from './Lease';
+export {Resident} from './Resident';
+export {TermType} from './TermType';

@@ -207,5 +207,9 @@ export default {
 
   updateApplicantStatus (id, params) {
     return HTTP.post(`/applicants/${id}/status`, params)
+  },
+
+  createLease (params) {
+    return HTTP.post(`/create-lease`, params)
   }
 }
