@@ -1,5 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm"
 import { TenantScope } from './TenantScope';
+
+import { Lease } from './Lease';
 
 @Entity()
 export class Resident extends TenantScope {
@@ -55,6 +57,15 @@ export class Resident extends TenantScope {
 
     @Column({nullable: true})
     EmergencyContactPhone: string;
+
+    @ManyToOne(type => Lease, lease => lease.Residents, {
+        cascade: true,
+        eager: true,
+        onDelete: 'CASCADE'
+    })
+    @JoinColumn()
+    Lease: Lease;
+
 
     @CreateDateColumn()
     CreatedAt: Date;

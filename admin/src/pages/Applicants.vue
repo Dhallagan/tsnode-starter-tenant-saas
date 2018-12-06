@@ -75,7 +75,6 @@
   </b-table>
 
   </b-card>
-  {{applications}}
 </page>
 </template>
 

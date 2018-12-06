@@ -3,6 +3,7 @@ import { Unit } from './Unit';
 import { TenantScope } from './TenantScope';
 import { PropertyImage } from './PropertyImage';
 import { PropertyFeatures } from './PropertyFeatures';
+import { Lease } from './Lease';
 
 @Entity()
 export class Property extends TenantScope {
@@ -38,4 +39,9 @@ export class Property extends TenantScope {
     @ManyToMany(type => PropertyFeatures, propertyFeatures => propertyFeatures.Property)
     @JoinTable({ name: "property_property_features"})
     PropertyFeatures: PropertyFeatures[];
+
+    @OneToMany(type => Lease, lease => lease.Property, {
+        nullable: true
+    })
+    Lease: Lease;
 }

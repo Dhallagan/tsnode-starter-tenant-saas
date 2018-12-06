@@ -13,6 +13,7 @@
         <willow-button class="ml-1" :primary="application.status =='Approved'?true:false"  @click.native="changeApplicantStatus('Approved')"><icon class="mr-1" name="thumbs-up" ></icon>Approve</willow-button>
         <willow-button class="ml-1" :primary="application.status =='Pending'?true:false"  @click.native="changeApplicantStatus('Pending')" ><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
         <willow-button class="ml-1" :primary="application.status =='Rejected'?true:false"  @click.native="changeApplicantStatus('Rejected')"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
+        <router-link :to="{path:'/admin/Leases/New',query:{propertyId:propertyId,unitId:unitId,applicantId:application.Id}}"><willow-button  class="ml-1">&nbsp;Move In</willow-button></router-link>
     </template>
 
   </page-header>
@@ -465,7 +466,6 @@
   </willow-layout>
 
   <!-- <page-actions>
-
       <template slot="action-left">
       <willow-button variant="danger">Delete this buildings</willow-button>
     </template>
@@ -485,11 +485,9 @@ export default {
   mounted () {
     this.fetch()
   },
-
   mixins: [
     Helpers
   ],
-
   data () {
     return {
       pageheader: {
@@ -502,6 +500,8 @@ export default {
       },
       application: { },
       applicationsStatus: [],
+      propertyId: '',
+      unitId: '',
       listings: [],
       selected: [], // Must be an array reference!
       options: [
@@ -512,12 +512,10 @@ export default {
       ]
     }
   },
-
   methods: {
     fetch () {
       axios.all([
         api.getApplicationStatusTypes(),
-        api.getListedListings(),
         api.getApplicantById(this.$route.params.applicant_id)
       ]).then(res => {
         res[0].data.map((obj) => {
@@ -526,12 +524,12 @@ export default {
           })
           this.applicationsStatus[obj.Name] = applicants
         })
-
-        this.listings = res[1].data
-        this.application = res[2].data
+        this.application = res[1].data
         this.application.status = this.applicationsStatus['None'].includes(this.application.Id) ? 'None' : (this.applicationsStatus['Approved'].includes(this.application.Id) ? 'Approved' : (this.applicationsStatus['Pending'].includes(this.application.Id) ? 'Pending' : 'Rejected'))
-
-        console.log('asada', this.application)
+        api.getListing(this.application.ListingApplyTo).then(res => {
+          this.propertyId = res.data.Unit.Property.Id
+          this.unitId = res.data.Unit.UnitId
+        })
       })
     },
     changeApplicantStatus (data) {
@@ -545,5 +543,4 @@ export default {
 </script>
 
 <style>
-
 </style>

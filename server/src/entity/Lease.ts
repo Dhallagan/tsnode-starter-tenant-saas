@@ -1,7 +1,12 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, OneToOne, JoinColumn} from "typeorm"
 import { TenantScope
     // , Property, Unit, Resident 
 } from './TenantScope';
+
+import { Property } from './Property';
+import { Unit } from './Unit';
+import { Resident } from './Resident';
+import { TermType } from './TermType';
 
 @Entity()
 export class Lease extends TenantScope {
@@ -11,17 +16,33 @@ export class Lease extends TenantScope {
 
     //JOIN RESIDENT
     //One Lease can have multiple Residents?
+    @OneToMany(type => Resident, recident => recident.Lease)
+    Residents: Resident[];
 
-    //JOIN BUILDING
-    //One lease can have one building per lease
+    // JOIN BUILDING
+    // One lease can have one building per lease
+    @ManyToOne(type => Property, property => property.Lease, {
+        cascade: true,
+        eager: true,
+        onDelete: 'CASCADE'
+    })
+    @JoinColumn({name: 'PropertyId'})
+    Property: Property;
 
     //JOIN UNIT
     //One lease can have one unit in that building per lease
+    @OneToOne(type => Unit, unit => unit.Lease, {
+        cascade: true,
+        eager: true,
+        onDelete: 'CASCADE'
+    })
+    @JoinColumn({name: 'UnitId'})
+    Unit: Unit;
 
-    @CreateDateColumn()
+    @Column()
     StartDate: Date;
 
-    @CreateDateColumn()
+    @Column()
     EndDate: Date;
 
     @Column({nullable: true})
@@ -31,7 +52,11 @@ export class Lease extends TenantScope {
     SecurityDeposit: number;
 
     //Add TermType reference: Fixed, Fixed w/ Rollover, Month To Month
-    @Column({nullable: true})
+    @ManyToOne(type => TermType, termType => termType.Lease, {
+        onDelete: 'CASCADE',
+        cascade: true,
+        eager: true
+    })
     Terms: number;
 
     @CreateDateColumn()

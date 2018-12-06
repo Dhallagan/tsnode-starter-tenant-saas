@@ -6,7 +6,7 @@
   >
     <template slot="action-right">
       <willow-button class="mt-4 mr-1" variant="default">Cancel</willow-button>
-      <willow-button class="mt-4 float-right" primary>Start Lease</willow-button>
+      <willow-button class="mt-4 float-right" primary @click.native="createLease()">Start Lease</willow-button>
     </template>
 
   </page-header>
@@ -27,21 +27,17 @@
         <b-row>
           <b-col>
             <label for="inputLive">Property</label>
-            <b-form-select
+            <b-form-input
                   type="text"
-                  placeholder="First">
-            </b-form-select>
+                  v-model="property">
+            </b-form-input>
           </b-col>
           <b-col>
-            <b-form-group
-              label="Unit"
-              label-for="inputHorizontal"
-            >
-              <b-form-select
-                type="text"
-                placeholder="Number">
-              </b-form-select>
-            </b-form-group>
+             <label for="inputLive">Unit</label>
+            <b-form-input
+                  type="text"
+                  v-model="unit">
+            </b-form-input>
           </b-col>
         </b-row>
 
@@ -50,7 +46,8 @@
             <label for="inputLive">Rent Amount</label>
             <b-form-input
                   type="text"
-                  placeholder="$0.00">
+                  placeholder="$0.00"
+                  v-model="monthlyRent">
             </b-form-input>
           </b-col>
           <b-col>
@@ -61,6 +58,7 @@
               <b-form-input
                 type="text"
                 placeholder="$0.00"
+                v-model="securityDeposit"
               >
               </b-form-input>
             </b-form-group>
@@ -72,24 +70,26 @@
             <label for="inputLive">Start Date</label>
             <b-form-input
                   type="date"
-                  placeholder="First">
+                  placeholder="First"
+                  v-model="startDate">
             </b-form-input>
           </b-col>
           <b-col>
             <label for="inputLive">End Date</label>
             <b-form-input
                   type="date"
-                  placeholder="First">
+                  placeholder="First"
+                  v-model="endDate">
             </b-form-input>
           </b-col>
         </b-row>
         <b-row class="mt-4">
           <b-col>
             <b-form-group label="Lease Type">
-              <b-form-radio-group id="radios2" v-model="selected" name="radioSubComponent" stacked>
-                <b-form-radio value="first">Fixed</b-form-radio>
-                <b-form-radio value="second">Fixed - Rollover</b-form-radio>
-                <b-form-radio value="thire">Month to Month</b-form-radio>
+              <b-form-radio-group id="radios2" v-model="termType" name="radioSubComponent" stacked>
+                <b-form-radio value=0>Fixed</b-form-radio>
+                <b-form-radio value=1>Fixed - Rollover</b-form-radio>
+                <b-form-radio value=2>Month to Month</b-form-radio>
               </b-form-radio-group>
             </b-form-group>
           </b-col>
@@ -104,20 +104,17 @@
             <label for="inputLive">First Name</label>
             <b-form-input
                   type="text"
-                  placeholder="First">
+                  placeholder="First"
+                  v-model="firstName">
             </b-form-input>
           </b-col>
           <b-col>
-            <b-form-group
-              label="Last"
-              label-for="inputHorizontal"
-            >
-              <b-form-input
-                type="text"
-                placeholder="Last"
-              >
-              </b-form-input>
-            </b-form-group>
+            <label for="inputLive">Last Name</label>
+            <b-form-input
+                  type="text"
+                  placeholder="First"
+                  v-model="lastName">
+            </b-form-input>
           </b-col>
         </b-row>
         <b-row class="mt-2">
@@ -125,7 +122,8 @@
             <label for="inputLive">Phone</label>
             <b-form-input
                   type="text"
-                  placeholder="(555) 555-5555">
+                  placeholder="(555) 555-5555"
+                  v-model="phone">
             </b-form-input>
           </b-col>
         </b-row>
@@ -135,7 +133,8 @@
             <label for="inputLive">Email</label>
             <b-form-input
                   type="text"
-                  placeholder="example@site.com">
+                  placeholder="example@site.com"
+                  v-model="email">
             </b-form-input>
           </b-col>
         </b-row>
@@ -162,22 +161,63 @@
 </template>
 
 <script>
+import axios from 'axios'
+import api from '@/api/api'
 export default {
+  data () {
+    return {
+      securityDeposit: 0,
+      monthlyRent: 0,
+      unitId: -1,
+      propertyId: -1,
+      termType: 0,
+      startDate: '',
+      endDate: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      property: '',
+      unit: ''
+    }
+  },
   mounted () {
-    // Check if supplied then prepopulate form
-    // this.$route.query.propertyId
-    // this.$route.query.unitId
-    // this.$route.query.applicantId
     this.fetch()
   },
   methods: {
     fetch () {
-      // TODO
+      axios.all([
+        api.getApplicantById(this.$route.query.applicantId),
+        api.getBuilding(this.$route.query.propertyId)
+      ]).then(res => {
+        this.property = res[1].data.Street
+        this.propertyId = res[1].data.Id
+        res[1].data.Units.forEach(unit => {
+          if (unit.UnitId === this.$route.query.unitId) {
+            this.unit = unit.Description
+            this.unitId = unit.UnitId
+          }
+        })
+      })
+    },
+    createLease () {
+      api.createLease({
+        unitId: this.unitId,
+        propertyId: this.propertyId,
+        securityDeposit: this.securityDeposit,
+        monthlyRent: this.monthlyRent,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        phone: this.phone,
+        email: this.email,
+        startDate: this.startDate,
+        endDate: this.endDate,
+        termType: this.termType
+      })
     }
   }
 }
 </script>
 
 <style>
-
 </style>

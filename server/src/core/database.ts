@@ -14,7 +14,10 @@ import {
   UnitImage,
   PropertyImage,
   UnitFeatures,
-  PropertyFeatures
+  PropertyFeatures,
+  Lease,
+  Resident,
+  TermType
 } from '../entity';
 
 export class Database {
@@ -45,7 +48,10 @@ export class Database {
           UnitImage,
           PropertyImage,
           UnitFeatures,
-          PropertyFeatures
+          PropertyFeatures,
+          Lease,
+          Resident,
+          TermType
         ]
     });
   }

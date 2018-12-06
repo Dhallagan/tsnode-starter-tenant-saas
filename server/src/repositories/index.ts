@@ -11,3 +11,6 @@ export { UnitFeaturesRepository } from './unit-features.repository';
 export { PropertyFeaturesRepository } from './property-features.repository';
 export { ApplicantRepository } from './applicant.repository';
 export { ApplicationStatusTypeRepository } from './applicantion-status-type.repository';
+export { LeaseRepository } from './lease.repository';
+export { TermTypeRepository } from './term-type.repository';
+export { ResidentRepository } from './resident.repository';

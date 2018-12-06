@@ -19,7 +19,8 @@ import {
     UnitFeaturesRoutes,
     PropertyFeaturesRoutes,
     ApplicantRoutes,
-    ApplicationStatusTypeRoutes
+    ApplicationStatusTypeRoutes,
+    LeaseRoutes
 } from '../routes';
 
 import * as dotenv from 'dotenv';
@@ -52,6 +53,7 @@ export class Bootstrap {
             Seeds.seedPlans();
             Seeds.seedPropertyTypes();
             Seeds.seedApplicantStatusTypes();
+            Seeds.seedTermTypes();
         });
     }
 
@@ -126,6 +128,9 @@ export class Bootstrap {
 
         const applicationStatusTypeRoutes = new ApplicationStatusTypeRoutes().router;
         app.use('/api', applicationStatusTypeRoutes);
+
+        const leaseRoutes = new LeaseRoutes().router;
+        app.use('/api', leaseRoutes);
 
     }
 }
