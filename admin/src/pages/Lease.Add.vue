@@ -175,7 +175,7 @@
             </b-form-input>
           </b-col>
         </b-row>
-        
+
         <b-row class="mt-2">
            <b-col>
             <label for="inputLive">Previous Employment StartDate</label>
@@ -204,7 +204,7 @@
                   v-model="resident.PreviousEmployer">
             </b-form-input>
           </b-col>
-          
+
           <b-col>
             <label for="inputLive">Previous Monthly Salary</label>
             <b-form-input
@@ -351,7 +351,6 @@
                   v-model="resident.CurrentEmployer">
             </b-form-input>
           </b-col>
-          
           <b-col>
             <label for="inputLive">Current Monthly Salary</label>
             <b-form-input
@@ -493,7 +492,7 @@ export default {
       phone: '',
       property: {},
       unit: {},
-      resident: {},
+      resident: {}
     }
   },
   mounted () {
