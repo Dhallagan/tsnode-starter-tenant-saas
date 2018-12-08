@@ -13,7 +13,7 @@
         <willow-button class="ml-1" :primary="application.status =='Approved'?true:false"  @click.native="changeApplicantStatus('Approved')"><icon class="mr-1" name="thumbs-up" ></icon>Approve</willow-button>
         <willow-button class="ml-1" :primary="application.status =='Pending'?true:false"  @click.native="changeApplicantStatus('Pending')" ><icon class="mr-1" name="arrow-right"></icon>In Review</willow-button>
         <willow-button class="ml-1" :primary="application.status =='Rejected'?true:false"  @click.native="changeApplicantStatus('Rejected')"><icon class="mr-1" name="ban"></icon>Reject</willow-button>
-        <router-link :to="{path:'/admin/Leases/New',query:{propertyId:propertyId,unitId:unitId,applicantId:application.Id}}"><willow-button  class="ml-1">&nbsp;Move In</willow-button></router-link>
+        <router-link :to="{path:'/admin/Leases/New',query:{listing: listingId,applicant: application.Id}}"><willow-button  class="ml-1">&nbsp;Move In</willow-button></router-link>
     </template>
 
   </page-header>
@@ -322,11 +322,11 @@
 
     <h3>General</h3>
 
-    <b-form-group  >
+    <b-form-group>
       <p>Do you smoke? </p>
     <b-form-radio-group name="smoke" v-model="application.Smoke" >
-      <b-form-radio name="smoke"  :value="true"  >Yes</b-form-radio>
-      <b-form-radio name="smoke"    :value="false"  >No</b-form-radio>
+      <b-form-radio name="smoke" :value="true">Yes</b-form-radio>
+      <b-form-radio name="smoke" :value="false">No</b-form-radio>
     </b-form-radio-group>
     </b-form-group>
 
@@ -334,7 +334,7 @@
       <p>Do you have pets?</p>
       <b-form-radio-group name="pets" v-model="application.Pets" >
       <b-form-radio :value="true" >Yes</b-form-radio>
-      <b-form-radio :value="false" >No</b-form-radio>
+      <b-form-radio :value="false">No</b-form-radio>
       </b-form-radio-group>
     </b-form-group>
 
@@ -500,10 +500,9 @@ export default {
       },
       application: { },
       applicationsStatus: [],
-      propertyId: '',
-      unitId: '',
       listings: [],
       selected: [], // Must be an array reference!
+      listingId: -1,
       options: [
         { text: 'Credit Check', value: '1' },
         { text: 'Background Check', value: '2' },
@@ -526,10 +525,7 @@ export default {
         })
         this.application = res[1].data
         this.application.status = this.applicationsStatus['None'].includes(this.application.Id) ? 'None' : (this.applicationsStatus['Approved'].includes(this.application.Id) ? 'Approved' : (this.applicationsStatus['Pending'].includes(this.application.Id) ? 'Pending' : 'Rejected'))
-        api.getListing(this.application.ListingApplyTo).then(res => {
-          this.propertyId = res.data.Unit.Property.Id
-          this.unitId = res.data.Unit.UnitId
-        })
+        this.listingId = res[1].data.Listing.ListingId
       })
     },
     changeApplicantStatus (data) {

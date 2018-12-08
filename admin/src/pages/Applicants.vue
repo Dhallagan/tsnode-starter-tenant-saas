@@ -48,7 +48,7 @@
   <b-table hover :items="applications" :fields="fields"
     @row-clicked="goTo"
   >
-      <template slot="applicant" slot-scope="data">
+    <template slot="applicant" slot-scope="data">
        {{data.item.FirstName}} {{data.item.LastName}}
     </template>
 
@@ -61,11 +61,14 @@
     </template>
 
     <template slot="status" slot-scope="data">
-        <b-badge :variant="data.item.status=='None'?'secondary':data.item.status=='Approved'?'success':data.item.status=='Rejected'?'danger':'info'">{{data.item.status }}</b-badge>
-
-       <!-- <b-badge v-if="data.item.status === 'None'" variant="secondary" >{{data.item.ListingApplyTo}}</b-badge>
-       <b-badge v-if="data.item.status === 'Accepted'" variant="success" pill>Approved</b-badge>
-       <b-badge v-if="data.item.status === 'Rejected'" variant="danger" pill>Declined</b-badge> -->
+      <b-badge
+        :variant="data.item.status=='None' ? 'secondary'
+                : data.item.status=='Approved' ? 'success'
+                : data.item.status=='Rejected' ? 'danger'
+                : 'info'"
+      >
+      {{data.item.status }}
+      </b-badge>
     </template>
 
     <template slot="last_updated" slot-scope="data">
@@ -83,7 +86,6 @@ import api from '@/api/api'
 import axios from 'axios'
 export default {
   mounted () {
-    // this.applications = this.$store.getters.getApplications
     this.fetch()
   },
 
@@ -99,7 +101,7 @@ export default {
     fetch () {
       axios.all([
         api.getApplicants(),
-        api.getApplicantsSatuts()
+        api.getApplicantStatusTypes()
       ]).then(axios.spread((applicationsData, applicationsStatusData) => {
         this.applications = applicationsData.data
         applicationsStatusData.data.map((obj) => {

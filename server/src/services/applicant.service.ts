@@ -38,16 +38,19 @@ export class ApplicantService {
 
     public async createApplicant(res: Response, ViewModel: any, listingId: number) {
 
-        const currentListing = await this.listingRepository.findOne({ListingId: listingId});
+        const currentListing = await this.listingRepository.findOne(listingId);
+        const status = await this.applicationStatusRepository.findOne({Name: 'None'});
+
 
         if (currentListing) {
             ViewModel.TenantId = currentListing.TenantId;
+            await this.applicantRepository.create({...ViewModel, ApplicationStatus: status, Listing: currentListing});
+        } else {
+            await this.applicantRepository.create({...ViewModel, ApplicationStatus: status});
         }
-
-        const status = await this.applicationStatusRepository.findOne({Name: 'None'});
-        const applicant = await this.applicantRepository.create({...ViewModel, ApplicationStatus: status});
-
-        return res.status(200).json(applicant);
+     
+        
+        return res.status(200).json({'msg': 'Applicant created.'});
     }
     
 

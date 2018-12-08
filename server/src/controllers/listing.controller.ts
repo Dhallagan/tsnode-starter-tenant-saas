@@ -3,6 +3,10 @@ import { BaseController } from './base-controller';
 import { ListingService } from '../services';
 import { validationResult } from 'express-validator/check';
 
+function check (target, key, description) {
+    console.log(target, key, description);
+}
+
 export class ListingController extends BaseController {
 
     private listingService: ListingService;
@@ -13,6 +17,7 @@ export class ListingController extends BaseController {
     }
 
     public async getListing(req: Request, res: Response) {
+
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -23,6 +28,21 @@ export class ListingController extends BaseController {
 
         return await this.listingService.getListing(res, id);
     }
+
+    @check
+    public async getListingWithRelations(req: Request, res: Response) {
+
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        const id = req.params.id;
+
+        return await this.listingService.getListingWithRelations(res, id);
+    }
+
     public async getListingForClient(req:Request, res:Response){
         const errors = validationResult(req);
 

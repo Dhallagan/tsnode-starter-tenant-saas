@@ -170,6 +170,10 @@ export default {
     return HTTP.get(`/listings/${id}`)
   },
 
+  getListingWithRelations (id) {
+    return HTTP.get(`/listings/${id}/relations`)
+  },
+
   getListedListings () {
     return HTTP.get('/listings/listed')
   },
@@ -193,7 +197,7 @@ export default {
   getApplicants () {
     return HTTP.get('/applicants')
   },
-  getApplicantsSatuts () {
+  getApplicantStatusTypes () {
     return HTTP.get('/application-status-types')
   },
 

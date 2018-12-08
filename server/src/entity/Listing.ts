@@ -1,6 +1,7 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn} from "typeorm"
 import { Property } from './Property';
 import { Unit } from './Unit';
+import { Applicant } from './Applicant';
 import { TenantScope } from './TenantScope';
 
 @Entity()
@@ -16,6 +17,11 @@ export class Listing extends TenantScope {
     @ManyToOne(type => Unit, unit => unit.Property, {onDelete: 'CASCADE'})
     @JoinColumn({ name: "UnitId" })
     Unit: Unit;
+
+    @OneToMany(type => Applicant, applicant => applicant.Listing, {
+        nullable: true
+    })
+    Applicants: Applicant[];
 
     @Column({nullable: true})
     ListedRent: number;
