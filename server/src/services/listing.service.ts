@@ -30,8 +30,21 @@ export class ListingService {
         const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
         if (listing) {
             return res.status(200).json(listing);
+        } else {
+            return res.status(422).json({'errors': [{'msg': 'No Listing found.'}]});
         }
     }
+
+
+    public async getListingWithRelations(res: Response, id: number) {
+        const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit", "Property", "Applicants"]});
+        if (listing) {
+            return res.status(200).json(listing);
+        } else {
+            return res.status(422).json({'errors': [{'msg': 'No Listing found.'}]});
+        }
+    }
+
     public async getListingForClient(res: Response, id: number) {
         const listing = await this.listingRepository.findOne({where: {ListingId: id}, relations: ["Unit"]});
         if (listing) {
@@ -41,10 +54,8 @@ export class ListingService {
             const unitFeatures = await this.unitService.getUnitFeatures(listing.Unit.Property.Id,listing.Unit.UnitId)
 
             return res.status(200).json({listing,buildingImages,unitImages,buldingFeatures,unitFeatures});
-        }
-        else {
+        } else {
             return res.status(422).json({'errors': [{'msg': 'No Listing found.'}]});
-
         }
     }
 

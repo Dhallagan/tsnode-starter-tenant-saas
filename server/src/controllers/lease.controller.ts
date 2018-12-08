@@ -26,14 +26,11 @@ export class LeaseController extends BaseController {
         const monthlyRent = req.body.monthlyRent;
         const securityDeposit = req.body.securityDeposit;
         const termType = req.body.termType;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const phone = req.body.phone;
-        const email = req.body.email;
         const unitId = req.body.unitId;
         const propertyId = req.body.propertyId;
+        const resident = req.body.resident;
 
-        return await this.leaseService.create(res, unitId, propertyId, startDate, endDate, monthlyRent, securityDeposit, termType, firstName, lastName, phone, email);
+        return await this.leaseService.create(res, unitId, propertyId, startDate, endDate, monthlyRent, securityDeposit, termType, resident);
     }
 
 }

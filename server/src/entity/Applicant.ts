@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn} from "typeorm"
 import { ApplicationStatusType } from './ApplicationStatusType';
+import { Listing } from './Listing';
 import { TenantScope } from './TenantScope';
 
 @Entity()
@@ -7,6 +8,14 @@ export class Applicant extends TenantScope {
 
     @PrimaryGeneratedColumn()
     Id: number;
+
+    @ManyToOne(type => Listing, listing => listing.Applicants, {
+        cascade: true,
+        eager: true,
+        onDelete: 'CASCADE'
+    })
+    @JoinColumn()
+    Listing: Listing;
 
     @Column({nullable: false})
     ListingApplyTo: number;

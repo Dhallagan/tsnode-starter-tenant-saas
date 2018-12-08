@@ -18,22 +18,26 @@ export class LeaseService {
     this.propertyRepository = new PropertyRepository()
   }
 
-  public async create(res: Response, unitId: number, propertyId: number, startDate: Date, endDate: Date, monthlyRent: number, securityDeposit: number, termType: number, firstName: string, lastName: string, phone: string, email: string) {
+  public async create(res: Response, unitId: number, propertyId: number, startDate: Date, endDate: Date, monthlyRent: number, securityDeposit: number, termType: number, resident: any) {
 
     const unit = await this.unitRepository.findOne(unitId);
-    console.log(unit);
+
     if (!unit) {
       return res.status(422).json({'errors': [{'msg': 'Unit is not exists.'}]});
     }
-    let lease: any = await this.leaseRepository.findOne({UnitId: unit.UnitId});
+    
+    let lease: any = await this.leaseRepository.findOne({Unit: unit});
 
     if (!lease) {
       const property = await this.propertyRepository.findOne(propertyId);
       const terms = await this.termTypeRepository.findOne(termType);
-      lease = await this.leaseRepository.create({StartDate: startDate, EndDate: endDate, MonthlyRent: monthlyRent, SecurityDeposit: securityDeposit, Terms: terms, Unit: unit, Property: property});
+      lease = await this.leaseRepository.create({TenantId: unit.TenantId, StartDate: startDate, EndDate: endDate, MonthlyRent: monthlyRent, SecurityDeposit: securityDeposit, Terms: terms, Unit: unit, Property: property});
     }
 
-    await this.residentRepository.create({FirstName: firstName, LastName: lastName, Phone: phone, Email: email, Lease: lease});
+    console.log(unit, lease);
+
+    const _resident = await this.residentRepository.create({...resident, Lease: lease});
+
     return res.status(200).json(lease);
 
   }
