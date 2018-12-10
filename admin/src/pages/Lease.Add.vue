@@ -69,7 +69,8 @@
             <b-form-input
                   type="text"
                   placeholder="$0.00"
-                  v-model="monthlyRent">
+                  v-model="monthlyRent"
+                  :disabled="queryLoaded">
             </b-form-input>
           </b-col>
           <b-col>
@@ -81,6 +82,7 @@
                 type="text"
                 placeholder="$0.00"
                 v-model="securityDeposit"
+                :disabled="queryLoaded"
               >
               </b-form-input>
             </b-form-group>
@@ -93,7 +95,8 @@
             <b-form-input
                   type="date"
                   placeholder="First"
-                  v-model="startDate">
+                  v-model="startDate"
+                  :disabled="queryLoaded">
             </b-form-input>
           </b-col>
           <b-col>
@@ -101,7 +104,8 @@
             <b-form-input
                   type="date"
                   placeholder="First"
-                  v-model="endDate">
+                  v-model="endDate"
+                  :disabled="queryLoaded">
             </b-form-input>
           </b-col>
         </b-row>
@@ -559,6 +563,11 @@ export default {
         this.resident.State = this.resident.CurrentState
         this.resident.Zip = this.resident.CurrentZip
         this.resident.Street = this.resident.CurrentStreet
+        this.resident.Birthdate = this.resident.Birthdate.split('T')[0]
+        this.monthlyRent = listing.data.ListedRent
+        this.securityDeposit = listing.data.SecurityDeposity
+        this.startDate = listing.data.ListedDate.split('T')[0]
+        this.endDate = listing.data.AvailableDate.split('T')[0]
       }))
     },
     fetchAll () {
@@ -583,13 +592,13 @@ export default {
         termType: this.termType,
         resident: this.resident
       }).then(res => {
-
+        console.log(res)
       }).catch(err => {
-
+        console.log(err)
       })
     },
     goToApplicants () {
-      this.$router.push({ path: '/Admin/Applicants/'})
+      this.$router.push({path: '/Admin/Applicants/'})
     }
   }
 }

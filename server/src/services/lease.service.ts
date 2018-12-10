@@ -31,7 +31,7 @@ export class LeaseService {
     if (!lease) {
       const property = await this.propertyRepository.findOne(propertyId);
       const terms = await this.termTypeRepository.findOne(termType);
-      lease = await this.leaseRepository.create({TenantId: unit.TenantId, StartDate: startDate, EndDate: endDate, MonthlyRent: monthlyRent, SecurityDeposit: securityDeposit, Terms: terms, Unit: unit, Property: property});
+      lease = await this.leaseRepository.create({TenantId: unit.TenantId, StartDate: startDate, EndDate: endDate, MonthlyRent: monthlyRent, SecurityDeposity: securityDeposit, Terms: terms, Unit: unit, Property: property});
     }
 
     const _resident = await this.residentRepository.create({...resident, Lease: lease});
