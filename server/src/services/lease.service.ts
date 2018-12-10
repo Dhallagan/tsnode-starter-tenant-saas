@@ -34,8 +34,6 @@ export class LeaseService {
       lease = await this.leaseRepository.create({TenantId: unit.TenantId, StartDate: startDate, EndDate: endDate, MonthlyRent: monthlyRent, SecurityDeposit: securityDeposit, Terms: terms, Unit: unit, Property: property});
     }
 
-    console.log(unit, lease);
-
     const _resident = await this.residentRepository.create({...resident, Lease: lease});
 
     return res.status(200).json(lease);

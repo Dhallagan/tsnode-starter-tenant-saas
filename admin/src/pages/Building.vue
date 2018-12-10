@@ -260,6 +260,7 @@ export default {
           this.building.state = building.data.State
           this.building.zipcode = building.data.Zipcode
           this.building.type = building.data.Type
+          // this.building.owner = building.data.Owner
           this.building.propertyFeatures = building.data.PropertyFeatures.map(p => p.Id)
 
           this.building.units = units.data.Units.map(unit => {
