@@ -91,22 +91,24 @@
 
         <b-row class="mt-4">
           <b-col>
-            <label for="inputLive">Start Date</label>
-            <b-form-input
+            <willow-datepicker
+              v-model='startDate'
+              :showCalendar='true'
+              :label="'Start Date'">
+            </willow-datepicker>
+            <!-- <b-form-input
                   type="date"
                   placeholder="First"
                   v-model="startDate"
                   :disabled="queryLoaded">
-            </b-form-input>
+            </b-form-input> -->
           </b-col>
           <b-col>
-            <label for="inputLive">End Date</label>
-            <b-form-input
-                  type="date"
-                  placeholder="First"
-                  v-model="endDate"
-                  :disabled="queryLoaded">
-            </b-form-input>
+            <willow-datepicker
+              v-model='endDate'
+              :showCalendar='true'
+              :label="'End Date'">
+            </willow-datepicker>
           </b-col>
         </b-row>
         <b-row class="mt-4">
@@ -333,12 +335,11 @@
 
         <b-row class="mt-2">
            <b-col>
-            <label for="inputLive">Birth Date</label>
-            <b-form-input
-                  type="date"
-                  placeholder="Birth Date"
-                  v-model="resident.Birthdate">
-            </b-form-input>
+            <willow-datepicker
+              v-model='resident.Birthdate'
+              :showCalendar='true'
+              :label="'Birth Date'">
+            </willow-datepicker>
           </b-col>
           <b-col>
             <label for="inputLive">Apartment Suite</label>
