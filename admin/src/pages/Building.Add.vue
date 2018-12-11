@@ -160,7 +160,8 @@ export default {
         zipcode: '',
         type: 1,
         propertyFeatures: [],
-        units: []
+        units: [],
+        owner: ''
       },
       propertyTypes: null
     }

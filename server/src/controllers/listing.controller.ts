@@ -3,10 +3,6 @@ import { BaseController } from './base-controller';
 import { ListingService } from '../services';
 import { validationResult } from 'express-validator/check';
 
-function check (target, key, description) {
-    console.log(target, key, description);
-}
-
 export class ListingController extends BaseController {
 
     private listingService: ListingService;
@@ -29,7 +25,6 @@ export class ListingController extends BaseController {
         return await this.listingService.getListing(res, id);
     }
 
-    @check
     public async getListingWithRelations(req: Request, res: Response) {
 
         const errors = validationResult(req);

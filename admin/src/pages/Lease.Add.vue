@@ -5,7 +5,7 @@
     title="Add Lease"
   >
     <template slot="action-right">
-      <willow-button class="mt-4 mr-1" variant="default">Cancel</willow-button>
+      <willow-button class="mt-4 mr-1" variant="default" @click.native="goToApplicants">Cancel</willow-button>
       <willow-button class="mt-4 float-right" primary @click.native="createLease()">Start Lease</willow-button>
     </template>
 
@@ -23,30 +23,54 @@
         <br><br>
         // If no querystring, then the property needs to be a dropdown of properties, unit needs to be a dropdown of units of that property, and the resident form would be empty.
 
-        <b-row>
+        <b-row v-if="queryLoaded">
           <b-col>
             <label for="inputLive">Property</label>
             <b-form-input
                   type="text"
-                  v-model="property.Street">
+                  :value="property.Street"
+                  disabled>
             </b-form-input>
           </b-col>
           <b-col>
              <label for="inputLive">Unit</label>
             <b-form-input
                   type="text"
-                  v-model="unit.UnitNumber">
+                  :value="unit.UnitNumber"
+                  disabled>
             </b-form-input>
           </b-col>
         </b-row>
 
-        <b-row>
+        <b-row v-if="!queryLoaded">
+          <b-col>
+            <willow-select
+              :label="'Property'"
+              :placeholder="'What property are you applying for?'"
+              :options="properties"
+              v-model="propertyId"
+              heading
+            ></willow-select>
+          </b-col>
+          <b-col>
+            <willow-select
+              :label="'Unit'"
+              :placeholder="'What unit are you applying for?'"
+              :options="units"
+              v-model="unitId"
+              heading
+            ></willow-select>
+          </b-col>
+        </b-row>
+
+        <b-row class="mt-2">
           <b-col>
             <label for="inputLive">Rent Amount</label>
             <b-form-input
                   type="text"
                   placeholder="$0.00"
-                  v-model="monthlyRent">
+                  v-model="monthlyRent"
+                  :disabled="queryLoaded">
             </b-form-input>
           </b-col>
           <b-col>
@@ -58,6 +82,7 @@
                 type="text"
                 placeholder="$0.00"
                 v-model="securityDeposit"
+                :disabled="queryLoaded"
               >
               </b-form-input>
             </b-form-group>
@@ -66,20 +91,24 @@
 
         <b-row class="mt-4">
           <b-col>
-            <label for="inputLive">Start Date</label>
-            <b-form-input
+            <willow-datepicker
+              v-model='startDate'
+              :showCalendar='true'
+              :label="'Start Date'">
+            </willow-datepicker>
+            <!-- <b-form-input
                   type="date"
                   placeholder="First"
-                  v-model="startDate">
-            </b-form-input>
+                  v-model="startDate"
+                  :disabled="queryLoaded">
+            </b-form-input> -->
           </b-col>
           <b-col>
-            <label for="inputLive">End Date</label>
-            <b-form-input
-                  type="date"
-                  placeholder="First"
-                  v-model="endDate">
-            </b-form-input>
+            <willow-datepicker
+              v-model='endDate'
+              :showCalendar='true'
+              :label="'End Date'">
+            </willow-datepicker>
           </b-col>
         </b-row>
         <b-row class="mt-4">
@@ -306,12 +335,11 @@
 
         <b-row class="mt-2">
            <b-col>
-            <label for="inputLive">Birth Date</label>
-            <b-form-input
-                  type="date"
-                  placeholder="Birth Date"
-                  v-model="resident.Birthdate">
-            </b-form-input>
+            <willow-datepicker
+              v-model='resident.Birthdate'
+              :showCalendar='true'
+              :label="'Birth Date'">
+            </willow-datepicker>
           </b-col>
           <b-col>
             <label for="inputLive">Apartment Suite</label>
@@ -492,14 +520,35 @@ export default {
       phone: '',
       property: {},
       unit: {},
-      resident: {}
+      resident: {},
+      properties: [],
+      units: [],
+      queryLoaded: true,
+      unitId: '',
+      propertyId: ''
+    }
+  },
+  watch: {
+    propertyId: function (newv, oldv) {
+      this.unitId = ''
+      api.getBuildingUnits(newv).then(res => {
+        this.units = res.data.Units.map(u => {
+          return {
+            text: u.UnitNumber,
+            value: u.UnitId
+          }
+        })
+        // this.unitId = this.units[0]
+      })
     }
   },
   mounted () {
     if (this.$route.query.applicant && this.$route.query.listing) {
       this.fetchFromQuery()
+      this.queryLoaded = true
     } else {
       this.fetchAll()
+      this.queryLoaded = false
     }
   },
   methods: {
@@ -515,25 +564,42 @@ export default {
         this.resident.State = this.resident.CurrentState
         this.resident.Zip = this.resident.CurrentZip
         this.resident.Street = this.resident.CurrentStreet
+        this.resident.Birthdate = this.resident.Birthdate.split('T')[0]
+        this.monthlyRent = listing.data.ListedRent
+        this.securityDeposit = listing.data.SecurityDeposity
+        this.startDate = listing.data.ListedDate.split('T')[0]
+        this.endDate = listing.data.AvailableDate.split('T')[0]
       }))
     },
     fetchAll () {
-      // axios.all([
-      //   api.getProper
-      // ])
+      api.getBuildings().then(res => {
+        this.properties = res.data.map(p => {
+          return {
+            value: p.Id,
+            text: p.Street
+          }
+        })
+        // this.propertyId = this.properties[0].value
+      })
     },
     createLease () {
-      alert()
       api.createLease({
-        unitId: this.unit.UnitId,
-        propertyId: this.property.Id,
+        unitId: this.queryLoaded ? this.unit.UnitId : this.unitId,
+        propertyId: this.queryLoaded ? this.property.Id : this.propertyId,
         securityDeposit: this.securityDeposit,
         monthlyRent: this.monthlyRent,
         startDate: this.startDate,
         endDate: this.endDate,
         termType: this.termType,
         resident: this.resident
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
       })
+    },
+    goToApplicants () {
+      this.$router.push({path: '/Admin/Applicants/'})
     }
   }
 }

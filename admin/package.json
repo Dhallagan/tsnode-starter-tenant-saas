@@ -23,7 +23,8 @@
     "vue": "^2.5.2",
     "vue-avatar": "^2.1.6",
     "vue-router": "^3.0.1",
-    "vue-tables-2": "^1.4.64",
+    "vue-tables-2": "^1.4.70",
+    "vuejs-datepicker": "^1.5.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
