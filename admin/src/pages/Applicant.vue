@@ -147,19 +147,19 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
-          :label="'Date From'"
-          v-model="application.CurrentStartDate"
-          heading
-        disabled></willow-textfield>
+        <willow-datepicker
+          v-model='application.CurrentStartDate'
+          :showCalendar='true'
+          :label="'Date From'">
+        </willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
-          :label="'To'"
-          v-model="application.CurrentEndDate"
-          heading
-        disabled></willow-textfield>
+        <willow-datepicker
+          v-model='application.CurrentEndDate'
+          :showCalendar='true'
+          :label="'To'">
+        </willow-datepicker>
       </b-col>
     </b-row>
 
@@ -235,19 +235,19 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="application.PreviousStartDate"
-          heading
-        disabled></willow-textfield>
+          :showCalendar="true"
+        disabled></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="application.PreviousEndDate"
-          heading
-        disabled></willow-textfield>
+          :showCalendar="true"
+        disabled></willow-datepicker>
       </b-col>
     </b-row>
     <br>
@@ -293,19 +293,19 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="application.CurrentEmploymentStartDate"
-          heading
-        disabled></willow-textfield>
+          :showCalendar="true"
+        disabled></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="application.CurrentEmploymentEndDate"
-          heading
-        disabled></willow-textfield>
+          :showCalendar="true"
+        disabled></willow-datepicker>
       </b-col>
     </b-row>
 
