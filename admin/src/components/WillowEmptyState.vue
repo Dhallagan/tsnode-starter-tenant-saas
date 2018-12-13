@@ -15,7 +15,8 @@
       </div>
     </div>
     <div class="col-sm-24 col-lg-10">
-      <img src="https://images.vexels.com/media/users/3/149878/isolated/preview/65fdeb2244ff3f9d51c68a153d23d2ae-industrial-building-illustration-by-vexels.png" role="presentation" alt="" class="Polaris-EmptyState__Image">
+      <img :src="img" style="width: 100%;"/>
+      <!-- <img :src="https://images.vexels.com/media/users/3/149878/isolated/preview/65fdeb2244ff3f9d51c68a153d23d2ae-industrial-building-illustration-by-vexels.png" role="presentation" alt="" class="Polaris-EmptyState__Image"> -->
     </div>
   </div>
 </template>
@@ -23,18 +24,18 @@
 <script>
 export default {
   props: {
-    heading: { 
-      type: String, 
-      default: 'Title' 
+    heading: {
+      type: String,
+      default: 'Title'
     },
-    img: { 
-      type: String, 
-      default: '' 
+    img: {
+      type: String,
+      default: ''
     },
     primaryAction: {
       type: Object,
       default () {
-        return { label: 'Action', url: 'path'}
+        return { label: 'Action', url: 'path' }
       }
     },
     secondaryAction: {

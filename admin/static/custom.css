@@ -363,3 +363,7 @@ body {
   padding: 0.2rem 0.5rem;
   border-radius: 0.1rem;
 }
+
+.btn-link {
+  box-shadow: none;
+}

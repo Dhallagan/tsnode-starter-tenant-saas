@@ -4,6 +4,11 @@
   <page-header
     title="Buildings"
   >
+  <!-- <template slot="action-left">
+    <willow-button size="lg" plain :url="'/Admin/buildings/new'"> <icon name="arrow-up" class="pr-1"></icon>Export</willow-button>
+    <willow-button size="lg" plain :url="'/Admin/buildings/new'"> <icon name="arrow-down" class="pr-1"></icon>Import</willow-button>
+  </template> -->
+
   <template slot="action-right">
     <willow-button size="lg" primary :url="'/Admin/buildings/new'">Add Building</willow-button>
   </template>
@@ -46,6 +51,7 @@
   <template v-else>
     <willow-empty-state
       :heading="'Add your buildings'"
+      :img="'https://images.vexels.com/media/users/3/149878/isolated/preview/65fdeb2244ff3f9d51c68a153d23d2ae-industrial-building-illustration-by-vexels.png'"
       :primaryAction="{ label: 'Add Building', url: '/Admin/buildings/New' }"
       :secodaryAction="{ label: 'two', url: 'Admin/buildings/New' }"
     >

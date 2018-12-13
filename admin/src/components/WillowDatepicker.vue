@@ -5,7 +5,7 @@
     <datepicker
       :value="value"
       :format="format"
-      :input-class="'bg-gray'"
+      :input-class="classes"
       :bootstrapStyling="true"
       :calendarButton="showCalendar"
       :calendar-button-icon="'fa fa-calendar'"
@@ -57,9 +57,9 @@ export default {
     }
   },
   computed: {
-    class () {
+    classes () {
       if (this.disabled) {
-        return 'bg-gray' 
+        return 'bg-gray'
       } else {
         return 'bg-white'
       }

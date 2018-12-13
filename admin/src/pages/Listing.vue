@@ -5,6 +5,9 @@
     title="List Unit"
     :breadcrumbs="pageheader.breadcrumbs"
   >
+    <template slot="action-right">
+      <willow-button  class="float-right mt-3" size="lg" primary @click.native="listListing()">List Unit</willow-button>
+    </template>
   </page-header>
 
   <willow-layout >
@@ -298,6 +301,12 @@ export default {
       api.deleteBuildingImage(data.image.Key).then(res => {
         this.buildingImages.splice(data.i, 1)
       })
+    },
+    listListing (listing) {
+      api.listListing(listing.id)
+        .then(res => {
+          this.getUnlistedListings()
+        })
     }
   }
 }

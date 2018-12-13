@@ -52,6 +52,7 @@ var Database = /** @class */ (function () {
                         password: process.env.DB_PASS,
                         database: process.env.DB_DATABASE,
                         synchronize: true,
+                        dropSchema: true,
                         entities: [
                             entity_1.Applicant,
                             entity_1.ApplicationStatusType,
