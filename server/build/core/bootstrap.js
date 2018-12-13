@@ -80,6 +80,8 @@ var Bootstrap = /** @class */ (function () {
                 // Seeds.seedUsers();
                 seeds_1.Seeds.seedPlans();
                 seeds_1.Seeds.seedPropertyTypes();
+                seeds_1.Seeds.seedApplicantStatusTypes();
+                seeds_1.Seeds.seedTermTypes();
                 return [2 /*return*/];
             });
         }); });
@@ -136,6 +138,10 @@ var Bootstrap = /** @class */ (function () {
         app.use('/api', unitFeaturesRoutes);
         var applicantRoutes = new routes_1.ApplicantRoutes().router;
         app.use('/api', applicantRoutes);
+        var applicationStatusTypeRoutes = new routes_1.ApplicationStatusTypeRoutes().router;
+        app.use('/api', applicationStatusTypeRoutes);
+        var leaseRoutes = new routes_1.LeaseRoutes().router;
+        app.use('/api', leaseRoutes);
     };
     return Bootstrap;
 }());

@@ -49,6 +49,10 @@
     <b-tab title="Unlisted" @click="getUnlistedListings()">
       <willow-table hover :rows="unlistedTable.unlisted" :headings="unlistedTable.fields" class="mt-4">
 
+        <template slot="List" slot-scope="data">
+          <willow-button @click.native="listListing(data.item)">{{data.item.action}}</willow-button>
+        </template>
+
         <template slot="Unit" slot-scope="data">
           {{data.item.unit}}
         </template>
@@ -89,7 +93,7 @@ export default {
         listed: []
       },
       unlistedTable: {
-        fields: ['Unit', 'Property', 'Rent', 'Action'],
+        fields: ['List','Unit', 'Property', 'Rent', 'Action'],
         unlisted: []
       }
     }

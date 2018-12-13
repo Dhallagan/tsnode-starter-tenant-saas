@@ -244,7 +244,7 @@ export default {
     save () {
       api.saveCompany(this.generalForm)
         .then(res => {
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: '/login' })
         })
         .catch(err => {
           console.log(err)

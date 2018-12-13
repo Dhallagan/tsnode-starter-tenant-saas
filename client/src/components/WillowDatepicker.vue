@@ -5,11 +5,10 @@
     <datepicker
       :value="value"
       :format="format"
-      :input-class="'bg-gray'"
+      :input-class="'bg-white'"
       :bootstrapStyling="true"
       :calendarButton="showCalendar"
       :calendar-button-icon="'fa fa-calendar'"
-      :disabled="disabled"
       @selected="handleChange"
     >
     </datepicker>
@@ -44,25 +43,12 @@ export default {
     inline: {
       type: Boolean,
       default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
     handleChange (e) {
       console.log(e)
       this.$emit('change', e)
-    }
-  },
-  computed: {
-    class () {
-      if (this.disabled) {
-        return 'bg-gray' 
-      } else {
-        return 'bg-white'
-      }
     }
   }
 }

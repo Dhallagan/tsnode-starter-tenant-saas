@@ -1,6 +1,6 @@
 <template>
 <page>
-
+<template v-if="this.buildings.length > 0">
   <page-header
     title="Buildings"
   >
@@ -41,7 +41,17 @@
     </willow-table>
 
   </b-card>
+  </template>
 
+  <template v-else>
+    <willow-empty-state
+      :heading="'Add your buildings'"
+      :primaryAction="{ label: 'Add Building', url: '/Admin/buildings/New' }"
+      :secodaryAction="{ label: 'two', url: 'Admin/buildings/New' }"
+    >
+      Get closer to listing your properties by adding a building, or import your building inventory.
+    </willow-empty-state>
+  </template>
 </page>
 </template>
 

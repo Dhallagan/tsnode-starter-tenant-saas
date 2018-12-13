@@ -24,6 +24,7 @@ var Unit_1 = require("./Unit");
 var TenantScope_1 = require("./TenantScope");
 var PropertyImage_1 = require("./PropertyImage");
 var PropertyFeatures_1 = require("./PropertyFeatures");
+var Lease_1 = require("./Lease");
 var Property = /** @class */ (function (_super) {
     __extends(Property, _super);
     function Property() {
@@ -71,6 +72,12 @@ var Property = /** @class */ (function (_super) {
         typeorm_1.JoinTable({ name: "property_property_features" }),
         __metadata("design:type", Array)
     ], Property.prototype, "PropertyFeatures", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return Lease_1.Lease; }, function (lease) { return lease.Property; }, {
+            nullable: true
+        }),
+        __metadata("design:type", Lease_1.Lease)
+    ], Property.prototype, "Lease", void 0);
     Property = __decorate([
         typeorm_1.Entity()
     ], Property);

@@ -72,7 +72,7 @@
     </template>
 
     <template slot="last_updated" slot-scope="data">
-       {{data.item.CreatedAt}}
+       {{MMDDYYYY(data.item.CreatedAt)}}
     </template>
 
   </b-table>
@@ -84,7 +84,11 @@
 <script>
 import api from '@/api/api'
 import axios from 'axios'
+import {Helpers} from '@/mixins'
 export default {
+  mixins: [
+    Helpers
+  ],
   mounted () {
     this.fetch()
   },

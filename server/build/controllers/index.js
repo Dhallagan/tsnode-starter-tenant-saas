@@ -26,3 +26,7 @@ var property_features_controller_1 = require("./property-features.controller");
 exports.PropertyFeaturesController = property_features_controller_1.PropertyFeaturesController;
 var applicant_controller_1 = require("./applicant.controller");
 exports.ApplicantController = applicant_controller_1.ApplicantController;
+var application_status_type_controller_1 = require("./application-status-type.controller");
+exports.ApplicationStatusTypeController = application_status_type_controller_1.ApplicationStatusTypeController;
+var lease_controller_1 = require("./lease.controller");
+exports.LeaseController = lease_controller_1.LeaseController;

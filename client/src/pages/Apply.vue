@@ -45,11 +45,12 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Birth date'"
           v-model="applicantForm.Birthdate"
           heading
-        ></willow-textfield>
+          >
+        </willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
@@ -135,23 +136,23 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.CurrentStartDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="applicantForm.CurrentEndDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
     </b-row>
 
-    <b-row class="mb-2">
+    <b-row class="mb -2">
       <b-col :cols="24">
         <willow-textfield
           :label="'Reason for moving'"
@@ -223,19 +224,19 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.PreviousStartDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="applicantForm.PreviousEndDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
     </b-row>
     <br>
@@ -281,19 +282,19 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.CurrentEmploymentStartDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="applicantForm.CurrentEmploymentEndDate"
           heading
-        ></willow-textfield>
+        ></willow-datepicker>
       </b-col>
     </b-row>
 

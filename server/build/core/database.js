@@ -54,6 +54,7 @@ var Database = /** @class */ (function () {
                         synchronize: true,
                         entities: [
                             entity_1.Applicant,
+                            entity_1.ApplicationStatusType,
                             entity_1.User,
                             entity_1.Tenant,
                             entity_1.Property,
@@ -66,7 +67,10 @@ var Database = /** @class */ (function () {
                             entity_1.UnitImage,
                             entity_1.PropertyImage,
                             entity_1.UnitFeatures,
-                            entity_1.PropertyFeatures
+                            entity_1.PropertyFeatures,
+                            entity_1.Lease,
+                            entity_1.Resident,
+                            entity_1.TermType
                         ]
                     })];
             });

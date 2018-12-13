@@ -21,23 +21,23 @@
 
        <b-card class="mb-2">
         <br><br>
-        // If no querystring, then the property needs to be a dropdown of properties, unit needs to be a dropdown of units of that property, and the resident form would be empty.
+        <!-- // If no querystring, then the property needs to be a dropdown of properties, unit needs to be a dropdown of units of that property, and the resident form would be empty. -->
 
         <b-row v-if="queryLoaded">
           <b-col>
             <label for="inputLive">Property</label>
             <b-form-input
-                  type="text"
-                  :value="property.Street"
-                  disabled>
+                type="text"
+                :value="property.Street"
+              >
             </b-form-input>
           </b-col>
           <b-col>
              <label for="inputLive">Unit</label>
             <b-form-input
-                  type="text"
-                  :value="unit.UnitNumber"
-                  disabled>
+                type="text"
+                :value="unit.UnitNumber"
+              >
             </b-form-input>
           </b-col>
         </b-row>
@@ -94,14 +94,8 @@
             <willow-datepicker
               v-model='startDate'
               :showCalendar='true'
-              :label="'Start Date'">
-            </willow-datepicker>
-            <!-- <b-form-input
-                  type="date"
-                  placeholder="First"
-                  v-model="startDate"
-                  :disabled="queryLoaded">
-            </b-form-input> -->
+              :label="'Start Date'"
+            ></willow-datepicker>
           </b-col>
           <b-col>
             <willow-datepicker
@@ -126,7 +120,7 @@
        </b-card>
 
       <b-card class="mb-2">
-        // IF applicant is supplied pre populate. Else blank
+        <!-- // IF applicant is supplied pre populate. Else blank -->
         <b-row>
           <b-col>
             <label for="inputLive">First Name</label>
@@ -163,7 +157,7 @@
             </b-form-input>
           </b-col>
         </b-row>
-        //TODO add address, personal data, emergency contact
+        <!-- //TODO add address, personal data, emergency contact -->
       </b-card>
 
       <!-- <b-card class="mb-2">

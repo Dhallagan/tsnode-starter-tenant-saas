@@ -57,11 +57,12 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Birth date'"
           v-model="application.Birthdate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
@@ -147,19 +148,21 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="application.CurrentStartDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="application.CurrentEndDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
     </b-row>
 
@@ -235,19 +238,21 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="application.PreviousStartDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="application.PreviousEndDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
     </b-row>
     <br>
@@ -293,19 +298,21 @@
 
     <b-row class="mb-2">
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'Date From'"
           v-model="application.CurrentEmploymentStartDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
-        <willow-textfield
+        <willow-datepicker
           :label="'To'"
           v-model="application.CurrentEmploymentEndDate"
           heading
-        disabled></willow-textfield>
+          disabled
+        ></willow-datepicker>
       </b-col>
     </b-row>
 
@@ -343,14 +350,16 @@
         <willow-textfield
           :label="'If you have a pet what breed?'"
           v-model="application.PetsBreed"
-        disabled></willow-textfield>
+          disabled
+        ></willow-textfield>
       </b-col>
 
       <b-col :cols="12">
         <willow-textfield
           :label="'Weight'"
           v-model="application.PetsWeight"
-        disabled></willow-textfield>
+          disabled
+        ></willow-textfield>
       </b-col>
 
     </b-row>
@@ -393,8 +402,8 @@
     <b-form-group>
       <p><strong>I have read, understand, and agreed to the terms and conditions</strong></p>
        <b-form-radio-group name="AgreedToTerms" v-model="application.AgreedToTerms" >
-      <b-form-radio :value="true" >Yes</b-form-radio>
-      <b-form-radio :value="false" >No</b-form-radio>
+      <b-form-radio :value="1" >Yes</b-form-radio>
+      <b-form-radio :value="0" >No</b-form-radio>
       </b-form-radio-group>
     </b-form-group>
     <p><strong>Terms and conditions:</strong><br>

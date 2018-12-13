@@ -33,6 +33,7 @@ export class Database {
         password: process.env.DB_PASS,
         database: process.env.DB_DATABASE,
         synchronize: true,
+        dropSchema: true,
         entities: [
           Applicant,
           ApplicationStatusType,

@@ -245,7 +245,7 @@ var Seeds = /** @class */ (function () {
                             { Name: "Fenced Yard", TenantId: TenantId, Unit: [] },
                             { Name: "Fireplace", TenantId: TenantId, Unit: [] },
                             { Name: "Hardwood Floors", TenantId: TenantId, Unit: [] },
-                            { Name: "Cable", TenantId: TenantId, Unit: [] },
+                            { Name: "Cable", TenantId: TenantId, Unit: [] }
                         ];
                         return [4 /*yield*/, unitFeaturesRepository.find({ TenantId: TenantId })];
                     case 1:
@@ -264,6 +264,73 @@ var Seeds = /** @class */ (function () {
                     case 4:
                         _i++;
                         return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Seeds.seedApplicantStatusTypes = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var applicantStatusTypeRepository, types, _i, types_1, type, existType;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        applicantStatusTypeRepository = typeorm_1.getRepository(entity_1.ApplicationStatusType);
+                        types = [
+                            { Name: "None", Applicants: [] },
+                            { Name: "Pending", Applicants: [] },
+                            { Name: "Rejected", Applicants: [] },
+                            { Name: "Approved", Applicants: [] }
+                        ];
+                        _i = 0, types_1 = types;
+                        _a.label = 1;
+                    case 1:
+                        if (!(_i < types_1.length)) return [3 /*break*/, 5];
+                        type = types_1[_i];
+                        return [4 /*yield*/, applicantStatusTypeRepository.findOne({ Name: type.Name })];
+                    case 2:
+                        existType = _a.sent();
+                        if (!!existType) return [3 /*break*/, 4];
+                        return [4 /*yield*/, applicantStatusTypeRepository.save(type)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Seeds.seedTermTypes = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var termTypeRepository, types, _i, types_2, type, existType;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        termTypeRepository = typeorm_1.getRepository(entity_1.TermType);
+                        types = [
+                            { Id: 0, Type: 'Fixed' },
+                            { Id: 1, Type: 'Fixed - Rollover' },
+                            { Id: 2, Type: 'Month to Month' }
+                        ];
+                        _i = 0, types_2 = types;
+                        _a.label = 1;
+                    case 1:
+                        if (!(_i < types_2.length)) return [3 /*break*/, 5];
+                        type = types_2[_i];
+                        return [4 /*yield*/, termTypeRepository.findOne({ Id: type.Id })];
+                    case 2:
+                        existType = _a.sent();
+                        if (!!existType) return [3 /*break*/, 4];
+                        return [4 /*yield*/, termTypeRepository.save(type)];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 1];
                     case 5: return [2 /*return*/];
                 }
             });
