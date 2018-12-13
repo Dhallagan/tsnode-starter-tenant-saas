@@ -49,8 +49,8 @@
           :label="'Birth date'"
           v-model="applicantForm.Birthdate"
           heading
-          >
-        </willow-datepicker>
+          :showCalendar="true"
+        ></willow-datepicker>
       </b-col>
 
       <b-col :cols="12">
@@ -139,7 +139,11 @@
         <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.CurrentStartDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
 
@@ -147,7 +151,11 @@
         <willow-datepicker
           :label="'To'"
           v-model="applicantForm.CurrentEndDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
     </b-row>
@@ -227,7 +235,11 @@
         <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.PreviousStartDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
 
@@ -235,7 +247,11 @@
         <willow-datepicker
           :label="'To'"
           v-model="applicantForm.PreviousEndDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
     </b-row>
@@ -285,7 +301,11 @@
         <willow-datepicker
           :label="'Date From'"
           v-model="applicantForm.CurrentEmploymentStartDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
 
@@ -293,7 +313,11 @@
         <willow-datepicker
           :label="'To'"
           v-model="applicantForm.CurrentEmploymentEndDate"
+<<<<<<< HEAD
           heading
+=======
+          :showCalendar="true"
+>>>>>>> 8a0885dcf609c2f3711ae6fd6ded0078c35b65e3
         ></willow-datepicker>
       </b-col>
     </b-row>

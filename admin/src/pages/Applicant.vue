@@ -151,6 +151,7 @@
         <willow-datepicker
           :label="'Date From'"
           v-model="application.CurrentStartDate"
+          :showCalendar='true'
           heading
           disabled
         ></willow-datepicker>
@@ -160,6 +161,7 @@
         <willow-datepicker
           :label="'To'"
           v-model="application.CurrentEndDate"
+          :showCalendar='true'
           heading
           disabled
         ></willow-datepicker>
@@ -243,6 +245,7 @@
           v-model="application.PreviousStartDate"
           heading
           disabled
+          :showCalendar="true"
         ></willow-datepicker>
       </b-col>
 
@@ -252,6 +255,7 @@
           v-model="application.PreviousEndDate"
           heading
           disabled
+          :showCalendar="true"
         ></willow-datepicker>
       </b-col>
     </b-row>
@@ -302,6 +306,7 @@
           :label="'Date From'"
           v-model="application.CurrentEmploymentStartDate"
           heading
+          :showCalendar="true"
           disabled
         ></willow-datepicker>
       </b-col>
@@ -311,6 +316,7 @@
           :label="'To'"
           v-model="application.CurrentEmploymentEndDate"
           heading
+          :showCalendar="true"
           disabled
         ></willow-datepicker>
       </b-col>

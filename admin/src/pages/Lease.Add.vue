@@ -500,6 +500,8 @@
 <script>
 import axios from 'axios'
 import api from '@/api/api'
+import {format} from 'date-fns'
+
 export default {
   data () {
     return {
@@ -558,11 +560,11 @@ export default {
         this.resident.State = this.resident.CurrentState
         this.resident.Zip = this.resident.CurrentZip
         this.resident.Street = this.resident.CurrentStreet
-        this.resident.Birthdate = this.resident.Birthdate.split('T')[0]
+        this.resident.Birthdate = format(this.resident.Birthdate, 'YYYY-MM-DD')
         this.monthlyRent = listing.data.ListedRent
         this.securityDeposit = listing.data.SecurityDeposity
-        this.startDate = listing.data.ListedDate.split('T')[0]
-        this.endDate = listing.data.AvailableDate.split('T')[0]
+        this.startDate = format(listing.data.ListedDate, 'YYYY-MM-DD')
+        this.endDate = format(listing.data.AvailableDate, 'YYYY-MM-DD')
       }))
     },
     fetchAll () {

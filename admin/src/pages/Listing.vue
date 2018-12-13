@@ -184,13 +184,12 @@
 
         <b-row>
           <b-col>
-            <label for="inputLive">Date Available</label>
-            <b-form-input
-              type="date"
-              placeholder="First"
+            <willow-datepicker
+              :label="'Date Available'"
               v-model="listing.date_available"
+              :showCalendar="true"
             >
-            </b-form-input>
+            </willow-datepicker>
           </b-col>
         </b-row>
 
